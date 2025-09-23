@@ -40,7 +40,7 @@
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -59,7 +59,7 @@
 }
 
 .nav-container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
@@ -132,7 +132,7 @@
 }
 
 .hero-container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
@@ -144,7 +144,7 @@
 }
 
 .hero-content {
-  max-width: 600px;
+  max-width: 100%;
 }
 
 .hero-badge {
@@ -747,7 +747,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 1.5rem;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -792,7 +792,7 @@
 }
 
 .cta-form {
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -867,6 +867,7 @@
   grid-template-columns: 1fr 2fr;
   gap: 4rem;
   margin-bottom: 3rem;
+  max-width: 100%;
 }
 
 .footer-brand {
@@ -918,6 +919,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 100%;
 }
 
 .footer-bottom p {
