@@ -17,21 +17,24 @@ export default function RegisterPage() {
     if (!emailToCheck) return
     
     try {
-      const response = await fetch(`/api/leads?limit=1000`)
+      const response = await fetch('/api/validate-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: emailToCheck }),
+      })
+      
       const data = await response.json()
       
       if (data.success) {
-        const lead = data.leads.find(lead => 
-          lead.email.toLowerCase() === emailToCheck.toLowerCase()
-        )
-        
-        if (lead) {
+        if (data.isLead) {
           setIsValidEmail(true)
-          setLeadData(lead)
-          setNombre(lead.nombre)
+          setLeadData(data.leadData)
+          setNombre(data.leadData.nombre)
           setMessage({
             type: 'success',
-            text: `¡Perfecto! Encontramos tu registro. Bienvenido ${lead.nombre}.`
+            text: `¡Perfecto! Encontramos tu registro. Bienvenido ${data.leadData.nombre}. El registro estará disponible próximamente. Te notificaremos por email.`
           })
         } else {
           setIsValidEmail(false)
@@ -225,12 +228,18 @@ export default function RegisterPage() {
           </div>
 
           <button 
-            type="submit" 
-            className="register-btn"
-            disabled={!isValidEmail || loading}
+            type="button" 
+            className="register-btn coming-soon"
+            disabled={true}
           >
-            {loading ? 'Creando cuenta...' : 'Crear cuenta y acceder'}
+            🚀 Próximamente Disponible
           </button>
+          
+          <div className="coming-soon-info">
+            <p>📅 <strong>Fecha de lanzamiento:</strong> Próximamente</p>
+            <p>📧 Te notificaremos por email cuando puedas crear tu cuenta</p>
+            <p>🎯 Solo los leads registrados podrán acceder</p>
+          </div>
         </form>
 
         {message && (
