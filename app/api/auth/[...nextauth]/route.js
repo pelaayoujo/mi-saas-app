@@ -52,10 +52,18 @@ const handler = NextAuth({
       return session
     }
   },
-  pages: {
-    signIn: '/login',
-    signUp: '/register',
-  },
+      pages: {
+        signIn: '/login',
+        signUp: '/register',
+      },
+      callbacks: {
+        async redirect({ url, baseUrl }) {
+          // Redirigir al dashboard después del login
+          if (url.startsWith('/')) return `${baseUrl}${url}`
+          else if (new URL(url).origin === baseUrl) return url
+          return `${baseUrl}/dashboard`
+        }
+      },
   secret: process.env.NEXTAUTH_SECRET,
 })
 

@@ -123,9 +123,9 @@ export default function RegisterPage() {
           text: '¡Cuenta creada exitosamente! Redirigiendo al dashboard...'
         })
         
-        // Redirigir al login después de 2 segundos
+        // Redirigir al dashboard después de 2 segundos
         setTimeout(() => {
-          window.location.href = '/login'
+          window.location.href = '/dashboard'
         }, 2000)
       } else if (response.status === 423) {
         // Registro no disponible o lista de espera

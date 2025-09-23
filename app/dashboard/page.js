@@ -9,57 +9,87 @@ export default function UserDashboard() {
   const router = useRouter()
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [activeTab, setActiveTab] = useState('generar')
-  const [content, setContent] = useState('')
-  const [generatedContent, setGeneratedContent] = useState('')
-  const [isGenerating, setIsGenerating] = useState(false)
+  const [articles, setArticles] = useState([])
+  const [stats, setStats] = useState({
+    totalArticles: 0,
+    publishedArticles: 0,
+    scheduledArticles: 0,
+    draftArticles: 0,
+    totalImpressions: 0,
+    totalReactions: 0,
+    averageEngagement: 0
+  })
 
-  // Verificar autenticación
+  // Verificar autenticación y cargar datos
   useEffect(() => {
-    if (status === 'loading') return // Aún cargando
+    if (status === 'loading') return
     
     if (!session) {
       router.push('/login')
       return
     }
 
-    // Cargar datos del usuario desde la sesión
+    // Cargar datos del usuario
     setUser({
       nombre: session.user.name,
       email: session.user.email,
-      nicho: 'Tecnología', // Esto vendría de la base de datos
-      plan: 'trial',
-      creditos: 8,
-      fechaRegistro: new Date()
+      role: session.user.role || 'user'
     })
+
+    // Cargar artículos y estadísticas
+    loadDashboardData()
     setLoading(false)
   }, [session, status, router])
 
-  const generateContent = async () => {
-    if (!content.trim()) return
+  const loadDashboardData = async () => {
+    try {
+      // Cargar artículos del usuario
+      const articlesResponse = await fetch('/api/articles')
+      if (articlesResponse.ok) {
+        const articlesData = await articlesResponse.json()
+        setArticles(articlesData.articles || [])
+      }
 
-    setIsGenerating(true)
-    
-    // Simular generación de contenido con IA
-    setTimeout(() => {
-      const templates = [
-        `🚀 **${content}** - La clave del éxito en LinkedIn\n\nDespués de analizar 10,000+ posts exitosos, he descubierto que ${content} es fundamental para:\n\n✅ Aumentar engagement en un 300%\n✅ Generar más conexiones de calidad\n✅ Posicionarte como experto\n\n¿Quieres saber cómo implementarlo? Comenta "SÍ" 👇`,
-        
-        `💡 **Mi secreto para ${content}**\n\nHace 6 meses no sabía nada sobre ${content}. Hoy genero 50+ leads semanales.\n\nEl cambio: aplicar estos 3 principios:\n\n1. Consistencia > Perfección\n2. Valor > Venta\n3. Autenticidad > Poser\n\n¿Te interesa conocer más? DM me 📩`,
-        
-        `⚡ **ROMPÍ el algoritmo con ${content}**\n\nDe 500 a 15,000 seguidores en 30 días.\n\nLa estrategia: ${content} + IA = Resultados exponenciales\n\n📈 +847% más interacciones\n🎯 +200% más leads\n💰 +500% más oportunidades\n\n¿Quieres la fórmula completa? Comenta "LINKEDAI" 👇`
-      ]
-      
-      const randomTemplate = templates[Math.floor(Math.random() * templates.length)]
-      setGeneratedContent(randomTemplate)
-      setIsGenerating(false)
-      
-      // Reducir créditos
-      setUser(prev => ({
-        ...prev,
-        creditos: prev.creditos - 1
-      }))
-    }, 2000)
+      // Cargar estadísticas
+      const statsResponse = await fetch('/api/analytics/dashboard')
+      if (statsResponse.ok) {
+        const statsData = await statsResponse.json()
+        setStats(statsData.analytics || stats)
+      }
+    } catch (error) {
+      console.error('Error cargando datos del dashboard:', error)
+    }
+  }
+
+  const handleCreateArticle = () => {
+    router.push('/dashboard/create')
+  }
+
+  const handleEditArticle = (articleId) => {
+    router.push(`/dashboard/edit/${articleId}`)
+  }
+
+  const handleViewAnalytics = (articleId) => {
+    router.push(`/dashboard/analytics/${articleId}`)
+  }
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  }
+
+  const getStatusBadge = (status) => {
+    const badges = {
+      draft: { text: 'Borrador', class: 'status-draft' },
+      scheduled: { text: 'Programado', class: 'status-scheduled' },
+      published: { text: 'Publicado', class: 'status-published' },
+      archived: { text: 'Archivado', class: 'status-archived' }
+    }
+    return badges[status] || badges.draft
   }
 
   if (loading) {
@@ -72,196 +102,160 @@ export default function UserDashboard() {
   }
 
   return (
-    <div className="user-dashboard">
+    <div className="dashboard-container">
       {/* Header */}
       <header className="dashboard-header">
         <div className="header-content">
-          <div className="user-info">
-            <h1>¡Hola, {user.nombre}! 👋</h1>
-            <p>Bienvenido a tu centro de control de LinkedAI</p>
+          <div className="header-left">
+            <div className="logo">
+              <span className="logo-icon">✍️</span>
+              <span className="logo-text">LinkedAI</span>
+            </div>
           </div>
-          <div className="user-stats">
-            <div className="stat-item">
-              <span className="stat-label">Plan</span>
-              <span className="stat-value">{user.plan.toUpperCase()}</span>
+          <div className="header-right">
+            <div className="user-menu">
+              <span className="user-name">Hola, {user.nombre}</span>
+              <button 
+                className="logout-btn"
+                onClick={() => signOut({ callbackUrl: '/' })}
+              >
+                Cerrar Sesión
+              </button>
             </div>
-            <div className="stat-item">
-              <span className="stat-label">Créditos</span>
-              <span className="stat-value">{user.creditos}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-label">Nicho</span>
-              <span className="stat-value">{user.nicho}</span>
-            </div>
-            <button 
-              className="logout-button"
-              onClick={() => signOut({ callbackUrl: '/' })}
-            >
-              Cerrar Sesión
-            </button>
           </div>
         </div>
       </header>
 
-      {/* Navigation Tabs */}
-      <nav className="dashboard-nav">
-        <button 
-          className={`nav-tab ${activeTab === 'generar' ? 'active' : ''}`}
-          onClick={() => setActiveTab('generar')}
-        >
-          🚀 Generar Contenido
-        </button>
-        <button 
-          className={`nav-tab ${activeTab === 'historial' ? 'active' : ''}`}
-          onClick={() => setActiveTab('historial')}
-        >
-          📚 Historial
-        </button>
-        <button 
-          className={`nav-tab ${activeTab === 'analytics' ? 'active' : ''}`}
-          onClick={() => setActiveTab('analytics')}
-        >
-          📊 Analytics
-        </button>
-        <button 
-          className={`nav-tab ${activeTab === 'config' ? 'active' : ''}`}
-          onClick={() => setActiveTab('config')}
-        >
-          ⚙️ Configuración
-        </button>
-      </nav>
+      <div className="dashboard-layout">
+        {/* Sidebar */}
+        <aside className="dashboard-sidebar">
+          <nav className="sidebar-nav">
+            <a href="/dashboard" className="nav-item active">
+              <span className="nav-icon">📊</span>
+              <span className="nav-label">Dashboard</span>
+            </a>
+            <a href="/dashboard/create" className="nav-item">
+              <span className="nav-icon">✏️</span>
+              <span className="nav-label">Crear Artículo</span>
+            </a>
+            <a href="/dashboard/calendar" className="nav-item">
+              <span className="nav-icon">📅</span>
+              <span className="nav-label">Calendario</span>
+            </a>
+            <a href="/dashboard/analytics" className="nav-item">
+              <span className="nav-icon">📈</span>
+              <span className="nav-label">Analytics</span>
+            </a>
+            <a href="/dashboard/settings" className="nav-item">
+              <span className="nav-icon">⚙️</span>
+              <span className="nav-label">Configuración</span>
+            </a>
+          </nav>
+        </aside>
 
-      {/* Main Content */}
-      <main className="dashboard-main">
-        {activeTab === 'generar' && (
-          <div className="content-generator">
-            <div className="generator-header">
-              <h2>Generador de Contenido IA</h2>
-              <p>Describe tu tema y la IA creará contenido optimizado para LinkedIn</p>
+        {/* Main Content */}
+        <main className="dashboard-main">
+          <div className="dashboard-content">
+            {/* Stats Cards */}
+            <div className="stats-grid">
+              <div className="stat-card">
+                <div className="stat-icon">📝</div>
+                <div className="stat-content">
+                  <div className="stat-number">{stats.totalArticles}</div>
+                  <div className="stat-label">Artículos</div>
+                </div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-icon">👁️</div>
+                <div className="stat-content">
+                  <div className="stat-number">{stats.totalImpressions.toLocaleString()}</div>
+                  <div className="stat-label">Impresiones</div>
+                </div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-icon">💬</div>
+                <div className="stat-content">
+                  <div className="stat-number">{stats.averageEngagement}%</div>
+                  <div className="stat-label">Engagement</div>
+                </div>
+              </div>
             </div>
 
-            <div className="generator-form">
-              <div className="input-group">
-                <label htmlFor="content-input">¿Sobre qué quieres crear contenido?</label>
-                <textarea
-                  id="content-input"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="Ej: estrategias de marketing digital, liderazgo en startups, ventas B2B..."
-                  rows={4}
-                />
+            {/* CTA Section */}
+            <div className="cta-section">
+              <div className="cta-content">
+                <h2>Crea contenido que genere engagement</h2>
+                <p>Usa nuestras plantillas profesionales y herramientas de IA para crear artículos optimizados para LinkedIn</p>
+                <button className="cta-button" onClick={handleCreateArticle}>
+                  <span className="cta-icon">✏️</span>
+                  Crear Artículo
+                </button>
               </div>
+            </div>
 
-              <button 
-                onClick={generateContent}
-                disabled={!content.trim() || isGenerating || user.creditos <= 0}
-                className="generate-btn"
-              >
-                {isGenerating ? '🤖 Generando...' : '✨ Generar Contenido'}
-              </button>
-
-              {user.creditos <= 0 && (
-                <p className="no-credits">⚠️ No tienes créditos disponibles. <a href="#upgrade">Actualiza tu plan</a></p>
+            {/* Recent Articles */}
+            <div className="articles-section">
+              <div className="section-header">
+                <h3>Artículos Recientes</h3>
+                <a href="/dashboard/articles" className="view-all">Ver todos</a>
+              </div>
+              
+              {articles.length === 0 ? (
+                <div className="empty-state">
+                  <div className="empty-icon">📝</div>
+                  <h4>Aún no tienes artículos</h4>
+                  <p>Crea tu primer artículo para ganar visibilidad en LinkedIn</p>
+                  <button className="empty-cta" onClick={handleCreateArticle}>
+                    Crear Artículo
+                  </button>
+                </div>
+              ) : (
+                <div className="articles-list">
+                  {articles.slice(0, 5).map((article) => {
+                    const statusBadge = getStatusBadge(article.status)
+                    return (
+                      <div key={article.id} className="article-card">
+                        <div className="article-content">
+                          <div className="article-header">
+                            <h4 className="article-title">{article.title}</h4>
+                            <span className={`status-badge ${statusBadge.class}`}>
+                              {statusBadge.text}
+                            </span>
+                          </div>
+                          <div className="article-meta">
+                            <span className="article-date">
+                              {formatDate(article.updatedAt)}
+                            </span>
+                            <span className="article-words">
+                              {article.wordCount} palabras
+                            </span>
+                          </div>
+                        </div>
+                        <div className="article-actions">
+                          <button 
+                            className="action-btn edit"
+                            onClick={() => handleEditArticle(article.id)}
+                          >
+                            Editar
+                          </button>
+                          {article.status === 'published' && (
+                            <button 
+                              className="action-btn analytics"
+                              onClick={() => handleViewAnalytics(article.id)}
+                            >
+                              Analytics
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
               )}
             </div>
-
-            {generatedContent && (
-              <div className="generated-content">
-                <h3>📝 Contenido Generado</h3>
-                <div className="content-preview">
-                  <pre>{generatedContent}</pre>
-                </div>
-                <div className="content-actions">
-                  <button className="btn-copy">📋 Copiar</button>
-                  <button className="btn-edit">✏️ Editar</button>
-                  <button className="btn-schedule">📅 Programar</button>
-                </div>
-              </div>
-            )}
           </div>
-        )}
-
-        {activeTab === 'historial' && (
-          <div className="content-history">
-            <h2>Historial de Contenido</h2>
-            <div className="history-list">
-              <div className="history-item">
-                <div className="history-content">
-                  <h4>Estrategias de Marketing Digital</h4>
-                  <p>Generado hace 2 horas</p>
-                </div>
-                <div className="history-actions">
-                  <button>Ver</button>
-                  <button>Copiar</button>
-                </div>
-              </div>
-              <div className="history-item">
-                <div className="history-content">
-                  <h4>Liderazgo en Startups</h4>
-                  <p>Generado hace 1 día</p>
-                </div>
-                <div className="history-actions">
-                  <button>Ver</button>
-                  <button>Copiar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'analytics' && (
-          <div className="analytics">
-            <h2>Analytics de Contenido</h2>
-            <div className="analytics-grid">
-              <div className="analytics-card">
-                <h3>📈 Contenido Generado</h3>
-                <div className="analytics-number">12</div>
-                <p>Este mes</p>
-              </div>
-              <div className="analytics-card">
-                <h3>🎯 Tasa de Éxito</h3>
-                <div className="analytics-number">87%</div>
-                <p>Contenido viral</p>
-              </div>
-              <div className="analytics-card">
-                <h3>💬 Engagement</h3>
-                <div className="analytics-number">+340%</div>
-                <p>vs. contenido manual</p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'config' && (
-          <div className="settings">
-            <h2>Configuración</h2>
-            <div className="settings-section">
-              <h3>Perfil</h3>
-              <div className="setting-item">
-                <label>Nombre</label>
-                <input type="text" value={user.nombre} readOnly />
-              </div>
-              <div className="setting-item">
-                <label>Email</label>
-                <input type="email" value={user.email} readOnly />
-              </div>
-              <div className="setting-item">
-                <label>Nicho</label>
-                <input type="text" value={user.nicho} readOnly />
-              </div>
-            </div>
-            
-            <div className="settings-section">
-              <h3>Plan</h3>
-              <div className="plan-info">
-                <p>Plan actual: <strong>{user.plan.toUpperCase()}</strong></p>
-                <p>Créditos restantes: <strong>{user.creditos}</strong></p>
-                <button className="upgrade-btn">🚀 Actualizar Plan</button>
-              </div>
-            </div>
-          </div>
-        )}
-      </main>
+        </main>
+      </div>
     </div>
   )
 }
