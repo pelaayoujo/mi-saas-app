@@ -11,14 +11,21 @@ export default function UserDashboard() {
   if (status === 'loading') {
     return (
       <div className="simple-dashboard">
-        <div className="loading">Cargando...</div>
+        <div className="loading">Cargando tu dashboard...</div>
       </div>
     )
   }
   
   if (!session) {
-    router.push('/login')
-    return null
+    // Redirigir al login después de un breve delay para evitar loops
+    setTimeout(() => {
+      router.push('/login')
+    }, 100)
+    return (
+      <div className="simple-dashboard">
+        <div className="loading">Redirigiendo al login...</div>
+      </div>
+    )
   }
 
   const handleCreateArticle = () => {

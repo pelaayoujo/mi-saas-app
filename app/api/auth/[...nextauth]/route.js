@@ -50,20 +50,18 @@ const handler = NextAuth({
         session.user.role = token.role
       }
       return session
+    },
+    async redirect({ url, baseUrl }) {
+      // Redirigir al dashboard después del login
+      if (url.startsWith('/')) return `${baseUrl}${url}`
+      else if (new URL(url).origin === baseUrl) return url
+      return `${baseUrl}/dashboard`
     }
   },
-      pages: {
-        signIn: '/login',
-        signUp: '/register',
-      },
-      callbacks: {
-        async redirect({ url, baseUrl }) {
-          // Redirigir al dashboard después del login
-          if (url.startsWith('/')) return `${baseUrl}${url}`
-          else if (new URL(url).origin === baseUrl) return url
-          return `${baseUrl}/dashboard`
-        }
-      },
+  pages: {
+    signIn: '/login',
+    signUp: '/register',
+  },
   secret: process.env.NEXTAUTH_SECRET,
 })
 
