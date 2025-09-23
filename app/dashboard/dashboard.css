@@ -2,9 +2,9 @@
 
 /* Variables */
 :root {
-  --primary-blue: #0077B5;
-  --secondary-blue: #005885;
-  --light-blue: #e0f2f7;
+  --linkedin-blue: #0077B5;
+  --linkedin-blue-dark: #005885;
+  --linkedin-blue-light: #e0f2f7;
   --white: #FFFFFF;
   --gray-50: #F9FAFB;
   --gray-100: #F3F4F6;
@@ -13,7 +13,6 @@
   --gray-600: #4B5563;
   --gray-800: #1F2937;
   --gray-900: #111827;
-  --success-green: #10B981;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -30,13 +29,13 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   color: var(--gray-800);
-  background: var(--gray-50);
+  background: var(--white);
 }
 
 /* Dashboard Container */
 .simple-dashboard {
   min-height: 100vh;
-  background: var(--gray-50);
+  background: var(--white);
 }
 
 /* Loading */
@@ -52,7 +51,7 @@ body {
 /* Header */
 .simple-header {
   background: var(--white);
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 2px solid var(--linkedin-blue);
   padding: 1rem 0;
   box-shadow: var(--shadow-sm);
 }
@@ -72,7 +71,7 @@ body {
   gap: 0.5rem;
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--primary-blue);
+  color: var(--linkedin-blue);
 }
 
 .logo-icon {
@@ -142,7 +141,7 @@ body {
 
 .action-card {
   background: var(--white);
-  border: 1px solid var(--gray-200);
+  border: 2px solid var(--gray-200);
   border-radius: 12px;
   padding: 2rem;
   text-align: center;
@@ -153,6 +152,7 @@ body {
 .action-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+  border-color: var(--linkedin-blue);
 }
 
 .action-icon {
@@ -175,7 +175,7 @@ body {
 
 /* Buttons */
 .primary-btn {
-  background: var(--primary-blue);
+  background: var(--linkedin-blue);
   color: var(--white);
   border: none;
   padding: 1rem 2rem;
@@ -188,7 +188,7 @@ body {
 }
 
 .primary-btn:hover {
-  background: var(--secondary-blue);
+  background: var(--linkedin-blue-dark);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
@@ -208,8 +208,8 @@ body {
 
 /* Info Section */
 .info-section {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
+  background: var(--linkedin-blue-light);
+  border: 2px solid var(--linkedin-blue);
   border-radius: 12px;
   padding: 3rem 2rem;
   box-shadow: var(--shadow-sm);
@@ -218,7 +218,7 @@ body {
 .info-section h2 {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--gray-800);
+  color: var(--linkedin-blue);
   text-align: center;
   margin-bottom: 3rem;
 }
@@ -236,7 +236,7 @@ body {
 }
 
 .step-number {
-  background: var(--primary-blue);
+  background: var(--linkedin-blue);
   color: var(--white);
   width: 40px;
   height: 40px;
