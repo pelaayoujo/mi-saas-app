@@ -337,6 +337,38 @@ export default function Home() {
               <h4>¿Puedo cancelar cuando quiera?</h4>
               <p>Absolutamente. Sin contratos, sin penalizaciones. Cancela cuando quieras desde tu dashboard.</p>
             </div>
+            <div className="faq-item">
+              <h4>¿Cómo funciona la IA de LinkedAI?</h4>
+              <p>Nuestra IA analiza más de 10 millones de posts exitosos de LinkedIn para entender qué contenido genera más engagement. Luego crea contenido personalizado basado en tu industria y audiencia.</p>
+            </div>
+            <div className="faq-item">
+              <h4>¿Qué tipo de contenido puede generar?</h4>
+              <p>LinkedAI puede crear posts de texto, carruseles, infografías, historias profesionales, artículos y hasta respuestas automáticas a comentarios. Todo optimizado para el algoritmo de LinkedIn.</p>
+            </div>
+            <div className="faq-item">
+              <h4>¿Es seguro usar LinkedAI?</h4>
+              <p>Sí, utilizamos encriptación de extremo a extremo y cumplimos con todas las regulaciones de privacidad. Tu información y contenido están completamente seguros.</p>
+            </div>
+            <div className="faq-item">
+              <h4>¿Puedo probar LinkedAI gratis?</h4>
+              <p>Sí, ofrecemos una prueba gratuita de 14 días sin compromiso. Puedes cancelar en cualquier momento sin penalizaciones.</p>
+            </div>
+            <div className="faq-item">
+              <h4>¿Qué incluye el plan Pro?</h4>
+              <p>El plan Pro incluye contenido ilimitado, imágenes automáticas, estrategia personalizada, programación de posts, análisis de competencia, respuestas automáticas y soporte prioritario 24/7.</p>
+            </div>
+            <div className="faq-item">
+              <h4>¿Necesito conocimientos técnicos?</h4>
+              <p>No, LinkedAI está diseñado para ser extremadamente fácil de usar. Solo necesitas conectar tu cuenta de LinkedIn y la IA hace el resto.</p>
+            </div>
+            <div className="faq-item">
+              <h4>¿Cómo mido el éxito de mi contenido?</h4>
+              <p>LinkedAI incluye un dashboard completo con métricas detalladas: interacciones, alcance, leads generados, crecimiento de seguidores y análisis de rendimiento por post.</p>
+            </div>
+            <div className="faq-item">
+              <h4>¿Ofrecen soporte en español?</h4>
+              <p>Sí, nuestro equipo de soporte habla español y está disponible 24/7 para ayudarte con cualquier pregunta o problema que puedas tener.</p>
+            </div>
           </div>
         </div>
       </section>
