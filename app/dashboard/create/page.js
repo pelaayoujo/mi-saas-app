@@ -9,7 +9,6 @@ export default function CreateArticle() {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [formData, setFormData] = useState({
-    jobTitle: '',
     professionalFocus: '',
     tone: 'profesional',
     topic: '',
@@ -58,7 +57,7 @@ export default function CreateArticle() {
     
     // Validación básica
     const newErrors = {}
-    if (!formData.jobTitle.trim()) newErrors.jobTitle = 'El puesto de trabajo es requerido'
+    if (!formData.professionalFocus.trim()) newErrors.professionalFocus = 'El enfoque profesional es requerido'
     if (!formData.topic.trim()) newErrors.topic = 'El tema es requerido'
     if (!formData.aspects.trim()) newErrors.aspects = 'Los aspectos a tocar son requeridos'
     
@@ -203,28 +202,10 @@ export default function CreateArticle() {
             {/* Formulario */}
             <form onSubmit={handleSubmit} className="create-form">
               <div className="form-grid">
-                {/* Puesto de Trabajo */}
-                <div className="form-group">
-                  <label htmlFor="jobTitle" className="form-label">
-                    Puesto de Trabajo *
-                  </label>
-                  <input
-                    type="text"
-                    id="jobTitle"
-                    name="jobTitle"
-                    value={formData.jobTitle}
-                    onChange={handleInputChange}
-                    placeholder="Ej: Marketing Manager, Desarrollador Senior, CEO..."
-                    className={`form-input ${errors.jobTitle ? 'error' : ''}`}
-                  />
-                  {errors.jobTitle && <span className="error-message">{errors.jobTitle}</span>}
-                  <p className="form-help">Tu rol profesional para dar credibilidad al artículo</p>
-                </div>
-
                 {/* Enfoque Profesional */}
                 <div className="form-group">
                   <label htmlFor="professionalFocus" className="form-label">
-                    Enfoque Profesional
+                    Enfoque Profesional *
                   </label>
                   <input
                     type="text"
@@ -232,9 +213,10 @@ export default function CreateArticle() {
                     name="professionalFocus"
                     value={formData.professionalFocus}
                     onChange={handleInputChange}
-                    placeholder="Ej: Marketing Digital, Desarrollo de Software, Liderazgo..."
-                    className="form-input"
+                    placeholder="Ej: Marketing Digital, Desarrollo de Software, Liderazgo, Emprendimiento..."
+                    className={`form-input ${errors.professionalFocus ? 'error' : ''}`}
                   />
+                  {errors.professionalFocus && <span className="error-message">{errors.professionalFocus}</span>}
                   <p className="form-help">Área específica desde la que abordarás el tema</p>
                 </div>
 
@@ -305,7 +287,7 @@ export default function CreateArticle() {
                 {/* Audiencia Objetivo */}
                 <div className="form-group">
                   <label htmlFor="targetAudience" className="form-label">
-                    Audiencia Objetivo
+                    Audiencia Objetivo (Opcional)
                   </label>
                   <input
                     type="text"
@@ -316,7 +298,7 @@ export default function CreateArticle() {
                     placeholder="Ej: Profesionales de marketing, Desarrolladores, Emprendedores..."
                     className="form-input"
                   />
-                  <p className="form-help">A quién va dirigido tu artículo</p>
+                  <p className="form-help">A quién va dirigido tu artículo (opcional)</p>
                 </div>
 
                 {/* Aspectos a Tocar */}

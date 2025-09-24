@@ -685,6 +685,7 @@ body {
 .create-container {
   max-width: 100%;
   margin: 0 auto;
+  width: 100%;
 }
 
 .create-header {
@@ -694,6 +695,7 @@ body {
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 
 .create-title h1 {
@@ -758,6 +760,7 @@ body {
   border-radius: 16px;
   padding: 2rem;
   box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 
 .form-grid {
@@ -765,6 +768,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .form-group {
