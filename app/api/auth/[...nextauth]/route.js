@@ -52,10 +52,10 @@ const handler = NextAuth({
       return session
     },
     async redirect({ url, baseUrl }) {
-      // Redirigir a la página principal después del login
+      // Redirigir al dashboard después del login
       if (url.startsWith('/')) return `${baseUrl}${url}`
       else if (new URL(url).origin === baseUrl) return url
-      return `${baseUrl}/`
+      return `${baseUrl}/dashboard`
     }
   },
   pages: {

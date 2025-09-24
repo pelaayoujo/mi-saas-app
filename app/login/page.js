@@ -28,8 +28,8 @@ export default function LoginPage() {
       if (result?.error) {
         setError('Credenciales inválidas')
       } else {
-        // Redirigir a la página principal
-        router.push('/')
+        // Redirigir al dashboard
+        router.push('/dashboard')
       }
     } catch (error) {
       setError('Error al iniciar sesión')
