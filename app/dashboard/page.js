@@ -29,45 +29,50 @@ export default function Dashboard() {
   }
 
   // Datos mock para el diseño
-  const metrics = {
-    followers: 1247,
-    impressions: 15680,
-    engagement: 8.4,
-    postsCreated: 23
-  }
-
   const recentArticles = [
     {
       id: 1,
       title: "5 estrategias para mejorar tu presencia en LinkedIn",
       status: "published",
       date: "2024-01-15",
-      views: 1240,
-      engagement: 12
+      scheduledDate: null
     },
     {
       id: 2,
       title: "Cómo crear contenido que genere engagement",
       status: "scheduled",
       date: "2024-01-16",
-      views: 0,
-      engagement: 0
+      scheduledDate: "2024-01-20"
     },
     {
       id: 3,
       title: "Tendencias de marketing digital 2024",
       status: "draft",
       date: "2024-01-14",
-      views: 0,
-      engagement: 0
+      scheduledDate: null
+    },
+    {
+      id: 4,
+      title: "Guía completa de networking profesional",
+      status: "draft",
+      date: "2024-01-13",
+      scheduledDate: null
     }
   ]
 
-  const tips = [
-    "Publica los martes y miércoles para mayor alcance",
-    "Usa hashtags relevantes (3-5 máximo)",
-    "Interactúa con comentarios en las primeras 2 horas",
-    "Comparte contenido de valor, no solo promocional"
+  const calendarEvents = [
+    {
+      id: 1,
+      title: "Cómo crear contenido que genere engagement",
+      date: "2024-01-20",
+      time: "09:00"
+    },
+    {
+      id: 2,
+      title: "Nuevo artículo sobre liderazgo",
+      date: "2024-01-22",
+      time: "14:00"
+    }
   ]
 
   const getStatusBadge = (status) => {
@@ -80,6 +85,14 @@ export default function Dashboard() {
   }
 
   const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    })
+  }
+
+  const formatCalendarDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('es-ES', {
       day: 'numeric',
       month: 'short'
@@ -96,10 +109,18 @@ export default function Dashboard() {
               className="menu-toggle"
               onClick={() => setSidebarOpen(!sidebarOpen)}
             >
-              ☰
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
             </button>
             <div className="logo">
-              <span className="logo-icon">✍️</span>
+              <div className="logo-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </div>
               <span className="logo-text">LinkedAI</span>
             </div>
           </div>
@@ -108,12 +129,15 @@ export default function Dashboard() {
             <div className="search-container">
               <input
                 type="text"
-                placeholder="Buscar artículos, métricas..."
+                placeholder="Buscar artículos..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="search-input"
               />
-              <span className="search-icon">🔍</span>
+              <svg className="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
             </div>
           </div>
 
@@ -141,23 +165,33 @@ export default function Dashboard() {
         <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
           <nav className="sidebar-nav">
             <a href="/dashboard" className="nav-item active">
-              <span className="nav-icon">🏠</span>
+              <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9,22 9,12 15,12 15,22"></polyline>
+              </svg>
               <span className="nav-label">Inicio</span>
             </a>
             <a href="/dashboard/create" className="nav-item">
-              <span className="nav-icon">✏️</span>
+              <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
               <span className="nav-label">Crear Artículo</span>
             </a>
             <a href="/dashboard/calendar" className="nav-item">
-              <span className="nav-icon">📅</span>
+              <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
               <span className="nav-label">Calendario</span>
             </a>
-            <a href="/dashboard/analytics" className="nav-item">
-              <span className="nav-icon">📊</span>
-              <span className="nav-label">Analytics</span>
-            </a>
             <a href="/dashboard/settings" className="nav-item">
-              <span className="nav-icon">⚙️</span>
+              <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
               <span className="nav-label">Ajustes</span>
             </a>
           </nav>
@@ -169,52 +203,26 @@ export default function Dashboard() {
             {/* Tarjeta de Bienvenida */}
             <div className="welcome-card">
               <div className="welcome-content">
-                <h1>¡Hola, {session.user.name}! 👋</h1>
-                <p>Bienvenido a tu centro de control de LinkedAI. Crea contenido que genere impacto.</p>
+                <h1>Bienvenido, {session.user.name}</h1>
+                <p>Crea contenido profesional que genere impacto en LinkedIn. Comienza escribiendo tu próximo artículo.</p>
                 <button className="cta-button">
-                  <span className="cta-icon">✏️</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
                   Crear Artículo
                 </button>
               </div>
               <div className="welcome-visual">
-                <div className="chart-placeholder">
-                  <span className="chart-icon">📈</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Métricas Rápidas */}
-            <div className="metrics-grid">
-              <div className="metric-card">
-                <div className="metric-icon">👥</div>
-                <div className="metric-content">
-                  <div className="metric-value">{metrics.followers.toLocaleString()}</div>
-                  <div className="metric-label">Seguidores</div>
-                  <div className="metric-change positive">+12%</div>
-                </div>
-              </div>
-              <div className="metric-card">
-                <div className="metric-icon">👁️</div>
-                <div className="metric-content">
-                  <div className="metric-value">{metrics.impressions.toLocaleString()}</div>
-                  <div className="metric-label">Impresiones</div>
-                  <div className="metric-change positive">+8%</div>
-                </div>
-              </div>
-              <div className="metric-card">
-                <div className="metric-icon">💬</div>
-                <div className="metric-content">
-                  <div className="metric-value">{metrics.engagement}%</div>
-                  <div className="metric-label">Engagement</div>
-                  <div className="metric-change positive">+2.1%</div>
-                </div>
-              </div>
-              <div className="metric-card">
-                <div className="metric-icon">📝</div>
-                <div className="metric-content">
-                  <div className="metric-value">{metrics.postsCreated}</div>
-                  <div className="metric-label">Posts Creados</div>
-                  <div className="metric-change neutral">Este mes</div>
+                <div className="welcome-stats">
+                  <div className="stat-item">
+                    <div className="stat-number">{recentArticles.length}</div>
+                    <div className="stat-label">Artículos</div>
+                  </div>
+                  <div className="stat-item">
+                    <div className="stat-number">{recentArticles.filter(a => a.status === 'published').length}</div>
+                    <div className="stat-label">Publicados</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -249,7 +257,12 @@ export default function Dashboard() {
                 <div className="articles-list">
                   {recentArticles.length === 0 ? (
                     <div className="empty-state">
-                      <div className="empty-icon">📝</div>
+                      <div className="empty-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <path d="M12 20h9"></path>
+                          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                        </svg>
+                      </div>
                       <h3>Aún no tienes artículos</h3>
                       <p>Crea tu primer artículo para ganar visibilidad en LinkedIn</p>
                       <button className="empty-cta">Crear Artículo</button>
@@ -268,18 +281,17 @@ export default function Dashboard() {
                             </div>
                             <div className="article-meta">
                               <span className="article-date">{formatDate(article.date)}</span>
-                              {article.status === 'published' && (
-                                <>
-                                  <span className="article-views">{article.views} vistas</span>
-                                  <span className="article-engagement">{article.engagement}% engagement</span>
-                                </>
+                              {article.scheduledDate && (
+                                <span className="article-scheduled">
+                                  Programado: {formatDate(article.scheduledDate)}
+                                </span>
                               )}
                             </div>
                           </div>
                           <div className="article-actions">
                             <button className="action-btn edit">Editar</button>
-                            {article.status === 'published' && (
-                              <button className="action-btn analytics">Analytics</button>
+                            {article.status === 'scheduled' && (
+                              <button className="action-btn schedule">Reprogramar</button>
                             )}
                           </div>
                         </div>
@@ -289,21 +301,38 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Tips y Sugerencias */}
-              <div className="tips-section">
+              {/* Calendario */}
+              <div className="calendar-section">
                 <div className="section-header">
-                  <h2>💡 Tips para LinkedIn</h2>
+                  <h2>Próximas Publicaciones</h2>
+                  <button className="calendar-btn">Ver Calendario</button>
                 </div>
-                <div className="tips-list">
-                  {tips.map((tip, index) => (
-                    <div key={index} className="tip-card">
-                      <div className="tip-icon">💡</div>
-                      <p className="tip-text">{tip}</p>
+                <div className="calendar-events">
+                  {calendarEvents.length === 0 ? (
+                    <div className="empty-calendar">
+                      <div className="empty-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                          <line x1="16" y1="2" x2="16" y2="6"></line>
+                          <line x1="8" y1="2" x2="8" y2="6"></line>
+                          <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                      </div>
+                      <p>No hay publicaciones programadas</p>
                     </div>
-                  ))}
-                </div>
-                <div className="tips-footer">
-                  <button className="tips-cta">Ver más tips</button>
+                  ) : (
+                    calendarEvents.map((event) => (
+                      <div key={event.id} className="calendar-event">
+                        <div className="event-date">
+                          <div className="event-day">{formatCalendarDate(event.date)}</div>
+                          <div className="event-time">{event.time}</div>
+                        </div>
+                        <div className="event-content">
+                          <div className="event-title">{event.title}</div>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             </div>
