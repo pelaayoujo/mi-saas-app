@@ -28,13 +28,8 @@ export default function LoginPage() {
       if (result?.error) {
         setError('Credenciales inválidas')
       } else {
-        // Verificar si es admin o usuario normal
-        const session = await getSession()
-        if (session?.user?.role === 'admin') {
-          router.push('/admin')
-        } else {
-          router.push('/dashboard')
-        }
+        // Redirigir a la página principal
+        router.push('/')
       }
     } catch (error) {
       setError('Error al iniciar sesión')
