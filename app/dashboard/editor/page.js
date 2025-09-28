@@ -192,10 +192,7 @@ export default function Editor() {
                   onClick={() => router.back()}
                   title="Volver"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M19 12H5"></path>
-                    <path d="M12 19l-7-7 7-7"></path>
-                  </svg>
+                  ←
                 </button>
               </div>
               
@@ -206,10 +203,7 @@ export default function Editor() {
                   onClick={() => formatText('bold')}
                   title="Negrita"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
-                    <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
-                  </svg>
+                  B
                 </button>
                 <button 
                   className="toolbar-btn"
@@ -217,11 +211,7 @@ export default function Editor() {
                   onClick={() => formatText('italic')}
                   title="Cursiva"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="19" y1="4" x2="10" y2="4"></line>
-                    <line x1="14" y1="20" x2="5" y2="20"></line>
-                    <line x1="15" y1="4" x2="9" y2="20"></line>
-                  </svg>
+                  I
                 </button>
                 <button 
                   className="toolbar-btn"
@@ -229,10 +219,7 @@ export default function Editor() {
                   onClick={() => formatText('underline')}
                   title="Subrayado"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path>
-                    <line x1="4" y1="21" x2="20" y2="21"></line>
-                  </svg>
+                  U
                 </button>
               </div>
 
@@ -267,12 +254,7 @@ export default function Editor() {
                   onClick={() => formatText('justifyLeft')}
                   title="Alinear Izquierda"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="21" y1="10" x2="7" y2="10"></line>
-                    <line x1="21" y1="6" x2="3" y2="6"></line>
-                    <line x1="21" y1="14" x2="3" y2="14"></line>
-                    <line x1="21" y1="18" x2="7" y2="18"></line>
-                  </svg>
+                  ←
                 </button>
                 <button 
                   className="toolbar-btn"
@@ -280,12 +262,7 @@ export default function Editor() {
                   onClick={() => formatText('justifyCenter')}
                   title="Centrar"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="10" x2="6" y2="10"></line>
-                    <line x1="21" y1="6" x2="3" y2="6"></line>
-                    <line x1="21" y1="14" x2="3" y2="14"></line>
-                    <line x1="18" y1="18" x2="6" y2="18"></line>
-                  </svg>
+                  ↔
                 </button>
                 <button 
                   className="toolbar-btn"
@@ -293,12 +270,7 @@ export default function Editor() {
                   onClick={() => formatText('justifyRight')}
                   title="Alinear Derecha"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="3" y1="10" x2="17" y2="10"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="14" x2="21" y2="14"></line>
-                    <line x1="3" y1="18" x2="17" y2="18"></line>
-                  </svg>
+                  →
                 </button>
                 <button 
                   className="toolbar-btn"
@@ -306,12 +278,7 @@ export default function Editor() {
                   onClick={() => formatText('justifyFull')}
                   title="Justificar"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                    <line x1="3" y1="14" x2="21" y2="14"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                  </svg>
+                  ≡
                 </button>
               </div>
 
@@ -322,14 +289,7 @@ export default function Editor() {
                   onClick={() => insertList('unordered')}
                   title="Lista con Viñetas"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                  </svg>
+                  •
                 </button>
                 <button 
                   className="toolbar-btn"
@@ -337,14 +297,7 @@ export default function Editor() {
                   onClick={() => insertList('ordered')}
                   title="Lista Numerada"
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="10" y1="6" x2="21" y2="6"></line>
-                    <line x1="10" y1="12" x2="21" y2="12"></line>
-                    <line x1="10" y1="18" x2="21" y2="18"></line>
-                    <path d="M4 6h1v4"></path>
-                    <path d="M4 10h2"></path>
-                    <path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path>
-                  </svg>
+                  1.
                 </button>
               </div>
 
