@@ -15,7 +15,8 @@ export default function CreateArticle() {
     length: 'medio',
     aspects: '',
     targetAudience: '',
-    objective: 'engagement'
+    objective: 'engagement',
+    resultsCount: 1
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -381,6 +382,44 @@ export default function CreateArticle() {
                   />
                   {errors.aspects && <span className="error-message">{errors.aspects}</span>}
                   <p className="form-help">Lista los puntos principales que quieres desarrollar en tu artículo</p>
+                </div>
+
+                {/* Cantidad de Resultados */}
+                <div className="form-group full-width">
+                  <label className="form-label">
+                    Cantidad de Resultados a Generar
+                  </label>
+                  <div className="slider-container">
+                    <div className="slider-labels">
+                      <span className="slider-label">1</span>
+                      <span className="slider-label">2</span>
+                      <span className="slider-label">3</span>
+                    </div>
+                    <div className="slider-wrapper">
+                      <input
+                        type="range"
+                        min="1"
+                        max="3"
+                        step="1"
+                        value={formData.resultsCount}
+                        onChange={(e) => setFormData(prev => ({ ...prev, resultsCount: parseInt(e.target.value) }))}
+                        className="slider"
+                      />
+                      <div className="slider-track">
+                        <div 
+                          className="slider-fill" 
+                          style={{ width: `${((formData.resultsCount - 1) / 2) * 100}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div className="slider-value">
+                      <span className="slider-number">{formData.resultsCount}</span>
+                      <span className="slider-text">
+                        {formData.resultsCount === 1 ? 'resultado' : 'resultados'}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="form-help">Selecciona cuántas versiones diferentes del artículo quieres generar</p>
                 </div>
               </div>
 
