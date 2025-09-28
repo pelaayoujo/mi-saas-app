@@ -2227,9 +2227,13 @@ body {
 }
 
 .content-title {
-  text-align: center;
-  margin-bottom: 3rem;
-  width: 100%;
+  text-align: center !important;
+  margin-bottom: 3rem !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .content-title h1 {
@@ -2244,7 +2248,8 @@ body {
   color: var(--gray-600);
   line-height: 1.6;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 auto !important;
+  text-align: center !important;
 }
 
 .content-filters {

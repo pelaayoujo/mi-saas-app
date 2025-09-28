@@ -298,6 +298,7 @@ export default function Content() {
         {/* Contenido Principal */}
         <main className="main-content">
           <div className="content-container">
+            {/* Título Principal Centrado */}
             <div className="content-title">
               <h1>Tu Contenido Generado</h1>
               <p>Gestiona y organiza todo el contenido que has creado con nuestras herramientas de IA.</p>
