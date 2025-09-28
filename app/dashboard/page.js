@@ -148,12 +148,6 @@ export default function Dashboard() {
               </div>
               <div className="user-dropdown">
                 <span className="user-name">{session.user.name}</span>
-                <button 
-                  className="logout-btn"
-                  onClick={() => signOut({ callbackUrl: '/' })}
-                >
-                  Cerrar Sesión
-                </button>
               </div>
             </div>
           </div>
