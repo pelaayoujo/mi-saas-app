@@ -238,7 +238,20 @@ body {
 .sidebar-nav {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.nav-section {
+  display: flex;
+  flex-direction: column;
   gap: 0.25rem;
+}
+
+.nav-section-bottom {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-200);
 }
 
 .nav-item {
@@ -251,6 +264,11 @@ body {
   font-weight: 500;
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
 }
 
 .nav-item:hover {
@@ -263,6 +281,17 @@ body {
   color: var(--linkedin-blue-dark);
   border-left-color: var(--linkedin-blue);
   font-weight: 600;
+}
+
+.nav-item-logout {
+  color: #EF4444;
+  border-left-color: transparent;
+}
+
+.nav-item-logout:hover {
+  background: #FEF2F2;
+  color: #DC2626;
+  border-left-color: #EF4444;
 }
 
 .nav-icon {
