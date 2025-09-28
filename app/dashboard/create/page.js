@@ -525,8 +525,8 @@ export default function CreateArticle() {
                         <button 
                           className="btn-secondary"
                           onClick={() => {
-                            // Aquí irá la lógica para abrir el editor
-                            alert('Abriendo editor para: ' + article.title)
+                            // Redirigir al editor con el artículo
+                            router.push('/dashboard/editor')
                           }}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
