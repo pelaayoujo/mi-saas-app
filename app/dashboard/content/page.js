@@ -18,40 +18,7 @@ export default function Content() {
       type: 'article',
       title: 'Marketing Digital 2024: Estrategias que Funcionan',
       preview: 'En el mundo del marketing digital, las tendencias evolucionan constantemente. Este artículo explora las estrategias más efectivas para 2024...',
-      content: `# Marketing Digital 2024: Estrategias que Funcionan
-
-En el mundo del marketing digital, las tendencias evolucionan constantemente. Este artículo explora las estrategias más efectivas para 2024, desde la personalización hasta el uso de la inteligencia artificial.
-
-## 1. Personalización Avanzada
-
-La personalización ya no es solo una opción, es una necesidad. Los consumidores esperan experiencias únicas y relevantes.
-
-### Técnicas de Personalización:
-- Segmentación basada en comportamiento
-- Contenido dinámico
-- Recomendaciones inteligentes
-
-## 2. Inteligencia Artificial en Marketing
-
-La IA está revolucionando cómo las empresas se conectan con sus audiencias.
-
-### Aplicaciones Prácticas:
-- Chatbots inteligentes
-- Análisis predictivo
-- Automatización de campañas
-
-## 3. Marketing de Contenidos Evolucionado
-
-El contenido sigue siendo el rey, pero ahora debe ser más estratégico y medible.
-
-### Estrategias Efectivas:
-- Storytelling auténtico
-- Contenido interactivo
-- Micro-momentos
-
-## Conclusión
-
-El marketing digital en 2024 requiere una combinación de tecnología avanzada y creatividad humana. Las empresas que logren este equilibrio serán las que destaquen en el mercado.`,
+      content: 'Contenido completo del artículo...',
       wordCount: 650,
       createdAt: '2024-01-15T10:30:00Z',
       status: 'published',
@@ -62,36 +29,7 @@ El marketing digital en 2024 requiere una combinación de tecnología avanzada y
       type: 'post',
       title: '5 Consejos para Mejorar tu LinkedIn',
       preview: '¿Quieres optimizar tu perfil de LinkedIn? Aquí tienes 5 consejos prácticos que te ayudarán a destacar...',
-      content: `🚀 5 Consejos para Mejorar tu LinkedIn
-
-1️⃣ **Optimiza tu foto de perfil**
-   - Usa una foto profesional y clara
-   - Sonríe y mantén contacto visual
-   - Evita fotos grupales o selfies
-
-2️⃣ **Escribe un headline atractivo**
-   - Ve más allá de tu título actual
-   - Incluye tu valor único
-   - Usa palabras clave relevantes
-
-3️⃣ **Crea un resumen impactante**
-   - Cuenta tu historia profesional
-   - Destaca logros específicos
-   - Incluye una llamada a la acción
-
-4️⃣ **Mantén tu perfil actualizado**
-   - Añade nuevas habilidades
-   - Actualiza experiencias recientes
-   - Solicita recomendaciones
-
-5️⃣ **Sé activo en la plataforma**
-   - Comparte contenido relevante
-   - Comenta en publicaciones
-   - Conecta con profesionales de tu sector
-
-¿Qué consejo te ha funcionado mejor? ¡Comparte tu experiencia! 👇
-
-#LinkedIn #Networking #DesarrolloProfesional #Carrera`,
+      content: 'Contenido completo del post...',
       wordCount: 280,
       createdAt: '2024-01-14T15:45:00Z',
       status: 'published',
@@ -102,36 +40,7 @@ El marketing digital en 2024 requiere una combinación de tecnología avanzada y
       type: 'biography',
       title: 'Biografía Profesional - Juan Pérez',
       preview: 'Experto en marketing digital con más de 8 años de experiencia ayudando a empresas a crecer en el mundo digital...',
-      content: `**Juan Pérez**
-*Especialista en Marketing Digital y Growth Hacking*
-
-Con más de 8 años de experiencia en el sector digital, Juan ha ayudado a más de 50 empresas a transformar su presencia online y aumentar sus ingresos en un promedio del 300%.
-
-**Experiencia Clave:**
-• Director de Marketing Digital en TechCorp (2020-2024)
-• Consultor Senior en DigitalGrowth (2018-2020)
-• Especialista en SEM en MarketingPro (2016-2018)
-
-**Logros Destacados:**
-🏆 Incrementó el tráfico orgánico en un 450% para clientes B2B
-🏆 Desarrolló estrategias que generaron $2M+ en ventas
-🏆 Certificado Google Ads y Facebook Blueprint
-
-**Especialidades:**
-- SEO/SEM y Marketing de Contenidos
-- Growth Hacking y Conversión
-- Automatización de Marketing
-- Análisis de Datos y ROI
-
-**Educación:**
-MBA en Marketing Digital - Universidad de Barcelona
-Certificación en Growth Hacking - Growth Tribe
-
-Apasionado por la innovación y el crecimiento sostenible. Siempre buscando nuevos desafíos que me permitan crear impacto real en el mundo digital.
-
-📧 juan.perez@email.com
-🌐 linkedin.com/in/juanperez
-📱 +34 600 123 456`,
+      content: 'Contenido completo de la biografía...',
       wordCount: 420,
       createdAt: '2024-01-13T09:15:00Z',
       status: 'published',
@@ -139,306 +48,32 @@ Apasionado por la innovación y el crecimiento sostenible. Siempre buscando nuev
     },
     {
       id: 4,
-      type: 'article',
-      title: 'El Futuro del Trabajo Remoto',
-      preview: 'El trabajo remoto ha transformado la forma en que trabajamos. Analizamos las tendencias y el futuro de esta modalidad...',
-      wordCount: 780,
-      createdAt: '2024-01-12T14:20:00Z',
-      status: 'draft',
-      tags: ['trabajo', 'remoto', 'futuro']
-    },
-    {
-      id: 5,
       type: 'email',
-      title: 'Email de Seguimiento - Propuesta Comercial',
+      title: 'Email de Seguimiento Comercial',
       preview: 'Estimado cliente, agradezco la oportunidad de presentar nuestra propuesta. Adjunto encontrará los detalles...',
-      content: `Asunto: Seguimiento de Propuesta - [Nombre del Proyecto]
-
-Estimado/a [Nombre del Cliente],
-
-Espero que este correo le encuentre muy bien.
-
-Quería hacer un seguimiento de la propuesta que le envié el [Fecha] para el proyecto [Nombre del Proyecto]. 
-
-**Resumen de la Propuesta:**
-• Alcance: [Descripción breve del proyecto]
-• Inversión: €[Cantidad]
-• Tiempo de entrega: [X semanas/meses]
-• Beneficios esperados: [Lista de beneficios]
-
-**Próximos Pasos:**
-1. Revisión de la propuesta
-2. Aclaración de dudas
-3. Firma del contrato
-4. Inicio del proyecto
-
-Me gustaría programar una breve llamada de 15 minutos para:
-- Resolver cualquier pregunta que pueda tener
-- Ajustar detalles si es necesario
-- Definir el cronograma de trabajo
-
-¿Le vendría bien [Día] a las [Hora]? Si no, puedo adaptarme a su disponibilidad.
-
-También adjunto algunos casos de éxito similares que podrían ser de su interés.
-
-Quedo a la espera de sus comentarios.
-
-Un cordial saludo,
-
-[Nombre]
-[Teléfono]
-[Email]
-[Empresa]
-
-P.D.: Si prefiere que le llame directamente, no dude en indicármelo.`,
+      content: 'Contenido completo del email...',
       wordCount: 320,
       createdAt: '2024-01-11T11:30:00Z',
       status: 'sent',
       tags: ['email', 'seguimiento', 'comercial']
     },
     {
-      id: 6,
+      id: 5,
       type: 'presentation',
       title: 'Presentación: Tendencias de Marketing Digital 2024',
-      preview: 'Una presentación completa sobre las principales tendencias en marketing digital para 2024, incluyendo IA, personalización y nuevas plataformas...',
-      content: `# Tendencias de Marketing Digital 2024
-
-## Slide 1: Portada
-**Tendencias de Marketing Digital 2024**
-*Preparado para: [Nombre de la Empresa]*
-*Fecha: [Fecha]*
-*Por: [Tu Nombre]*
-
-## Slide 2: Agenda
-1. **Personalización Avanzada**
-2. **Inteligencia Artificial**
-3. **Marketing de Contenidos Evolucionado**
-4. **Nuevas Plataformas Sociales**
-5. **Privacidad y Transparencia**
-6. **Automatización Inteligente**
-
-## Slide 3: Personalización Avanzada
-- **Realidad**: 80% de consumidores esperan experiencias personalizadas
-- **Técnicas**: Segmentación, contenido dinámico, recomendaciones
-- **Herramientas**: CRM avanzados, plataformas de personalización
-- **Resultado**: +20% en conversiones
-
-## Slide 4: Inteligencia Artificial
-- **Chatbots Inteligentes**: 24/7 atención al cliente
-- **Análisis Predictivo**: Anticipar necesidades
-- **Automatización**: Campañas optimizadas automáticamente
-- **ROI**: Reducción del 40% en costos operativos
-
-## Slide 5: Marketing de Contenidos
-- **Storytelling Auténtico**: Historias que conectan
-- **Contenido Interactivo**: Videos, encuestas, quizzes
-- **Micro-momentos**: Contenido para cada etapa del customer journey
-- **Métricas**: Engagement, no solo alcance
-
-## Slide 6: Nuevas Plataformas
-- **TikTok Business**: Para audiencias jóvenes
-- **LinkedIn**: B2B más fuerte que nunca
-- **Clubhouse**: Networking de voz
-- **Estrategia**: Diversificar presencia
-
-## Slide 7: Privacidad y Transparencia
-- **Cookies Third-Party**: Desaparición gradual
-- **First-Party Data**: Más valioso que nunca
-- **Transparencia**: Comunicación clara sobre datos
-- **Compliance**: GDPR, CCPA, futuras regulaciones
-
-## Slide 8: Automatización Inteligente
-- **Email Marketing**: Secuencias personalizadas
-- **Social Media**: Publicación automática optimizada
-- **Lead Nurturing**: Scoring y seguimiento automático
-- **Eficiencia**: +60% en productividad del equipo
-
-## Slide 9: Casos de Éxito
-**Empresa A**: +300% en leads cualificados
-**Empresa B**: -50% en costos de adquisición
-**Empresa C**: +150% en engagement social
-
-## Slide 10: Recomendaciones
-1. **Audita** tu estrategia actual
-2. **Prioriza** las tendencias relevantes
-3. **Experimenta** con nuevas herramientas
-4. **Mide** resultados constantemente
-5. **Adapta** según los datos
-
-## Slide 11: Próximos Pasos
-- **Q1**: Implementar personalización básica
-- **Q2**: Integrar herramientas de IA
-- **Q3**: Optimizar contenido interactivo
-- **Q4**: Evaluar y escalar
-
-## Slide 12: Preguntas y Respuestas
-*¿Tienen alguna pregunta sobre estas tendencias?*
-
-**Contacto:**
-[Email] | [Teléfono] | [LinkedIn]`,
+      preview: 'Una presentación completa sobre las principales tendencias en marketing digital para 2024...',
+      content: 'Contenido completo de la presentación...',
       wordCount: 780,
       createdAt: '2024-01-12T14:20:00Z',
       status: 'draft',
       tags: ['presentación', 'marketing', 'tendencias']
     },
     {
-      id: 7,
+      id: 6,
       type: 'proposal',
       title: 'Propuesta Comercial: Servicios de Marketing Digital',
-      preview: 'Propuesta detallada para servicios integrales de marketing digital, incluyendo estrategia, implementación y seguimiento...',
-      content: `# PROPUESTA COMERCIAL
-## Servicios Integrales de Marketing Digital
-
-**Para:** [Nombre de la Empresa]
-**Fecha:** [Fecha]
-**Válida hasta:** [Fecha + 30 días]
-**Preparado por:** [Tu Nombre/Empresa]
-
----
-
-## RESUMEN EJECUTIVO
-
-Proponemos una estrategia integral de marketing digital diseñada específicamente para [Nombre de la Empresa] que incluye:
-
-- **Análisis y Estrategia**: Auditoría completa y plan estratégico
-- **Implementación**: Desarrollo y ejecución de campañas
-- **Seguimiento**: Monitoreo y optimización continua
-- **ROI Esperado**: Incremento del 200-300% en leads cualificados
-
----
-
-## SITUACIÓN ACTUAL
-
-### Análisis de la Competencia
-- [Análisis específico de competidores]
-- [Oportunidades identificadas]
-- [Amenazas detectadas]
-
-### Estado del Marketing Digital
-- **Presencia Online**: [Evaluación actual]
-- **SEO**: [Posicionamiento actual]
-- **Social Media**: [Presencia y engagement]
-- **Conversiones**: [Tasa actual de conversión]
-
----
-
-## PROPUESTA DE VALOR
-
-### 1. ESTRATEGIA Y PLANIFICACIÓN
-**Duración:** 2-3 semanas
-**Entregables:**
-- Auditoría completa de marketing digital
-- Plan estratégico personalizado
-- Cronograma de implementación
-- KPIs y métricas de seguimiento
-
-**Inversión:** €2,500
-
-### 2. IMPLEMENTACIÓN Y DESARROLLO
-**Duración:** 8-12 semanas
-**Servicios Incluidos:**
-- Optimización SEO técnica y de contenido
-- Desarrollo de estrategia de contenidos
-- Configuración de herramientas de marketing
-- Creación de landing pages optimizadas
-- Setup de automatizaciones
-
-**Inversión:** €8,500
-
-### 3. GESTIÓN Y OPTIMIZACIÓN
-**Duración:** 6 meses (renovable)
-**Servicios Incluidos:**
-- Gestión diaria de campañas
-- Creación de contenido regular
-- Análisis y reportes mensuales
-- Optimización continua
-- Soporte técnico
-
-**Inversión:** €3,500/mes
-
----
-
-## CRONOGRAMA DE TRABAJO
-
-### Fase 1: Análisis y Estrategia (Semanas 1-3)
-- Semana 1: Auditoría completa
-- Semana 2: Desarrollo de estrategia
-- Semana 3: Presentación y aprobación
-
-### Fase 2: Implementación (Semanas 4-15)
-- Semanas 4-6: Setup técnico y herramientas
-- Semanas 7-12: Desarrollo de contenido y campañas
-- Semanas 13-15: Testing y optimización inicial
-
-### Fase 3: Gestión Continua (Meses 4-9)
-- Gestión diaria de campañas
-- Reportes mensuales
-- Optimización continua
-
----
-
-## INVERSIÓN TOTAL
-
-### Opción 1: Implementación Completa
-- **Estrategia y Planificación:** €2,500
-- **Implementación:** €8,500
-- **Gestión 6 meses:** €21,000
-- **TOTAL:** €32,000
-
-### Opción 2: Solo Implementación
-- **Estrategia y Planificación:** €2,500
-- **Implementación:** €8,500
-- **TOTAL:** €11,000
-
-### Opción 3: Solo Gestión
-- **Setup inicial:** €3,000
-- **Gestión 6 meses:** €21,000
-- **TOTAL:** €24,000
-
----
-
-## GARANTÍAS Y COMPROMISOS
-
-### Garantías
-- **ROI Mínimo**: 150% en 6 meses
-- **Leads Cualificados**: +200% en 3 meses
-- **Soporte**: Disponible 24/7 para emergencias
-
-### Compromisos
-- Reportes mensuales detallados
-- Reuniones de seguimiento quincenales
-- Transparencia total en métricas
-- Flexibilidad para ajustes
-
----
-
-## PRÓXIMOS PASOS
-
-1. **Revisión de Propuesta** (Esta semana)
-2. **Llamada de Aclaración** (Si es necesario)
-3. **Firma de Contrato** (Próxima semana)
-4. **Kick-off Meeting** (Inicio del proyecto)
-
----
-
-## CONTACTO
-
-**Responsable del Proyecto:**
-[Nombre]
-[Email]
-[Teléfono]
-[LinkedIn]
-
-**Empresa:**
-[Nombre de la Empresa]
-[Dirección]
-[Web]
-
----
-
-*Esta propuesta es válida por 30 días a partir de la fecha de emisión.*
-
-**¡Esperamos trabajar juntos para hacer crecer su negocio!**`,
+      preview: 'Propuesta detallada para servicios integrales de marketing digital...',
+      content: 'Contenido completo de la propuesta...',
       wordCount: 1200,
       createdAt: '2024-01-10T16:45:00Z',
       status: 'draft',
@@ -538,44 +173,23 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
     <div className="dashboard">
       {/* Header Fijo */}
       <header className="header">
-        <div className="header-content">
-          <div className="header-left">
-            <button 
-              className="menu-toggle"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
-            <div className="logo">
-              <div className="logo-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </div>
-              <span className="logo-text">LinkedAI</span>
-            </div>
-          </div>
-
-          <div className="header-center">
-            <div className="page-title">
-              <h1>Contenido Generado</h1>
-            </div>
-          </div>
-
-          <div className="header-right">
-            <div className="user-menu">
-              <div className="user-avatar">
-                {session.user.name?.charAt(0) || 'U'}
-              </div>
-              <div className="user-dropdown">
-                <span className="user-name">{session.user.name}</span>
-              </div>
-            </div>
-          </div>
+        <div className="header-left">
+          <button 
+            className="menu-toggle"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <h1>Contenido Generado</h1>
+        </div>
+        <div className="header-right">
+          <span className="user-info">
+            {session.user.name} ({session.user.role})
+          </span>
         </div>
       </header>
 
@@ -586,22 +200,22 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
             {/* Menú Principal */}
             <div className="nav-section">
               <a href="/dashboard" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   <polyline points="9,22 9,12 15,12 15,22"></polyline>
                 </svg>
                 <span className="nav-label">Inicio</span>
               </a>
               
               <a href="/dashboard/tools" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                 </svg>
                 <span className="nav-label">Herramientas</span>
               </a>
               
               <a href="/dashboard/content" className="nav-item active">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14,2 14,8 20,8"></polyline>
                   <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -612,7 +226,7 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
               </a>
               
               <a href="/dashboard/create" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M12 20h9"></path>
                   <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                 </svg>
@@ -620,7 +234,7 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
               </a>
               
               <a href="/dashboard/schedule" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                   <line x1="16" y1="2" x2="16" y2="6"></line>
                   <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -636,7 +250,7 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
                 className="nav-item nav-item-logout"
                 onClick={() => signOut({ callbackUrl: '/' })}
               >
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                   <polyline points="16,17 21,12 16,7"></polyline>
                   <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -650,27 +264,26 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
         {/* Contenido Principal */}
         <main className="main-content">
           <div className="content-container">
-            {/* Header y Filtros */}
             <div className="content-header">
               <div className="content-title">
-                <h1>Contenido Generado</h1>
-                <p>Gestiona todo tu contenido creado con nuestras herramientas</p>
+                <h1>Tu Contenido Generado</h1>
+                <p>Gestiona y organiza todo el contenido que has creado con nuestras herramientas de IA.</p>
               </div>
-              
+
               <div className="content-filters">
                 <div className="search-box">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                   </svg>
                   <input
                     type="text"
-                    placeholder="Buscar contenido..."
+                    placeholder="Buscar contenido por título, descripción o tags..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                
+
                 <div className="filter-tabs">
                   {contentTypes.map(type => (
                     <button
@@ -686,87 +299,58 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
               </div>
             </div>
 
-            {/* Lista de Contenido */}
             <div className="content-list">
-              {filteredContent.length === 0 ? (
-                <div className="empty-state">
-                  <div className="empty-icon">📄</div>
-                  <h3>No hay contenido</h3>
-                  <p>No se encontró contenido que coincida con los filtros seleccionados.</p>
-                  <button 
-                    className="btn-primary"
-                    onClick={() => router.push('/dashboard/tools')}
-                  >
-                    Crear Contenido
-                  </button>
-                </div>
-              ) : (
+              {filteredContent.length > 0 ? (
                 filteredContent.map(item => {
                   const typeInfo = getTypeInfo(item.type)
                   const statusInfo = getStatusInfo(item.status)
-                  
                   return (
                     <div key={item.id} className="content-item">
                       <div className="content-item-header">
                         <div className="content-type">
-                          <span 
-                            className="type-icon"
-                            style={{ backgroundColor: typeInfo.color }}
-                          >
+                          <div className="type-icon" style={{ backgroundColor: typeInfo.color }}>
                             {typeInfo.icon}
-                          </span>
+                          </div>
                           <span className="type-label">{typeInfo.label}</span>
                         </div>
-                        
                         <div className="content-status">
-                          <span 
-                            className="status-badge"
-                            style={{ 
-                              color: statusInfo.color, 
-                              backgroundColor: statusInfo.bg 
-                            }}
-                          >
+                          <span className="status-badge" style={{ 
+                            backgroundColor: statusInfo.bg,
+                            color: statusInfo.color
+                          }}>
                             {statusInfo.label}
                           </span>
                         </div>
                       </div>
-                      
                       <div className="content-item-body">
                         <h3 className="content-title">{item.title}</h3>
                         <p className="content-preview">{item.preview}</p>
-                        
                         <div className="content-meta">
-                          <div className="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <span className="meta-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                               <polyline points="14,2 14,8 20,8"></polyline>
-                              <line x1="16" y1="13" x2="8" y2="13"></line>
-                              <line x1="16" y1="17" x2="8" y2="17"></line>
                             </svg>
-                            <span>{item.wordCount} palabras</span>
-                          </div>
-                          
-                          <div className="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            {item.wordCount} palabras
+                          </span>
+                          <span className="meta-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <circle cx="12" cy="12" r="10"></circle>
-                              <polyline points="12,6 12,12 16,14"></polyline>
+                              <polyline points="12 6 12 12 16 14"></polyline>
                             </svg>
-                            <span>{formatDate(item.createdAt)}</span>
-                          </div>
-                          
+                            {formatDate(item.createdAt)}
+                          </span>
                           <div className="content-tags">
-                            {item.tags.map((tag, index) => (
-                              <span key={index} className="content-tag">#{tag}</span>
+                            {item.tags.map(tag => (
+                              <span key={tag} className="content-tag">#{tag}</span>
                             ))}
                           </div>
                         </div>
                       </div>
-                      
                       <div className="content-item-actions">
                         <button 
                           className="action-btn view-btn"
                           onClick={() => handleView(item)}
-                          title="Ver contenido"
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -774,11 +358,9 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
                           </svg>
                           Ver
                         </button>
-                        
                         <button 
                           className="action-btn edit-btn"
                           onClick={() => handleEdit(item)}
-                          title="Editar contenido"
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M12 20h9"></path>
@@ -786,15 +368,15 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
                           </svg>
                           Editar
                         </button>
-                        
                         <button 
                           className="action-btn delete-btn"
                           onClick={() => handleDelete(item)}
-                          title="Eliminar contenido"
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polyline points="3,6 5,6 21,6"></polyline>
-                            <path d="M19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
                           </svg>
                           Eliminar
                         </button>
@@ -802,6 +384,22 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
                     </div>
                   )
                 })
+              ) : (
+                <div className="empty-state">
+                  <span className="empty-icon">📦</span>
+                  <h3>No hay contenido generado</h3>
+                  <p>Parece que aún no has creado ningún contenido. ¡Empieza a usar nuestras herramientas para generar artículos, posts y más!</p>
+                  <button 
+                    className="btn-primary"
+                    onClick={() => router.push('/dashboard/tools')}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                    Ir a Herramientas
+                  </button>
+                </div>
               )}
             </div>
           </div>
