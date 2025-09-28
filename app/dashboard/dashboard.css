@@ -2280,7 +2280,7 @@ body {
 
 .search-box input:focus {
   outline: none;
-  border-color: var(--linkedin-blue);
+  border-color: #0077B5;
   box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.1);
 }
 
@@ -2308,14 +2308,14 @@ body {
 }
 
 .filter-tab:hover {
-  border-color: var(--linkedin-blue);
-  color: var(--linkedin-blue);
+  border-color: #0077B5;
+  color: #0077B5;
 }
 
 .filter-tab.active {
-  background: var(--linkedin-blue);
-  border-color: var(--linkedin-blue);
-  color: var(--white);
+  background: #0077B5;
+  border-color: #0077B5;
+  color: white;
 }
 
 .filter-icon {
@@ -2473,21 +2473,21 @@ body {
 }
 
 .view-btn:hover {
-  background: var(--linkedin-blue);
-  border-color: var(--linkedin-blue);
-  color: var(--white);
+  background: #0077B5;
+  border-color: #0077B5;
+  color: white;
 }
 
 .edit-btn:hover {
-  background: var(--warning);
-  border-color: var(--warning);
-  color: var(--white);
+  background: #ffc107;
+  border-color: #ffc107;
+  color: white;
 }
 
 .delete-btn:hover {
-  background: var(--danger);
-  border-color: var(--danger);
-  color: var(--white);
+  background: #dc3545;
+  border-color: #dc3545;
+  color: white;
 }
 
 .empty-state {

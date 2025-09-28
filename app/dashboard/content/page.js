@@ -94,7 +94,7 @@ export default function Content() {
 
   const getTypeInfo = (type) => {
     const typeMap = {
-      article: { label: 'Artículo', icon: '📝', color: '#0073b1' },
+      article: { label: 'Artículo', icon: '📝', color: '#0077B5' },
       post: { label: 'Post', icon: '💬', color: '#28a745' },
       biography: { label: 'Biografía', icon: '👤', color: '#6f42c1' },
       email: { label: 'Email', icon: '📧', color: '#fd7e14' },
