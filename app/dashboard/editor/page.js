@@ -100,6 +100,19 @@ export default function Editor() {
   const formatText = (command, value = null) => {
     document.execCommand(command, false, value)
     document.getElementById('editor').focus()
+    updateToolbarState()
+  }
+
+  const updateToolbarState = () => {
+    // Actualizar estado de botones de formato
+    const buttons = document.querySelectorAll('.toolbar-btn')
+    buttons.forEach(btn => {
+      const command = btn.getAttribute('data-command')
+      if (command) {
+        const isActive = document.queryCommandState(command)
+        btn.classList.toggle('active', isActive)
+      }
+    })
   }
 
   const insertHeading = (level) => {
@@ -109,6 +122,19 @@ export default function Editor() {
   const insertList = (type) => {
     formatText(type === 'ordered' ? 'insertOrderedList' : 'insertUnorderedList')
   }
+
+  // Actualizar estado de toolbar cuando se hace clic en el editor
+  useEffect(() => {
+    const editor = document.getElementById('editor')
+    if (editor) {
+      editor.addEventListener('click', updateToolbarState)
+      editor.addEventListener('keyup', updateToolbarState)
+      return () => {
+        editor.removeEventListener('click', updateToolbarState)
+        editor.removeEventListener('keyup', updateToolbarState)
+      }
+    }
+  }, [])
 
   return (
     <div className="dashboard">
@@ -155,96 +181,30 @@ export default function Editor() {
         </div>
       </header>
 
-      <div className="dashboard-layout">
-        {/* Sidebar */}
-        <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
-          <nav className="sidebar-nav">
-            {/* Menú Principal */}
-            <div className="nav-section">
-              <a href="/dashboard" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  <polyline points="9,22 9,12 15,12 15,22"></polyline>
-                </svg>
-                <span className="nav-label">Inicio</span>
-              </a>
-              
-              <a href="/dashboard/tools" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                </svg>
-                <span className="nav-label">Herramientas</span>
-              </a>
-              
-              <a href="/dashboard/articles" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14,2 14,8 20,8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10,9 9,9 8,9"></polyline>
-                </svg>
-                <span className="nav-label">Artículos Recientes</span>
-              </a>
-              
-              <a href="/dashboard/create" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 20h9"></path>
-                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                </svg>
-                <span className="nav-label">Generador de Artículos</span>
-              </a>
-              
-              <a href="/dashboard/schedule" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="16" y1="2" x2="16" y2="6"></line>
-                  <line x1="8" y1="2" x2="8" y2="6"></line>
-                  <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-                <span className="nav-label">Programación</span>
-              </a>
-            </div>
-            
-            {/* Sección de Cerrar Sesión */}
-            <div className="nav-section nav-section-bottom">
-              <button 
-                className="nav-item nav-item-logout"
-                onClick={() => signOut({ callbackUrl: '/' })}
-              >
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                  <polyline points="16,17 21,12 16,7"></polyline>
-                  <line x1="21" y1="12" x2="9" y2="12"></line>
-                </svg>
-                <span className="nav-label">Cerrar Sesión</span>
-              </button>
-            </div>
-          </nav>
-        </aside>
-
-        {/* Contenido Principal */}
-        <main className="main-content">
+      {/* Contenido Principal - Editor a pantalla completa */}
+      <div className="editor-fullscreen">
           <div className="editor-container">
             {/* Barra de Herramientas */}
             <div className="editor-toolbar">
               <div className="toolbar-group">
                 <button 
                   className="toolbar-btn"
+                  data-command="bold"
                   onClick={() => formatText('bold')}
                   title="Negrita"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
                     <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
                   </svg>
                 </button>
                 <button 
                   className="toolbar-btn"
+                  data-command="italic"
                   onClick={() => formatText('italic')}
                   title="Cursiva"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="19" y1="4" x2="10" y2="4"></line>
                     <line x1="14" y1="20" x2="5" y2="20"></line>
                     <line x1="15" y1="4" x2="9" y2="20"></line>
@@ -252,10 +212,11 @@ export default function Editor() {
                 </button>
                 <button 
                   className="toolbar-btn"
+                  data-command="underline"
                   onClick={() => formatText('underline')}
                   title="Subrayado"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path>
                     <line x1="4" y1="21" x2="20" y2="21"></line>
                   </svg>
@@ -289,10 +250,11 @@ export default function Editor() {
               <div className="toolbar-group">
                 <button 
                   className="toolbar-btn"
+                  data-command="justifyLeft"
                   onClick={() => formatText('justifyLeft')}
                   title="Alinear Izquierda"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="21" y1="10" x2="7" y2="10"></line>
                     <line x1="21" y1="6" x2="3" y2="6"></line>
                     <line x1="21" y1="14" x2="3" y2="14"></line>
@@ -301,10 +263,11 @@ export default function Editor() {
                 </button>
                 <button 
                   className="toolbar-btn"
+                  data-command="justifyCenter"
                   onClick={() => formatText('justifyCenter')}
                   title="Centrar"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="18" y1="10" x2="6" y2="10"></line>
                     <line x1="21" y1="6" x2="3" y2="6"></line>
                     <line x1="21" y1="14" x2="3" y2="14"></line>
@@ -313,10 +276,11 @@ export default function Editor() {
                 </button>
                 <button 
                   className="toolbar-btn"
+                  data-command="justifyRight"
                   onClick={() => formatText('justifyRight')}
                   title="Alinear Derecha"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="3" y1="10" x2="17" y2="10"></line>
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="14" x2="21" y2="14"></line>
@@ -325,10 +289,11 @@ export default function Editor() {
                 </button>
                 <button 
                   className="toolbar-btn"
+                  data-command="justifyFull"
                   onClick={() => formatText('justifyFull')}
                   title="Justificar"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="10" x2="21" y2="10"></line>
                     <line x1="3" y1="14" x2="21" y2="14"></line>
@@ -340,10 +305,11 @@ export default function Editor() {
               <div className="toolbar-group">
                 <button 
                   className="toolbar-btn"
+                  data-command="insertUnorderedList"
                   onClick={() => insertList('unordered')}
                   title="Lista con Viñetas"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="8" y1="6" x2="21" y2="6"></line>
                     <line x1="8" y1="12" x2="21" y2="12"></line>
                     <line x1="8" y1="18" x2="21" y2="18"></line>
@@ -354,10 +320,11 @@ export default function Editor() {
                 </button>
                 <button 
                   className="toolbar-btn"
+                  data-command="insertOrderedList"
                   onClick={() => insertList('ordered')}
                   title="Lista Numerada"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="10" y1="6" x2="21" y2="6"></line>
                     <line x1="10" y1="12" x2="21" y2="12"></line>
                     <line x1="10" y1="18" x2="21" y2="18"></line>
@@ -485,7 +452,6 @@ export default function Editor() {
               </button>
             </div>
           </div>
-        </main>
       </div>
     </div>
   )

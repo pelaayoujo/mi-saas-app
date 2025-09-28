@@ -1586,48 +1586,56 @@ body {
 }
 
 /* Estilos para el Editor */
+.editor-fullscreen {
+  display: flex;
+  height: calc(100vh - 80px);
+  background: var(--white);
+}
+
 .editor-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 80px);
+  flex: 1;
   background: var(--white);
 }
 
 .editor-toolbar {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: var(--gray-50);
-  border-bottom: 1px solid var(--gray-200);
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-300);
   flex-wrap: wrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .toolbar-group {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  padding-right: 1rem;
+  gap: 0.125rem;
+  padding-right: 0.75rem;
   border-right: 1px solid var(--gray-300);
 }
 
 .toolbar-group:last-child {
   border-right: none;
+  padding-right: 0;
 }
 
 .toolbar-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   background: var(--white);
   border: 1px solid var(--gray-300);
-  border-radius: 6px;
+  border-radius: 4px;
   color: var(--gray-700);
   cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.8rem;
+  transition: all 0.15s ease;
+  font-size: 0.75rem;
   font-weight: 600;
 }
 
@@ -1637,20 +1645,22 @@ body {
   color: var(--gray-900);
 }
 
-.toolbar-btn:active {
+.toolbar-btn:active,
+.toolbar-btn.active {
   background: var(--linkedin-blue);
   border-color: var(--linkedin-blue);
   color: var(--white);
 }
 
 .toolbar-select {
-  padding: 0.5rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid var(--gray-300);
-  border-radius: 6px;
+  border-radius: 4px;
   background: var(--white);
   color: var(--gray-700);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   cursor: pointer;
+  height: 28px;
 }
 
 .toolbar-select:focus {
@@ -1736,10 +1746,11 @@ body {
 .editor-sidebar {
   width: 350px;
   background: var(--white);
-  border-left: 1px solid var(--gray-200);
+  border-left: 1px solid var(--gray-300);
   padding: 1.5rem;
   overflow-y: auto;
   height: calc(100vh - 80px);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-header {
