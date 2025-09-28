@@ -20,6 +20,9 @@ export default function CreateArticle() {
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [currentStep, setCurrentStep] = useState(1) // 1: Configuración, 2: Generación, 3: Revisión
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generatedArticles, setGeneratedArticles] = useState([])
 
   // Verificar autenticación
   if (status === 'loading') {
@@ -69,14 +72,24 @@ export default function CreateArticle() {
       return
     }
 
-    // Aquí iría la lógica para procesar el formulario
-    // Por ahora solo simulamos el envío
+    // Pasar al paso 2 (Generación)
+    setIsSubmitting(false)
+    setCurrentStep(2)
+    setIsGenerating(true)
+    
+    // Simular generación de artículos
     setTimeout(() => {
-      console.log('Datos del artículo:', formData)
-      setIsSubmitting(false)
-      // Redirigir al editor o mostrar mensaje de éxito
-      alert('Configuración guardada. Próximamente se abrirá el editor.')
-    }, 1000)
+      setIsGenerating(false)
+      setCurrentStep(3)
+      // Simular artículos generados
+      const mockArticles = Array.from({ length: formData.resultsCount }, (_, index) => ({
+        id: index + 1,
+        title: `${formData.topic} - Versión ${index + 1}`,
+        content: `Este es el contenido generado para el artículo sobre "${formData.topic}" con enfoque en ${formData.professionalFocus}. El tono es ${formData.tone} y tiene una extensión ${formData.length}.`,
+        wordCount: formData.length === 'corto' ? 450 : formData.length === 'medio' ? 650 : formData.length === 'largo' ? 950 : 1200
+      }))
+      setGeneratedArticles(mockArticles)
+    }, 3000) // 3 segundos de simulación
   }
 
   const toneOptions = [
@@ -226,23 +239,24 @@ export default function CreateArticle() {
                 <p>Define los aspectos clave de tu artículo para crear contenido optimizado para LinkedIn</p>
               </div>
               <div className="create-progress">
-                <div className="progress-step active">
+                <div className={`progress-step ${currentStep >= 1 ? 'active' : ''} ${currentStep > 1 ? 'completed' : ''}`}>
                   <div className="step-number">1</div>
                   <div className="step-label">Configuración</div>
                 </div>
-                <div className="progress-step">
+                <div className={`progress-step ${currentStep >= 2 ? 'active' : ''} ${currentStep > 2 ? 'completed' : ''}`}>
                   <div className="step-number">2</div>
-                  <div className="step-label">Escritura</div>
+                  <div className="step-label">Generación</div>
                 </div>
-                <div className="progress-step">
+                <div className={`progress-step ${currentStep >= 3 ? 'active' : ''}`}>
                   <div className="step-number">3</div>
                   <div className="step-label">Revisión</div>
                 </div>
               </div>
             </div>
 
-            {/* Formulario */}
-            <form onSubmit={handleSubmit} className="create-form">
+            {/* Contenido según el paso actual */}
+            {currentStep === 1 && (
+              <form onSubmit={handleSubmit} className="create-form">
               <div className="form-grid">
                 {/* Enfoque Profesional */}
                 <div className="form-group">
@@ -454,6 +468,109 @@ export default function CreateArticle() {
                 </button>
               </div>
             </form>
+            )}
+
+            {/* Paso 2: Pantalla de Generación */}
+            {currentStep === 2 && (
+              <div className="generation-screen">
+                <div className="generation-content">
+                  <div className="generation-spinner">
+                    <div className="spinner-circle"></div>
+                  </div>
+                  <h2>Generando {formData.resultsCount === 1 ? 'Artículo' : 'Artículos'}</h2>
+                  <p>Nuestra IA está creando {formData.resultsCount === 1 ? 'tu artículo' : `tus ${formData.resultsCount} artículos`} personalizado{formData.resultsCount > 1 ? 's' : ''}...</p>
+                  <div className="generation-details">
+                    <div className="detail-item">
+                      <span className="detail-label">Tema:</span>
+                      <span className="detail-value">{formData.topic}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Enfoque:</span>
+                      <span className="detail-value">{formData.professionalFocus}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Tono:</span>
+                      <span className="detail-value">{toneOptions.find(t => t.value === formData.tone)?.label}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-label">Extensión:</span>
+                      <span className="detail-value">{lengthOptions.find(l => l.value === formData.length)?.label}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Paso 3: Pantalla de Revisión */}
+            {currentStep === 3 && (
+              <div className="review-screen">
+                <div className="review-header">
+                  <h2>Artículos Generados</h2>
+                  <p>Revisa y edita {formData.resultsCount === 1 ? 'tu artículo' : `tus ${formData.resultsCount} artículos`} antes de publicar</p>
+                </div>
+                
+                <div className="articles-list">
+                  {generatedArticles.map((article, index) => (
+                    <div key={article.id} className="article-card">
+                      <div className="article-header">
+                        <h3>{article.title}</h3>
+                        <div className="article-meta">
+                          <span className="word-count">{article.wordCount} palabras</span>
+                        </div>
+                      </div>
+                      <div className="article-content">
+                        <p>{article.content}</p>
+                      </div>
+                      <div className="article-actions">
+                        <button className="btn-secondary">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                          </svg>
+                          Editar
+                        </button>
+                        <button className="btn-primary">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                          </svg>
+                          Publicar
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="review-actions">
+                  <button 
+                    className="btn-secondary"
+                    onClick={() => setCurrentStep(1)}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 12H5"></path>
+                      <path d="M12 19l-7-7 7-7"></path>
+                    </svg>
+                    Volver a Configurar
+                  </button>
+                  <button 
+                    className="btn-primary"
+                    onClick={() => {
+                      // Aquí iría la lógica para guardar o publicar
+                      alert('Artículos guardados exitosamente')
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                      <polyline points="17,21 17,13 7,13 7,21"></polyline>
+                      <polyline points="7,3 7,8 15,8"></polyline>
+                    </svg>
+                    Guardar Artículos
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </main>
       </div>
