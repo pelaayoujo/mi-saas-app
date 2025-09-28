@@ -11,23 +11,6 @@ export default function Content() {
   const [selectedFilter, setSelectedFilter] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Verificar autenticación
-  if (status === 'loading') {
-    return (
-      <div className="dashboard">
-        <div className="loading">
-          <div className="loading-spinner"></div>
-          <p>Cargando...</p>
-        </div>
-      </div>
-    )
-  }
-  
-  if (!session) {
-    router.push('/login')
-    return null
-  }
-
   // Mock data - En el futuro esto vendrá de la base de datos
   const [contentItems, setContentItems] = useState([
     {
@@ -81,6 +64,23 @@ export default function Content() {
       tags: ['email', 'seguimiento', 'comercial']
     }
   ])
+
+  // Verificar autenticación
+  if (status === 'loading') {
+    return (
+      <div className="dashboard">
+        <div className="loading">
+          <div className="loading-spinner"></div>
+          <p>Cargando...</p>
+        </div>
+      </div>
+    )
+  }
+  
+  if (!session) {
+    router.push('/login')
+    return null
+  }
 
   const contentTypes = [
     { value: 'all', label: 'Todo el Contenido', icon: '📄' },
