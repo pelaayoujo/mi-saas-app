@@ -184,7 +184,7 @@ export default function Content() {
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
-          <h1>Contenido Generado</h1>
+          <h1>Dashboard</h1>
         </div>
         <div className="header-right">
           <span className="user-info">
