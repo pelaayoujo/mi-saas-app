@@ -2226,13 +2226,10 @@ body {
   margin: 0 auto;
 }
 
-.content-header {
-  margin-bottom: 2rem;
-}
-
 .content-title {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  width: 100%;
 }
 
 .content-title h1 {
@@ -2255,6 +2252,8 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 .search-box {

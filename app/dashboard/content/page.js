@@ -298,13 +298,12 @@ export default function Content() {
         {/* Contenido Principal */}
         <main className="main-content">
           <div className="content-container">
-            <div className="content-header">
-              <div className="content-title">
-                <h1>Tu Contenido Generado</h1>
-                <p>Gestiona y organiza todo el contenido que has creado con nuestras herramientas de IA.</p>
-              </div>
+            <div className="content-title">
+              <h1>Tu Contenido Generado</h1>
+              <p>Gestiona y organiza todo el contenido que has creado con nuestras herramientas de IA.</p>
+            </div>
 
-              <div className="content-filters">
+            <div className="content-filters">
                 <div className="search-box">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="11" cy="11" r="8"></circle>
