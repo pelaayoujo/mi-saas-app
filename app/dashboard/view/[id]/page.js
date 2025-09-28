@@ -1,18 +1,19 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import '../dashboard.css'
+import { useRouter, useParams } from 'next/navigation'
+import '../../dashboard.css'
 
-export default function Content() {
+export default function ViewContent() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const params = useParams()
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [selectedFilter, setSelectedFilter] = useState('all')
-  const [searchTerm, setSearchTerm] = useState('')
+  const [content, setContent] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   // Mock data - En el futuro esto vendrá de la base de datos
-  const [contentItems, setContentItems] = useState([
+  const contentItems = [
     {
       id: 1,
       type: 'article',
@@ -142,6 +143,55 @@ Apasionado por la innovación y el crecimiento sostenible. Siempre buscando nuev
       type: 'article',
       title: 'El Futuro del Trabajo Remoto',
       preview: 'El trabajo remoto ha transformado la forma en que trabajamos. Analizamos las tendencias y el futuro de esta modalidad...',
+      content: `# El Futuro del Trabajo Remoto
+
+El trabajo remoto ha transformado la forma en que trabajamos. Analizamos las tendencias y el futuro de esta modalidad que llegó para quedarse.
+
+## Introducción
+
+La pandemia aceleró una transformación que ya estaba en marcha. El trabajo remoto no es solo una tendencia temporal, sino un cambio estructural en cómo entendemos el trabajo.
+
+## Beneficios del Trabajo Remoto
+
+### Para los Empleados
+- Mayor flexibilidad horaria
+- Mejor equilibrio trabajo-vida
+- Reducción de costos de transporte
+- Mayor productividad en muchos casos
+
+### Para las Empresas
+- Reducción de costos de oficina
+- Acceso a talento global
+- Mayor retención de empleados
+- Menor absentismo
+
+## Desafíos y Soluciones
+
+### Desafíos Principales
+- Comunicación y colaboración
+- Gestión de equipos distribuidos
+- Mantenimiento de la cultura empresarial
+- Seguridad de datos
+
+### Soluciones Tecnológicas
+- Herramientas de videoconferencia
+- Plataformas de colaboración
+- Software de gestión de proyectos
+- Sistemas de seguridad avanzados
+
+## Tendencias Futuras
+
+### Modelos Híbridos
+La mayoría de empresas adoptarán modelos híbridos que combinen trabajo presencial y remoto.
+
+### Tecnologías Emergentes
+- Realidad virtual para reuniones
+- IA para gestión de equipos
+- Herramientas de productividad avanzadas
+
+## Conclusión
+
+El trabajo remoto llegó para quedarse. Las empresas que se adapten mejor a esta nueva realidad tendrán ventajas competitivas significativas.`,
       wordCount: 780,
       createdAt: '2024-01-12T14:20:00Z',
       status: 'draft',
@@ -444,7 +494,38 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
       status: 'draft',
       tags: ['propuesta', 'comercial', 'marketing digital']
     }
-  ])
+  ]
+
+  useEffect(() => {
+    if (params.id) {
+      const foundContent = contentItems.find(item => item.id === parseInt(params.id))
+      setContent(foundContent)
+      setLoading(false)
+    }
+  }, [params.id])
+
+  const getTypeInfo = (type) => {
+    const typeMap = {
+      article: { label: 'Artículo', icon: '📝', color: '#0077B5' },
+      post: { label: 'Post', icon: '💬', color: '#28a745' },
+      biography: { label: 'Biografía', icon: '👤', color: '#6f42c1' },
+      email: { label: 'Email', icon: '📧', color: '#fd7e14' },
+      presentation: { label: 'Presentación', icon: '📊', color: '#20c997' },
+      proposal: { label: 'Propuesta', icon: '📋', color: '#dc3545' }
+    }
+    return typeMap[type] || { label: 'Contenido', icon: '📄', color: '#6c757d' }
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  }
 
   // Verificar autenticación
   if (status === 'loading') {
@@ -463,119 +544,53 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
     return null
   }
 
-  const contentTypes = [
-    { value: 'all', label: 'Todo el Contenido', icon: '📄' },
-    { value: 'article', label: 'Artículos', icon: '📝' },
-    { value: 'post', label: 'Posts', icon: '💬' },
-    { value: 'biography', label: 'Biografías', icon: '👤' },
-    { value: 'email', label: 'Emails', icon: '📧' },
-    { value: 'presentation', label: 'Presentaciones', icon: '📊' },
-    { value: 'proposal', label: 'Propuestas', icon: '📋' }
-  ]
-
-  const getTypeInfo = (type) => {
-    const typeMap = {
-      article: { label: 'Artículo', icon: '📝', color: '#0077B5' },
-      post: { label: 'Post', icon: '💬', color: '#28a745' },
-      biography: { label: 'Biografía', icon: '👤', color: '#6f42c1' },
-      email: { label: 'Email', icon: '📧', color: '#fd7e14' },
-      presentation: { label: 'Presentación', icon: '📊', color: '#20c997' },
-      proposal: { label: 'Propuesta', icon: '📋', color: '#dc3545' }
-    }
-    return typeMap[type] || { label: 'Contenido', icon: '📄', color: '#6c757d' }
+  if (loading) {
+    return (
+      <div className="dashboard">
+        <div className="loading">
+          <div className="loading-spinner"></div>
+          <p>Cargando contenido...</p>
+        </div>
+      </div>
+    )
   }
 
-  const getStatusInfo = (status) => {
-    const statusMap = {
-      published: { label: 'Publicado', color: '#28a745', bg: '#d4edda' },
-      draft: { label: 'Borrador', color: '#ffc107', bg: '#fff3cd' },
-      sent: { label: 'Enviado', color: '#17a2b8', bg: '#d1ecf1' },
-      scheduled: { label: 'Programado', color: '#6f42c1', bg: '#e2e3f1' }
-    }
-    return statusMap[status] || { label: 'Desconocido', color: '#6c757d', bg: '#f8f9fa' }
+  if (!content) {
+    return (
+      <div className="dashboard">
+        <div className="loading">
+          <p>Contenido no encontrado</p>
+          <button className="btn-primary" onClick={() => router.push('/dashboard/content')}>
+            Volver al listado
+          </button>
+        </div>
+      </div>
+    )
   }
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })
-  }
-
-  const filteredContent = contentItems.filter(item => {
-    const matchesFilter = selectedFilter === 'all' || item.type === selectedFilter
-    const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.preview.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    return matchesFilter && matchesSearch
-  })
-
-  const handleEdit = (item) => {
-    // Redirigir al editor correspondiente según el tipo
-    if (item.type === 'article') {
-      router.push('/dashboard/editor')
-    } else {
-      alert(`Editor para ${getTypeInfo(item.type).label} estará disponible próximamente`)
-    }
-  }
-
-  const handleDelete = (item) => {
-    if (confirm(`¿Estás seguro de que quieres eliminar "${item.title}"?`)) {
-      setContentItems(prev => prev.filter(content => content.id !== item.id))
-    }
-  }
-
-  const handleView = (item) => {
-    // Redirigir a la página de visualización
-    router.push(`/dashboard/view/${item.id}`)
-  }
+  const typeInfo = getTypeInfo(content.type)
 
   return (
     <div className="dashboard">
       {/* Header Fijo */}
       <header className="header">
-        <div className="header-content">
-          <div className="header-left">
-            <button 
-              className="menu-toggle"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
-            <div className="logo">
-              <div className="logo-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </div>
-              <span className="logo-text">LinkedAI</span>
-            </div>
-          </div>
-
-          <div className="header-center">
-            <div className="page-title">
-              <h1>Contenido Generado</h1>
-            </div>
-          </div>
-
-          <div className="header-right">
-            <div className="user-menu">
-              <div className="user-avatar">
-                {session.user.name?.charAt(0) || 'U'}
-              </div>
-              <div className="user-dropdown">
-                <span className="user-name">{session.user.name}</span>
-              </div>
-            </div>
-          </div>
+        <div className="header-left">
+          <button 
+            className="menu-toggle"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          <h1>Visualizar Contenido</h1>
+        </div>
+        <div className="header-right">
+          <span className="user-info">
+            {session.user.name} ({session.user.role})
+          </span>
         </div>
       </header>
 
@@ -586,22 +601,22 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
             {/* Menú Principal */}
             <div className="nav-section">
               <a href="/dashboard" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   <polyline points="9,22 9,12 15,12 15,22"></polyline>
                 </svg>
                 <span className="nav-label">Inicio</span>
               </a>
               
               <a href="/dashboard/tools" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                 </svg>
                 <span className="nav-label">Herramientas</span>
               </a>
               
               <a href="/dashboard/content" className="nav-item active">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14,2 14,8 20,8"></polyline>
                   <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -612,7 +627,7 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
               </a>
               
               <a href="/dashboard/create" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M12 20h9"></path>
                   <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                 </svg>
@@ -620,7 +635,7 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
               </a>
               
               <a href="/dashboard/schedule" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                   <line x1="16" y1="2" x2="16" y2="6"></line>
                   <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -636,7 +651,7 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
                 className="nav-item nav-item-logout"
                 onClick={() => signOut({ callbackUrl: '/' })}
               >
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                   <polyline points="16,17 21,12 16,7"></polyline>
                   <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -649,160 +664,83 @@ Proponemos una estrategia integral de marketing digital diseñada específicamen
 
         {/* Contenido Principal */}
         <main className="main-content">
-          <div className="content-container">
-            {/* Header y Filtros */}
+          <div className="content-viewer">
+            {/* Header del Contenido */}
             <div className="content-header">
-              <div className="content-title">
-                <h1>Contenido Generado</h1>
-                <p>Gestiona todo tu contenido creado con nuestras herramientas</p>
+              <div className="content-meta">
+                <div className="content-type-badge" style={{ backgroundColor: typeInfo.color }}>
+                  <span className="type-icon">{typeInfo.icon}</span>
+                  <span className="type-label">{typeInfo.label}</span>
+                </div>
+                <div className="content-status">
+                  <span className="status-badge" style={{ 
+                    backgroundColor: content.status === 'published' ? '#28a745' : 
+                                     content.status === 'draft' ? '#ffc107' : 
+                                     content.status === 'sent' ? '#0077B5' : 
+                                     '#6c757d',
+                    color: 'white'
+                  }}>
+                    {content.status === 'published' ? 'Publicado' : 
+                     content.status === 'draft' ? 'Borrador' : 
+                     content.status === 'sent' ? 'Enviado' : 
+                     'Desconocido'}
+                  </span>
+                </div>
               </div>
               
-              <div className="content-filters">
-                <div className="search-box">
+              <div className="content-actions">
+                <button 
+                  className="btn-secondary"
+                  onClick={() => router.push('/dashboard/editor')}
+                >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                   </svg>
-                  <input
-                    type="text"
-                    placeholder="Buscar contenido..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                  />
-                </div>
-                
-                <div className="filter-tabs">
-                  {contentTypes.map(type => (
-                    <button
-                      key={type.value}
-                      className={`filter-tab ${selectedFilter === type.value ? 'active' : ''}`}
-                      onClick={() => setSelectedFilter(type.value)}
-                    >
-                      <span className="filter-icon">{type.icon}</span>
-                      <span className="filter-label">{type.label}</span>
-                    </button>
-                  ))}
-                </div>
+                  Editar
+                </button>
+                <button 
+                  className="btn-primary"
+                  onClick={() => router.push('/dashboard/content')}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"></path>
+                    <polyline points="21,6 12,13 3,6"></polyline>
+                  </svg>
+                  Volver
+                </button>
               </div>
             </div>
 
-            {/* Lista de Contenido */}
-            <div className="content-list">
-              {filteredContent.length === 0 ? (
-                <div className="empty-state">
-                  <div className="empty-icon">📄</div>
-                  <h3>No hay contenido</h3>
-                  <p>No se encontró contenido que coincida con los filtros seleccionados.</p>
-                  <button 
-                    className="btn-primary"
-                    onClick={() => router.push('/dashboard/tools')}
-                  >
-                    Crear Contenido
-                  </button>
-                </div>
-              ) : (
-                filteredContent.map(item => {
-                  const typeInfo = getTypeInfo(item.type)
-                  const statusInfo = getStatusInfo(item.status)
-                  
-                  return (
-                    <div key={item.id} className="content-item">
-                      <div className="content-item-header">
-                        <div className="content-type">
-                          <span 
-                            className="type-icon"
-                            style={{ backgroundColor: typeInfo.color }}
-                          >
-                            {typeInfo.icon}
-                          </span>
-                          <span className="type-label">{typeInfo.label}</span>
-                        </div>
-                        
-                        <div className="content-status">
-                          <span 
-                            className="status-badge"
-                            style={{ 
-                              color: statusInfo.color, 
-                              backgroundColor: statusInfo.bg 
-                            }}
-                          >
-                            {statusInfo.label}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      <div className="content-item-body">
-                        <h3 className="content-title">{item.title}</h3>
-                        <p className="content-preview">{item.preview}</p>
-                        
-                        <div className="content-meta">
-                          <div className="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                              <polyline points="14,2 14,8 20,8"></polyline>
-                              <line x1="16" y1="13" x2="8" y2="13"></line>
-                              <line x1="16" y1="17" x2="8" y2="17"></line>
-                            </svg>
-                            <span>{item.wordCount} palabras</span>
-                          </div>
-                          
-                          <div className="meta-item">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <circle cx="12" cy="12" r="10"></circle>
-                              <polyline points="12,6 12,12 16,14"></polyline>
-                            </svg>
-                            <span>{formatDate(item.createdAt)}</span>
-                          </div>
-                          
-                          <div className="content-tags">
-                            {item.tags.map((tag, index) => (
-                              <span key={index} className="content-tag">#{tag}</span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="content-item-actions">
-                        <button 
-                          className="action-btn view-btn"
-                          onClick={() => handleView(item)}
-                          title="Ver contenido"
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                          </svg>
-                          Ver
-                        </button>
-                        
-                        <button 
-                          className="action-btn edit-btn"
-                          onClick={() => handleEdit(item)}
-                          title="Editar contenido"
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 20h9"></path>
-                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                          </svg>
-                          Editar
-                        </button>
-                        
-                        <button 
-                          className="action-btn delete-btn"
-                          onClick={() => handleDelete(item)}
-                          title="Eliminar contenido"
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <polyline points="3,6 5,6 21,6"></polyline>
-                            <path d="M19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
-                          </svg>
-                          Eliminar
-                        </button>
-                      </div>
-                    </div>
-                  )
-                })
-              )}
+            {/* Título */}
+            <h1 className="content-title">{content.title}</h1>
+
+            {/* Metadatos */}
+            <div className="content-details">
+              <div className="detail-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14,2 14,8 20,8"></polyline>
+                </svg>
+                <span>{content.wordCount} palabras</span>
+              </div>
+              <div className="detail-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>{formatDate(content.createdAt)}</span>
+              </div>
+              <div className="content-tags">
+                {content.tags.map(tag => (
+                  <span key={tag} className="content-tag">#{tag}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Contenido */}
+            <div className="content-body">
+              <pre className="content-text">{content.content}</pre>
             </div>
           </div>
         </main>
