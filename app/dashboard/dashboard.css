@@ -1000,14 +1000,13 @@ body {
 .slider-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
   padding: 0.75rem;
   background: var(--white);
   border: 1px solid var(--gray-200);
   border-radius: 8px;
   max-width: 300px;
-  margin: 0 auto;
 }
 
 .slider-labels {
@@ -1108,7 +1107,7 @@ body {
 .slider-value {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.25rem;
   margin-top: 0.25rem;
 }
