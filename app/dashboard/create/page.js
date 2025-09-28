@@ -14,7 +14,8 @@ export default function CreateArticle() {
     topic: '',
     length: 'medio',
     aspects: '',
-    targetAudience: ''
+    targetAudience: '',
+    objective: 'engagement'
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -90,6 +91,15 @@ export default function CreateArticle() {
     { value: 'medio', label: 'Medio (500-800 palabras)', description: 'Artículo estándar' },
     { value: 'largo', label: 'Largo (800-1200 palabras)', description: 'Análisis profundo' },
     { value: 'muy-largo', label: 'Muy largo (1200+ palabras)', description: 'Artículo completo' }
+  ]
+
+  const objectiveOptions = [
+    { value: 'engagement', label: 'Generar Interacción', description: 'Likes, comentarios y shares' },
+    { value: 'discussion', label: 'Intercambio de Opiniones', description: 'Debate y conversación' },
+    { value: 'followers', label: 'Ganar Seguidores', description: 'Crecimiento de audiencia' },
+    { value: 'authority', label: 'Posicionar Autoridad', description: 'Establecer expertise' },
+    { value: 'leads', label: 'Generar Leads', description: 'Conversiones y contactos' },
+    { value: 'awareness', label: 'Crear Conciencia', description: 'Difundir mensaje o causa' }
   ]
 
   return (
@@ -251,12 +261,30 @@ export default function CreateArticle() {
                   <p className="form-help">Área específica desde la que abordarás el tema</p>
                 </div>
 
+                {/* Tema */}
+                <div className="form-group">
+                  <label htmlFor="topic" className="form-label">
+                    Tema del Artículo *
+                  </label>
+                  <input
+                    type="text"
+                    id="topic"
+                    name="topic"
+                    value={formData.topic}
+                    onChange={handleInputChange}
+                    placeholder="Ej: Tendencias de marketing digital 2024, Cómo liderar equipos remotos..."
+                    className={`form-input ${errors.topic ? 'error' : ''}`}
+                  />
+                  {errors.topic && <span className="error-message">{errors.topic}</span>}
+                  <p className="form-help">El tema principal sobre el que escribirás</p>
+                </div>
+
                 {/* Tono */}
                 <div className="form-group">
                   <label className="form-label">Tono del Artículo *</label>
-                  <div className="radio-group">
+                  <div className="radio-group radio-group-compact">
                     {toneOptions.map((option) => (
-                      <label key={option.value} className="radio-option">
+                      <label key={option.value} className="radio-option radio-option-compact">
                         <input
                           type="radio"
                           name="tone"
@@ -274,35 +302,40 @@ export default function CreateArticle() {
                   </div>
                 </div>
 
-                {/* Tema */}
-                <div className="form-group full-width">
-                  <label htmlFor="topic" className="form-label">
-                    Tema del Artículo *
-                  </label>
-                  <input
-                    type="text"
-                    id="topic"
-                    name="topic"
-                    value={formData.topic}
-                    onChange={handleInputChange}
-                    placeholder="Ej: Tendencias de marketing digital 2024, Cómo liderar equipos remotos..."
-                    className={`form-input ${errors.topic ? 'error' : ''}`}
-                  />
-                  {errors.topic && <span className="error-message">{errors.topic}</span>}
-                  <p className="form-help">El tema principal sobre el que escribirás</p>
-                </div>
-
                 {/* Extensión */}
                 <div className="form-group">
                   <label className="form-label">Extensión Aproximada *</label>
-                  <div className="radio-group">
+                  <div className="radio-group radio-group-compact">
                     {lengthOptions.map((option) => (
-                      <label key={option.value} className="radio-option">
+                      <label key={option.value} className="radio-option radio-option-compact">
                         <input
                           type="radio"
                           name="length"
                           value={option.value}
                           checked={formData.length === option.value}
+                          onChange={handleInputChange}
+                          className="radio-input"
+                        />
+                        <div className="radio-content">
+                          <div className="radio-label">{option.label}</div>
+                          <div className="radio-description">{option.description}</div>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Objetivo del Artículo */}
+                <div className="form-group">
+                  <label className="form-label">Objetivo del Artículo *</label>
+                  <div className="radio-group radio-group-compact">
+                    {objectiveOptions.map((option) => (
+                      <label key={option.value} className="radio-option radio-option-compact">
+                        <input
+                          type="radio"
+                          name="objective"
+                          value={option.value}
+                          checked={formData.objective === option.value}
                           onChange={handleInputChange}
                           className="radio-input"
                         />
