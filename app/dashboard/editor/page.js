@@ -42,11 +42,8 @@ export default function Editor() {
           `)
         }
       } else {
-        // Si no hay artículo guardado, usar contenido por defecto
-        setEditorContent(`
-          <h1>Artículo de Ejemplo</h1>
-          <p>No se encontró ningún artículo para editar. Por favor, genera un artículo primero.</p>
-        `)
+        // Si no hay artículo guardado, redirigir al dashboard
+        router.push('/dashboard/create')
       }
     }
   }, [])

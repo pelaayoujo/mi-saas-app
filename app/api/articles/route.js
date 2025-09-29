@@ -81,6 +81,8 @@ export async function POST(request) {
   try {
     const session = await getServerSession()
     
+    console.log('Session:', session)
+    
     if (!session) {
       return NextResponse.json(
         { success: false, message: 'No autorizado' },
@@ -104,7 +106,7 @@ export async function POST(request) {
 
     // Crear nuevo artículo
     const article = {
-      userId: session.user.id,
+      userId: session.user?.id || session.user?.email,
       title,
       body: content,
       status: 'draft',
