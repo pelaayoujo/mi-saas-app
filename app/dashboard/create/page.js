@@ -77,19 +77,35 @@ export default function CreateArticle() {
     setCurrentStep(2)
     setIsGenerating(true)
     
-    // Simular generación de artículos
-    setTimeout(() => {
+    try {
+      // Llamar a la API de OpenAI
+      const response = await fetch('/api/ai/generate-article', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error generando artículo')
+      }
+
+      // Pasar al paso 3 (Revisión) con los artículos generados
       setIsGenerating(false)
       setCurrentStep(3)
-      // Simular artículos generados
-      const mockArticles = Array.from({ length: formData.resultsCount }, (_, index) => ({
-        id: index + 1,
-        title: `${formData.topic} - Versión ${index + 1}`,
-        content: `Este es el contenido generado para el artículo sobre "${formData.topic}" con enfoque en ${formData.professionalFocus}. El tono es ${formData.tone} y tiene una extensión ${formData.length}.`,
-        wordCount: formData.length === 'corto' ? 450 : formData.length === 'medio' ? 650 : formData.length === 'largo' ? 950 : 1200
-      }))
-      setGeneratedArticles(mockArticles)
-    }, 3000) // 3 segundos de simulación
+      setGeneratedArticles(data.articles)
+      
+    } catch (error) {
+      console.error('Error:', error)
+      setIsGenerating(false)
+      setCurrentStep(1) // Volver al formulario
+      
+      // Mostrar error al usuario
+      alert(`Error generando artículo: ${error.message}`)
+    }
   }
 
   const toneOptions = [
