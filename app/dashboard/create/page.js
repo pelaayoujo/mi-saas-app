@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import ReactMarkdown from 'react-markdown'
 import '../dashboard.css'
 
 export default function CreateArticle() {
@@ -535,15 +536,14 @@ export default function CreateArticle() {
                         </div>
                       </div>
                       <div className="article-content">
-                        <div 
+                        <ReactMarkdown
                           style={{ 
-                            whiteSpace: 'pre-wrap',
                             fontFamily: 'inherit',
                             lineHeight: '1.6'
                           }}
                         >
                           {article.content}
-                        </div>
+                        </ReactMarkdown>
                       </div>
                       <div className="article-actions">
                         <button 
