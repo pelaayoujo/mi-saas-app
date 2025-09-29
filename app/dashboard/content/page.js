@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import '../dashboard.css'
@@ -10,84 +10,58 @@ export default function Content() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [selectedFilter, setSelectedFilter] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
 
-  // Mock data - En el futuro esto vendrá de la base de datos
-  const [contentItems, setContentItems] = useState([
-    {
-      id: 1,
-      type: 'article',
-      title: 'Marketing Digital 2024: Estrategias que Funcionan',
-      preview: 'En el mundo del marketing digital, las tendencias evolucionan constantemente. Este artículo explora las estrategias más efectivas para 2024...',
-      content: 'Contenido completo del artículo...',
-      wordCount: 650,
-      createdAt: '2024-01-15T10:30:00Z',
-      status: 'published',
-      tags: ['marketing', 'digital', 'estrategias']
-    },
-    {
-      id: 2,
-      type: 'post',
-      title: '5 Consejos para Mejorar tu LinkedIn',
-      preview: '¿Quieres optimizar tu perfil de LinkedIn? Aquí tienes 5 consejos prácticos que te ayudarán a destacar...',
-      content: 'Contenido completo del post...',
-      wordCount: 280,
-      createdAt: '2024-01-14T15:45:00Z',
-      status: 'published',
-      tags: ['linkedin', 'optimización', 'perfil']
-    },
-    {
-      id: 3,
-      type: 'biography',
-      title: 'Biografía Profesional - Juan Pérez',
-      preview: 'Experto en marketing digital con más de 8 años de experiencia ayudando a empresas a crecer en el mundo digital...',
-      content: 'Contenido completo de la biografía...',
-      wordCount: 420,
-      createdAt: '2024-01-13T09:15:00Z',
-      status: 'published',
-      tags: ['biografía', 'profesional', 'marketing']
-    },
-    {
-      id: 4,
-      type: 'email',
-      title: 'Email de Seguimiento Comercial',
-      preview: 'Estimado cliente, agradezco la oportunidad de presentar nuestra propuesta. Adjunto encontrará los detalles...',
-      content: 'Contenido completo del email...',
-      wordCount: 320,
-      createdAt: '2024-01-11T11:30:00Z',
-      status: 'sent',
-      tags: ['email', 'seguimiento', 'comercial']
-    },
-    {
-      id: 5,
-      type: 'presentation',
-      title: 'Presentación: Tendencias de Marketing Digital 2024',
-      preview: 'Una presentación completa sobre las principales tendencias en marketing digital para 2024...',
-      content: 'Contenido completo de la presentación...',
-      wordCount: 780,
-      createdAt: '2024-01-12T14:20:00Z',
-      status: 'draft',
-      tags: ['presentación', 'marketing', 'tendencias']
-    },
-    {
-      id: 6,
-      type: 'proposal',
-      title: 'Propuesta Comercial: Servicios de Marketing Digital',
-      preview: 'Propuesta detallada para servicios integrales de marketing digital...',
-      content: 'Contenido completo de la propuesta...',
-      wordCount: 1200,
-      createdAt: '2024-01-10T16:45:00Z',
-      status: 'draft',
-      tags: ['propuesta', 'comercial', 'marketing digital']
+  // Cargar contenido real del usuario
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const response = await fetch('/api/articles')
+        if (response.ok) {
+          const data = await response.json()
+          // Convertir artículos a formato de contenido
+          const formattedContent = data.articles.map(article => ({
+            id: article._id,
+            type: 'article',
+            title: article.title,
+            preview: article.body.substring(0, 150) + '...',
+            content: article.body,
+            wordCount: article.metadata?.estimatedReadTime ? article.metadata.estimatedReadTime * 200 : 500,
+            createdAt: article.createdAt,
+            status: article.status,
+            tags: article.metadata?.tags || []
+          }))
+          setContentItems(formattedContent)
+        } else {
+          setContentItems([])
+        }
+      } catch (error) {
+        console.error('Error cargando contenido:', error)
+        setContentItems([])
+      } finally {
+        setIsLoading(false)
+      }
     }
+
+    if (session) {
+      fetchContent()
+    }
+  }, [session])
+
+  // Mock data comentado - Ahora usamos datos reales de la base de datos
+  /*
+  const [contentItems, setContentItems] = useState([
+    // ... datos mock comentados
   ])
+  */
 
   // Verificar autenticación
-  if (status === 'loading') {
+  if (status === 'loading' || isLoading) {
     return (
       <div className="dashboard">
         <div className="loading">
           <div className="loading-spinner"></div>
-          <p>Cargando...</p>
+          <p>Cargando tu contenido...</p>
         </div>
       </div>
     )

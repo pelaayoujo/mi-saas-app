@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import './dashboard.css'
@@ -10,9 +10,37 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [filterStatus, setFilterStatus] = useState('all')
+  const [recentArticles, setRecentArticles] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Cargar artículos reales del usuario
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const response = await fetch('/api/articles')
+        if (response.ok) {
+          const data = await response.json()
+          // Tomar solo los últimos 4 artículos
+          setRecentArticles(data.articles.slice(0, 4))
+        } else {
+          // Si no hay artículos, usar array vacío
+          setRecentArticles([])
+        }
+      } catch (error) {
+        console.error('Error cargando artículos:', error)
+        setRecentArticles([])
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    if (session) {
+      fetchArticles()
+    }
+  }, [session])
 
   // Verificar autenticación
-  if (status === 'loading') {
+  if (status === 'loading' || isLoading) {
     return (
       <div className="dashboard">
         <div className="loading">
@@ -27,38 +55,6 @@ export default function Dashboard() {
     router.push('/login')
     return null
   }
-
-  // Datos mock para el diseño
-  const recentArticles = [
-    {
-      id: 1,
-      title: "5 estrategias para mejorar tu presencia en LinkedIn",
-      status: "published",
-      date: "2024-01-15",
-      scheduledDate: null
-    },
-    {
-      id: 2,
-      title: "Cómo crear contenido que genere engagement",
-      status: "scheduled",
-      date: "2024-01-16",
-      scheduledDate: "2024-01-20"
-    },
-    {
-      id: 3,
-      title: "Tendencias de marketing digital 2024",
-      status: "draft",
-      date: "2024-01-14",
-      scheduledDate: null
-    },
-    {
-      id: 4,
-      title: "Guía completa de networking profesional",
-      status: "draft",
-      date: "2024-01-13",
-      scheduledDate: null
-    }
-  ]
 
   const calendarEvents = [
     {
