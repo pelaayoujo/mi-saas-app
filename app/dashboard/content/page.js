@@ -11,6 +11,7 @@ export default function Content() {
   const [selectedFilter, setSelectedFilter] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [contentItems, setContentItems] = useState([])
 
   // Cargar contenido real del usuario
   useEffect(() => {
