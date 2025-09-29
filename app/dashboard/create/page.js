@@ -535,7 +535,15 @@ export default function CreateArticle() {
                         </div>
                       </div>
                       <div className="article-content">
-                        <p>{article.content}</p>
+                        <div 
+                          style={{ 
+                            whiteSpace: 'pre-wrap',
+                            fontFamily: 'inherit',
+                            lineHeight: '1.6'
+                          }}
+                        >
+                          {article.content}
+                        </div>
                       </div>
                       <div className="article-actions">
                         <button 
