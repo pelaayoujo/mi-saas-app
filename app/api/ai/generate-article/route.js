@@ -81,30 +81,44 @@ function processGeneratedContent(content, resultsCount) {
   const articles = []
   
   if (resultsCount === 1) {
-    // Un solo artículo
+    // Un solo artículo - limpiar y formatear
+    const cleanContent = cleanAndFormatContent(content)
     articles.push({
       id: 1,
-      title: extractTitle(content),
-      content: content,
-      wordCount: countWords(content)
+      title: extractTitle(cleanContent),
+      content: cleanContent,
+      wordCount: countWords(cleanContent)
     })
   } else {
-    // Múltiples artículos - separar por títulos
-    const articleSections = content.split(/(?=##|# )/).filter(section => section.trim())
+    // Múltiples artículos - separar por "---" o títulos
+    const articleSections = content.split(/---+/).filter(section => section.trim())
     
     articleSections.forEach((section, index) => {
       if (section.trim()) {
+        const cleanContent = cleanAndFormatContent(section.trim())
         articles.push({
           id: index + 1,
-          title: extractTitle(section),
-          content: section.trim(),
-          wordCount: countWords(section)
+          title: extractTitle(cleanContent),
+          content: cleanContent,
+          wordCount: countWords(cleanContent)
         })
       }
     })
   }
   
   return articles
+}
+
+// Función para limpiar y formatear el contenido
+function cleanAndFormatContent(content) {
+  return content
+    .replace(/^#+\s*Título[:\s]*/gmi, '') // Remover "Título:" o "## Título:"
+    .replace(/^#+\s*Gancho inicial[:\s]*/gmi, '') // Remover "Gancho inicial:"
+    .replace(/^#+\s*Cuerpo[:\s]*/gmi, '') // Remover "Cuerpo:"
+    .replace(/^#+\s*Conclusión[:\s]*/gmi, '## Conclusión\n\n') // Limpiar "Conclusión:"
+    .replace(/^#+\s*Hashtags[:\s]*/gmi, '') // Remover "Hashtags:"
+    .replace(/\n{3,}/g, '\n\n') // Limitar saltos de línea múltiples
+    .trim()
 }
 
 // Función para extraer el título del contenido
