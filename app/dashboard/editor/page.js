@@ -17,33 +17,35 @@ export default function Editor() {
   })
   
   // Estado del editor
-  const [editorContent, setEditorContent] = useState(`
-    <h1>Marketing Digital 2024: Estrategias que Funcionan</h1>
-    
-    <p>En el mundo del marketing digital, las tendencias evolucionan constantemente. Este artículo explora las estrategias más efectivas para 2024.</p>
-    
-    <h2>1. Personalización a Gran Escala</h2>
-    
-    <p>La personalización ya no es una opción, es una necesidad. Los consumidores esperan experiencias únicas y relevantes que se adapten a sus necesidades específicas.</p>
-    
-    <p>Las herramientas de IA permiten crear campañas personalizadas a gran escala, analizando el comportamiento del usuario y adaptando el mensaje en tiempo real.</p>
-    
-    <h2>2. Contenido de Valor</h2>
-    
-    <p>El contenido sigue siendo el rey, pero ahora más que nunca debe aportar valor real. Los usuarios buscan información que les ayude a resolver problemas específicos.</p>
-    
-    <p>Crear contenido educativo, tutoriales paso a paso y análisis profundos te posicionará como una autoridad en tu sector.</p>
-    
-    <h2>3. Automatización Inteligente</h2>
-    
-    <p>La automatización inteligente permite optimizar procesos sin perder el toque humano. Desde emails personalizados hasta respuestas de chat, la tecnología puede mejorar la experiencia del cliente.</p>
-    
-    <p>La clave está en encontrar el equilibrio perfecto entre automatización y personalización humana.</p>
-    
-    <h2>Conclusión</h2>
-    
-    <p>El marketing digital en 2024 se centra en la personalización, el valor y la automatización inteligente. Las empresas que adopten estas estrategias tendrán una ventaja competitiva significativa.</p>
-  `)
+  const [editorContent, setEditorContent] = useState('')
+  const [articleData, setArticleData] = useState(null)
+
+  // Cargar artículo del localStorage al montar el componente
+  useEffect(() => {
+    const savedArticle = localStorage.getItem('currentArticle')
+    if (savedArticle) {
+      try {
+        const article = JSON.parse(savedArticle)
+        setArticleData(article)
+        setEditorContent(article.content)
+        // Limpiar localStorage después de cargar
+        localStorage.removeItem('currentArticle')
+      } catch (error) {
+        console.error('Error cargando artículo:', error)
+        // Si hay error, usar contenido por defecto
+        setEditorContent(`
+          <h1>Artículo de Ejemplo</h1>
+          <p>No se pudo cargar el artículo. Por favor, vuelve a generarlo.</p>
+        `)
+      }
+    } else {
+      // Si no hay artículo guardado, usar contenido por defecto
+      setEditorContent(`
+        <h1>Artículo de Ejemplo</h1>
+        <p>No se encontró ningún artículo para editar. Por favor, genera un artículo primero.</p>
+      `)
+    }
+  }, [])
 
   // Verificar autenticación
   if (status === 'loading') {

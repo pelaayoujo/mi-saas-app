@@ -541,6 +541,20 @@ export default function CreateArticle() {
                         <button 
                           className="btn-secondary"
                           onClick={() => {
+                            // Guardar el artículo en localStorage para pasarlo al editor
+                            localStorage.setItem('currentArticle', JSON.stringify({
+                              id: article.id,
+                              title: article.title,
+                              content: article.content,
+                              wordCount: article.wordCount,
+                              metadata: {
+                                topic: formData.topic,
+                                professionalFocus: formData.professionalFocus,
+                                tone: formData.tone,
+                                length: formData.length,
+                                objective: formData.objective
+                              }
+                            }))
                             // Redirigir al editor con el artículo
                             router.push('/dashboard/editor')
                           }}
