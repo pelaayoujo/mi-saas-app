@@ -22,28 +22,31 @@ export default function Editor() {
 
   // Cargar artículo del localStorage al montar el componente
   useEffect(() => {
-    const savedArticle = localStorage.getItem('currentArticle')
-    if (savedArticle) {
-      try {
-        const article = JSON.parse(savedArticle)
-        setArticleData(article)
-        setEditorContent(article.content)
-        // Limpiar localStorage después de cargar
-        localStorage.removeItem('currentArticle')
-      } catch (error) {
-        console.error('Error cargando artículo:', error)
-        // Si hay error, usar contenido por defecto
+    // Verificar que estamos en el cliente
+    if (typeof window !== 'undefined') {
+      const savedArticle = localStorage.getItem('currentArticle')
+      if (savedArticle) {
+        try {
+          const article = JSON.parse(savedArticle)
+          setArticleData(article)
+          setEditorContent(article.content)
+          // Limpiar localStorage después de cargar
+          localStorage.removeItem('currentArticle')
+        } catch (error) {
+          console.error('Error cargando artículo:', error)
+          // Si hay error, usar contenido por defecto
+          setEditorContent(`
+            <h1>Artículo de Ejemplo</h1>
+            <p>No se pudo cargar el artículo. Por favor, vuelve a generarlo.</p>
+          `)
+        }
+      } else {
+        // Si no hay artículo guardado, usar contenido por defecto
         setEditorContent(`
           <h1>Artículo de Ejemplo</h1>
-          <p>No se pudo cargar el artículo. Por favor, vuelve a generarlo.</p>
+          <p>No se encontró ningún artículo para editar. Por favor, genera un artículo primero.</p>
         `)
       }
-    } else {
-      // Si no hay artículo guardado, usar contenido por defecto
-      setEditorContent(`
-        <h1>Artículo de Ejemplo</h1>
-        <p>No se encontró ningún artículo para editar. Por favor, genera un artículo primero.</p>
-      `)
     }
   }, [])
 
