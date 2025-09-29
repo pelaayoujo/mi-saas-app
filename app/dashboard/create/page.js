@@ -575,9 +575,39 @@ export default function CreateArticle() {
                         </button>
                         <button 
                           className="btn-primary"
-                          onClick={() => {
-                            // Aquí irá la lógica para guardar en artículos recientes
-                            alert('Artículo guardado en Artículos Recientes: ' + article.title)
+                          onClick={async () => {
+                            try {
+                              // Guardar artículo en la base de datos
+                              const response = await fetch('/api/articles', {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                  title: article.title,
+                                  body: article.content,
+                                  template: 'ai-generated',
+                                  tone: formData.tone,
+                                  length: formData.length,
+                                  targetAudience: formData.professionalFocus,
+                                  keywords: [formData.topic],
+                                  tags: [formData.objective],
+                                  wordCount: article.wordCount
+                                })
+                              })
+
+                              if (response.ok) {
+                                alert('✅ Artículo guardado exitosamente en Contenido Generado')
+                                // Redirigir a la página de contenido
+                                router.push('/dashboard/content')
+                              } else {
+                                const error = await response.json()
+                                alert('❌ Error al guardar: ' + (error.message || 'Error desconocido'))
+                              }
+                            } catch (error) {
+                              console.error('Error guardando artículo:', error)
+                              alert('❌ Error al guardar el artículo')
+                            }
                           }}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
