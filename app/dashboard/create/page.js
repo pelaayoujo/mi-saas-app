@@ -577,8 +577,8 @@ export default function CreateArticle() {
                           className="btn-primary"
                           onClick={async () => {
                             try {
-                              // Guardar artículo (API simple sin MongoDB)
-                              const response = await fetch('/api/articles/simple', {
+                              // Guardar artículo en la base de datos
+                              const response = await fetch('/api/articles', {
                                 method: 'POST',
                                 headers: {
                                   'Content-Type': 'application/json',
