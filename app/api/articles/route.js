@@ -33,6 +33,7 @@ export async function GET(request) {
     const formattedArticles = userArticles.map(article => ({
       id: article._id.toString(),
       title: article.title,
+      body: article.body,
       status: article.status,
       createdAt: article.createdAt,
       updatedAt: article.updatedAt,
@@ -100,7 +101,7 @@ export async function POST(request) {
       userId: session.user?.email,
       title,
       body: content,
-      status: 'draft',
+      status: 'published',
       template: template || 'custom',
       metadata: {
         tone: tone || 'cercano',
