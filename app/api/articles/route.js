@@ -95,17 +95,26 @@ export async function POST(request) {
     }
 
     const body = await request.json()
+    console.log('POST Articles - Body:', body)
+    
     const { title, template, tone, length, targetAudience, keywords, tags, body: content, wordCount } = body
 
     // Validaciones básicas
     if (!title || !content) {
+      console.log('POST Articles - Validation failed:', { title: !!title, content: !!content })
       return NextResponse.json(
         { success: false, message: 'Título y contenido son requeridos' },
         { status: 400 }
       )
     }
 
+    console.log('POST Articles - Connecting to database...')
+    console.log('POST Articles - MONGODB_URI exists:', !!process.env.MONGODB_URI)
+    console.log('POST Articles - MONGODB_DB:', process.env.MONGODB_DB)
+    
     const { db } = await connectToDatabase()
+    console.log('POST Articles - Database connected successfully')
+    
     const articlesCollection = db.collection('articles')
 
     // Crear nuevo artículo
@@ -148,7 +157,11 @@ export async function POST(request) {
       updatedAt: new Date()
     }
 
+    console.log('POST Articles - Article to insert:', article)
+    console.log('POST Articles - Inserting into database...')
+    
     const result = await articlesCollection.insertOne(article)
+    console.log('POST Articles - Insert result:', result)
 
     return NextResponse.json({
       success: true,
@@ -161,9 +174,14 @@ export async function POST(request) {
     }, { status: 201 })
 
   } catch (error) {
-    console.error('Error creando artículo:', error)
+    console.error('POST Articles - Error creando artículo:', error)
+    console.error('POST Articles - Error stack:', error.stack)
     return NextResponse.json(
-      { success: false, message: 'Error interno del servidor' },
+      { 
+        success: false, 
+        message: 'Error interno del servidor',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      },
       { status: 500 }
     )
   }
