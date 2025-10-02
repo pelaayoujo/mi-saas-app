@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-
-// Base de datos simple en memoria
-let articlesDB = []
+import { connectToDatabase } from '../../../lib/mongodb'
 
 export async function GET(request) {
   try {
@@ -18,19 +16,37 @@ export async function GET(request) {
       )
     }
 
+    // Conectar a MongoDB
+    const { db } = await connectToDatabase()
+    const articlesCollection = db.collection('articles')
+
     // Filtrar artículos del usuario actual
     const userEmail = session.user?.email
-    const userArticles = articlesDB.filter(article => article.userId === userEmail)
+    const userArticles = await articlesCollection
+      .find({ userId: userEmail })
+      .sort({ createdAt: -1 })
+      .toArray()
 
     console.log('User articles:', userArticles.length)
 
+    // Formatear respuesta
+    const formattedArticles = userArticles.map(article => ({
+      id: article._id.toString(),
+      title: article.title,
+      status: article.status,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt,
+      wordCount: article.metadata?.estimatedReadTime ? article.metadata.estimatedReadTime * 200 : 0,
+      tags: article.metadata?.tags || []
+    }))
+
     return NextResponse.json({
       success: true,
-      articles: userArticles,
+      articles: formattedArticles,
       pagination: {
         page: 1,
         limit: 10,
-        total: userArticles.length,
+        total: formattedArticles.length,
         pages: 1
       }
     })
@@ -75,9 +91,12 @@ export async function POST(request) {
       )
     }
 
+    // Conectar a MongoDB
+    const { db } = await connectToDatabase()
+    const articlesCollection = db.collection('articles')
+
     // Crear artículo
     const article = {
-      id: 'article-' + Date.now(),
       userId: session.user?.email,
       title,
       body: content,
@@ -91,19 +110,18 @@ export async function POST(request) {
         targetAudience: targetAudience || 'profesionales',
         estimatedReadTime: Math.ceil(wordCount / 200) || 1
       },
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      createdAt: new Date(),
+      updatedAt: new Date()
     }
 
-    // Guardar en memoria
-    articlesDB.push(article)
-    console.log('Article saved:', article.id)
-    console.log('Total articles:', articlesDB.length)
+    // Guardar en MongoDB
+    const result = await articlesCollection.insertOne(article)
+    console.log('Article saved:', result.insertedId)
 
     return NextResponse.json({
       success: true,
       article: {
-        id: article.id,
+        id: result.insertedId.toString(),
         title: article.title,
         status: article.status,
         createdAt: article.createdAt
