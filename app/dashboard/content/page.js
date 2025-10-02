@@ -17,7 +17,7 @@ export default function Content() {
   useEffect(() => {
     const fetchContent = async () => {
       try {
-        const response = await fetch('/api/articles')
+        const response = await fetch('/api/articles/test-get')
         if (response.ok) {
           const data = await response.json()
           // Convertir artículos a formato de contenido
