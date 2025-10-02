@@ -4,6 +4,14 @@ import { connectToDatabase } from '../../../lib/mongodb'
 
 export async function GET(request) {
   try {
+    // Evitar conexión durante build
+    if (process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI) {
+      return NextResponse.json(
+        { success: false, message: 'MongoDB no configurado' },
+        { status: 500 }
+      )
+    }
+
     const session = await getServerSession()
     
     console.log('GET Articles - Session:', session)
@@ -86,6 +94,14 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    // Evitar conexión durante build
+    if (process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI) {
+      return NextResponse.json(
+        { success: false, message: 'MongoDB no configurado' },
+        { status: 500 }
+      )
+    }
+
     const session = await getServerSession()
     
     console.log('POST Articles - Session:', session)
