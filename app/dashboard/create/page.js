@@ -597,11 +597,14 @@ export default function CreateArticle() {
                               })
 
                               if (response.ok) {
+                                const result = await response.json()
+                                console.log('Artículo guardado exitosamente:', result)
                                 alert('✅ Artículo guardado exitosamente en Contenido Generado')
                                 // Redirigir a la página de contenido
                                 router.push('/dashboard/content')
                               } else {
                                 const error = await response.json()
+                                console.error('Error al guardar artículo:', error)
                                 alert('❌ Error al guardar: ' + (error.message || 'Error desconocido'))
                               }
                             } catch (error) {
@@ -632,20 +635,6 @@ export default function CreateArticle() {
                       <path d="M12 19l-7-7 7-7"></path>
                     </svg>
                     Volver a Configurar
-                  </button>
-                  <button 
-                    className="btn-primary"
-                    onClick={() => {
-                      // Aquí iría la lógica para guardar todos los artículos
-                      alert('Todos los artículos guardados en Artículos Recientes')
-                    }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                      <polyline points="17,21 17,13 7,13 7,21"></polyline>
-                      <polyline points="7,3 7,8 15,8"></polyline>
-                    </svg>
-                    Guardar Todos los Artículos
                   </button>
                 </div>
               </div>
