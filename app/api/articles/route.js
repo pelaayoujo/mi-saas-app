@@ -1,30 +1,15 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 
-// Importar dinámicamente para evitar errores de build
-let connectToDatabase
-try {
-  const mongodb = require('../../../lib/mongodb')
-  connectToDatabase = mongodb.connectToDatabase
-} catch (error) {
-  console.warn('MongoDB no disponible durante build:', error.message)
-}
+// Base de datos simple en memoria
+let articlesDB = []
 
 export async function GET(request) {
   try {
-    // Evitar conexión durante build
-    if (!connectToDatabase || !process.env.MONGODB_URI) {
-      return NextResponse.json(
-        { success: false, message: 'MongoDB no configurado' },
-        { status: 500 }
-      )
-    }
-
-    const session = await getServerSession()
+    console.log('=== GET ARTICLES ===')
     
-    console.log('GET Articles - Session:', session)
-    console.log('GET Articles - User ID:', session.user?.id)
-    console.log('GET Articles - User Email:', session.user?.email)
+    const session = await getServerSession()
+    console.log('Session:', session)
     
     if (!session) {
       return NextResponse.json(
@@ -33,68 +18,31 @@ export async function GET(request) {
       )
     }
 
-    const { searchParams } = new URL(request.url)
-    const status = searchParams.get('status')
-    const page = parseInt(searchParams.get('page')) || 1
-    const limit = parseInt(searchParams.get('limit')) || 10
-    const search = searchParams.get('search')
+    // Filtrar artículos del usuario actual
+    const userEmail = session.user?.email
+    const userArticles = articlesDB.filter(article => article.userId === userEmail)
 
-    const { db } = await connectToDatabase()
-    const articlesCollection = db.collection('articles')
-
-    // Construir filtros - usar email como identificador principal
-    const userId = session.user?.email || session.user?.id
-    const filters = { userId }
-    if (status) {
-      filters.status = status
-    }
-    if (search) {
-      filters.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { body: { $regex: search, $options: 'i' } }
-      ]
-    }
-    
-    console.log('GET Articles - Filters:', filters)
-
-    // Obtener artículos con paginación
-    const skip = (page - 1) * limit
-    const articles = await articlesCollection
-      .find(filters)
-      .sort({ updatedAt: -1 })
-      .skip(skip)
-      .limit(limit)
-      .toArray()
-
-    // Contar total para paginación
-    const total = await articlesCollection.countDocuments(filters)
-
-    // Formatear respuesta
-    const formattedArticles = articles.map(article => ({
-      id: article._id.toString(),
-      title: article.title,
-      status: article.status,
-      createdAt: article.createdAt,
-      updatedAt: article.updatedAt,
-      wordCount: article.metadata?.estimatedReadTime ? article.metadata.estimatedReadTime * 200 : 0,
-      tags: article.metadata?.tags || []
-    }))
+    console.log('User articles:', userArticles.length)
 
     return NextResponse.json({
       success: true,
-      articles: formattedArticles,
+      articles: userArticles,
       pagination: {
-        page,
-        limit,
-        total,
-        pages: Math.ceil(total / limit)
+        page: 1,
+        limit: 10,
+        total: userArticles.length,
+        pages: 1
       }
     })
 
   } catch (error) {
-    console.error('Error obteniendo artículos:', error)
+    console.error('GET Articles - Error:', error)
     return NextResponse.json(
-      { success: false, message: 'Error interno del servidor' },
+      { 
+        success: false, 
+        message: 'Error obteniendo artículos',
+        error: error.message
+      },
       { status: 500 }
     )
   }
@@ -102,19 +50,10 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    // Evitar conexión durante build
-    if (!connectToDatabase || !process.env.MONGODB_URI) {
-      return NextResponse.json(
-        { success: false, message: 'MongoDB no configurado' },
-        { status: 500 }
-      )
-    }
-
-    const session = await getServerSession()
+    console.log('=== POST ARTICLES ===')
     
-    console.log('POST Articles - Session:', session)
-    console.log('POST Articles - User ID:', session.user?.id)
-    console.log('POST Articles - User Email:', session.user?.email)
+    const session = await getServerSession()
+    console.log('Session:', session)
     
     if (!session) {
       return NextResponse.json(
@@ -124,32 +63,22 @@ export async function POST(request) {
     }
 
     const body = await request.json()
-    console.log('POST Articles - Body:', body)
+    console.log('Body received:', body)
     
     const { title, template, tone, length, targetAudience, keywords, tags, body: content, wordCount } = body
 
     // Validaciones básicas
     if (!title || !content) {
-      console.log('POST Articles - Validation failed:', { title: !!title, content: !!content })
       return NextResponse.json(
         { success: false, message: 'Título y contenido son requeridos' },
         { status: 400 }
       )
     }
 
-    console.log('POST Articles - Connecting to database...')
-    console.log('POST Articles - MONGODB_URI exists:', !!process.env.MONGODB_URI)
-    console.log('POST Articles - MONGODB_DB:', process.env.MONGODB_DB)
-    
-    const { db } = await connectToDatabase()
-    console.log('POST Articles - Database connected successfully')
-    
-    const articlesCollection = db.collection('articles')
-
-    // Crear nuevo artículo - usar email como identificador principal
-    const userId = session.user?.email || session.user?.id
+    // Crear artículo
     const article = {
-      userId,
+      id: 'article-' + Date.now(),
+      userId: session.user?.email,
       title,
       body: content,
       status: 'draft',
@@ -162,41 +91,19 @@ export async function POST(request) {
         targetAudience: targetAudience || 'profesionales',
         estimatedReadTime: Math.ceil(wordCount / 200) || 1
       },
-      linkedInData: {
-        postId: null,
-        publishedAt: null,
-        url: null
-      },
-      scheduledAt: null,
-      analytics: {
-        impressions: 0,
-        reactions: 0,
-        comments: 0,
-        shares: 0,
-        clicks: 0,
-        engagementRate: 0,
-        newFollowers: 0
-      },
-      versions: [{
-        version: 1,
-        content: content,
-        createdAt: new Date(),
-        changes: 'Versión inicial'
-      }],
-      createdAt: new Date(),
-      updatedAt: new Date()
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }
 
-    console.log('POST Articles - Article to insert:', article)
-    console.log('POST Articles - Inserting into database...')
-    
-    const result = await articlesCollection.insertOne(article)
-    console.log('POST Articles - Insert result:', result)
+    // Guardar en memoria
+    articlesDB.push(article)
+    console.log('Article saved:', article.id)
+    console.log('Total articles:', articlesDB.length)
 
     return NextResponse.json({
       success: true,
       article: {
-        id: result.insertedId.toString(),
+        id: article.id,
         title: article.title,
         status: article.status,
         createdAt: article.createdAt
@@ -204,13 +111,12 @@ export async function POST(request) {
     }, { status: 201 })
 
   } catch (error) {
-    console.error('POST Articles - Error creando artículo:', error)
-    console.error('POST Articles - Error stack:', error.stack)
+    console.error('POST Articles - Error:', error)
     return NextResponse.json(
       { 
         success: false, 
-        message: 'Error interno del servidor',
-        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        message: 'Error creando artículo',
+        error: error.message
       },
       { status: 500 }
     )
