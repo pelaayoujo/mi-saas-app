@@ -22,7 +22,7 @@ export default function Content() {
           const data = await response.json()
           // Convertir artículos a formato de contenido
           const formattedContent = data.articles.map(article => ({
-            id: article._id,
+            id: article.id,
             type: 'article',
             title: article.title,
             preview: article.body.substring(0, 150) + '...',

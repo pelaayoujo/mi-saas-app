@@ -6,6 +6,8 @@ export async function GET(request) {
   try {
     const session = await getServerSession()
     
+    console.log('GET Articles - Session:', session)
+    
     if (!session) {
       return NextResponse.json(
         { success: false, message: 'No autorizado' },
@@ -23,7 +25,7 @@ export async function GET(request) {
     const articlesCollection = db.collection('articles')
 
     // Construir filtros
-    const filters = { userId: session.user.id }
+    const filters = { userId: session.user?.id || session.user?.email }
     if (status) {
       filters.status = status
     }
@@ -33,6 +35,8 @@ export async function GET(request) {
         { body: { $regex: search, $options: 'i' } }
       ]
     }
+    
+    console.log('GET Articles - Filters:', filters)
 
     // Obtener artículos con paginación
     const skip = (page - 1) * limit

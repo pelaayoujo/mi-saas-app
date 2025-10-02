@@ -309,7 +309,7 @@ export default function Dashboard() {
                               </span>
                             </div>
                             <div className="article-meta">
-                              <span className="article-date">{formatDate(article.date)}</span>
+                              <span className="article-date">{formatDate(article.createdAt)}</span>
                               {article.scheduledDate && (
                                 <span className="article-scheduled">
                                   Programado: {formatDate(article.scheduledDate)}
