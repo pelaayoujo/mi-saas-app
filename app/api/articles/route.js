@@ -1,11 +1,19 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
-import { connectToDatabase } from '../../../lib/mongodb'
+
+// Importar dinámicamente para evitar errores de build
+let connectToDatabase
+try {
+  const mongodb = require('../../../lib/mongodb')
+  connectToDatabase = mongodb.connectToDatabase
+} catch (error) {
+  console.warn('MongoDB no disponible durante build:', error.message)
+}
 
 export async function GET(request) {
   try {
     // Evitar conexión durante build
-    if (process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI) {
+    if (!connectToDatabase || !process.env.MONGODB_URI) {
       return NextResponse.json(
         { success: false, message: 'MongoDB no configurado' },
         { status: 500 }
@@ -95,7 +103,7 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     // Evitar conexión durante build
-    if (process.env.NODE_ENV === 'production' && !process.env.MONGODB_URI) {
+    if (!connectToDatabase || !process.env.MONGODB_URI) {
       return NextResponse.json(
         { success: false, message: 'MongoDB no configurado' },
         { status: 500 }
