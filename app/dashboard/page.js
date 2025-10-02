@@ -17,7 +17,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await fetch('/api/articles')
+        const response = await fetch('/api/articles/simple')
         if (response.ok) {
           const data = await response.json()
           // Tomar solo los últimos 4 artículos
