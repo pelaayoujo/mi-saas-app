@@ -7,6 +7,8 @@ export async function GET(request) {
     const session = await getServerSession()
     
     console.log('GET Articles - Session:', session)
+    console.log('GET Articles - User ID:', session.user?.id)
+    console.log('GET Articles - User Email:', session.user?.email)
     
     if (!session) {
       return NextResponse.json(
@@ -24,8 +26,9 @@ export async function GET(request) {
     const { db } = await connectToDatabase()
     const articlesCollection = db.collection('articles')
 
-    // Construir filtros
-    const filters = { userId: session.user?.id || session.user?.email }
+    // Construir filtros - usar email como identificador principal
+    const userId = session.user?.email || session.user?.id
+    const filters = { userId }
     if (status) {
       filters.status = status
     }
@@ -85,7 +88,9 @@ export async function POST(request) {
   try {
     const session = await getServerSession()
     
-    console.log('Session:', session)
+    console.log('POST Articles - Session:', session)
+    console.log('POST Articles - User ID:', session.user?.id)
+    console.log('POST Articles - User Email:', session.user?.email)
     
     if (!session) {
       return NextResponse.json(
@@ -117,9 +122,10 @@ export async function POST(request) {
     
     const articlesCollection = db.collection('articles')
 
-    // Crear nuevo artículo
+    // Crear nuevo artículo - usar email como identificador principal
+    const userId = session.user?.email || session.user?.id
     const article = {
-      userId: session.user?.id || session.user?.email,
+      userId,
       title,
       body: content,
       status: 'draft',
