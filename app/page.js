@@ -215,46 +215,54 @@ export default function Home() {
       </section>
 
       {/* Demo Section */}
-      <section id="demo" className="demo">
+      <section id="demo" className="demo scroll-reveal">
         <div className="container">
           <div className="demo-content">
             <div className="demo-text">
-              <h2>Mira LinkedAI en acción</h2>
-              <p>Un post generado por IA que obtuvo 50,000+ interacciones</p>
+              <h2>Resultados que hablan por sí solos</h2>
+              <p>Nuestros usuarios han transformado completamente su presencia en LinkedIn</p>
               <div className="demo-stats">
                 <div className="demo-stat">
-                  <div className="demo-stat-number">50,000+</div>
-                  <div className="demo-stat-label">interacciones</div>
+                  <div className="demo-stat-number">+847%</div>
+                  <div className="demo-stat-label">más interacciones</div>
                 </div>
                 <div className="demo-stat">
-                  <div className="demo-stat-number">15,000</div>
-                  <div className="demo-stat-label">nuevos seguidores</div>
+                  <div className="demo-stat-number">3.2M</div>
+                  <div className="demo-stat-label">impresiones totales</div>
                 </div>
                 <div className="demo-stat">
-                  <div className="demo-stat-number">30</div>
-                  <div className="demo-stat-label">días</div>
+                  <div className="demo-stat-number">24h</div>
+                  <div className="demo-stat-label">para ver resultados</div>
                 </div>
               </div>
             </div>
             <div className="demo-visual">
-              <div className="linkedin-post">
-                <div className="post-header">
-                  <div className="post-avatar">👤</div>
-                  <div className="post-info">
-                    <div className="post-name">María González</div>
-                    <div className="post-title">CEO | Growth Marketing Expert</div>
-                    <div className="post-time">hace 2 horas</div>
+              <div className="demo-card">
+                <div className="demo-header">
+                  <h3>¿Por qué LinkedAI?</h3>
+                </div>
+                <div className="demo-features">
+                  <div className="demo-feature">
+                    <span className="demo-icon">🤖</span>
+                    <div>
+                      <h4>IA Avanzada</h4>
+                      <p>Analiza millones de posts exitosos</p>
+                    </div>
                   </div>
-                </div>
-                <div className="post-content">
-                  <p>🚀 <strong>ROMPÍ el algoritmo de LinkedIn con esta estrategia:</strong></p>
-                  <p>En 30 días pasé de 500 a 15,000 seguidores usando solo IA.</p>
-                  <p>El secreto: <strong>LinkedAI</strong> analizó 10M+ posts exitosos...</p>
-                </div>
-                <div className="post-engagement">
-                  <span>👍 2.3K</span>
-                  <span>💬 847</span>
-                  <span>🔄 1.2K</span>
+                  <div className="demo-feature">
+                    <span className="demo-icon">⚡</span>
+                    <div>
+                      <h4>Resultados Rápidos</h4>
+                      <p>Ve mejoras en las primeras 24 horas</p>
+                    </div>
+                  </div>
+                  <div className="demo-feature">
+                    <span className="demo-icon">🎯</span>
+                    <div>
+                      <h4>Personalizado</h4>
+                      <p>Contenido adaptado a tu industria</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
