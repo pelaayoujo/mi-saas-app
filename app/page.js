@@ -1,6 +1,8 @@
 "use client"
-import { useState } from 'react'
-import './page.css'
+import { useState, useEffect } from 'react'
+import './page-futuristic.css'
+import Particles from './components/Particles'
+import useScrollReveal from './hooks/useScrollReveal'
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -10,6 +12,41 @@ export default function Home() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState(null)
+  const [navbarScrolled, setNavbarScrolled] = useState(false)
+
+  // Efecto de scroll para navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setNavbarScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Inicializar animaciones de scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed')
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    )
+
+    const elements = document.querySelectorAll('.scroll-reveal')
+    elements.forEach((el) => observer.observe(el))
+
+    return () => {
+      elements.forEach((el) => observer.unobserve(el))
+    }
+  }, [])
 
   const handleChange = (e) => {
     setFormData({
@@ -58,8 +95,11 @@ export default function Home() {
 
   return (
     <div className="escribelo-inspired">
+      {/* Partículas de fondo */}
+      <Particles />
+      
       {/* Navigation */}
-      <nav className="navbar">
+      <nav className={`navbar ${navbarScrolled ? 'scrolled' : ''}`}>
         <div className="nav-container">
           <div className="nav-logo">
             <span className="logo-icon">✍️</span>
@@ -139,7 +179,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="features">
+      <section id="features" className="features scroll-reveal">
         <div className="container">
           <div className="section-header">
             <h2>Todo lo que necesitas para dominar LinkedIn</h2>
@@ -374,7 +414,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="cta">
+      <section id="contact" className="cta scroll-reveal">
         <div className="container">
           <div className="cta-content">
             <h2>¿Listo para multiplicar tu impacto en LinkedIn?</h2>
