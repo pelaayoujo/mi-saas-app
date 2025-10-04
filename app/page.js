@@ -13,6 +13,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState(null)
   const [navbarScrolled, setNavbarScrolled] = useState(false)
+  const [openFAQ, setOpenFAQ] = useState(null)
 
   // Efecto de scroll para navbar
   useEffect(() => {
@@ -53,6 +54,10 @@ export default function Home() {
       ...formData,
       [e.target.name]: e.target.value
     })
+  }
+
+  const toggleFAQ = (index) => {
+    setOpenFAQ(openFAQ === index ? null : index)
   }
 
   const handleSubmit = async (e) => {
@@ -105,12 +110,12 @@ export default function Home() {
             <span className="logo-icon">✍️</span>
             <span className="logo-text">LinkedAI</span>
           </div>
-          <div className="nav-links">
-            <a href="#features">Características</a>
-            <a href="#pricing">Precios</a>
-            <a href="#testimonials">Testimonios</a>
-            <a href="#contact" className="nav-cta">Empezar Gratis</a>
-          </div>
+            <div className="nav-links">
+              <a href="#features">Características</a>
+              <a href="#pricing">Precios</a>
+              <a href="#testimonials">Testimonios</a>
+              <a href="#contact" className="nav-cta">Probar LinkedAI</a>
+            </div>
         </div>
       </nav>
 
@@ -123,87 +128,47 @@ export default function Home() {
               <span>50,000+ PROFESIONALES YA LO USAN</span>
             </div>
             <h1 className="hero-title">
-              The #1 LinkedIn AI Tool
+              La #1 Herramienta de IA para LinkedIn
               <span className="highlight">LinkedAI</span>
               <br />
-              Create Viral LinkedIn Content With AI
+              Crea Contenido Viral en LinkedIn con IA
             </h1>
             <p className="hero-description">
-              Your all-in-one platform for LinkedIn content creation. Your all-in-one tool for creating AI posts, 
-              engaging stories, optimized articles, and more.
+              Tu plataforma todo-en-uno para la creación de contenido en LinkedIn. Tu herramienta completa para crear posts con IA, 
+              historias atractivas, artículos optimizados y mucho más.
             </p>
             <div className="hero-cta">
               <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
-                Try LinkedAI Now
+                Probar LinkedAI
                 <span className="btn-arrow">→</span>
-              </button>
-              <button className="btn-secondary" onClick={() => document.getElementById('demo').scrollIntoView()}>
-                See Demo
               </button>
             </div>
             <div className="hero-stats">
               <div className="stat">
                 <div className="stat-number">+847%</div>
-                <div className="stat-label">more engagement</div>
+                <div className="stat-label">más engagement</div>
               </div>
               <div className="stat">
                 <div className="stat-number">3.2M</div>
-                <div className="stat-label">impressions</div>
+                <div className="stat-label">impresiones</div>
               </div>
               <div className="stat">
                 <div className="stat-number">24h</div>
-                <div className="stat-label">to see results</div>
+                <div className="stat-label">para ver resultados</div>
               </div>
             </div>
           </div>
           <div className="hero-visual">
-            <div className="hero-demo">
-              <div className="demo-header">
-                <div className="demo-dots">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-                <div className="demo-title">LinkedAI Editor</div>
-              </div>
-              <div className="demo-content">
-                <div className="demo-sidebar">
-                  <div className="sidebar-item active">
-                    <span className="sidebar-icon">📝</span>
-                    <span>AI Post Generator</span>
-                  </div>
-                  <div className="sidebar-item">
-                    <span className="sidebar-icon">🎨</span>
-                    <span>Image Creator</span>
-                  </div>
-                  <div className="sidebar-item">
-                    <span className="sidebar-icon">📊</span>
-                    <span>Analytics</span>
-                  </div>
-                </div>
-                <div className="demo-main">
-                  <div className="demo-preview">
-                    <div className="preview-post">
-                      <div className="post-header">
-                        <div className="post-avatar">👤</div>
-                        <div className="post-info">
-                          <div className="post-name">Your Name</div>
-                          <div className="post-title">Professional Title</div>
-                        </div>
-                      </div>
-                      <div className="post-content">
-                        <p>🚀 <strong>BREAKING: This AI tool changed my LinkedIn game completely!</strong></p>
-                        <p>In just 30 days, I went from 500 to 15,000 followers using only AI-generated content.</p>
-                        <p>The secret: <strong>LinkedAI</strong> analyzed 10M+ successful posts...</p>
-                      </div>
-                      <div className="post-engagement">
-                        <span>👍 2.3K</span>
-                        <span>💬 847</span>
-                        <span>🔄 1.2K</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="hero-simple">
+              <h2 className="hero-simple-title">¿Listo para revolucionar tu LinkedIn?</h2>
+              <p className="hero-simple-subtitle">Únete a miles de profesionales que ya están generando contenido viral</p>
+              <div className="hero-simple-buttons">
+                <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
+                  Comenzar Gratis
+                </button>
+                <button className="btn-secondary" onClick={() => document.getElementById('features').scrollIntoView()}>
+                  Ver Características
+                </button>
               </div>
             </div>
           </div>
@@ -214,138 +179,100 @@ export default function Home() {
       <section id="features" className="workflow scroll-reveal">
         <div className="container">
           <div className="section-header">
-            <h2>3 Step Workflow</h2>
-            <p>Workflows To Go Viral</p>
-            <span className="workflow-subtitle">Example: See how to generate a viral LinkedIn post</span>
+            <h2>Proceso de 5 Pasos</h2>
+            <p>Flujos de Trabajo Para Hacer Viral</p>
+            <span className="workflow-subtitle">Ejemplo: Ve cómo generar un post viral de LinkedIn</span>
           </div>
           <div className="workflow-steps">
             <div className="workflow-step">
               <div className="step-number">1</div>
               <div className="step-content">
-                <h3>Make an account</h3>
-                <h4>Upload your content</h4>
-                <p>Use any topic, or connect your LinkedIn profile.</p>
+                <h3>Crear una cuenta</h3>
+                <h4>Regístrate gratis</h4>
+                <p>Conecta tu perfil de LinkedIn y comienza en segundos.</p>
               </div>
             </div>
             <div className="workflow-step">
               <div className="step-number">2</div>
               <div className="step-content">
-                <h3>Select Content style</h3>
-                <h4>Choose from 15+ viral styles</h4>
-                <p>Professional, casual, inspirational, educational, and more.</p>
+                <h3>Elegir la herramienta</h3>
+                <h4>Selecciona entre 8+ herramientas</h4>
+                <p>Posts, artículos, imágenes, programación y más.</p>
               </div>
             </div>
             <div className="workflow-step">
               <div className="step-number">3</div>
               <div className="step-content">
-                <h3>Generate Content</h3>
-                <h4>Watch it generate content in seconds</h4>
-                <p>AI creates optimized posts ready to publish.</p>
+                <h3>Completar los campos</h3>
+                <h4>Describe tu idea de contenido</h4>
+                <p>Tema, tono, audiencia y objetivos específicos.</p>
+              </div>
+            </div>
+            <div className="workflow-step">
+              <div className="step-number">4</div>
+              <div className="step-content">
+                <h3>Generar contenido con IA</h3>
+                <h4>Ve cómo se crea en segundos</h4>
+                <p>La IA analiza millones de posts exitosos para ti.</p>
+              </div>
+            </div>
+            <div className="workflow-step">
+              <div className="step-number">5</div>
+              <div className="step-content">
+                <h3>Empezar a generar impacto</h3>
+                <h4>Publica y ve los resultados</h4>
+                <p>Contenido optimizado listo para viralizar.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Web-Based Editor Section */}
-      <section className="editor-demo scroll-reveal">
-        <div className="container">
-          <div className="editor-content">
-            <div className="editor-text">
-              <h2>Web-Based Editor.</h2>
-              <p>Full control with our web editor.</p>
-              <span className="editor-subtitle">Feels like magic.</span>
-              <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
-                Try LinkedAI Now
-              </button>
-            </div>
-            <div className="editor-visual">
-              <div className="editor-preview">
-                <div className="editor-header">
-                  <div className="editor-tabs">
-                    <div className="tab active">Post Generator</div>
-                    <div className="tab">Image Creator</div>
-                    <div className="tab">Analytics</div>
-                  </div>
-                </div>
-                <div className="editor-body">
-                  <div className="editor-sidebar">
-                    <div className="sidebar-section">
-                      <h4>Content Type</h4>
-                      <div className="option active">LinkedIn Post</div>
-                      <div className="option">Article</div>
-                      <div className="option">Story</div>
-                    </div>
-                    <div className="sidebar-section">
-                      <h4>Tone</h4>
-                      <div className="option active">Professional</div>
-                      <div className="option">Casual</div>
-                      <div className="option">Inspirational</div>
-                    </div>
-                  </div>
-                  <div className="editor-main">
-                    <div className="editor-input">
-                      <textarea placeholder="Describe your content idea..."></textarea>
-                    </div>
-                    <div className="editor-output">
-                      <div className="generated-content">
-                        <p>🚀 <strong>BREAKING: This AI tool changed my LinkedIn game completely!</strong></p>
-                        <p>In just 30 days, I went from 500 to 15,000 followers using only AI-generated content.</p>
-                        <p>The secret: <strong>LinkedAI</strong> analyzed 10M+ successful posts...</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Countless Tools Section */}
       <section id="demo" className="tools scroll-reveal">
         <div className="container">
           <div className="tools-content">
             <div className="tools-text">
-              <h2>Countless Tools</h2>
-              <p>LinkedAI has everything you need to go viral</p>
-              <span className="tools-subtitle">From cutting-edge AI content generation to LinkedIn optimization, we've got you covered.</span>
+              <h2>Herramientas Incluidas</h2>
+              <p>LinkedAI tiene todo lo que necesitas para hacer viral</p>
+              <span className="tools-subtitle">Desde generación de contenido con IA hasta optimización de LinkedIn, te tenemos cubierto.</span>
               <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
-                Try LinkedAI Now
+                Probar LinkedAI
               </button>
             </div>
             <div className="tools-grid">
               <div className="tool-card">
-                <div className="tool-icon">🤖</div>
-                <h3>AI Post Generator</h3>
+                <div className="tool-icon">📝</div>
+                <h3>Generador de Posts</h3>
+              </div>
+              <div className="tool-card">
+                <div className="tool-icon">📄</div>
+                <h3>Generador de Artículos</h3>
               </div>
               <div className="tool-card">
                 <div className="tool-icon">🎨</div>
-                <h3>AI Image Creator</h3>
-              </div>
-              <div className="tool-card">
-                <div className="tool-icon">📝</div>
-                <h3>AI Article Writer</h3>
+                <h3>Creador de Imágenes</h3>
               </div>
               <div className="tool-card">
                 <div className="tool-icon">📊</div>
-                <h3>LinkedIn Analytics</h3>
+                <h3>Biografías de LinkedIn</h3>
               </div>
               <div className="tool-card">
-                <div className="tool-icon">🎯</div>
-                <h3>Content Optimizer</h3>
+                <div className="tool-icon">📈</div>
+                <h3>Presentaciones</h3>
               </div>
               <div className="tool-card">
-                <div className="tool-icon">⚡</div>
-                <h3>Auto Scheduler</h3>
+                <div className="tool-icon">📧</div>
+                <h3>Generador de Emails</h3>
               </div>
               <div className="tool-card">
-                <div className="tool-icon">💬</div>
-                <h3>Comment Generator</h3>
+                <div className="tool-icon">💼</div>
+                <h3>Propuestas Comerciales</h3>
               </div>
               <div className="tool-card">
-                <div className="tool-icon">🔍</div>
-                <h3>Trend Analyzer</h3>
+                <div className="tool-icon">📅</div>
+                <h3>Programador de Contenido</h3>
               </div>
             </div>
           </div>
@@ -356,19 +283,21 @@ export default function Home() {
       <section id="testimonials" className="testimonials scroll-reveal">
         <div className="container">
           <div className="testimonials-header">
-            <h2>LinkedAI Has Generated Billions of Views.</h2>
-            <p>For Millions of Professionals.</p>
+            <h2>LinkedAI Ha Generado Miles de Millones de Visualizaciones.</h2>
+            <p>Para Millones de Profesionales.</p>
           </div>
           <div className="testimonials-subtitle">
-            <h3>See What Our Users Are Saying</h3>
+            <h3>Mira Lo Que Dicen Nuestros Usuarios</h3>
           </div>
           <div className="testimonials-grid">
             <div className="testimonial">
               <div className="testimonial-content">
-                "I've created content for some of the biggest professionals on LinkedIn. LinkedAI is the tool I wish I had when I started."
+                "He creado contenido para algunos de los profesionales más grandes de LinkedIn. LinkedAI es la herramienta que desearía haber tenido cuando empecé."
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">👨‍💼</div>
+                <div className="author-avatar">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Carlos" />
+                </div>
                 <div className="author-info">
                   <div className="author-name">Carlos</div>
                 </div>
@@ -376,10 +305,12 @@ export default function Home() {
             </div>
             <div className="testimonial">
               <div className="testimonial-content">
-                "LinkedAI is the only tool I've found that can create viral LinkedIn content consistently. 10/10."
+                "LinkedAI es la única herramienta que he encontrado que puede crear contenido viral de LinkedIn consistentemente. 10/10."
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">👩‍💻</div>
+                <div className="author-avatar">
+                  <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" alt="Ana" />
+                </div>
                 <div className="author-info">
                   <div className="author-name">Ana</div>
                 </div>
@@ -387,10 +318,12 @@ export default function Home() {
             </div>
             <div className="testimonial">
               <div className="testimonial-content">
-                "After building a personal brand with over 1 million followers, I built LinkedAI to solve my own scaling problems."
+                "Después de construir una marca personal con más de 1 millón de seguidores, construí LinkedAI para resolver mis propios problemas de escalabilidad."
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">👨‍🚀</div>
+                <div className="author-avatar">
+                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="David" />
+                </div>
                 <div className="author-info">
                   <div className="author-name">David</div>
                 </div>
@@ -398,10 +331,12 @@ export default function Home() {
             </div>
             <div className="testimonial">
               <div className="testimonial-content">
-                "LinkedAI makes creating and optimizing LinkedIn content so much easier, now I can focus on strategy & growth."
+                "LinkedAI hace que crear y optimizar contenido de LinkedIn sea mucho más fácil, ahora puedo enfocarme en estrategia y crecimiento."
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">👨‍💼</div>
+                <div className="author-avatar">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Brandon" />
+                </div>
                 <div className="author-info">
                   <div className="author-name">Brandon</div>
                 </div>
@@ -409,10 +344,12 @@ export default function Home() {
             </div>
             <div className="testimonial">
               <div className="testimonial-content">
-                "Their AI content generator is insane. It saves me from needing multiple subscriptions for different tools."
+                "Su generador de contenido con IA es increíble. Me ahorra de necesitar múltiples suscripciones para diferentes herramientas."
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">👩‍💻</div>
+                <div className="author-avatar">
+                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Sarah" />
+                </div>
                 <div className="author-info">
                   <div className="author-name">Sarah</div>
                 </div>
@@ -420,10 +357,12 @@ export default function Home() {
             </div>
             <div className="testimonial">
               <div className="testimonial-content">
-                "I wish I found this sooner. AI-generated posts are OP for LinkedIn. Most worth it subscription I have."
+                "Ojalá hubiera encontrado esto antes. Los posts generados por IA son increíbles para LinkedIn. La suscripción más valiosa que tengo."
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">👨‍🚀</div>
+                <div className="author-avatar">
+                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face" alt="James" />
+                </div>
                 <div className="author-info">
                   <div className="author-name">James</div>
                 </div>
@@ -432,7 +371,7 @@ export default function Home() {
           </div>
           <div className="testimonials-cta">
             <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
-              Make an account
+              Crear una cuenta
             </button>
           </div>
         </div>
@@ -442,34 +381,80 @@ export default function Home() {
       <section id="pricing" className="pricing">
         <div className="container">
           <div className="section-header">
-            <h2>Un plan simple. Resultados extraordinarios.</h2>
-            <p>Sin complicaciones, sin contratos largos, sin sorpresas</p>
+            <h2>Planes de Precios</h2>
+            <p>Elige el plan que mejor se adapte a tus necesidades</p>
           </div>
-          <div className="pricing-card">
-            <div className="pricing-badge">Más Popular</div>
-            <div className="pricing-header">
-              <h3>LinkedAI Pro</h3>
-              <div className="price">
-                <span className="currency">€</span>
-                <span className="amount">97</span>
-                <span className="period">/mes</span>
+          <div className="pricing-grid">
+            <div className="pricing-card">
+              <div className="pricing-header">
+                <h3>Básico</h3>
+                <div className="price">
+                  <span className="currency">€</span>
+                  <span className="amount">12</span>
+                  <span className="period">/mes</span>
+                </div>
+                <p className="price-description">Perfecto para empezar</p>
               </div>
-              <p className="price-description">Todo lo que necesitas para dominar LinkedIn</p>
+              <div className="pricing-features">
+                <div className="pricing-feature">✅ 50 posts generados/mes</div>
+                <div className="pricing-feature">✅ Generador de posts</div>
+                <div className="pricing-feature">✅ Generador de artículos</div>
+                <div className="pricing-feature">✅ Soporte por email</div>
+              </div>
+              <button className="btn-secondary pricing-btn" onClick={() => document.getElementById('contact').scrollIntoView()}>
+                Empezar
+              </button>
             </div>
-            <div className="pricing-features">
-              <div className="pricing-feature">✅ Contenido ilimitado generado por IA</div>
-              <div className="pricing-feature">✅ Imágenes y carruseles automáticos</div>
-              <div className="pricing-feature">✅ Estrategia personalizada por nicho</div>
-              <div className="pricing-feature">✅ Programación automática de posts</div>
-              <div className="pricing-feature">✅ Análisis de competencia en tiempo real</div>
-              <div className="pricing-feature">✅ Respuestas automáticas a comentarios</div>
-              <div className="pricing-feature">✅ Dashboard con métricas avanzadas</div>
-              <div className="pricing-feature">✅ Soporte prioritario 24/7</div>
+            
+            <div className="pricing-card featured">
+              <div className="pricing-badge">Más Popular</div>
+              <div className="pricing-header">
+                <h3>Profesional</h3>
+                <div className="price">
+                  <span className="currency">€</span>
+                  <span className="amount">20</span>
+                  <span className="period">/mes</span>
+                </div>
+                <p className="price-description">Para profesionales serios</p>
+              </div>
+              <div className="pricing-features">
+                <div className="pricing-feature">✅ 200 posts generados/mes</div>
+                <div className="pricing-feature">✅ Todas las herramientas</div>
+                <div className="pricing-feature">✅ Programador de contenido</div>
+                <div className="pricing-feature">✅ Analytics básicos</div>
+                <div className="pricing-feature">✅ Soporte prioritario</div>
+              </div>
+              <button className="btn-primary pricing-btn" onClick={() => document.getElementById('contact').scrollIntoView()}>
+                Empezar
+              </button>
             </div>
-            <div className="pricing-guarantee">
-              <div className="guarantee-icon">🛡️</div>
-              <p>Garantía de 30 días o te devolvemos el dinero</p>
+            
+            <div className="pricing-card">
+              <div className="pricing-header">
+                <h3>Empresarial</h3>
+                <div className="price">
+                  <span className="currency">€</span>
+                  <span className="amount">30</span>
+                  <span className="period">/mes</span>
+                </div>
+                <p className="price-description">Para equipos y empresas</p>
+              </div>
+              <div className="pricing-features">
+                <div className="pricing-feature">✅ Generación ilimitada</div>
+                <div className="pricing-feature">✅ Todas las herramientas</div>
+                <div className="pricing-feature">✅ Analytics avanzados</div>
+                <div className="pricing-feature">✅ Colaboración en equipo</div>
+                <div className="pricing-feature">✅ Soporte 24/7</div>
+                <div className="pricing-feature">✅ API personalizada</div>
+              </div>
+              <button className="btn-secondary pricing-btn" onClick={() => document.getElementById('contact').scrollIntoView()}>
+                Empezar
+              </button>
             </div>
+          </div>
+          <div className="pricing-guarantee">
+            <span className="guarantee-icon">🛡️</span>
+            <p>Garantía de 30 días o te devolvemos tu dinero</p>
           </div>
         </div>
       </section>
@@ -481,54 +466,65 @@ export default function Home() {
             <h2>Preguntas frecuentes</h2>
             <p>Todo lo que necesitas saber sobre LinkedAI</p>
           </div>
-          <div className="faq-grid">
+          <div className="faq-list">
             <div className="faq-item">
-              <h4>¿Cuánto tiempo tardo en ver resultados?</h4>
-              <p>La mayoría de nuestros usuarios ven un aumento del 200-300% en interacciones en las primeras 48 horas. Los resultados más significativos aparecen en 7-14 días.</p>
+              <div className="faq-question" onClick={() => toggleFAQ(0)}>
+                <h4>¿Cuánto tiempo tardo en ver resultados?</h4>
+                <span className="faq-icon">{openFAQ === 0 ? '−' : '+'}</span>
+              </div>
+              {openFAQ === 0 && (
+                <div className="faq-answer">
+                  <p>La mayoría de nuestros usuarios ven un aumento del 200-300% en interacciones en las primeras 48 horas. Los resultados más significativos aparecen en 7-14 días.</p>
+                </div>
+              )}
             </div>
+            
             <div className="faq-item">
-              <h4>¿El contenido suena artificial?</h4>
-              <p>No. Nuestra IA aprende tu tono de voz y estilo personal. El contenido es indistinguible del que escribirías manualmente, pero optimizado para el algoritmo.</p>
+              <div className="faq-question" onClick={() => toggleFAQ(1)}>
+                <h4>¿El contenido suena artificial?</h4>
+                <span className="faq-icon">{openFAQ === 1 ? '−' : '+'}</span>
+              </div>
+              {openFAQ === 1 && (
+                <div className="faq-answer">
+                  <p>No. Nuestra IA aprende tu tono de voz y estilo personal. El contenido es indistinguible del que escribirías manualmente, pero optimizado para el algoritmo.</p>
+                </div>
+              )}
             </div>
+            
             <div className="faq-item">
-              <h4>¿Funciona para cualquier industria?</h4>
-              <p>Sí. LinkedAI se adapta a más de 200 industrias diferentes, desde tecnología hasta salud, finanzas, educación y más.</p>
+              <div className="faq-question" onClick={() => toggleFAQ(2)}>
+                <h4>¿Puedo cancelar cuando quiera?</h4>
+                <span className="faq-icon">{openFAQ === 2 ? '−' : '+'}</span>
+              </div>
+              {openFAQ === 2 && (
+                <div className="faq-answer">
+                  <p>Absolutamente. Sin contratos, sin penalizaciones. Cancela cuando quieras desde tu dashboard.</p>
+                </div>
+              )}
             </div>
+            
             <div className="faq-item">
-              <h4>¿Puedo cancelar cuando quiera?</h4>
-              <p>Absolutamente. Sin contratos, sin penalizaciones. Cancela cuando quieras desde tu dashboard.</p>
+              <div className="faq-question" onClick={() => toggleFAQ(3)}>
+                <h4>¿Puedo probar LinkedAI gratis?</h4>
+                <span className="faq-icon">{openFAQ === 3 ? '−' : '+'}</span>
+              </div>
+              {openFAQ === 3 && (
+                <div className="faq-answer">
+                  <p>Sí, ofrecemos una prueba gratuita de 14 días sin compromiso. Puedes cancelar en cualquier momento sin penalizaciones.</p>
+                </div>
+              )}
             </div>
+            
             <div className="faq-item">
-              <h4>¿Cómo funciona la IA de LinkedAI?</h4>
-              <p>Nuestra IA analiza más de 10 millones de posts exitosos de LinkedIn para entender qué contenido genera más engagement. Luego crea contenido personalizado basado en tu industria y audiencia.</p>
-            </div>
-            <div className="faq-item">
-              <h4>¿Qué tipo de contenido puede generar?</h4>
-              <p>LinkedAI puede crear posts de texto, carruseles, infografías, historias profesionales, artículos y hasta respuestas automáticas a comentarios. Todo optimizado para el algoritmo de LinkedIn.</p>
-            </div>
-            <div className="faq-item">
-              <h4>¿Es seguro usar LinkedAI?</h4>
-              <p>Sí, utilizamos encriptación de extremo a extremo y cumplimos con todas las regulaciones de privacidad. Tu información y contenido están completamente seguros.</p>
-            </div>
-            <div className="faq-item">
-              <h4>¿Puedo probar LinkedAI gratis?</h4>
-              <p>Sí, ofrecemos una prueba gratuita de 14 días sin compromiso. Puedes cancelar en cualquier momento sin penalizaciones.</p>
-            </div>
-            <div className="faq-item">
-              <h4>¿Qué incluye el plan Pro?</h4>
-              <p>El plan Pro incluye contenido ilimitado, imágenes automáticas, estrategia personalizada, programación de posts, análisis de competencia, respuestas automáticas y soporte prioritario 24/7.</p>
-            </div>
-            <div className="faq-item">
-              <h4>¿Necesito conocimientos técnicos?</h4>
-              <p>No, LinkedAI está diseñado para ser extremadamente fácil de usar. Solo necesitas conectar tu cuenta de LinkedIn y la IA hace el resto.</p>
-            </div>
-            <div className="faq-item">
-              <h4>¿Cómo mido el éxito de mi contenido?</h4>
-              <p>LinkedAI incluye un dashboard completo con métricas detalladas: interacciones, alcance, leads generados, crecimiento de seguidores y análisis de rendimiento por post.</p>
-            </div>
-            <div className="faq-item">
-              <h4>¿Ofrecen soporte en español?</h4>
-              <p>Sí, nuestro equipo de soporte habla español y está disponible 24/7 para ayudarte con cualquier pregunta o problema que puedas tener.</p>
+              <div className="faq-question" onClick={() => toggleFAQ(4)}>
+                <h4>¿Necesito conocimientos técnicos?</h4>
+                <span className="faq-icon">{openFAQ === 4 ? '−' : '+'}</span>
+              </div>
+              {openFAQ === 4 && (
+                <div className="faq-answer">
+                  <p>No, LinkedAI está diseñado para ser extremadamente fácil de usar. Solo necesitas conectar tu cuenta de LinkedIn y la IA hace el resto.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
