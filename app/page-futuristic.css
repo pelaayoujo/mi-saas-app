@@ -170,7 +170,7 @@ body {
   font-weight: 700;
   font-size: 1.8rem;
   color: var(--linkedin-blue);
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-logo:hover {
@@ -178,12 +178,82 @@ body {
 }
 
 .logo-icon {
-  font-size: 2rem;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.3s ease;
 }
 
+.logo-icon::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--linkedin-blue) 0%, var(--accent-blue) 100%);
+  border-radius: 8px;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+}
+
+.logo-icon::after {
+  content: '';
+  position: relative;
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  background: 
+    /* Circuit pattern */
+    linear-gradient(90deg, transparent 6px, #ffffff 6px, #ffffff 8px, transparent 8px),
+    linear-gradient(0deg, transparent 6px, #ffffff 6px, #ffffff 8px, transparent 8px),
+    linear-gradient(45deg, transparent 4px, rgba(255, 255, 255, 0.5) 4px, rgba(255, 255, 255, 0.5) 6px, transparent 6px),
+    /* Central AI node */
+    radial-gradient(circle at 50% 50%, #ffffff 3px, transparent 3px);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(255, 255, 255, 0.3);
+}
+
 .logo-icon:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.logo-icon:hover::before {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--linkedin-blue) 100%);
+  box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
+  animation: logoPulse 2s ease-in-out infinite;
+}
+
+.logo-icon:hover::after {
+  animation: circuitGlow 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% { 
+    transform: rotate(45deg) scale(1);
+  }
+  50% { 
+    transform: rotate(45deg) scale(1.05);
+  }
+}
+
+@keyframes circuitGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.4),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+      0 0 8px rgba(255, 255, 255, 0.3);
+  }
+  50% { 
+    box-shadow: 
+      0 0 0 1px rgba(255, 255, 255, 0.6),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.4),
+      0 0 12px rgba(255, 255, 255, 0.5);
+  }
 }
 
 .nav-links {
@@ -1754,6 +1824,21 @@ body {
   font-size: 1.5rem;
   color: var(--linkedin-blue);
   margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.footer-logo:hover {
+  color: var(--accent-blue);
+}
+
+.footer-logo .logo-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.footer-logo .logo-icon::after {
+  width: 16px;
+  height: 16px;
 }
 
 .footer-brand p {
