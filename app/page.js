@@ -122,7 +122,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-container">
-          <div className="hero-content">
+          <div className="hero-content-centered">
             <div className="hero-badge">
               <span className="badge-dot"></span>
               <span>50,000+ PROFESIONALES YA LO USAN</span>
@@ -130,8 +130,6 @@ export default function Home() {
             <h1 className="hero-title">
               La #1 Herramienta de IA para LinkedIn
               <span className="highlight">LinkedAI</span>
-              <br />
-              Crea Contenido Viral en LinkedIn con IA
             </h1>
             <p className="hero-description">
               Tu plataforma todo-en-uno para la creación de contenido en LinkedIn. Tu herramienta completa para crear posts con IA, 
@@ -155,20 +153,6 @@ export default function Home() {
               <div className="stat">
                 <div className="stat-number">24h</div>
                 <div className="stat-label">para ver resultados</div>
-              </div>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <div className="hero-simple">
-              <h2 className="hero-simple-title">¿Listo para revolucionar tu LinkedIn?</h2>
-              <p className="hero-simple-subtitle">Únete a miles de profesionales que ya están generando contenido viral</p>
-              <div className="hero-simple-buttons">
-                <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
-                  Comenzar Gratis
-                </button>
-                <button className="btn-secondary" onClick={() => document.getElementById('features').scrollIntoView()}>
-                  Ver Características
-                </button>
               </div>
             </div>
           </div>
