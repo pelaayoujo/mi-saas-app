@@ -4,6 +4,35 @@ import './page.css'
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [email, setEmail] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState('')
+
+  const handleTrialSubmit = async (e) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+      
+      if (response.ok) {
+        setSubmitMessage('¡Gracias! Te hemos enviado un email con acceso a la prueba.')
+        setEmail('')
+      } else {
+        setSubmitMessage('Error al procesar tu solicitud. Inténtalo de nuevo.')
+      }
+    } catch (error) {
+      setSubmitMessage('Error de conexión. Inténtalo de nuevo.')
+    }
+    
+    setIsSubmitting(false)
+  }
 
   return (
     <div className="homepage">
@@ -77,24 +106,17 @@ export default function Home() {
           </p>
           
           <div className="hero-actions">
-            <a href="/dashboard/create" className="btn-primary">
-              <span>Probar LinkedAI Gratis</span>
+            <a href="#trial" className="btn-primary">
+              <span>Probar LinkedAI Ahora</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </a>
-            <a href="#demo" className="btn-secondary">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 18.333a8.333 8.333 0 100-16.667 8.333 8.333 0 000 16.667z" stroke="currentColor" strokeWidth="1.5"/>
-                <path d="M8.333 10l2.5 2.5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              Ver Demo
             </a>
           </div>
           
           <div className="hero-stats">
             <div className="stat">
-              <div className="stat-number">10M+</div>
+              <div className="stat-number">15K+</div>
               <div className="stat-label">Posts generados</div>
             </div>
             <div className="stat">
@@ -404,6 +426,42 @@ export default function Home() {
                 <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Trial Section */}
+      <section id="trial" className="trial">
+        <div className="container">
+          <div className="trial-content">
+            <h2>¿Listo para transformar tu LinkedIn?</h2>
+            <p>Únete a miles de profesionales que ya están generando contenido viral con LinkedAI</p>
+            
+            <form className="trial-form" onSubmit={handleTrialSubmit}>
+              <div className="form-group">
+                <input 
+                  type="email" 
+                  placeholder="Tu email profesional" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <button type="submit" className="btn-primary large">
+                  <span>Comenzar Prueba Gratis</span>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+              <p className="trial-disclaimer">
+                Sin compromiso. Cancela cuando quieras. Acceso inmediato.
+              </p>
+              {submitMessage && (
+                <p className={`submit-message ${submitMessage.includes('Gracias') ? 'success' : 'error'}`}>
+                  {submitMessage}
+                </p>
+              )}
+            </form>
           </div>
         </div>
       </section>

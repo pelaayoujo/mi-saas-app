@@ -4,12 +4,12 @@ import clientPromise from '../../../lib/mongodb'
 export async function POST(request) {
   try {
     const body = await request.json()
-    const { nombre, email, nicho } = body
+    const { email } = body
 
     // Validación básica
-    if (!nombre || !email) {
+    if (!email) {
       return NextResponse.json(
-        { error: 'Nombre y email son requeridos' },
+        { error: 'Email es requerido' },
         { status: 400 }
       )
     }
@@ -43,18 +43,17 @@ export async function POST(request) {
 
     // Crear el lead
     const lead = {
-      nombre: nombre.trim(),
       email: normalizedEmail,
-      nicho: nicho?.trim() || '',
       fecha: new Date(),
       status: 'nuevo',
+      source: 'homepage_trial',
       ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
     }
 
         const result = await collection.insertOne(lead)
 
         // Email desactivado - Solo acumular leads
-        console.log('Lead registrado:', { email, nombre, nicho })
+        console.log('Lead registrado:', { email, source: 'homepage_trial' })
 
         return NextResponse.json({
           success: true,
