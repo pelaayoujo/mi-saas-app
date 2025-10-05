@@ -155,7 +155,7 @@ body {
   position: relative;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   margin-top: -80px;
-  padding-top: 160px; /* Increased from 120px to 160px for more space from navbar */
+  padding: 160px 0 4rem 0; /* Added bottom padding for space before next section */
 }
 
 .hero-background {
@@ -326,13 +326,14 @@ body {
 
 /* Features Section */
 .features {
-  padding: 6rem 0;
+  padding: 8rem 0 6rem 0; /* Increased top padding from 6rem to 8rem for more space from hero */
   background: #ffffff;
 }
 
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
+  margin-top: 2rem; /* Added top margin to bring text up */
 }
 
 .section-header h2 {
