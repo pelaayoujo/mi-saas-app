@@ -3,11 +3,14 @@ import clientPromise from '../../../lib/mongodb'
 
 export async function POST(request) {
   try {
+    console.log('=== LEAD API CALLED ===')
     const body = await request.json()
     const { email } = body
+    console.log('Received email:', email)
 
     // Validación básica
     if (!email) {
+      console.log('Error: No email provided')
       return NextResponse.json(
         { error: 'Email es requerido' },
         { status: 400 }
@@ -23,12 +26,13 @@ export async function POST(request) {
       )
     }
 
+    console.log('Connecting to MongoDB...')
     const client = await clientPromise
-    const db = client.db(process.env.MONGODB_DB)
+    const db = client.db('miSaaS') // Use the correct database name
     const collection = db.collection('leads')
+    console.log('Connected to database and collection')
     // Índices (idempotentes)
     await collection.createIndex({ email: 1 }, { unique: true })
-    await collection.createIndex({ nicho: 1, fecha: -1 })
     await collection.createIndex({ fecha: -1 })
 
     const normalizedEmail = email.toLowerCase().trim()
@@ -50,28 +54,35 @@ export async function POST(request) {
       ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
     }
 
+        console.log('Inserting lead:', lead)
         const result = await collection.insertOne(lead)
+        console.log('Lead inserted successfully:', result.insertedId)
 
         // Email desactivado - Solo acumular leads
         console.log('Lead registrado:', { email, source: 'homepage_trial' })
 
         return NextResponse.json({
           success: true,
-          message: '¡Gracias! Te contactaremos pronto.',
+          message: '¡Gracias! Te hemos enviado un email con acceso a la prueba.',
           id: result.insertedId
         })
 
   } catch (error) {
+    console.error('=== ERROR IN LEAD API ===')
+    console.error('Error details:', error)
+    
     // Manejo de clave duplicada (índice único)
     if (error && (error.code === 11000 || error.code === '11000')) {
+      console.log('Duplicate email error')
       return NextResponse.json(
         { error: 'Este email ya está registrado' },
         { status: 409 }
       )
     }
+    
     console.error('Error al guardar lead:', error)
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      { error: 'Error interno del servidor. Inténtalo de nuevo.' },
       { status: 500 }
     )
   }
