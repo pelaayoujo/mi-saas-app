@@ -326,13 +326,8 @@ body {
 
 /* Features Section */
 .features {
-  padding: 8rem 0 6rem 0; /* Increased top padding from 6rem to 8rem for more space from hero */
+  padding: 2rem 0 6rem 0; /* Changed top padding from 8rem to 2rem as requested */
   background: #ffffff;
-}
-
-/* Additional padding for features section */
-#features {
-  padding-top: 2rem;
 }
 
 .section-header {
