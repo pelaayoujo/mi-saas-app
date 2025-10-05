@@ -275,8 +275,8 @@ body {
 }
 
 .btn-primary.large {
-  padding: 0.8rem 1.5rem; /* Reduced padding for narrower button */
-  font-size: 1rem; /* Reduced font size */
+  padding: 0.6rem 1.5rem; /* Reduced vertical padding from 0.8rem to 0.6rem */
+  font-size: 1rem;
 }
 
 .btn-secondary {
@@ -759,7 +759,7 @@ body {
 }
 
 .trial-form {
-  max-width: 350px; /* Further reduced to 350px for narrower form */
+  max-width: 600px; /* Increased from 350px to 600px for more horizontal space */
   margin: 0 auto;
 }
 
@@ -771,10 +771,10 @@ body {
 
 .form-group input {
   flex: 1;
-  padding: 0.8rem 1rem; /* Reduced padding from 1rem 1.5rem to 0.8rem 1rem */
+  padding: 0.6rem 1rem; /* Reduced vertical padding from 0.8rem to 0.6rem */
   border: none;
   border-radius: 0.5rem;
-  font-size: 0.95rem; /* Slightly smaller font */
+  font-size: 1rem; /* Restored to normal font size */
   background: rgba(255, 255, 255, 0.9);
   color: #1a1a1a;
 }
@@ -790,9 +790,13 @@ body {
 }
 
 .trial-disclaimer {
-  font-size: 0.9rem;
+  font-size: 1rem; /* Increased from 0.9rem to 1rem */
   opacity: 0.8;
   margin-top: 1rem;
+  max-width: 500px; /* Added max-width to prevent text from being too wide */
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5; /* Added line height for better readability */
 }
 
 .submit-message {
