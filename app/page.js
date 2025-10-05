@@ -128,31 +128,30 @@ export default function Home() {
               <span>50,000+ PROFESIONALES YA LO USAN</span>
             </div>
             <h1 className="hero-title">
-              La #1 Herramienta de IA para LinkedIn
-              <span className="highlight">LinkedAI</span>
+              La #1 Herramienta de IA para <span className="highlight">LinkedIn</span>
             </h1>
             <p className="hero-description">
               Tu plataforma todo-en-uno para la creación de contenido en LinkedIn. Tu herramienta completa para crear posts con IA, 
               historias atractivas, artículos optimizados y mucho más.
             </p>
             <div className="hero-cta">
-              <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
+              <button className="btn-primary hero-btn" onClick={() => document.getElementById('contact').scrollIntoView()}>
                 Probar LinkedAI
                 <span className="btn-arrow">→</span>
               </button>
             </div>
-            <div className="hero-stats">
-              <div className="stat">
-                <div className="stat-number">+847%</div>
-                <div className="stat-label">más engagement</div>
+            <div className="hero-features">
+              <div className="hero-feature">
+                <div className="feature-tick">✓</div>
+                <span>Genera contenido viral en segundos</span>
               </div>
-              <div className="stat">
-                <div className="stat-number">3.2M</div>
-                <div className="stat-label">impresiones</div>
+              <div className="hero-feature">
+                <div className="feature-tick">✓</div>
+                <span>Optimizado para el algoritmo de LinkedIn</span>
               </div>
-              <div className="stat">
-                <div className="stat-number">24h</div>
-                <div className="stat-label">para ver resultados</div>
+              <div className="hero-feature">
+                <div className="feature-tick">✓</div>
+                <span>8+ herramientas profesionales incluidas</span>
               </div>
             </div>
           </div>
