@@ -21,7 +21,6 @@ body {
   background: #ffffff;
   color: #1a1a1a;
   line-height: 1.6;
-  padding-top: 80px;
 }
 
 /* Container principal */
@@ -148,13 +147,12 @@ body {
 
 /* Hero Section */
 .hero {
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   overflow: hidden;
-  margin-top: -80px;
   padding-top: 80px;
 }
 
@@ -199,7 +197,7 @@ body {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 0 2rem;
+  padding: 2rem 2rem 0 2rem;
   text-align: center;
 }
 
