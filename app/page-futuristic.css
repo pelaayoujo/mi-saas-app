@@ -59,7 +59,7 @@ body {
 
 /* Container principal */
 .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
   width: 100%;
@@ -83,7 +83,7 @@ body {
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
@@ -586,6 +586,7 @@ body {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  width: 100%;
 }
 
 .testimonials-carousel::-webkit-scrollbar {
@@ -593,7 +594,7 @@ body {
 }
 
 .testimonial-card {
-  min-width: 350px;
+  min-width: 400px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
@@ -603,22 +604,6 @@ body {
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
-}
-
-.testimonial-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--primary-gradient);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.testimonial-card:hover::before {
-  opacity: 1;
 }
 
 .testimonial-card:hover {
@@ -1061,10 +1046,11 @@ body {
   
   .testimonials-carousel {
     gap: 1.5rem;
+    padding: 1rem 0;
   }
   
   .testimonial-card {
-    min-width: 300px;
+    min-width: 350px;
   }
 }
 
@@ -1102,10 +1088,11 @@ body {
   
   .testimonials-carousel {
     gap: 1rem;
+    padding: 1rem 0;
   }
   
   .testimonial-card {
-    min-width: 280px;
+    min-width: 300px;
   }
   
   .pricing-grid {
@@ -1144,7 +1131,7 @@ body {
   }
   
   .testimonial-card {
-    min-width: 250px;
+    min-width: 280px;
   }
   
   .footer-content {
