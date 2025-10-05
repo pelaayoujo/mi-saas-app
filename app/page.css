@@ -759,7 +759,7 @@ body {
 }
 
 .trial-form {
-  max-width: 500px;
+  max-width: 400px; /* Reduced from 500px to 400px for narrower form */
   margin: 0 auto;
 }
 

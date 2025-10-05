@@ -435,13 +435,13 @@ export default function Home() {
         <div className="container">
           <div className="trial-content">
             <h2>¿Listo para transformar tu LinkedIn?</h2>
-            <p>Únete a miles de profesionales que ya están generando contenido viral con LinkedAI</p>
+            <p>Apúntate a la prueba de lanzamiento privada de manera gratuita de la herramienta</p>
             
             <form className="trial-form" onSubmit={handleTrialSubmit}>
               <div className="form-group">
                 <input 
                   type="email" 
-                  placeholder="Tu email profesional" 
+                  placeholder="Tu email para la prueba gratuita" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
