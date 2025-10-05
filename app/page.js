@@ -162,21 +162,16 @@ export default function Home() {
       <section id="features" className="workflow scroll-reveal">
         <div className="container">
           <div className="section-header">
-            <h2>Proceso de 5 Pasos</h2>
+            <h2>Proceso de 3 Pasos</h2>
             <p>Flujos de Trabajo Para Hacer Viral</p>
             <span className="workflow-subtitle">Ejemplo: Ve cómo generar un post viral de LinkedIn</span>
           </div>
           <div className="workflow-steps">
             <div className="workflow-step">
-              <div className="step-number">1</div>
-              <div className="step-content">
-                <h3>Crear una cuenta</h3>
-                <h4>Regístrate gratis</h4>
-                <p>Conecta tu perfil de LinkedIn y comienza en segundos.</p>
+              <div className="step-number">
+                <span className="step-icon">🎯</span>
+                <span className="step-digit">1</span>
               </div>
-            </div>
-            <div className="workflow-step">
-              <div className="step-number">2</div>
               <div className="step-content">
                 <h3>Elegir la herramienta</h3>
                 <h4>Selecciona entre 8+ herramientas</h4>
@@ -184,27 +179,25 @@ export default function Home() {
               </div>
             </div>
             <div className="workflow-step">
-              <div className="step-number">3</div>
+              <div className="step-number">
+                <span className="step-icon">💡</span>
+                <span className="step-digit">2</span>
+              </div>
               <div className="step-content">
-                <h3>Completar los campos</h3>
-                <h4>Describe tu idea de contenido</h4>
+                <h3>Describe tu idea</h3>
+                <h4>Cuéntanos qué quieres crear</h4>
                 <p>Tema, tono, audiencia y objetivos específicos.</p>
               </div>
             </div>
             <div className="workflow-step">
-              <div className="step-number">4</div>
-              <div className="step-content">
-                <h3>Generar contenido con IA</h3>
-                <h4>Ve cómo se crea en segundos</h4>
-                <p>La IA analiza millones de posts exitosos para ti.</p>
+              <div className="step-number">
+                <span className="step-icon">🚀</span>
+                <span className="step-digit">3</span>
               </div>
-            </div>
-            <div className="workflow-step">
-              <div className="step-number">5</div>
               <div className="step-content">
-                <h3>Empezar a generar impacto</h3>
+                <h3>Genera contenido y empieza a ganar impacto</h3>
                 <h4>Publica y ve los resultados</h4>
-                <p>Contenido optimizado listo para viralizar.</p>
+                <p>La IA crea contenido optimizado listo para viralizar.</p>
               </div>
             </div>
           </div>
