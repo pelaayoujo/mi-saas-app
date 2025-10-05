@@ -256,96 +256,128 @@ export default function Home() {
       <section id="testimonials" className="testimonials scroll-reveal">
         <div className="container">
           <div className="testimonials-header">
-            <h2>LinkedAI Ha Generado Miles de Millones de Visualizaciones.</h2>
-            <p>Para Millones de Profesionales.</p>
+            <h2>Resultados Reales de Profesionales Como Tú</h2>
+            <p>Más de 10,000 profesionales ya están generando contenido viral con LinkedAI</p>
           </div>
-          <div className="testimonials-subtitle">
-            <h3>Mira Lo Que Dicen Nuestros Usuarios</h3>
-          </div>
-          <div className="testimonials-grid">
-            <div className="testimonial">
+          <div className="testimonials-carousel">
+            <div className="testimonial-card">
+              <div className="testimonial-stars">
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+              </div>
               <div className="testimonial-content">
-                "He creado contenido para algunos de los profesionales más grandes de LinkedIn. LinkedAI es la herramienta que desearía haber tenido cuando empecé."
+                <p>"LinkedAI ha revolucionado mi estrategia de contenido. Mis posts ahora tienen 3x más engagement y mi audiencia ha crecido un 150% en solo 2 meses."</p>
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face" alt="Carlos" />
-                </div>
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face" alt="María González" />
                 <div className="author-info">
-                  <div className="author-name">Carlos</div>
+                  <h4>María González</h4>
+                  <span>Marketing Manager en TechCorp</span>
                 </div>
               </div>
             </div>
-            <div className="testimonial">
+            <div className="testimonial-card">
+              <div className="testimonial-stars">
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+              </div>
               <div className="testimonial-content">
-                "LinkedAI es la única herramienta que he encontrado que puede crear contenido viral de LinkedIn consistentemente. 10/10."
+                <p>"La IA entiende perfectamente mi audiencia. El contenido generado es exactamente lo que necesito y me ha ayudado a conseguir 3 clientes nuevos este mes."</p>
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face" alt="Ana" />
-                </div>
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Carlos Ruiz" />
                 <div className="author-info">
-                  <div className="author-name">Ana</div>
+                  <h4>Carlos Ruiz</h4>
+                  <span>CEO de InnovateStart</span>
                 </div>
               </div>
             </div>
-            <div className="testimonial">
+            <div className="testimonial-card">
+              <div className="testimonial-stars">
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+              </div>
               <div className="testimonial-content">
-                "Después de construir una marca personal con más de 1 millón de seguidores, construí LinkedAI para resolver mis propios problemas de escalabilidad."
+                <p>"Ahorro 5 horas semanales en creación de contenido. La calidad es increíble y mis clientes están impresionados con la consistencia de mi marca."</p>
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="David" />
-                </div>
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Ana Martín" />
                 <div className="author-info">
-                  <div className="author-name">David</div>
+                  <h4>Ana Martín</h4>
+                  <span>Consultora de Marketing</span>
                 </div>
               </div>
             </div>
-            <div className="testimonial">
+            <div className="testimonial-card">
+              <div className="testimonial-stars">
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+              </div>
               <div className="testimonial-content">
-                "LinkedAI hace que crear y optimizar contenido de LinkedIn sea mucho más fácil, ahora puedo enfocarme en estrategia y crecimiento."
+                <p>"Mis artículos ahora se posicionan mejor en LinkedIn. El algoritmo los ama y he conseguido 2 colaboraciones importantes gracias al contenido generado."</p>
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face" alt="Brandon" />
-                </div>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="David López" />
                 <div className="author-info">
-                  <div className="author-name">Brandon</div>
+                  <h4>David López</h4>
+                  <span>Freelancer Digital</span>
                 </div>
               </div>
             </div>
-            <div className="testimonial">
+            <div className="testimonial-card">
+              <div className="testimonial-stars">
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+              </div>
               <div className="testimonial-content">
-                "Su generador de contenido con IA es increíble. Me ahorra de necesitar múltiples suscripciones para diferentes herramientas."
+                <p>"El ROI de mi contenido ha aumentado un 200%. LinkedAI es imprescindible para cualquier profesional que quiera destacar en LinkedIn."</p>
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face" alt="Sarah" />
-                </div>
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Laura Sánchez" />
                 <div className="author-info">
-                  <div className="author-name">Sarah</div>
+                  <h4>Laura Sánchez</h4>
+                  <span>Directora de Marketing</span>
                 </div>
               </div>
             </div>
-            <div className="testimonial">
+            <div className="testimonial-card">
+              <div className="testimonial-stars">
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+                <span className="star">★</span>
+              </div>
               <div className="testimonial-content">
-                "Ojalá hubiera encontrado esto antes. Los posts generados por IA son increíbles para LinkedIn. La suscripción más valiosa que tengo."
+                <p>"Genero contenido de calidad profesional en minutos. Es como tener un equipo de copywriters trabajando 24/7 para mi marca personal."</p>
               </div>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=face" alt="James" />
-                </div>
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=face" alt="Roberto García" />
                 <div className="author-info">
-                  <div className="author-name">James</div>
+                  <h4>Roberto García</h4>
+                  <span>Emprendedor Serial</span>
                 </div>
               </div>
             </div>
           </div>
           <div className="testimonials-cta">
-            <button className="btn-primary" onClick={() => document.getElementById('contact').scrollIntoView()}>
-              Crear una cuenta
-            </button>
+            <p>Únete a miles de profesionales que ya están generando impacto</p>
+            <a href="/dashboard/create" className="btn btn-primary">Comenzar Gratis</a>
           </div>
         </div>
       </section>
@@ -655,5 +687,8 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+
 }
 
