@@ -24,8 +24,12 @@ export default function Home() {
       if (response.ok) {
         setSubmitMessage('¡Gracias! Te hemos enviado un email con acceso a la prueba.')
         setEmail('')
+      } else if (response.status === 409) {
+        setSubmitMessage('Este email ya está registrado. ¡Gracias por tu interés!')
+        setEmail('')
       } else {
-        setSubmitMessage('Error al procesar tu solicitud. Inténtalo de nuevo.')
+        const errorData = await response.json()
+        setSubmitMessage(errorData.error || 'Error al procesar tu solicitud. Inténtalo de nuevo.')
       }
     } catch (error) {
       setSubmitMessage('Error de conexión. Inténtalo de nuevo.')
@@ -441,7 +445,7 @@ export default function Home() {
                 Sin compromiso. Cancela cuando quieras. Acceso inmediato.
               </p>
               {submitMessage && (
-                <p className={`submit-message ${submitMessage.includes('Gracias') ? 'success' : 'error'}`}>
+                <p className={`submit-message ${submitMessage.includes('Gracias') || submitMessage.includes('registrado') ? 'success' : 'error'}`}>
                   {submitMessage}
                 </p>
               )}
