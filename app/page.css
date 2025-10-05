@@ -770,7 +770,14 @@ body {
 }
 
 .form-group input {
-  flex: 1;
+  flex: 2; /* Input takes 2/3 of the space */
+}
+
+.form-group button {
+  flex: 1; /* Button takes 1/3 of the space */
+}
+
+.form-group input {
   padding: 0.6rem 1rem; /* Reduced vertical padding from 0.8rem to 0.6rem */
   border: none;
   border-radius: 0.5rem;
