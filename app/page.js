@@ -31,7 +31,7 @@ export default function Home() {
               <span>50,000+ PROFESIONALES YA LO USAN</span>
             </div>
             <h1 className="hero-title">
-              La #1 Herramienta de IA para <span className="highlight">LinkedIn</span>
+              NUEVA PÁGINA - La #1 Herramienta de IA para <span className="highlight">LinkedIn</span>
             </h1>
             <p className="hero-description">
               Tu plataforma todo-en-uno para la creación de contenido en LinkedIn. Tu herramienta completa para crear posts con IA, 
