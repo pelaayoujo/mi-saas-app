@@ -26,9 +26,9 @@ body {
 /* Container principal */
 .container {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem; /* Increased from 2rem to 3rem for more lateral margin */
 }
 
 /* Navigation */
@@ -42,13 +42,14 @@ body {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem; /* Increased from 2rem to 3rem for more lateral margin */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -153,7 +154,7 @@ body {
   position: relative;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   margin-top: -80px;
-  padding-top: 80px;
+  padding-top: 120px; /* Increased from 80px to 120px for more space from navbar */
 }
 
 .hero-background {
@@ -195,9 +196,9 @@ body {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 2rem 2rem 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 3rem 0 3rem; /* Increased from 2rem to 3rem for more lateral margin */
   text-align: center;
 }
 
