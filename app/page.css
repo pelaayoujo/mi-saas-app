@@ -275,8 +275,8 @@ body {
 }
 
 .btn-primary.large {
-  padding: 1.25rem 2.5rem;
-  font-size: 1.2rem;
+  padding: 0.8rem 1.5rem; /* Reduced padding for narrower button */
+  font-size: 1rem; /* Reduced font size */
 }
 
 .btn-secondary {
@@ -759,7 +759,7 @@ body {
 }
 
 .trial-form {
-  max-width: 400px; /* Reduced from 500px to 400px for narrower form */
+  max-width: 350px; /* Further reduced to 350px for narrower form */
   margin: 0 auto;
 }
 
@@ -771,10 +771,10 @@ body {
 
 .form-group input {
   flex: 1;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1rem; /* Reduced padding from 1rem 1.5rem to 0.8rem 1rem */
   border: none;
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.95rem; /* Slightly smaller font */
   background: rgba(255, 255, 255, 0.9);
   color: #1a1a1a;
 }

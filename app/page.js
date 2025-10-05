@@ -414,28 +414,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="cta">
-        <div className="container">
-          <div className="cta-content">
-            <h2>¿Listo para transformar tu LinkedIn?</h2>
-            <p>Únete a miles de profesionales que ya están generando contenido viral con LinkedAI</p>
-            <a href="/dashboard/create" className="btn-primary large">
-              <span>Comenzar Gratis Ahora</span>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Trial Section */}
       <section id="trial" className="trial">
         <div className="container">
           <div className="trial-content">
             <h2>¿Listo para transformar tu LinkedIn?</h2>
-            <p>Apúntate a la prueba de lanzamiento privada de manera gratuita de la herramienta</p>
+            <p>Únete a la prueba de lanzamiento privada gratuita de LinkedAI</p>
             
             <form className="trial-form" onSubmit={handleTrialSubmit}>
               <div className="form-group">
