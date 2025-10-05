@@ -169,7 +169,6 @@ export default function Home() {
           <div className="workflow-steps">
             <div className="workflow-step">
               <div className="step-number">
-                <span className="step-icon">⚙️</span>
                 <span className="step-digit">1</span>
               </div>
               <div className="step-content">
@@ -180,7 +179,6 @@ export default function Home() {
             </div>
             <div className="workflow-step">
               <div className="step-number">
-                <span className="step-icon">✏️</span>
                 <span className="step-digit">2</span>
               </div>
               <div className="step-content">
@@ -191,7 +189,6 @@ export default function Home() {
             </div>
             <div className="workflow-step">
               <div className="step-number">
-                <span className="step-icon">📈</span>
                 <span className="step-digit">3</span>
               </div>
               <div className="step-content">

@@ -923,7 +923,6 @@ body {
   background: linear-gradient(135deg, #0077B5 0%, #4facfe 100%);
   border-radius: 50%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0 auto 2rem;
@@ -946,14 +945,8 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.step-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
 .step-digit {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 800;
   color: var(--text-primary);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -2067,12 +2060,8 @@ body {
     height: 120px;
   }
   
-  .step-icon {
-    font-size: 1.5rem;
-  }
-  
   .step-digit {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   
   .testimonials-grid {
