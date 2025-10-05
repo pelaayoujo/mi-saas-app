@@ -451,19 +451,23 @@ body {
 }
 
 .hero-btn {
-  font-size: 1.2rem;
-  padding: 1rem 2.5rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  padding: 1.2rem 3rem;
+  font-weight: 800;
   transform: scale(1.05);
   background: linear-gradient(135deg, #0077B5 0%, #4facfe 50%, #00f2fe 100%);
   box-shadow: 
-    0 8px 25px rgba(0, 119, 181, 0.4),
-    0 0 20px rgba(79, 172, 254, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(79, 172, 254, 0.3);
+    0 10px 30px rgba(0, 119, 181, 0.5),
+    0 0 40px rgba(79, 172, 254, 0.4),
+    0 0 60px rgba(0, 242, 254, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
 }
 
 .hero-btn::before {
@@ -473,8 +477,31 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.hero-btn::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    #0077B5, #4facfe, #00f2fe, #0077B5, #4facfe, #00f2fe
+  );
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite;
 }
 
 .hero-btn:hover::before {
@@ -482,12 +509,27 @@ body {
 }
 
 .hero-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.15) translateY(-2px);
   box-shadow: 
-    0 12px 35px rgba(0, 119, 181, 0.6),
-    0 0 30px rgba(79, 172, 254, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border-color: rgba(79, 172, 254, 0.5);
+    0 15px 40px rgba(0, 119, 181, 0.7),
+    0 0 50px rgba(79, 172, 254, 0.6),
+    0 0 80px rgba(0, 242, 254, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.hero-btn:active {
+  transform: scale(1.1) translateY(0px);
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .btn-primary {
