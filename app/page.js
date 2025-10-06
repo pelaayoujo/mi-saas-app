@@ -227,7 +227,7 @@ export default function Home() {
               
               <div className="benefits-stats">
                 <div className="stat-item">
-                  <div className="stat-number">+300%</div>
+                  <div className="stat-number">+150%</div>
                   <div className="stat-label">Aumento promedio en engagement</div>
                 </div>
                 <div className="stat-item">
@@ -316,10 +316,10 @@ export default function Home() {
                 <div className="result-card">
                   <div className="result-header">
                     <div className="result-avatar">
-                      <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Usuario" />
+                      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face&auto=format" alt="Usuario" />
                     </div>
                     <div className="result-info">
-                      <h5>María L.</h5>
+                      <h5>Laura M.</h5>
                       <span>Marketing Manager</span>
                   </div>
                 </div>
@@ -332,7 +332,7 @@ export default function Home() {
                       <span className="metric-label">Después:</span>
                       <span className="metric-value high">€40,000/año</span>
                     </div>
-                  </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -359,7 +359,7 @@ export default function Home() {
               </div>
               <p>"LinkedAI ha transformado completamente mi estrategia de contenido. Mis posts ahora tienen 3x más engagement y he conseguido 5 clientes nuevos en solo 2 meses."</p>
               <div className="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face&auto=format" alt="María González" />
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face&auto=format" alt="María González" />
                 <div className="author-info">
                   <h4>María González</h4>
                   <span>Marketing Manager</span>
