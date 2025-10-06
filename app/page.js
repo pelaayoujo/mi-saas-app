@@ -11,7 +11,7 @@ export default function Home() {
   const handleTrialSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     try {
       const response = await fetch('/api/leads', {
         method: 'POST',
@@ -20,7 +20,7 @@ export default function Home() {
         },
         body: JSON.stringify({ email }),
       })
-      
+
       if (response.ok) {
         setSubmitMessage('¡Gracias! Te hemos enviado un email con acceso a la prueba.')
         setEmail('')
@@ -35,7 +35,7 @@ export default function Home() {
       setSubmitMessage('Error de conexión. Inténtalo de nuevo.')
     }
     
-    setIsSubmitting(false)
+      setIsSubmitting(false)
   }
 
   return (
@@ -93,18 +93,18 @@ export default function Home() {
           <div className="hero-pattern"></div>
         </div>
         
-        <div className="hero-content">
-          <div className="hero-badge">
+          <div className="hero-content">
+            <div className="hero-badge">
             <span className="badge-icon">🚀</span>
             <span>+50,000 profesionales ya usan LinkedAI</span>
-          </div>
+            </div>
           
-          <h1 className="hero-title">
+            <h1 className="hero-title">
             La herramienta de IA más potente para
             <span className="gradient-text"> LinkedIn</span>
-          </h1>
+            </h1>
           
-          <p className="hero-description">
+            <p className="hero-description">
             Genera contenido viral, posts optimizados y artículos profesionales en segundos. 
             Conecta con tu audiencia y haz crecer tu presencia en LinkedIn con inteligencia artificial.
           </p>
@@ -116,18 +116,18 @@ export default function Home() {
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
-          </div>
+            </div>
           
-          <div className="hero-stats">
-            <div className="stat">
+            <div className="hero-stats">
+              <div className="stat">
               <div className="stat-number">15K+</div>
               <div className="stat-label">Posts generados</div>
-            </div>
-            <div className="stat">
+              </div>
+              <div className="stat">
               <div className="stat-number">4.9/5</div>
               <div className="stat-label">Valoración</div>
-            </div>
-            <div className="stat">
+              </div>
+              <div className="stat">
               <div className="stat-number">150%</div>
               <div className="stat-label">Más engagement</div>
             </div>
@@ -217,62 +217,122 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Demo Section */}
-      <section id="demo" className="demo">
+      {/* Benefits Section */}
+      <section id="benefits" className="benefits">
         <div className="container">
-          <div className="demo-content">
-            <div className="demo-text">
-              <h2>Ve LinkedAI en acción</h2>
-              <p>Descubre cómo crear contenido profesional en segundos con nuestra demostración interactiva</p>
-              <div className="demo-features">
-                <div className="demo-feature">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M16.667 5L7.5 14.167L3.333 10" stroke="#0077B5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span>Generación instantánea</span>
+          <div className="benefits-content">
+            <div className="benefits-text">
+              <h2>¿Por qué LinkedAI es la herramienta que necesitas?</h2>
+              <p className="benefits-subtitle">Miles de profesionales ya han transformado su LinkedIn con resultados reales</p>
+              
+              <div className="benefits-stats">
+                <div className="stat-item">
+                  <div className="stat-number">+300%</div>
+                  <div className="stat-label">Aumento promedio en engagement</div>
                 </div>
-                <div className="demo-feature">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M16.667 5L7.5 14.167L3.333 10" stroke="#0077B5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span>Optimización automática</span>
+                <div className="stat-item">
+                  <div className="stat-number">2.5h</div>
+                  <div className="stat-label">Tiempo ahorrado por semana</div>
                 </div>
-                <div className="demo-feature">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M16.667 5L7.5 14.167L3.333 10" stroke="#0077B5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span>Resultados profesionales</span>
+                <div className="stat-item">
+                  <div className="stat-number">€2,400</div>
+                  <div className="stat-label">Ingresos extra promedio/mes</div>
                 </div>
               </div>
-              <a href="/dashboard/create" className="btn-primary">
-                Probar Ahora
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
+
+              <div className="benefits-features">
+                <div className="benefit-item">
+                  <div className="benefit-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="#0077B5"/>
+                    </svg>
+                  </div>
+                  <div className="benefit-content">
+                    <h4>Contenido que convierte</h4>
+                    <p>Posts optimizados que generan leads y oportunidades de negocio reales</p>
+                  </div>
+                </div>
+                
+                <div className="benefit-item">
+                  <div className="benefit-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#0077B5"/>
+                    </svg>
+                  </div>
+                  <div className="benefit-content">
+                    <h4>Velocidad profesional</h4>
+                    <p>Crea 30 días de contenido en 30 minutos. Tu tiempo es dinero</p>
+                  </div>
+                </div>
+                
+                <div className="benefit-item">
+                  <div className="benefit-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#0077B5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <div className="benefit-content">
+                    <h4>Resultados garantizados</h4>
+                    <p>Si no aumentas tu engagement en 30 días, te devolvemos el dinero</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="benefits-cta">
+                <a href="#trial" className="btn-primary large">
+                  <span>Quiero estos resultados</span>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+                <p className="cta-disclaimer">Prueba gratuita • Sin compromiso • Resultados en 7 días</p>
+              </div>
             </div>
             
-            <div className="demo-visual">
-              <div className="demo-card">
-                <div className="demo-header">
-                  <div className="demo-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <span className="demo-title">LinkedAI Editor</span>
+            <div className="benefits-visual">
+              <div className="results-showcase">
+                <div className="result-card">
+                  <div className="result-header">
+                    <div className="result-avatar">
+                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Usuario" />
+                    </div>
+                    <div className="result-info">
+                      <h5>Carlos M.</h5>
+                      <span>CEO Startup</span>
+                    </div>
                 </div>
-                <div className="demo-body">
-                  <div className="demo-input">
-                    <label>Tema del post:</label>
-                    <input type="text" placeholder="Inteligencia artificial en el trabajo..." readOnly />
+                  <div className="result-metrics">
+                    <div className="metric">
+                      <span className="metric-label">Antes:</span>
+                      <span className="metric-value low">45 likes</span>
+                </div>
+                    <div className="metric">
+                      <span className="metric-label">Después:</span>
+                      <span className="metric-value high">340 likes</span>
+                </div>
+              </div>
+            </div>
+                
+                <div className="result-card">
+                  <div className="result-header">
+                    <div className="result-avatar">
+                      <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Usuario" />
+                    </div>
+                    <div className="result-info">
+                      <h5>María L.</h5>
+                      <span>Marketing Manager</span>
                   </div>
-                  <div className="demo-output">
-                    <div className="output-line"></div>
-                    <div className="output-line short"></div>
-                    <div className="output-line"></div>
-                    <div className="output-line medium"></div>
-                  </div>
+                </div>
+                  <div className="result-metrics">
+                    <div className="metric">
+                      <span className="metric-label">Antes:</span>
+                      <span className="metric-value low">2 clientes/mes</span>
+                    </div>
+                    <div className="metric">
+                      <span className="metric-label">Después:</span>
+                      <span className="metric-value high">8 clientes/mes</span>
+                    </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -299,7 +359,7 @@ export default function Home() {
               </div>
               <p>"LinkedAI ha transformado completamente mi estrategia de contenido. Mis posts ahora tienen 3x más engagement y he conseguido 5 clientes nuevos en solo 2 meses."</p>
               <div className="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face" alt="María González" />
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face&auto=format" alt="María González" />
                 <div className="author-info">
                   <h4>María González</h4>
                   <span>Marketing Manager</span>
@@ -355,8 +415,8 @@ export default function Home() {
           </div>
           
           <div className="pricing-grid">
-            <div className="pricing-card">
-              <div className="pricing-header">
+          <div className="pricing-card">
+            <div className="pricing-header">
                 <h3>Básico</h3>
                 <p>Perfecto para empezar</p>
               </div>
@@ -379,12 +439,12 @@ export default function Home() {
               <div className="pricing-header">
                 <h3>Profesional</h3>
                 <p>Para profesionales serios</p>
-              </div>
+            </div>
               <div className="pricing-price">
                 <span className="currency">€</span>
                 <span className="amount">20</span>
                 <span className="period">/mes</span>
-              </div>
+            </div>
               <ul className="pricing-features">
                 <li>200 posts generados</li>
                 <li>20 artículos por mes</li>
@@ -393,18 +453,18 @@ export default function Home() {
                 <li>Soporte prioritario</li>
               </ul>
               <a href="/dashboard/create" className="pricing-btn">Empezar</a>
-            </div>
+        </div>
             
             <div className="pricing-card">
               <div className="pricing-header">
                 <h3>Empresarial</h3>
                 <p>Para equipos y empresas</p>
-              </div>
+          </div>
               <div className="pricing-price">
                 <span className="currency">€</span>
                 <span className="amount">30</span>
                 <span className="period">/mes</span>
-              </div>
+            </div>
               <ul className="pricing-features">
                 <li>Posts ilimitados</li>
                 <li>Artículos ilimitados</li>
@@ -432,7 +492,7 @@ export default function Home() {
                   placeholder="Tu email para la prueba gratuita" 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
+                  required 
                 />
                 <button type="submit" className="btn-primary large">
                   <span>Comenzar Prueba Gratis</span>
@@ -479,26 +539,26 @@ export default function Home() {
             </div>
             
             <div className="footer-section">
-              <h4>Producto</h4>
+                <h4>Producto</h4>
               <a href="#features">Características</a>
-              <a href="#pricing">Precios</a>
+                <a href="#pricing">Precios</a>
               <a href="/dashboard">Dashboard</a>
-            </div>
+              </div>
             
             <div className="footer-section">
               <h4>Recursos</h4>
               <a href="#demo">Demo</a>
               <a href="#testimonials">Testimonios</a>
               <a href="#help">Ayuda</a>
-            </div>
+              </div>
             
             <div className="footer-section">
               <h4>Empresa</h4>
               <a href="#about">Sobre nosotros</a>
               <a href="#contact">Contacto</a>
               <a href="#privacy">Privacidad</a>
+              </div>
             </div>
-          </div>
           
           <div className="footer-bottom">
             <p>&copy; 2024 LinkedAI. Todos los derechos reservados.</p>
