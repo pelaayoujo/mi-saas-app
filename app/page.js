@@ -231,12 +231,12 @@ export default function Home() {
                   <div className="stat-label">Aumento promedio en engagement</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">2.5h</div>
+                  <div className="stat-number">4h</div>
                   <div className="stat-label">Tiempo ahorrado por semana</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">€2,400</div>
-                  <div className="stat-label">Ingresos extra promedio/mes</div>
+                  <div className="stat-number">€5,000</div>
+                  <div className="stat-label">Aumento salarial anual promedio</div>
                 </div>
               </div>
 
@@ -249,7 +249,7 @@ export default function Home() {
                   </div>
                   <div className="benefit-content">
                     <h4>Contenido que convierte</h4>
-                    <p>Posts optimizados que generan leads y oportunidades de negocio reales</p>
+                    <p>Posts optimizados que mejoran tu perfil profesional y aumentan tu valor en el mercado</p>
                   </div>
                 </div>
                 
@@ -261,7 +261,7 @@ export default function Home() {
                   </div>
                   <div className="benefit-content">
                     <h4>Velocidad profesional</h4>
-                    <p>Crea 30 días de contenido en 30 minutos. Tu tiempo es dinero</p>
+                    <p>Ahorra 4 horas semanales creando contenido. Tu tiempo es dinero</p>
                   </div>
                 </div>
                 
@@ -326,13 +326,13 @@ export default function Home() {
                   <div className="result-metrics">
                     <div className="metric">
                       <span className="metric-label">Antes:</span>
-                      <span className="metric-value low">2 clientes/mes</span>
+                      <span className="metric-value low">€35,000/año</span>
                     </div>
                     <div className="metric">
                       <span className="metric-label">Después:</span>
-                      <span className="metric-value high">8 clientes/mes</span>
+                      <span className="metric-value high">€40,000/año</span>
                     </div>
-                </div>
+                  </div>
                 </div>
               </div>
             </div>
