@@ -127,8 +127,8 @@ export default function ViewContent() {
 
   return (
     <div className="dashboard">
-      {/* Sidebar */}
-      <div className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+      {/* Sidebar - Solo visible en móvil */}
+      <div className={`sidebar mobile-only ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <div className="sidebar-header">
           <h2>LinkedAI</h2>
           <button 
@@ -176,7 +176,7 @@ export default function ViewContent() {
         />
       )}
 
-      {/* Main Content */}
+      {/* Main Content - Ocupa todo el ancho */}
       <div className="main-content full-width">
         {/* Header */}
         <header className="dashboard-header modern">
@@ -187,6 +187,26 @@ export default function ViewContent() {
             ☰
           </button>
           <div className="header-content">
+            <div className="header-nav">
+              <button 
+                onClick={() => router.push('/dashboard')}
+                className="nav-btn"
+              >
+                📊 Dashboard
+              </button>
+              <button 
+                onClick={() => router.push('/dashboard/create')}
+                className="nav-btn"
+              >
+                ✍️ Crear Artículo
+              </button>
+              <button 
+                onClick={() => router.push('/dashboard/content')}
+                className="nav-btn active"
+              >
+                📄 Mi Contenido
+              </button>
+            </div>
             <div className="header-title">
               <h1>Ver Artículo</h1>
               <p>Visualiza y gestiona tu contenido</p>
@@ -197,6 +217,12 @@ export default function ViewContent() {
                 className="btn-secondary"
               >
                 ← Volver al Contenido
+              </button>
+              <button 
+                onClick={() => signOut()}
+                className="btn-logout"
+              >
+                🚪 Cerrar Sesión
               </button>
             </div>
           </div>
@@ -269,17 +295,30 @@ export default function ViewContent() {
       </div>
 
       <style jsx>{`
+        .sidebar.mobile-only {
+          display: none;
+        }
+
         .main-content.full-width {
           margin-left: 0 !important;
           padding: 0 !important;
-          width: 100% !important;
+          width: 100vw !important;
           max-width: none !important;
+          position: relative !important;
+          left: 0 !important;
+          right: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+          .sidebar.mobile-only {
+            display: block;
+          }
         }
 
         .dashboard-header.modern {
           background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
           border-bottom: 1px solid #e2e8f0;
-          padding: 2rem 4rem;
+          padding: 1.5rem 4rem;
           box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         }
 
@@ -287,8 +326,55 @@ export default function ViewContent() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          max-width: 1200px;
+          max-width: 1400px;
           margin: 0 auto;
+          gap: 2rem;
+        }
+
+        .header-nav {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        .nav-btn {
+          background: none;
+          border: 1px solid #e2e8f0;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          color: #64748b;
+          font-size: 0.9rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+          background: #f8fafc;
+          border-color: #cbd5e1;
+          color: #475569;
+        }
+
+        .nav-btn.active {
+          background: #3b82f6;
+          border-color: #3b82f6;
+          color: white;
+        }
+
+        .btn-logout {
+          background: #ef4444;
+          color: white;
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .btn-logout:hover {
+          background: #dc2626;
         }
 
         .header-title h1 {
@@ -562,6 +648,10 @@ export default function ViewContent() {
         @media (max-width: 768px) {
           .dashboard-header.modern {
             padding: 1.5rem;
+          }
+
+          .header-nav {
+            display: none;
           }
 
           .header-content {
