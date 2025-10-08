@@ -522,30 +522,50 @@ export default function CreateArticle() {
             {currentStep === 3 && (
               <div className="review-screen">
                 <div className="review-header">
-                  <h2>Artículos Generados</h2>
-                  <p>Revisa y edita {formData.resultsCount === 1 ? 'tu artículo' : `tus ${formData.resultsCount} artículos`} antes de publicar</p>
+                  <div className="success-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22,4 12,14.01 9,11.01"></polyline>
+                    </svg>
+                  </div>
+                  <h2>¡Artículo Generado Exitosamente!</h2>
+                  <p>Tu contenido está listo. Revisa, edita o copia directamente para LinkedIn</p>
                 </div>
                 
                 <div className="articles-list">
                   {generatedArticles.map((article, index) => (
-                    <div key={article.id} className="article-card">
-                      <div className="article-header">
-                        <h3>{article.title}</h3>
-                        <div className="article-meta">
-                          <span className="word-count">{article.wordCount} palabras</span>
+                    <div key={article.id} className="article-card modern">
+                      <div className="article-card-header">
+                        <div className="article-status">
+                          <span className="status-badge">✓ Generado</span>
+                          <span className="article-stats">{article.wordCount} palabras</span>
                         </div>
                       </div>
-                      <div className="article-content">
-                        <ReactMarkdown
-                          style={{ 
-                            fontFamily: 'inherit',
-                            lineHeight: '1.6'
-                          }}
-                        >
-                          {article.content}
-                        </ReactMarkdown>
+                      
+                      <div className="article-preview">
+                        <div className="linkedin-mockup">
+                          <div className="linkedin-header">
+                            <div className="linkedin-avatar"></div>
+                            <div className="linkedin-user">
+                              <div className="user-name">Tu Perfil</div>
+                              <div className="user-title">Tu cargo profesional</div>
+                            </div>
+                          </div>
+                          <div className="linkedin-content">
+                            <ReactMarkdown
+                              style={{ 
+                                fontFamily: 'inherit',
+                                lineHeight: '1.5',
+                                fontSize: '14px'
+                              }}
+                            >
+                              {article.content}
+                            </ReactMarkdown>
+                          </div>
+                        </div>
                       </div>
-                      <div className="article-actions">
+                      
+                      <div className="article-actions modern">
                         <button 
                           className="btn-secondary"
                           onClick={() => {
