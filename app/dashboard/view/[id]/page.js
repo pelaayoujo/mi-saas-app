@@ -127,8 +127,8 @@ export default function ViewContent() {
 
   return (
     <div className="dashboard">
-      {/* Sidebar - Solo visible en móvil */}
-      <div className={`sidebar mobile-only ${sidebarOpen ? 'sidebar-open' : ''}`}>
+      {/* Sidebar */}
+      <div className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
         <div className="sidebar-header">
           <h2>LinkedAI</h2>
           <button 
@@ -176,10 +176,10 @@ export default function ViewContent() {
         />
       )}
 
-      {/* Main Content - Ocupa todo el ancho */}
-      <div className="main-content full-width">
+      {/* Main Content */}
+      <div className="main-content">
         {/* Header */}
-        <header className="dashboard-header modern">
+        <header className="dashboard-header">
           <button 
             className="sidebar-toggle mobile"
             onClick={() => setSidebarOpen(true)}
@@ -187,42 +187,13 @@ export default function ViewContent() {
             ☰
           </button>
           <div className="header-content">
-            <div className="header-nav">
-              <button 
-                onClick={() => router.push('/dashboard')}
-                className="nav-btn"
-              >
-                📊 Dashboard
-              </button>
-              <button 
-                onClick={() => router.push('/dashboard/create')}
-                className="nav-btn"
-              >
-                ✍️ Crear Artículo
-              </button>
-              <button 
-                onClick={() => router.push('/dashboard/content')}
-                className="nav-btn active"
-              >
-                📄 Mi Contenido
-              </button>
-            </div>
-            <div className="header-title">
-              <h1>Ver Artículo</h1>
-              <p>Visualiza y gestiona tu contenido</p>
-            </div>
+            <h1>Ver Artículo</h1>
             <div className="header-actions">
               <button 
                 onClick={() => router.push('/dashboard/content')}
                 className="btn-secondary"
               >
                 ← Volver al Contenido
-              </button>
-              <button 
-                onClick={() => signOut()}
-                className="btn-logout"
-              >
-                🚪 Cerrar Sesión
               </button>
             </div>
           </div>
@@ -295,169 +266,45 @@ export default function ViewContent() {
       </div>
 
       <style jsx>{`
-        .sidebar.mobile-only {
-          display: none;
-        }
-
-        .main-content.full-width {
-          margin-left: 0 !important;
-          padding: 0 !important;
-          width: 100vw !important;
-          max-width: none !important;
-          position: relative !important;
-          left: 0 !important;
-          right: 0 !important;
-        }
-
-        @media (max-width: 768px) {
-          .sidebar.mobile-only {
-            display: block;
-          }
-        }
-
-        .dashboard-header.modern {
-          background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-          border-bottom: 1px solid #e2e8f0;
-          padding: 1.5rem 4rem;
-          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          max-width: 1400px;
-          margin: 0 auto;
-          gap: 2rem;
-        }
-
-        .header-nav {
-          display: flex;
-          gap: 0.5rem;
-          align-items: center;
-        }
-
-        .nav-btn {
-          background: none;
-          border: 1px solid #e2e8f0;
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          color: #64748b;
-          font-size: 0.9rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .nav-btn:hover {
-          background: #f8fafc;
-          border-color: #cbd5e1;
-          color: #475569;
-        }
-
-        .nav-btn.active {
-          background: #3b82f6;
-          border-color: #3b82f6;
-          color: white;
-        }
-
-        .btn-logout {
-          background: #ef4444;
-          color: white;
-          border: none;
-          padding: 0.5rem 1rem;
-          border-radius: 8px;
-          font-size: 0.9rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.2s ease;
-        }
-
-        .btn-logout:hover {
-          background: #dc2626;
-        }
-
-        .header-title h1 {
-          font-size: 2rem;
-          font-weight: 700;
-          color: #0f172a;
-          margin: 0;
-          line-height: 1.2;
-        }
-
-        .header-title p {
-          color: #64748b;
-          font-size: 1rem;
-          margin: 0.5rem 0 0 0;
-        }
-
-        .header-actions {
-          display: flex;
-          gap: 1rem;
-          align-items: center;
-        }
-
         .article-view-container {
-          padding: 0;
-          width: 100%;
-          max-width: none;
-          margin: 0;
+          padding: 2rem;
+          max-width: 900px;
+          margin: 0 auto;
         }
 
         .article-view {
           background: white;
-          border-radius: 0;
-          box-shadow: none;
+          border-radius: 12px;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
           overflow: hidden;
-          min-height: calc(100vh - 80px);
-          display: flex;
-          flex-direction: column;
         }
 
         .article-header {
           padding: 3rem 4rem 2rem 4rem;
           border-bottom: 1px solid #e5e7eb;
-          background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .article-header::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 4px;
-          background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
-        }
-
-        .article-meta {
-          max-width: 900px;
-          margin: 0 auto;
+          background: #f8fafc;
         }
 
         .article-title {
-          font-size: 2.5rem;
-          font-weight: 800;
-          color: #0f172a;
+          font-size: 2.2rem;
+          font-weight: 700;
+          color: #111827;
           margin-bottom: 1.5rem;
-          line-height: 1.1;
-          letter-spacing: -0.02em;
+          line-height: 1.2;
         }
 
         .article-info {
           display: flex;
           align-items: center;
           gap: 1.5rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
           flex-wrap: wrap;
         }
 
         .article-date,
         .article-word-count {
-          color: #64748b;
-          font-size: 0.95rem;
+          color: #6b7280;
+          font-size: 0.9rem;
           font-weight: 500;
         }
 
@@ -468,139 +315,70 @@ export default function ViewContent() {
         }
 
         .tag {
-          background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-          color: #475569;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.85rem;
+          background: #e5e7eb;
+          color: #374151;
+          padding: 0.4rem 0.8rem;
+          border-radius: 16px;
+          font-size: 0.8rem;
           font-weight: 500;
-          border: 1px solid #e2e8f0;
         }
 
         .article-body {
-          padding: 4rem;
-          flex: 1;
-          display: flex;
-          justify-content: center;
+          padding: 3rem 4rem;
         }
 
         .article-content {
-          max-width: 800px;
-          width: 100%;
-          line-height: 1.8;
-          color: #334155;
-          font-size: 1.1rem;
+          line-height: 1.7;
+          color: #374151;
+          font-size: 1.05rem;
         }
 
         .article-content h1 {
-          font-size: 2rem;
+          font-size: 1.8rem;
           font-weight: 700;
-          color: #0f172a;
-          margin: 3rem 0 1.5rem 0;
-          line-height: 1.2;
-          letter-spacing: -0.01em;
+          color: #111827;
+          margin: 2.5rem 0 1.5rem 0;
+          line-height: 1.3;
         }
 
         .article-content h2 {
-          font-size: 1.5rem;
+          font-size: 1.4rem;
           font-weight: 600;
-          color: #1e293b;
-          margin: 2.5rem 0 1rem 0;
+          color: #1f2937;
+          margin: 2rem 0 1rem 0;
           line-height: 1.3;
-          position: relative;
-          padding-left: 1rem;
-        }
-
-        .article-content h2::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 4px;
-          height: 60%;
-          background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-          border-radius: 2px;
         }
 
         .article-content h3 {
-          font-size: 1.25rem;
+          font-size: 1.2rem;
           font-weight: 600;
-          color: #1e293b;
-          margin: 2rem 0 0.75rem 0;
+          color: #1f2937;
+          margin: 1.5rem 0 0.75rem 0;
           line-height: 1.3;
         }
 
         .article-content p {
-          margin-bottom: 1.5rem;
-          color: #334155;
-          font-size: 1.1rem;
-          line-height: 1.8;
+          margin-bottom: 1.25rem;
+          color: #374151;
+          line-height: 1.7;
         }
 
         .article-content ul,
         .article-content ol {
-          margin: 1.5rem 0;
-          padding-left: 2rem;
+          margin: 1.25rem 0;
+          padding-left: 1.5rem;
         }
 
         .article-content li {
-          margin-bottom: 0.75rem;
-          color: #334155;
-          line-height: 1.7;
-        }
-
-        .article-content blockquote {
-          border-left: 4px solid #3b82f6;
-          padding: 1.5rem 2rem;
-          margin: 2rem 0;
-          font-style: italic;
-          color: #64748b;
-          background: #f8fafc;
-          border-radius: 0 8px 8px 0;
-          position: relative;
-        }
-
-        .article-content blockquote::before {
-          content: '"';
-          font-size: 4rem;
-          color: #cbd5e1;
-          position: absolute;
-          top: -0.5rem;
-          left: 1rem;
-          line-height: 1;
-        }
-
-        .article-content code {
-          background: #f1f5f9;
-          padding: 0.3rem 0.6rem;
-          border-radius: 6px;
-          font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-          font-size: 0.9em;
-          color: #e11d48;
-          border: 1px solid #e2e8f0;
-        }
-
-        .article-content pre {
-          background: #1e293b;
-          padding: 2rem;
-          border-radius: 12px;
-          overflow-x: auto;
-          margin: 2rem 0;
-          border: 1px solid #334155;
-        }
-
-        .article-content pre code {
-          background: none;
-          border: none;
-          color: #e2e8f0;
-          padding: 0;
+          margin-bottom: 0.5rem;
+          color: #374151;
+          line-height: 1.6;
         }
 
         .article-actions {
-          padding: 3rem 4rem;
+          padding: 2rem 4rem;
           border-top: 1px solid #e5e7eb;
-          background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+          background: #f9fafb;
           display: flex;
           gap: 1rem;
           justify-content: center;
@@ -632,59 +410,19 @@ export default function ViewContent() {
           margin-bottom: 2rem;
         }
 
-        @media (max-width: 1200px) {
-          .dashboard-header.modern {
-            padding: 2rem;
+        @media (max-width: 768px) {
+          .article-view-container {
+            padding: 1rem;
           }
 
           .article-header,
           .article-body,
           .article-actions {
-            padding-left: 2rem;
-            padding-right: 2rem;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .dashboard-header.modern {
-            padding: 1.5rem;
-          }
-
-          .header-nav {
-            display: none;
-          }
-
-          .header-content {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1rem;
-          }
-
-          .header-title h1 {
-            font-size: 1.5rem;
-          }
-
-          .header-actions {
-            width: 100%;
-            justify-content: flex-start;
-          }
-
-          .article-header {
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
-          }
-
-          .article-body {
             padding: 2rem 1.5rem;
-          }
-
-          .article-actions {
-            padding: 2rem 1.5rem;
-            flex-direction: column;
-            align-items: stretch;
           }
 
           .article-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
           }
 
           .article-info {
@@ -693,16 +431,9 @@ export default function ViewContent() {
             gap: 0.75rem;
           }
 
-          .article-content {
-            font-size: 1rem;
-          }
-
-          .article-content h1 {
-            font-size: 1.75rem;
-          }
-
-          .article-content h2 {
-            font-size: 1.35rem;
+          .article-actions {
+            flex-direction: column;
+            align-items: stretch;
           }
         }
       `}</style>
