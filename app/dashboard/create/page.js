@@ -571,23 +571,44 @@ export default function CreateArticle() {
                       <div className="article-actions modern">
                         <button 
                           className="btn-secondary"
-                          onClick={() => {
-                            // Guardar el artículo en localStorage para pasarlo al editor
-                            localStorage.setItem('currentArticle', JSON.stringify({
-                              id: article.id,
-                              title: article.title,
-                              content: article.content,
-                              wordCount: article.wordCount,
-                              metadata: {
-                                topic: formData.topic,
-                                professionalFocus: formData.professionalFocus,
-                                tone: formData.tone,
-                                length: formData.length,
-                                objective: formData.objective
+                          onClick={async () => {
+                            try {
+                              // Guardar artículo en la base de datos primero
+                              const response = await fetch('/api/articles', {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                  title: article.title,
+                                  body: article.content,
+                                  wordCount: article.wordCount,
+                                  metadata: {
+                                    tone: formData.tone,
+                                    length: formData.length,
+                                    keywords: [],
+                                    tags: article.hashtags || [],
+                                    targetAudience: formData.targetAudience || 'profesionales',
+                                    estimatedReadTime: Math.ceil(article.wordCount / 200) || 1
+                                  }
+                                })
+                              })
+
+                              if (response.ok) {
+                                const data = await response.json()
+                                if (data.success) {
+                                  // Redirigir a la página de visualización del artículo guardado
+                                  router.push(`/dashboard/view/${data.article.id}`)
+                                } else {
+                                  alert('Error al guardar el artículo: ' + data.message)
+                                }
+                              } else {
+                                alert('Error al guardar el artículo')
                               }
-                            }))
-                            // Redirigir al editor con el artículo
-                            router.push('/dashboard/editor')
+                            } catch (error) {
+                              console.error('Error guardando artículo:', error)
+                              alert('Error al guardar el artículo')
+                            }
                           }}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
