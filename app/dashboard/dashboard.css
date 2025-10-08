@@ -1613,12 +1613,36 @@ body {
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-badge::before {
+  content: '✓';
+  font-size: 1rem;
 }
 
 .article-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.article-stats .word-count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1;
+}
+
+.article-stats .word-label {
+  font-size: 0.8rem;
   color: var(--gray-500);
-  font-size: 0.9rem;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .article-preview {
@@ -1674,10 +1698,12 @@ body {
 .linkedin-content {
   color: var(--gray-800);
   line-height: 1.6;
+  max-width: none;
+  width: 100%;
 }
 
 .linkedin-content h1 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--gray-900);
   margin-bottom: 1rem;
@@ -1685,7 +1711,7 @@ body {
 }
 
 .linkedin-content h2 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--gray-800);
   margin: 1.5rem 0 0.5rem 0;
@@ -1694,6 +1720,7 @@ body {
 .linkedin-content p {
   margin-bottom: 1rem;
   color: var(--gray-700);
+  font-size: 15px;
 }
 
 .linkedin-content ul {
@@ -1704,6 +1731,31 @@ body {
 .linkedin-content li {
   margin-bottom: 0.5rem;
   color: var(--gray-700);
+  font-size: 15px;
+}
+
+/* Mejorar el mockup de LinkedIn para desktop */
+@media (min-width: 769px) {
+  .linkedin-mockup {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .linkedin-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .linkedin-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .linkedin-content p {
+    font-size: 16px;
+  }
+  
+  .linkedin-content li {
+    font-size: 16px;
+  }
 }
 
 .article-actions.modern {
