@@ -216,54 +216,35 @@ export default function Dashboard() {
             <div className="hero-section">
               <div className="hero-content">
                 <div className="hero-text">
-                  <h1>¡Crea contenido que impacte!</h1>
-                  <p>
-                    Genera artículos profesionales para LinkedIn con IA. 
-                    Ahorra tiempo y crea contenido que genere engagement real.
-                  </p>
-                  <div className="hero-stats">
-                    <div className="hero-stat">
-                      <span className="stat-number">{recentArticles.length}</span>
-                      <span className="stat-label">Artículos creados</span>
-                    </div>
-                    <div className="hero-stat">
-                      <span className="stat-number">15K+</span>
-                      <span className="stat-label">Posts generados</span>
-                    </div>
-                    <div className="hero-stat">
-                      <span className="stat-number">4h</span>
-                      <span className="stat-label">Tiempo ahorrado/semana</span>
-                    </div>
+                  <div className="greeting">
+                    <h1>¡Hola, {session.user.name?.split(' ')[0] || 'Creator'}! 👋</h1>
                   </div>
-                  <div className="hero-actions">
+                  <p className="hero-subtitle">
+                    Genera contenido profesional para LinkedIn que genere impacto real. 
+                    Tus ideas merecen ser escuchadas.
+                  </p>
+                  <div className="hero-cta">
                     <button 
-                      className="btn-primary large"
+                      className="btn-primary large hero-btn"
                       onClick={() => router.push('/dashboard/create')}
                     >
                       <span className="btn-icon">✨</span>
-                      Crear Artículo Ahora
-                    </button>
-                    <button 
-                      className="btn-secondary large"
-                      onClick={() => router.push('/dashboard/content')}
-                    >
-                      <span className="btn-icon">📄</span>
-                      Ver Mis Artículos
+                      Crear Nuevo Artículo
                     </button>
                   </div>
                 </div>
-                <div className="hero-visual">
-                  <div className="floating-card card-1">
-                    <div className="card-icon">📝</div>
-                    <div className="card-text">Genera contenido</div>
+                <div className="hero-stats-mini">
+                  <div className="mini-stat">
+                    <span className="mini-number">{recentArticles.length}</span>
+                    <span className="mini-label">Artículos</span>
                   </div>
-                  <div className="floating-card card-2">
-                    <div className="card-icon">⚡</div>
-                    <div className="card-text">Ahorra tiempo</div>
+                  <div className="mini-stat">
+                    <span className="mini-number">15K+</span>
+                    <span className="mini-label">Posts generados</span>
                   </div>
-                  <div className="floating-card card-3">
-                    <div className="card-icon">🚀</div>
-                    <div className="card-text">Mejora engagement</div>
+                  <div className="mini-stat">
+                    <span className="mini-number">4h</span>
+                    <span className="mini-label">Ahorro semanal</span>
                   </div>
                 </div>
               </div>
@@ -273,29 +254,30 @@ export default function Dashboard() {
               {/* Quick Actions */}
               <div className="quick-actions-section">
                 <div className="section-header">
-                  <h2>Acciones Rápidas</h2>
-                  <p>Gestiona tu contenido de forma eficiente</p>
+                  <h2>Acceso Rápido</h2>
+                  <p>Navega por las funcionalidades principales</p>
                 </div>
                 <div className="quick-actions-grid">
-                  <div className="quick-action-card" onClick={() => router.push('/dashboard/create')}>
-                    <div className="action-icon">✨</div>
-                    <h3>Crear Artículo</h3>
-                    <p>Genera contenido profesional con IA</p>
-                  </div>
-                  <div className="quick-action-card" onClick={() => router.push('/dashboard/content')}>
-                    <div className="action-icon">📄</div>
-                    <h3>Mis Artículos</h3>
-                    <p>Gestiona tu biblioteca de contenido</p>
+                  <div className="quick-action-card primary-action" onClick={() => router.push('/dashboard/content')}>
+                    <div className="action-icon">📚</div>
+                    <h3>Mi Biblioteca</h3>
+                    <p>Todos tus artículos en un solo lugar</p>
+                    <div className="card-badge">{recentArticles.length} artículos</div>
                   </div>
                   <div className="quick-action-card" onClick={() => router.push('/dashboard/schedule')}>
                     <div className="action-icon">📅</div>
                     <h3>Programar</h3>
-                    <p>Organiza tu calendario de publicaciones</p>
+                    <p>Organiza tu calendario editorial</p>
                   </div>
                   <div className="quick-action-card" onClick={() => router.push('/dashboard/tools')}>
                     <div className="action-icon">🔧</div>
                     <h3>Herramientas</h3>
-                    <p>Utilidades para mejorar tu contenido</p>
+                    <p>Optimiza tu contenido</p>
+                  </div>
+                  <div className="quick-action-card" onClick={() => router.push('/dashboard/editor')}>
+                    <div className="action-icon">✏️</div>
+                    <h3>Editor</h3>
+                    <p>Edita y personaliza tus posts</p>
                   </div>
                 </div>
               </div>
@@ -348,36 +330,20 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Insights */}
-              <div className="insights-section">
-                <div className="section-header">
-                  <h2>Insights de Contenido</h2>
-                  <p>Métricas y tendencias para optimizar tu estrategia</p>
+              {/* Tips y Motivación */}
+              <div className="tips-section">
+                <div className="tip-card">
+                  <div className="tip-icon">💡</div>
+                  <div className="tip-content">
+                    <h3>Tip del día</h3>
+                    <p>Publica contenido de forma consistente para aumentar tu visibilidad en LinkedIn. Los mejores días son martes y miércoles entre 9-11 AM.</p>
+                  </div>
                 </div>
-                <div className="insights-grid">
-                  <div className="insight-card">
-                    <div className="insight-icon">📈</div>
-                    <div className="insight-content">
-                      <h3>Engagement Promedio</h3>
-                      <div className="insight-value">+150%</div>
-                      <p>Incremento en interacciones</p>
-                    </div>
-                  </div>
-                  <div className="insight-card">
-                    <div className="insight-icon">⏱️</div>
-                    <div className="insight-content">
-                      <h3>Tiempo de Creación</h3>
-                      <div className="insight-value">15 min</div>
-                      <p>Promedio por artículo</p>
-                    </div>
-                  </div>
-                  <div className="insight-card">
-                    <div className="insight-icon">🎯</div>
-                    <div className="insight-content">
-                      <h3>Calidad del Contenido</h3>
-                      <div className="insight-value">95%</div>
-                      <p>Optimización automática</p>
-                    </div>
+                <div className="tip-card success">
+                  <div className="tip-icon">🎯</div>
+                  <div className="tip-content">
+                    <h3>Tu progreso</h3>
+                    <p>¡Vas por buen camino! Usuarios como tú han aumentado su engagement un 150% usando LinkedAI de forma constante.</p>
                   </div>
                 </div>
               </div>
