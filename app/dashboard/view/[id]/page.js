@@ -187,7 +187,7 @@ export default function ViewContent() {
             ☰
           </button>
           <div className="header-content">
-            <h1>Ver Artículo</h1>
+            <h1 className="page-title">Ver Artículo</h1>
             <div className="header-actions">
               <button 
                 onClick={() => router.push('/dashboard/content')}
@@ -266,10 +266,33 @@ export default function ViewContent() {
       </div>
 
       <style jsx>{`
+        .main-content {
+          margin-left: 280px !important;
+          padding: 1rem !important;
+        }
+
+        .page-title {
+          font-size: 1.5rem !important;
+          font-weight: 600 !important;
+          color: #374151 !important;
+          margin: 0 !important;
+        }
+
+        @media (max-width: 768px) {
+          .main-content {
+            margin-left: 0 !important;
+            padding: 1rem !important;
+          }
+          
+          .page-title {
+            font-size: 1.25rem !important;
+          }
+        }
+
         .article-view-container {
-          padding: 2rem;
-          max-width: 900px;
-          margin: 0 auto;
+          padding: 1rem;
+          max-width: 100%;
+          margin: 0;
         }
 
         .article-view {
@@ -277,19 +300,20 @@ export default function ViewContent() {
           border-radius: 12px;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
           overflow: hidden;
+          width: 100%;
         }
 
         .article-header {
-          padding: 3rem 4rem 2rem 4rem;
+          padding: 2rem 3rem 1.5rem 3rem;
           border-bottom: 1px solid #e5e7eb;
           background: #f8fafc;
         }
 
         .article-title {
-          font-size: 2.2rem;
+          font-size: 1.8rem;
           font-weight: 700;
           color: #111827;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1rem;
           line-height: 1.2;
         }
 
@@ -324,13 +348,17 @@ export default function ViewContent() {
         }
 
         .article-body {
-          padding: 3rem 4rem;
+          padding: 2rem 3rem;
+          max-width: none;
+          width: 100%;
         }
 
         .article-content {
           line-height: 1.7;
           color: #374151;
           font-size: 1.05rem;
+          max-width: none;
+          width: 100%;
         }
 
         .article-content h1 {
@@ -412,17 +440,17 @@ export default function ViewContent() {
 
         @media (max-width: 768px) {
           .article-view-container {
-            padding: 1rem;
+            padding: 0.5rem;
           }
 
           .article-header,
           .article-body,
           .article-actions {
-            padding: 2rem 1.5rem;
+            padding: 1.5rem 1rem;
           }
 
           .article-title {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
           }
 
           .article-info {
