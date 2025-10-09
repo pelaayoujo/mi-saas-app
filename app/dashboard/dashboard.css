@@ -1249,15 +1249,17 @@ body {
   font-weight: 500;
 }
 
-/* Quick Actions */
+/* Quick Actions - Full Width */
 .quick-actions-section {
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .quick-actions-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
+  width: 100%;
 }
 
 .quick-action-card {
