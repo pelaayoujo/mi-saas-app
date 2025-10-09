@@ -1256,10 +1256,8 @@ body {
 
 .quick-actions-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .quick-action-card {
@@ -1658,6 +1656,18 @@ body {
 
   .quick-action-card {
     padding: 1.5rem;
+  }
+
+  .action-icon {
+    font-size: 2rem;
+  }
+
+  .quick-action-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .quick-action-card p {
+    font-size: 0.85rem;
   }
 
   .articles-grid {
