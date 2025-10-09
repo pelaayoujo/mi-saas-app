@@ -212,71 +212,134 @@ export default function Dashboard() {
         {/* Contenido Principal */}
         <main className="main-content">
           <div className="content-container">
-            {/* Tarjeta de Bienvenida */}
-            <div className="welcome-card">
-              <div className="welcome-content">
-                <h1>Bienvenido, {session.user.name}</h1>
-                <p>Crea contenido profesional que genere impacto en LinkedIn. Comienza escribiendo tu próximo artículo.</p>
-                <button 
-                  className="cta-button"
-                  onClick={() => router.push('/dashboard/create')}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 20h9"></path>
-                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                  </svg>
-                  Crear Artículo
-                </button>
-              </div>
-              <div className="welcome-visual">
-                <div className="welcome-stats">
-                  <div className="stat-item">
-                    <div className="stat-number">{recentArticles.length}</div>
-                    <div className="stat-label">Artículos</div>
+            {/* Hero Section */}
+            <div className="hero-section">
+              <div className="hero-content">
+                <div className="hero-text">
+                  <h1>¡Crea contenido que impacte!</h1>
+                  <p>
+                    Genera artículos profesionales para LinkedIn con IA. 
+                    Ahorra tiempo y crea contenido que genere engagement real.
+                  </p>
+                  <div className="hero-stats">
+                    <div className="hero-stat">
+                      <span className="stat-number">{recentArticles.length}</span>
+                      <span className="stat-label">Artículos creados</span>
+                    </div>
+                    <div className="hero-stat">
+                      <span className="stat-number">15K+</span>
+                      <span className="stat-label">Posts generados</span>
+                    </div>
+                    <div className="hero-stat">
+                      <span className="stat-number">4h</span>
+                      <span className="stat-label">Tiempo ahorrado/semana</span>
+                    </div>
+                  </div>
+                  <div className="hero-actions">
+                    <button 
+                      className="btn-primary large"
+                      onClick={() => router.push('/dashboard/create')}
+                    >
+                      <span className="btn-icon">✨</span>
+                      Crear Artículo Ahora
+                    </button>
+                    <button 
+                      className="btn-secondary large"
+                      onClick={() => router.push('/dashboard/content')}
+                    >
+                      <span className="btn-icon">📄</span>
+                      Ver Mis Artículos
+                    </button>
+                  </div>
+                </div>
+                <div className="hero-visual">
+                  <div className="floating-card card-1">
+                    <div className="card-icon">📝</div>
+                    <div className="card-text">Genera contenido</div>
+                  </div>
+                  <div className="floating-card card-2">
+                    <div className="card-icon">⚡</div>
+                    <div className="card-text">Ahorra tiempo</div>
+                  </div>
+                  <div className="floating-card card-3">
+                    <div className="card-icon">🚀</div>
+                    <div className="card-text">Mejora engagement</div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="content-grid">
+              {/* Quick Actions */}
+              <div className="quick-actions-section">
+                <div className="section-header">
+                  <h2>Acciones Rápidas</h2>
+                  <p>Gestiona tu contenido de forma eficiente</p>
+                </div>
+                <div className="quick-actions-grid">
+                  <div className="quick-action-card" onClick={() => router.push('/dashboard/create')}>
+                    <div className="action-icon">✨</div>
+                    <h3>Crear Artículo</h3>
+                    <p>Genera contenido profesional con IA</p>
+                  </div>
+                  <div className="quick-action-card" onClick={() => router.push('/dashboard/content')}>
+                    <div className="action-icon">📄</div>
+                    <h3>Mis Artículos</h3>
+                    <p>Gestiona tu biblioteca de contenido</p>
+                  </div>
+                  <div className="quick-action-card" onClick={() => router.push('/dashboard/schedule')}>
+                    <div className="action-icon">📅</div>
+                    <h3>Programar</h3>
+                    <p>Organiza tu calendario de publicaciones</p>
+                  </div>
+                  <div className="quick-action-card" onClick={() => router.push('/dashboard/tools')}>
+                    <div className="action-icon">🔧</div>
+                    <h3>Herramientas</h3>
+                    <p>Utilidades para mejorar tu contenido</p>
+                  </div>
+                </div>
+              </div>
+
               {/* Artículos Recientes */}
               <div className="articles-section">
                 <div className="section-header">
                   <h2>Artículos Recientes</h2>
+                  <button 
+                    className="view-all-btn"
+                    onClick={() => router.push('/dashboard/content')}
+                  >
+                    Ver todos →
+                  </button>
                 </div>
 
                 <div className="articles-list">
                   {recentArticles.length === 0 ? (
                     <div className="empty-state">
-                      <div className="empty-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <path d="M12 20h9"></path>
-                          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                        </svg>
-                      </div>
-                      <h3>Aún no tienes artículos</h3>
-                      <p>Crea tu primer artículo para ganar visibilidad en LinkedIn</p>
+                      <div className="empty-icon">📝</div>
+                      <h3>¡Comienza a crear!</h3>
+                      <p>Tu primer artículo te está esperando. Genera contenido que genere impacto en LinkedIn.</p>
                       <button 
-                        className="empty-cta"
+                        className="btn-primary"
                         onClick={() => router.push('/dashboard/create')}
                       >
-                        Crear Artículo
+                        Crear mi primer artículo
                       </button>
                     </div>
                   ) : (
-                    recentArticles.map((article) => {
+                    recentArticles.slice(0, 3).map((article) => {
                       return (
-                        <div key={article.id} className="article-card">
+                        <div key={article.id} className="article-card modern">
                           <div className="article-content">
                             <div className="article-header">
                               <h3 className="article-title">{article.title}</h3>
+                              <div className="article-date">{formatDate(article.createdAt)}</div>
                             </div>
-                            <div className="article-meta">
-                              <span className="article-date">{formatDate(article.createdAt)}</span>
+                            <div className="article-preview">
+                              {article.body ? article.body.substring(0, 100) + '...' : 'Sin contenido'}
                             </div>
                           </div>
                           <div className="article-actions">
-                            <button className="action-btn edit">Editar</button>
+                            <button className="action-btn primary">Editar</button>
                           </div>
                         </div>
                       )
@@ -285,38 +348,37 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Calendario */}
-              <div className="calendar-section">
+              {/* Insights */}
+              <div className="insights-section">
                 <div className="section-header">
-                  <h2>Próximas Publicaciones</h2>
-                  <button className="calendar-btn">Ver Calendario</button>
+                  <h2>Insights de Contenido</h2>
+                  <p>Métricas y tendencias para optimizar tu estrategia</p>
                 </div>
-                <div className="calendar-events">
-                  {calendarEvents.length === 0 ? (
-                    <div className="empty-calendar">
-                      <div className="empty-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                          <line x1="16" y1="2" x2="16" y2="6"></line>
-                          <line x1="8" y1="2" x2="8" y2="6"></line>
-                          <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                      </div>
-                      <p>No hay publicaciones programadas</p>
+                <div className="insights-grid">
+                  <div className="insight-card">
+                    <div className="insight-icon">📈</div>
+                    <div className="insight-content">
+                      <h3>Engagement Promedio</h3>
+                      <div className="insight-value">+150%</div>
+                      <p>Incremento en interacciones</p>
                     </div>
-                  ) : (
-                    calendarEvents.map((event) => (
-                      <div key={event.id} className="calendar-event">
-                        <div className="event-date">
-                          <div className="event-day">{formatCalendarDate(event.date)}</div>
-                          <div className="event-time">{event.time}</div>
-                        </div>
-                        <div className="event-content">
-                          <div className="event-title">{event.title}</div>
-                        </div>
-                      </div>
-                    ))
-                  )}
+                  </div>
+                  <div className="insight-card">
+                    <div className="insight-icon">⏱️</div>
+                    <div className="insight-content">
+                      <h3>Tiempo de Creación</h3>
+                      <div className="insight-value">15 min</div>
+                      <p>Promedio por artículo</p>
+                    </div>
+                  </div>
+                  <div className="insight-card">
+                    <div className="insight-icon">🎯</div>
+                    <div className="insight-content">
+                      <h3>Calidad del Contenido</h3>
+                      <div className="insight-value">95%</div>
+                      <p>Optimización automática</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
