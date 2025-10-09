@@ -1385,6 +1385,7 @@ body {
 /* Articles Section */
 .articles-section.full-width {
   grid-column: 1 / -1;
+  margin-top: 2rem;
 }
 
 .articles-grid {
@@ -1490,7 +1491,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .tip-card {
