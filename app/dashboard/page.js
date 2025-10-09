@@ -283,9 +283,12 @@ export default function Dashboard() {
               </div>
 
               {/* Artículos Recientes */}
-              <div className="articles-section">
+              <div className="articles-section full-width">
                 <div className="section-header">
-                  <h2>Artículos Recientes</h2>
+                  <div>
+                    <h2>Tus Artículos Recientes</h2>
+                    <p>Revisa y edita tu contenido más reciente</p>
+                  </div>
                   <button 
                     className="view-all-btn"
                     onClick={() => router.push('/dashboard/content')}
@@ -294,21 +297,21 @@ export default function Dashboard() {
                   </button>
                 </div>
 
-                <div className="articles-list">
-                  {recentArticles.length === 0 ? (
-                    <div className="empty-state">
-                      <div className="empty-icon">📝</div>
-                      <h3>¡Comienza a crear!</h3>
-                      <p>Tu primer artículo te está esperando. Genera contenido que genere impacto en LinkedIn.</p>
-                      <button 
-                        className="btn-primary"
-                        onClick={() => router.push('/dashboard/create')}
-                      >
-                        Crear mi primer artículo
-                      </button>
-                    </div>
-                  ) : (
-                    recentArticles.slice(0, 3).map((article) => {
+                {recentArticles.length === 0 ? (
+                  <div className="empty-state">
+                    <div className="empty-icon">📝</div>
+                    <h3>¡Comienza a crear!</h3>
+                    <p>Tu primer artículo te está esperando. Genera contenido que genere impacto en LinkedIn.</p>
+                    <button 
+                      className="btn-primary"
+                      onClick={() => router.push('/dashboard/create')}
+                    >
+                      Crear mi primer artículo
+                    </button>
+                  </div>
+                ) : (
+                  <div className="articles-grid">
+                    {recentArticles.slice(0, 3).map((article) => {
                       return (
                         <div key={article.id} className="article-card modern">
                           <div className="article-content">
@@ -317,7 +320,7 @@ export default function Dashboard() {
                               <div className="article-date">{formatDate(article.createdAt)}</div>
                             </div>
                             <div className="article-preview">
-                              {article.body ? article.body.substring(0, 100) + '...' : 'Sin contenido'}
+                              {article.body ? article.body.substring(0, 120) + '...' : 'Sin contenido'}
                             </div>
                           </div>
                           <div className="article-actions">
@@ -325,9 +328,9 @@ export default function Dashboard() {
                           </div>
                         </div>
                       )
-                    })
-                  )}
-                </div>
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* Tips y Motivación */}
