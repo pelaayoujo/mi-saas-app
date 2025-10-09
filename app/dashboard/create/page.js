@@ -537,7 +537,6 @@ export default function CreateArticle() {
                     <div key={article.id} className="article-card modern">
                       <div className="article-card-header">
                         <div className="article-status">
-                          <span className="status-badge">Generado</span>
                           <div className="article-stats">
                             <span className="word-count">{article.wordCount}</span>
                             <span className="word-label">palabras</span>

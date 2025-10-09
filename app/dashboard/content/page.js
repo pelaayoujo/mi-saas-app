@@ -95,15 +95,6 @@ export default function Content() {
     return typeMap[type] || { label: 'Contenido', icon: '📄', color: '#6c757d' }
   }
 
-  const getStatusInfo = (status) => {
-    const statusMap = {
-      published: { label: 'Publicado', color: '#28a745', bg: '#d4edda' },
-      draft: { label: 'Borrador', color: '#ffc107', bg: '#fff3cd' },
-      sent: { label: 'Enviado', color: '#17a2b8', bg: '#d1ecf1' },
-      scheduled: { label: 'Programado', color: '#6f42c1', bg: '#e2e3f1' }
-    }
-    return statusMap[status] || { label: 'Desconocido', color: '#6c757d', bg: '#f8f9fa' }
-  }
 
   const formatDate = (dateString) => {
     const date = new Date(dateString)
@@ -312,7 +303,6 @@ export default function Content() {
               {filteredContent.length > 0 ? (
                 filteredContent.map(item => {
                   const typeInfo = getTypeInfo(item.type)
-                  const statusInfo = getStatusInfo(item.status)
                   return (
                     <div key={item.id} className="content-item">
                       <div className="content-item-header">
@@ -321,14 +311,6 @@ export default function Content() {
                             {typeInfo.icon}
                           </div>
                           <span className="type-label">{typeInfo.label}</span>
-                        </div>
-                        <div className="content-status">
-                          <span className="status-badge" style={{ 
-                            backgroundColor: statusInfo.bg,
-                            color: statusInfo.color
-                          }}>
-                            {statusInfo.label}
-                          </span>
                         </div>
                       </div>
                       <div className="content-item-body">

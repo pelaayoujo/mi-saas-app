@@ -9,7 +9,6 @@ export default function Dashboard() {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [filterStatus, setFilterStatus] = useState('all')
   const [recentArticles, setRecentArticles] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -71,14 +70,6 @@ export default function Dashboard() {
     }
   ]
 
-  const getStatusBadge = (status) => {
-    const badges = {
-      published: { text: 'Publicado', class: 'status-published' },
-      scheduled: { text: 'Programado', class: 'status-scheduled' },
-      draft: { text: 'Borrador', class: 'status-draft' }
-    }
-    return badges[status] || badges.draft
-  }
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('es-ES', {
@@ -243,10 +234,6 @@ export default function Dashboard() {
                     <div className="stat-number">{recentArticles.length}</div>
                     <div className="stat-label">Artículos</div>
                   </div>
-                  <div className="stat-item">
-                    <div className="stat-number">{recentArticles.filter(a => a.status === 'published').length}</div>
-                    <div className="stat-label">Publicados</div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -256,26 +243,6 @@ export default function Dashboard() {
               <div className="articles-section">
                 <div className="section-header">
                   <h2>Artículos Recientes</h2>
-                  <div className="filter-tabs">
-                    <button 
-                      className={`filter-tab ${filterStatus === 'all' ? 'active' : ''}`}
-                      onClick={() => setFilterStatus('all')}
-                    >
-                      Todos
-                    </button>
-                    <button 
-                      className={`filter-tab ${filterStatus === 'published' ? 'active' : ''}`}
-                      onClick={() => setFilterStatus('published')}
-                    >
-                      Publicados
-                    </button>
-                    <button 
-                      className={`filter-tab ${filterStatus === 'draft' ? 'active' : ''}`}
-                      onClick={() => setFilterStatus('draft')}
-                    >
-                      Borradores
-                    </button>
-                  </div>
                 </div>
 
                 <div className="articles-list">
@@ -298,30 +265,18 @@ export default function Dashboard() {
                     </div>
                   ) : (
                     recentArticles.map((article) => {
-                      const statusBadge = getStatusBadge(article.status)
                       return (
                         <div key={article.id} className="article-card">
                           <div className="article-content">
                             <div className="article-header">
                               <h3 className="article-title">{article.title}</h3>
-                              <span className={`status-badge ${statusBadge.class}`}>
-                                {statusBadge.text}
-                              </span>
                             </div>
                             <div className="article-meta">
                               <span className="article-date">{formatDate(article.createdAt)}</span>
-                              {article.scheduledDate && (
-                                <span className="article-scheduled">
-                                  Programado: {formatDate(article.scheduledDate)}
-                                </span>
-                              )}
                             </div>
                           </div>
                           <div className="article-actions">
                             <button className="action-btn edit">Editar</button>
-                            {article.status === 'scheduled' && (
-                              <button className="action-btn schedule">Reprogramar</button>
-                            )}
                           </div>
                         </div>
                       )

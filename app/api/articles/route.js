@@ -101,7 +101,7 @@ export async function POST(request) {
       userId: session.user?.email,
       title,
       body: content,
-      status: 'published',
+      status: 'draft',
       template: template || 'custom',
       metadata: {
         tone: tone || 'cercano',

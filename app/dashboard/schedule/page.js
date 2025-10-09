@@ -24,7 +24,7 @@ export default function SchedulePage() {
       preview: 'En el mundo del marketing digital, las tendencias evolucionan constantemente...',
       wordCount: 650,
       createdAt: '2024-01-15T10:30:00Z',
-      status: 'published',
+      status: 'draft',
       tags: ['marketing', 'digital', 'estrategias']
     },
     {
@@ -34,7 +34,7 @@ export default function SchedulePage() {
       preview: '¿Quieres optimizar tu perfil de LinkedIn? Aquí tienes 5 consejos prácticos...',
       wordCount: 280,
       createdAt: '2024-01-14T15:45:00Z',
-      status: 'published',
+      status: 'draft',
       tags: ['linkedin', 'optimización', 'perfil']
     },
     {
@@ -44,7 +44,7 @@ export default function SchedulePage() {
       preview: 'Experto en marketing digital con más de 8 años de experiencia...',
       wordCount: 420,
       createdAt: '2024-01-13T09:15:00Z',
-      status: 'published',
+      status: 'draft',
       tags: ['biografía', 'profesional', 'marketing']
     },
     {
@@ -504,11 +504,6 @@ export default function SchedulePage() {
                             {getTypeInfo(item.type).icon}
                           </span>
                           <span className="type-label">{getTypeInfo(item.type).label}</span>
-                        </div>
-                        <div className="content-status">
-                          <span className={`status-badge ${item.status}`}>
-                            {item.status === 'published' ? 'Publicado' : 'Borrador'}
-                          </span>
                         </div>
                       </div>
                       <div className="content-option-body">
