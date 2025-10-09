@@ -414,9 +414,8 @@ body {
 
 /* Contenido Grid */
 .content-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
+  display: block;
+  width: 100%;
 }
 
 /* Artículos Recientes */
@@ -1566,9 +1565,6 @@ body {
     margin-top: 1.5rem;
   }
 
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
 
   .form-grid {
     grid-template-columns: 1fr;

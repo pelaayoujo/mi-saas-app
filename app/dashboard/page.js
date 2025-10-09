@@ -236,15 +236,15 @@ export default function Dashboard() {
                 <div className="hero-stats-mini">
                   <div className="mini-stat">
                     <span className="mini-number">{recentArticles.length}</span>
-                    <span className="mini-label">Artículos</span>
+                    <span className="mini-label">Artículos creados</span>
                   </div>
                   <div className="mini-stat">
-                    <span className="mini-number">15K+</span>
-                    <span className="mini-label">Posts generados</span>
+                    <span className="mini-number">{recentArticles.length > 0 ? Math.ceil(recentArticles.length * 4) : 0}h</span>
+                    <span className="mini-label">Tiempo ahorrado</span>
                   </div>
                   <div className="mini-stat">
-                    <span className="mini-number">4h</span>
-                    <span className="mini-label">Ahorro semanal</span>
+                    <span className="mini-number">{recentArticles.length > 0 ? '+' + Math.ceil(recentArticles.length * 150) + '%' : '0%'}</span>
+                    <span className="mini-label">Engagement estimado</span>
                   </div>
                 </div>
               </div>
