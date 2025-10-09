@@ -573,7 +573,7 @@ export default function CreateArticle() {
                           className="btn-secondary"
                           onClick={async () => {
                             try {
-                              // Guardar artículo en la base de datos primero
+                              // Guardar artículo en la base de datos
                               const response = await fetch('/api/articles', {
                                 method: 'POST',
                                 headers: {
@@ -597,8 +597,7 @@ export default function CreateArticle() {
                               if (response.ok) {
                                 const data = await response.json()
                                 if (data.success) {
-                                  // Redirigir a la página de visualización del artículo guardado
-                                  router.push(`/dashboard/view/${data.article.id}`)
+                                  alert('Artículo guardado correctamente')
                                 } else {
                                   alert('Error al guardar el artículo: ' + data.message)
                                 }
@@ -615,7 +614,7 @@ export default function CreateArticle() {
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                           </svg>
-                          Visualizar/Editar
+                          Guardar Artículo
                         </button>
                         <button 
                           className="btn-primary"

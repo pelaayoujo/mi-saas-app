@@ -140,8 +140,8 @@ export default function Content() {
   }
 
   const handleView = (item) => {
-    // Redirigir a la página de visualización
-    router.push(`/dashboard/view/${item.id}`)
+    // Función temporalmente deshabilitada
+    alert('Funcionalidad de visualización temporalmente deshabilitada')
   }
 
   return (
