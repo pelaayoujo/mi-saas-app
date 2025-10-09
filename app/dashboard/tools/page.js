@@ -56,43 +56,29 @@ export default function Tools() {
       path: null
     },
     {
-      id: 'presentations',
-      title: 'Presentaciones para LinkedIn',
-      description: 'Crea presentaciones impactantes para compartir en LinkedIn',
-      icon: '📊',
+      id: 'cv-optimizer',
+      title: 'Optimizador de Currículum',
+      description: 'Optimiza tu CV para destacar en LinkedIn y procesos de selección',
+      icon: '📄',
       features: [
-        'Diapositivas profesionales',
-        'Templates personalizables',
-        'Contenido visual',
-        'Exportación múltiple'
+        'Análisis de palabras clave',
+        'Optimización ATS',
+        'Formato profesional',
+        'Consejos personalizados'
       ],
       status: 'coming-soon',
       path: null
     },
     {
-      id: 'posts',
-      title: 'Posts Optimizados',
-      description: 'Genera posts cortos y efectivos para maximizar engagement',
+      id: 'linkedin-messages',
+      title: 'Mensajes de LinkedIn',
+      description: 'Crea mensajes efectivos para networking en LinkedIn',
       icon: '💬',
       features: [
-        'Posts de 130-300 caracteres',
-        'Hashtags optimizados',
-        'Horarios de publicación',
-        'Análisis de rendimiento'
-      ],
-      status: 'coming-soon',
-      path: null
-    },
-    {
-      id: 'email',
-      title: 'Emails Profesionales',
-      description: 'Crea emails de networking y seguimiento profesional',
-      icon: '📧',
-      features: [
-        'Templates personalizados',
-        'Tono profesional',
-        'Seguimiento automático',
-        'Métricas de apertura'
+        'Mensajes de conexión',
+        'Follow-ups profesionales',
+        'Tono personalizado',
+        'Templates optimizados'
       ],
       status: 'coming-soon',
       path: null
