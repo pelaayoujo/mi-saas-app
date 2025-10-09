@@ -1620,36 +1620,48 @@ body {
   }
 
   .hero-section {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
   }
 
   .hero-content {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     text-align: center;
   }
 
   .greeting h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+
+  .hero-cta {
+    margin-top: 1rem;
+  }
+
+  .hero-btn {
+    width: 100%;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
   }
 
   .hero-stats-mini {
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
     width: 100%;
+    gap: 0.75rem;
   }
 
   .mini-stat {
-    flex: 1;
-    min-width: auto;
+    flex: none;
+    padding: 0.75rem 1rem;
   }
 
   .mini-number {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .mini-label {
@@ -1677,24 +1689,62 @@ body {
     font-size: 0.85rem;
   }
 
+  .articles-section.full-width {
+    margin-top: 1.5rem;
+  }
+
   .articles-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
 
+  .article-card.modern {
+    padding: 1.25rem;
+  }
+
+  .article-card.modern .article-header {
+    padding-bottom: 0.75rem;
+  }
+
+  .article-card.modern .article-title {
+    font-size: 1rem;
+  }
+
+  .article-preview {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .article-card.modern .article-actions {
+    padding-top: 0.75rem;
+  }
+
   .tips-section {
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
   .tip-card {
-    padding: 1.5rem;
+    padding: 1.25rem;
     flex-direction: column;
     text-align: center;
   }
 
   .tip-icon {
-    margin: 0 auto 1rem;
+    margin: 0 auto 0.75rem;
+    font-size: 2rem;
+  }
+
+  .tip-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tip-content p {
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
 
   .dashboard-layout {

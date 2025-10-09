@@ -973,6 +973,37 @@ body {
   .form-group input, .form-group button {
     width: 100%;
   }
+
+  /* Benefits Section Mobile */
+  .benefits {
+    padding: 3rem 0;
+  }
+
+  .benefits-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .benefits-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .benefits-subtitle {
+    font-size: 1rem;
+  }
+
+  .benefits-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .benefits-visual {
+    display: none;
+  }
+
+  .benefits-features {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
