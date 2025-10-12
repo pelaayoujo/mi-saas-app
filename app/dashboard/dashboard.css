@@ -1544,25 +1544,6 @@ body {
 }
 
 /* Biography Page Styles */
-.page-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.page-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 1rem;
-}
-
-.page-header p {
-  font-size: 1.2rem;
-  color: #6b7280;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
 .bio-form-container {
   max-width: 800px;
   margin: 0 auto;
@@ -1642,49 +1623,10 @@ body {
   margin-top: 2rem;
 }
 
-/* Sidebar Logo */
-.sidebar-logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--gray-900);
-  margin: 0;
-  text-decoration: none;
-}
-
-/* Sidebar Close Button */
-.sidebar-close {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: var(--gray-500);
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.sidebar-close:hover {
-  background: var(--gray-100);
-  color: var(--gray-700);
-}
-
 @media (max-width: 768px) {
-  .sidebar-close {
-    display: block;
-  }
-  
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
-  }
-  
-  .page-header h1 {
-    font-size: 2rem;
-  }
-  
-  .page-header p {
-    font-size: 1rem;
   }
   
   .bio-form {
