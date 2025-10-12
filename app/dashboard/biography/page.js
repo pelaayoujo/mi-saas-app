@@ -88,43 +88,41 @@ export default function Biography() {
                 </svg>
                 <span className="nav-label">Herramientas</span>
               </a>
-            </div>
-
-            {/* Herramientas */}
-            <div className="nav-section">
-              <div className="nav-section-title">Herramientas</div>
+              
+              <a href="/dashboard/content" className="nav-item">
+                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14,2 14,8 20,8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10,9 9,9 8,9"></polyline>
+                </svg>
+                <span className="nav-label">Contenido Generado</span>
+              </a>
               
               <a href="/dashboard/create" className="nav-item">
                 <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M12 20h9"></path>
                   <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
                 </svg>
-                <span className="nav-label">Crear Artículo</span>
+                <span className="nav-label">Generador de Artículos</span>
               </a>
-
-              <a href="/dashboard/biography" className="nav-item active">
+              
+              <a href="/dashboard/schedule" className="nav-item">
                 <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
-                <span className="nav-label">Biografía LinkedIn</span>
-              </a>
-
-              <a href="/dashboard/content" className="nav-item">
-                <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
-                  <polyline points="13 2 13 9 20 9"></polyline>
-                </svg>
-                <span className="nav-label">Mi Contenido</span>
+                <span className="nav-label">Programación</span>
               </a>
             </div>
-
-            {/* Configuración */}
-            <div className="nav-section">
-              <div className="nav-section-title">Configuración</div>
-              
+            
+            {/* Sección de Cerrar Sesión */}
+            <div className="nav-section nav-section-bottom">
               <button 
-                className="nav-item"
+                className="nav-item nav-item-logout"
                 onClick={() => signOut({ callbackUrl: '/' })}
               >
                 <svg className="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
