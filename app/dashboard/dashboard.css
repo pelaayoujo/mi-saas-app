@@ -240,6 +240,26 @@ body {
   left: 0;
   overflow-y: auto;
   z-index: 100;
+  /* Ocultar scrollbar cuando no es necesario */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-nav {
@@ -1544,9 +1564,32 @@ body {
 }
 
 /* Biography Page Styles */
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 .bio-form-container {
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .bio-form {
@@ -1988,6 +2031,19 @@ body {
 
   .bio-actions button {
     width: 100%;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .page-header p {
+    font-size: 1rem;
   }
 
   .dashboard-layout {
@@ -2837,9 +2893,43 @@ body {
 }
 
 .sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--gray-200);
+}
+
+.sidebar-close {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--gray-500);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-close:hover {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+@media (max-width: 768px) {
+  .sidebar-close {
+    display: block;
+  }
+}
+
+.sidebar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0;
+  text-decoration: none;
 }
 
 .sidebar-header h3 {
