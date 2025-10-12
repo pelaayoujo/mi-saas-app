@@ -1543,6 +1543,213 @@ body {
   color: #047857;
 }
 
+/* Biography Page Styles */
+.bio-form-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bio-form {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2rem;
+}
+
+.form-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #0a66c2;
+  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.checkbox-group {
+  margin-bottom: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* Biography Result Styles */
+.bio-result-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bio-result-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.bio-result-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.bio-result-header p {
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+.bio-result-content {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.bio-preview {
+  margin-bottom: 2rem;
+}
+
+.bio-preview h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.bio-text {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #1f2937;
+  white-space: pre-wrap;
+}
+
+.bio-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.bio-stats .stat-item {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.bio-tips {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.bio-tips h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #78350f;
+  margin-bottom: 1rem;
+}
+
+.bio-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-tips li {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #92400e;
+  position: relative;
+}
+
+.bio-tips li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #d97706;
+  font-weight: bold;
+}
+
+.bio-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .header-content {
@@ -1745,6 +1952,42 @@ body {
   .tip-content p {
     font-size: 0.875rem;
     line-height: 1.5;
+  }
+
+  .bio-form-container,
+  .bio-result-container {
+    padding: 0 1rem;
+  }
+
+  .bio-form {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .bio-result-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .bio-text {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .bio-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .bio-actions {
+    flex-direction: column;
+  }
+
+  .bio-actions button {
+    width: 100%;
   }
 
   .dashboard-layout {
