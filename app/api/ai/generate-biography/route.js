@@ -99,7 +99,10 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      biography: result,
+      biography: result.biography,
+      tips: result.tips || [],
+      wordCount: result.wordCount,
+      charCount: result.charCount,
       usage: {
         promptTokens: completion.usage.prompt_tokens,
         completionTokens: completion.usage.completion_tokens,

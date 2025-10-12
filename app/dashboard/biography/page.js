@@ -83,7 +83,12 @@ export default function Biography() {
       // Pasar al paso 3 (Resultado) con la biografía generada
       setIsGenerating(false)
       setCurrentStep(3)
-      setGeneratedBio(data.biography)
+      setGeneratedBio({
+        biography: data.biography,
+        tips: data.tips || [],
+        wordCount: data.wordCount,
+        charCount: data.charCount
+      })
     } catch (error) {
       console.error('Error:', error)
       setIsGenerating(false)
@@ -282,222 +287,213 @@ export default function Biography() {
                 <form onSubmit={handleSubmit} className="create-form">
                   <div className="form-grid">
                     {/* Información Personal */}
-                    <div className="form-section">
-                      <h3 className="section-title">
-                        <svg className="section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                          <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        Información Personal
-                      </h3>
-                      
-                      <div className="form-row">
-                        <div className="form-group">
-                          <label htmlFor="fullName">Nombre completo *</label>
-                          <input
-                            type="text"
-                            id="fullName"
-                            name="fullName"
-                            value={formData.fullName}
-                            onChange={handleInputChange}
-                            placeholder="Ej: María García López"
-                            className={errors.fullName ? 'error' : ''}
-                            required
-                          />
-                          {errors.fullName && <span className="error-message">{errors.fullName}</span>}
-                        </div>
-
-                        <div className="form-group">
-                          <label htmlFor="currentRole">Rol/Puesto actual *</label>
-                          <input
-                            type="text"
-                            id="currentRole"
-                            name="currentRole"
-                            value={formData.currentRole}
-                            onChange={handleInputChange}
-                            placeholder="Ej: Directora de Marketing Digital"
-                            className={errors.currentRole ? 'error' : ''}
-                            required
-                          />
-                          {errors.currentRole && <span className="error-message">{errors.currentRole}</span>}
-                        </div>
-                      </div>
-
-                      <div className="form-row">
-                        <div className="form-group">
-                          <label htmlFor="company">Empresa actual</label>
-                          <input
-                            type="text"
-                            id="company"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleInputChange}
-                            placeholder="Ej: Google España"
-                          />
-                        </div>
-
-                        <div className="form-group">
-                          <label htmlFor="yearsExperience">Años de experiencia *</label>
-                          <input
-                            type="number"
-                            id="yearsExperience"
-                            name="yearsExperience"
-                            value={formData.yearsExperience}
-                            onChange={handleInputChange}
-                            placeholder="Ej: 8"
-                            min="0"
-                            max="50"
-                            className={errors.yearsExperience ? 'error' : ''}
-                            required
-                          />
-                          {errors.yearsExperience && <span className="error-message">{errors.yearsExperience}</span>}
-                        </div>
-                      </div>
+                    <div className="form-group">
+                      <label htmlFor="fullName" className="form-label">
+                        Nombre completo *
+                      </label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        placeholder="Ej: María García López"
+                        className={`form-input ${errors.fullName ? 'error' : ''}`}
+                        required
+                      />
+                      {errors.fullName && <span className="error-message">{errors.fullName}</span>}
+                      <p className="form-help">Tu nombre completo para la biografía</p>
                     </div>
 
-                    {/* Formación y Especialización */}
-                    <div className="form-section">
-                      <h3 className="section-title">
-                        <svg className="section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-                        </svg>
-                        Formación y Especialización
-                      </h3>
-                      
-                      <div className="form-group">
-                        <label htmlFor="education">Formación académica</label>
-                        <textarea
-                          id="education"
-                          name="education"
-                          value={formData.education}
-                          onChange={handleInputChange}
-                          placeholder="Ej: MBA en IE Business School, Licenciatura en Administración de Empresas por la Universidad Complutense"
-                          rows="3"
-                        />
-                      </div>
+                    <div className="form-group">
+                      <label htmlFor="currentRole" className="form-label">
+                        Rol/Puesto actual *
+                      </label>
+                      <input
+                        type="text"
+                        id="currentRole"
+                        name="currentRole"
+                        value={formData.currentRole}
+                        onChange={handleInputChange}
+                        placeholder="Ej: Directora de Marketing Digital"
+                        className={`form-input ${errors.currentRole ? 'error' : ''}`}
+                        required
+                      />
+                      {errors.currentRole && <span className="error-message">{errors.currentRole}</span>}
+                      <p className="form-help">Tu posición actual o el rol que quieres destacar</p>
+                    </div>
 
-                      <div className="form-group">
-                        <label htmlFor="specialization">Especialización/Sector</label>
+                    <div className="form-group">
+                      <label htmlFor="company" className="form-label">
+                        Empresa actual
+                      </label>
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                        placeholder="Ej: Google España"
+                        className="form-input"
+                      />
+                      <p className="form-help">Nombre de tu empresa actual (opcional)</p>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="yearsExperience" className="form-label">
+                        Años de experiencia *
+                      </label>
+                      <input
+                        type="number"
+                        id="yearsExperience"
+                        name="yearsExperience"
+                        value={formData.yearsExperience}
+                        onChange={handleInputChange}
+                        placeholder="Ej: 8"
+                        min="0"
+                        max="50"
+                        className={`form-input ${errors.yearsExperience ? 'error' : ''}`}
+                        required
+                      />
+                      {errors.yearsExperience && <span className="error-message">{errors.yearsExperience}</span>}
+                      <p className="form-help">Años totales de experiencia profesional</p>
+                    </div>
+
+                    <div className="form-group full-width">
+                      <label htmlFor="education" className="form-label">
+                        Formación académica
+                      </label>
+                      <textarea
+                        id="education"
+                        name="education"
+                        value={formData.education}
+                        onChange={handleInputChange}
+                        placeholder="Ej: MBA en IE Business School, Licenciatura en Administración de Empresas por la Universidad Complutense"
+                        className="form-textarea"
+                        rows="3"
+                      />
+                      <p className="form-help">Títulos, certificaciones y formación relevante</p>
+                    </div>
+
+                    <div className="form-group full-width">
+                      <label htmlFor="specialization" className="form-label">
+                        Especialización/Sector
+                      </label>
+                      <input
+                        type="text"
+                        id="specialization"
+                        name="specialization"
+                        value={formData.specialization}
+                        onChange={handleInputChange}
+                        placeholder="Ej: Marketing Digital, E-commerce, SaaS"
+                        className="form-input"
+                      />
+                      <p className="form-help">Tu área de especialización o sector de trabajo</p>
+                    </div>
+
+                    <div className="form-group full-width">
+                      <label htmlFor="keySkills" className="form-label">
+                        Habilidades clave
+                      </label>
+                      <textarea
+                        id="keySkills"
+                        name="keySkills"
+                        value={formData.keySkills}
+                        onChange={handleInputChange}
+                        placeholder="Ej: Estrategia digital, SEO/SEM, Analítica web, Growth hacking, Gestión de equipos"
+                        className="form-textarea"
+                        rows="3"
+                      />
+                      <p className="form-help">Separa cada habilidad con comas</p>
+                    </div>
+
+                    <div className="form-group full-width">
+                      <label htmlFor="achievements" className="form-label">
+                        Logros destacados
+                      </label>
+                      <textarea
+                        id="achievements"
+                        name="achievements"
+                        value={formData.achievements}
+                        onChange={handleInputChange}
+                        placeholder="Ej: Aumenté las ventas online en un 300% en 2 años, Lideré equipo de 15 personas, Implementé estrategia que generó 5M€ en ingresos"
+                        className="form-textarea"
+                        rows="4"
+                      />
+                      <p className="form-help">Logros cuantificables y resultados importantes</p>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="tone" className="form-label">
+                        Tono de la biografía
+                      </label>
+                      <select
+                        id="tone"
+                        name="tone"
+                        value={formData.tone}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        <option value="professional">Profesional</option>
+                        <option value="friendly">Cercano</option>
+                        <option value="inspirational">Inspirador</option>
+                        <option value="authoritative">Autoritativo</option>
+                      </select>
+                      <p className="form-help">Estilo de comunicación</p>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="length" className="form-label">
+                        Longitud
+                      </label>
+                      <select
+                        id="length"
+                        name="length"
+                        value={formData.length}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        <option value="short">Corta (1-2 párrafos)</option>
+                        <option value="medium">Media (3-4 párrafos)</option>
+                        <option value="long">Larga (5+ párrafos)</option>
+                      </select>
+                      <p className="form-help">Longitud del texto generado</p>
+                    </div>
+
+                    <div className="form-group full-width">
+                      <label className="checkbox-label">
                         <input
-                          type="text"
-                          id="specialization"
-                          name="specialization"
-                          value={formData.specialization}
+                          type="checkbox"
+                          name="includeCallToAction"
+                          checked={formData.includeCallToAction}
                           onChange={handleInputChange}
-                          placeholder="Ej: Marketing Digital, E-commerce, SaaS"
+                          className="checkbox-input"
                         />
-                      </div>
+                        <span className="checkbox-text">Incluir llamada a la acción</span>
+                      </label>
+                      <p className="form-help">Añadir invitación a contactar o colaborar</p>
                     </div>
 
-                    {/* Experiencia y Logros */}
-                    <div className="form-section">
-                      <h3 className="section-title">
-                        <svg className="section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                          <path d="M4 22h16"></path>
-                          <path d="M10 14.66V17c0 .55.47.98.97 1.21l1 .37c.55.2 1.18.2 1.73 0l1-.37c.5-.23.97-.66.97-1.21v-2.34"></path>
-                          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                        </svg>
-                        Experiencia y Logros
-                      </h3>
-                      
-                      <div className="form-group">
-                        <label htmlFor="keySkills">Habilidades clave (separadas por comas)</label>
-                        <textarea
-                          id="keySkills"
-                          name="keySkills"
-                          value={formData.keySkills}
-                          onChange={handleInputChange}
-                          placeholder="Ej: Estrategia digital, SEO/SEM, Analítica web, Growth hacking, Gestión de equipos"
-                          rows="3"
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="achievements">Logros destacados</label>
-                        <textarea
-                          id="achievements"
-                          name="achievements"
-                          value={formData.achievements}
-                          onChange={handleInputChange}
-                          placeholder="Ej: Aumenté las ventas online en un 300% en 2 años, Lideré equipo de 15 personas, Implementé estrategia que generó 5M€ en ingresos"
-                          rows="4"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Estilo y Formato */}
-                    <div className="form-section">
-                      <h3 className="section-title">
-                        <svg className="section-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M12 20h9"></path>
-                          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                        </svg>
-                        Estilo y Formato
-                      </h3>
-                      
-                      <div className="form-row">
-                        <div className="form-group">
-                          <label htmlFor="tone">Tono de la biografía</label>
-                          <select
-                            id="tone"
-                            name="tone"
-                            value={formData.tone}
-                            onChange={handleInputChange}
-                          >
-                            <option value="professional">Profesional</option>
-                            <option value="friendly">Cercano</option>
-                            <option value="inspirational">Inspirador</option>
-                            <option value="authoritative">Autoritativo</option>
-                          </select>
-                        </div>
-
-                        <div className="form-group">
-                          <label htmlFor="length">Longitud</label>
-                          <select
-                            id="length"
-                            name="length"
-                            value={formData.length}
-                            onChange={handleInputChange}
-                          >
-                            <option value="short">Corta (1-2 párrafos)</option>
-                            <option value="medium">Media (3-4 párrafos)</option>
-                            <option value="long">Larga (5+ párrafos)</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="form-group checkbox-group">
-                        <label className="checkbox-label">
-                          <input
-                            type="checkbox"
-                            name="includeCallToAction"
-                            checked={formData.includeCallToAction}
-                            onChange={handleInputChange}
-                          />
-                          <span>Incluir llamada a la acción</span>
+                    {formData.includeCallToAction && (
+                      <div className="form-group full-width">
+                        <label htmlFor="callToActionType" className="form-label">
+                          Tipo de llamada a la acción
                         </label>
+                        <select
+                          id="callToActionType"
+                          name="callToActionType"
+                          value={formData.callToActionType}
+                          onChange={handleInputChange}
+                          className="form-select"
+                        >
+                          <option value="contact">Invitar a contactar</option>
+                          <option value="collaborate">Proponer colaboración</option>
+                          <option value="consult">Ofrecer consultoría</option>
+                          <option value="network">Ampliar red profesional</option>
+                        </select>
+                        <p className="form-help">Tipo de invitación a incluir</p>
                       </div>
-
-                      {formData.includeCallToAction && (
-                        <div className="form-group">
-                          <label htmlFor="callToActionType">Tipo de llamada a la acción</label>
-                          <select
-                            id="callToActionType"
-                            name="callToActionType"
-                            value={formData.callToActionType}
-                            onChange={handleInputChange}
-                          >
-                            <option value="contact">Invitar a contactar</option>
-                            <option value="collaborate">Proponer colaboración</option>
-                            <option value="consult">Ofrecer consultoría</option>
-                            <option value="network">Ampliar red profesional</option>
-                          </select>
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
 
                   <div className="form-actions">
