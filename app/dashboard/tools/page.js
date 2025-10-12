@@ -52,8 +52,8 @@ export default function Tools() {
         'Logros destacados',
         'Llamada a la acción'
       ],
-      status: 'available',
-      path: '/dashboard/biography'
+      status: 'coming-soon',
+      path: null
     },
     {
       id: 'cv-optimizer',
