@@ -166,8 +166,8 @@ function createBiographyPrompt(data) {
 
 DATOS PERSONALES:
 - Nombre: ${fullName}
-- Rol actual: ${currentRole}${company ? `\n- Empresa: ${company}` : ''}
-- Años de experiencia: ${yearsExperience}${specialization ? `\n- Especialización: ${specialization}` : ''}
+- Situación actual: ${currentRole}${company ? `\n- Empresa/Institución: ${company}` : ''}
+- Años de experiencia/Estudios: ${yearsExperience}${specialization ? `\n- Especialización: ${specialization}` : ''}
 
 ${education ? `FORMACIÓN:\n${education}\n` : ''}
 
@@ -185,15 +185,17 @@ ${includeCallToAction ? `- Incluir llamada a la acción: ${ctaMap[callToActionTy
 
 INSTRUCCIONES ESPECÍFICAS:
 1. Comienza con un gancho potente que capte atención
-2. Destaca logros cuantificables si están disponibles
+2. Destaca logros cuantificables (profesionales o académicos) si están disponibles
 3. Muestra personalidad pero manteniendo profesionalismo
-4. Usa palabras clave relevantes del sector
+4. Usa palabras clave relevantes del sector o área de estudios
 5. Estructura clara con párrafos separados
 6. NO uses emojis ni caracteres especiales raros
 7. Usa SOLO caracteres estándar del español
 8. Evita clichés como "apasionado por" o "dinámico profesional"
 9. Sé específico y concreto, no genérico
 10. La biografía debe fluir naturalmente
+11. Si es estudiante, enfócate en potencial, habilidades y objetivos
+12. Si tiene experiencia, destaca logros y expertise profesional
 
 FORMATO DE RESPUESTA:
 Devuelve SOLO un JSON con esta estructura exacta:

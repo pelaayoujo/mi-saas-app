@@ -50,8 +50,8 @@ export default function Biography() {
     // Validación básica
     const newErrors = {}
     if (!formData.fullName.trim()) newErrors.fullName = 'El nombre completo es requerido'
-    if (!formData.currentRole.trim()) newErrors.currentRole = 'El rol actual es requerido'
-    if (!formData.yearsExperience) newErrors.yearsExperience = 'Los años de experiencia son requeridos'
+    if (!formData.currentRole.trim()) newErrors.currentRole = 'La situación actual es requerida'
+    if (!formData.yearsExperience || formData.yearsExperience < 0) newErrors.yearsExperience = 'Los años de experiencia/estudios son requeridos'
     
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -307,7 +307,7 @@ export default function Biography() {
 
                     <div className="form-group">
                       <label htmlFor="currentRole" className="form-label">
-                        Rol/Puesto actual *
+                        Rol/Puesto actual o Situación *
                       </label>
                       <input
                         type="text"
@@ -315,17 +315,17 @@ export default function Biography() {
                         name="currentRole"
                         value={formData.currentRole}
                         onChange={handleInputChange}
-                        placeholder="Ej: Directora de Marketing Digital"
+                        placeholder="Ej: Estudiante de Marketing, Desarrollador Frontend, Emprendedor, Consultor independiente"
                         className={`form-input ${errors.currentRole ? 'error' : ''}`}
                         required
                       />
                       {errors.currentRole && <span className="error-message">{errors.currentRole}</span>}
-                      <p className="form-help">Tu posición actual o el rol que quieres destacar</p>
+                      <p className="form-help">Tu situación actual: trabajo, estudios, emprendimiento, etc.</p>
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="company" className="form-label">
-                        Empresa actual
+                        Empresa/Institución actual
                       </label>
                       <input
                         type="text"
@@ -333,15 +333,15 @@ export default function Biography() {
                         name="company"
                         value={formData.company}
                         onChange={handleInputChange}
-                        placeholder="Ej: Google España"
+                        placeholder="Ej: Google España, Universidad Complutense, Freelance, Startup propia"
                         className="form-input"
                       />
-                      <p className="form-help">Nombre de tu empresa actual (opcional)</p>
+                      <p className="form-help">Empresa, universidad, institución o situación laboral (opcional)</p>
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="yearsExperience" className="form-label">
-                        Años de experiencia *
+                        Años de experiencia/Estudios *
                       </label>
                       <input
                         type="number"
@@ -349,14 +349,14 @@ export default function Biography() {
                         name="yearsExperience"
                         value={formData.yearsExperience}
                         onChange={handleInputChange}
-                        placeholder="Ej: 8"
+                        placeholder="Ej: 8 (experiencia) o 3 (años de carrera)"
                         min="0"
                         max="50"
                         className={`form-input ${errors.yearsExperience ? 'error' : ''}`}
                         required
                       />
                       {errors.yearsExperience && <span className="error-message">{errors.yearsExperience}</span>}
-                      <p className="form-help">Años totales de experiencia profesional</p>
+                      <p className="form-help">Años de experiencia profesional o años de carrera/estudios</p>
                     </div>
 
                     <div className="form-group full-width">
@@ -368,11 +368,11 @@ export default function Biography() {
                         name="education"
                         value={formData.education}
                         onChange={handleInputChange}
-                        placeholder="Ej: MBA en IE Business School, Licenciatura en Administración de Empresas por la Universidad Complutense"
+                        placeholder="Ej: Estudiante de Grado en Marketing Digital (3º año), MBA en IE Business School, Bootcamp de Desarrollo Web, Certificación en Google Analytics"
                         className="form-textarea"
                         rows="3"
                       />
-                      <p className="form-help">Títulos, certificaciones y formación relevante</p>
+                      <p className="form-help">Carrera actual, títulos, certificaciones y formación relevante</p>
                     </div>
 
                     <div className="form-group full-width">
@@ -400,11 +400,11 @@ export default function Biography() {
                         name="keySkills"
                         value={formData.keySkills}
                         onChange={handleInputChange}
-                        placeholder="Ej: Estrategia digital, SEO/SEM, Analítica web, Growth hacking, Gestión de equipos"
+                        placeholder="Ej: JavaScript, React, Python, Marketing Digital, SEO/SEM, Analítica web, Trabajo en equipo, Comunicación"
                         className="form-textarea"
                         rows="3"
                       />
-                      <p className="form-help">Separa cada habilidad con comas</p>
+                      <p className="form-help">Técnicas, blandas o académicas. Separa cada habilidad con comas</p>
                     </div>
 
                     <div className="form-group full-width">
@@ -416,11 +416,11 @@ export default function Biography() {
                         name="achievements"
                         value={formData.achievements}
                         onChange={handleInputChange}
-                        placeholder="Ej: Aumenté las ventas online en un 300% en 2 años, Lideré equipo de 15 personas, Implementé estrategia que generó 5M€ en ingresos"
+                        placeholder="Ej: Nota media de 9.2 en la carrera, Proyecto final destacado, Prácticas en empresa líder, Voluntariado internacional, Primer puesto en hackathon, Aumenté ventas en 300%"
                         className="form-textarea"
                         rows="4"
                       />
-                      <p className="form-help">Logros cuantificables y resultados importantes</p>
+                      <p className="form-help">Logros académicos, profesionales, proyectos destacados o resultados cuantificables</p>
                     </div>
 
                     <div className="form-group">
