@@ -1543,6 +1543,113 @@ body {
   color: #047857;
 }
 
+/* Biography Page Styles */
+.bio-result {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.bio-preview {
+  margin-bottom: 2rem;
+}
+
+.bio-preview h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.bio-text {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #1f2937;
+  white-space: pre-wrap;
+  font-family: inherit;
+}
+
+.bio-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.bio-stats .stat-item {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.bio-tips {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.bio-tips h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #78350f;
+  margin-bottom: 1rem;
+}
+
+.bio-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-tips li {
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #92400e;
+  position: relative;
+}
+
+.bio-tips li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #d97706;
+  font-weight: bold;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .bio-text {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .bio-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-actions button {
+    width: 100%;
+  }
+}
+
 
 
 /* Responsive Design */
