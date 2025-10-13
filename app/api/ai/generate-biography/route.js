@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import OpenAI from 'openai'
+import { requireContentGeneration, handleAuthError } from '../../../../lib/authMiddleware'
+import { incrementArticleUsage } from '../../../../lib/usageTracker'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -8,14 +10,14 @@ const openai = new OpenAI({
 
 export async function POST(request) {
   try {
-    const session = await getServerSession()
-
-    if (!session) {
-      return NextResponse.json(
-        { success: false, message: 'No autorizado' },
-        { status: 401 }
-      )
+    // Verificar permisos y autenticación
+    const authResult = await requireContentGeneration(request, 'biography')
+    
+    if (!authResult.success) {
+      return handleAuthError(authResult, NextResponse)
     }
+    
+    const user = authResult.user
 
     const body = await request.json()
     const {
@@ -95,6 +97,14 @@ export async function POST(request) {
         wordCount: generatedText.split(' ').length,
         charCount: generatedText.length
       }
+    }
+
+    // Incrementar contador de uso
+    try {
+      await incrementArticleUsage(user.email)
+    } catch (usageError) {
+      console.error('Error tracking usage:', usageError)
+      // No fallar la respuesta por error de tracking
     }
 
     return NextResponse.json({

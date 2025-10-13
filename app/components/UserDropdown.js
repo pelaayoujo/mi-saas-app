@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { getUserPlan } from '../../lib/permissions'
 
 export default function UserDropdown() {
   const { data: session } = useSession()
@@ -116,7 +117,9 @@ export default function UserDropdown() {
                 </div>
               </div>
               <div className="dropdown-plan-badge">
-                <span className="plan-badge">Plan Básico</span>
+                <span className="plan-badge">
+                  {session?.user?.email ? getUserPlan(session.user.email).name : 'Plan Básico'}
+                </span>
               </div>
             </div>
 

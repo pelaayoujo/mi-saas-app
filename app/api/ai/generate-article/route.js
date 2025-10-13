@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { createPrompt, mapFormDataToPrompt } from '../../../../lib/promptGenerator'
+import { requireContentGeneration, handleAuthError } from '../../../../lib/authMiddleware'
+import { incrementArticleUsage } from '../../../../lib/usageTracker'
 
 // Inicializar cliente de OpenAI
 const openai = new OpenAI({
@@ -9,6 +11,14 @@ const openai = new OpenAI({
 
 export async function POST(request) {
   try {
+    // Verificar permisos y autenticación
+    const authResult = await requireContentGeneration(request, 'article')
+    
+    if (!authResult.success) {
+      return handleAuthError(authResult, NextResponse)
+    }
+    
+    const user = authResult.user
     const formData = await request.json()
     
     // Validar datos requeridos
@@ -44,6 +54,14 @@ export async function POST(request) {
     
     // Procesar la respuesta para extraer artículos
     const articles = processGeneratedContent(generatedContent, formData.resultsCount)
+    
+    // Incrementar contador de uso
+    try {
+      await incrementArticleUsage(user.email)
+    } catch (usageError) {
+      console.error('Error tracking usage:', usageError)
+      // No fallar la respuesta por error de tracking
+    }
     
     return NextResponse.json({
       success: true,
