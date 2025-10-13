@@ -29,50 +29,48 @@ export default function Billing() {
 
   const plans = [
     {
-      id: 'free',
-      name: 'Plan Gratuito',
-      price: '€0',
+      id: 'basic',
+      name: 'Plan Básico',
+      price: '€12',
       period: '/mes',
       description: 'Perfecto para empezar',
       features: [
+        '50 posts generados',
         '5 artículos por mes',
-        'Generador de biografías',
-        'Soporte por email',
-        'Plantillas básicas'
+        'Plantillas básicas',
+        'Soporte por email'
       ],
       current: true,
       popular: false
     },
     {
-      id: 'pro',
-      name: 'Plan Pro',
-      price: '€29',
+      id: 'professional',
+      name: 'Plan Profesional',
+      price: '€20',
       period: '/mes',
       description: 'Para profesionales serios',
       features: [
-        'Artículos ilimitados',
-        'Todas las herramientas',
-        'Soporte prioritario',
-        'Plantillas premium',
-        'Analytics avanzados',
-        'Programación de posts'
+        '200 posts generados',
+        '20 artículos por mes',
+        'Todas las plantillas',
+        'Programación de contenido',
+        'Soporte prioritario'
       ],
       current: false,
       popular: true
     },
     {
-      id: 'business',
-      name: 'Plan Business',
-      price: '€99',
+      id: 'enterprise',
+      name: 'Plan Empresarial',
+      price: '€30',
       period: '/mes',
       description: 'Para equipos y empresas',
       features: [
-        'Todo del Plan Pro',
-        'Gestión de equipos',
-        'Aprobación de contenido',
-        'Brand guidelines',
-        'API access',
-        'Soporte dedicado'
+        'Posts ilimitados',
+        'Artículos ilimitados',
+        'Múltiples usuarios',
+        'Analytics avanzados',
+        'Soporte 24/7'
       ],
       current: false,
       popular: false
@@ -222,7 +220,7 @@ export default function Billing() {
                 <h2>Tu Plan Actual</h2>
                 <div className="current-plan-card">
                   <div className="plan-info">
-                    <div className="plan-name">Plan Gratuito</div>
+                    <div className="plan-name">Plan Básico</div>
                     <div className="plan-status">
                       <span className="status-badge active">Activo</span>
                     </div>
@@ -234,6 +232,13 @@ export default function Billing() {
                     </div>
                     <div className="usage-bar">
                       <div className="usage-progress" style={{width: '40%'}}></div>
+                    </div>
+                    <div className="usage-item">
+                      <span className="usage-label">Posts generados:</span>
+                      <span className="usage-value">12 de 50</span>
+                    </div>
+                    <div className="usage-bar">
+                      <div className="usage-progress" style={{width: '24%'}}></div>
                     </div>
                   </div>
                   <div className="plan-actions">

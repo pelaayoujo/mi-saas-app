@@ -116,7 +116,7 @@ export default function UserDropdown() {
                 </div>
               </div>
               <div className="dropdown-plan-badge">
-                <span className="plan-badge">Plan Gratuito</span>
+                <span className="plan-badge">Plan Básico</span>
               </div>
             </div>
 
