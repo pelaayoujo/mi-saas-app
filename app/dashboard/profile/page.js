@@ -21,8 +21,6 @@ export default function Profile() {
     position: '',
     location: '',
     website: '',
-    linkedin: '',
-    twitter: '',
     phone: '',
     timezone: 'Europe/Madrid',
     language: 'es',
@@ -91,8 +89,6 @@ export default function Profile() {
 
   const tabs = [
     { id: 'personal', label: 'Información Personal', icon: '👤' },
-    { id: 'professional', label: 'Información Profesional', icon: '💼' },
-    { id: 'social', label: 'Redes Sociales', icon: '🔗' },
     { id: 'preferences', label: 'Preferencias', icon: '⚙️' }
   ]
 
@@ -258,7 +254,7 @@ export default function Profile() {
                 <form onSubmit={handleSubmit}>
                   {activeTab === 'personal' && (
                     <div className="profile-section">
-                      <h2>Información Personal</h2>
+                      <h2>Información Personal y Profesional</h2>
                       <div className="form-grid">
                         <div className="form-group">
                           <label htmlFor="name" className="form-label">Nombre completo *</label>
@@ -282,6 +278,30 @@ export default function Profile() {
                             onChange={handleInputChange}
                             className="form-input"
                             required
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="company" className="form-label">Empresa</label>
+                          <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            value={formData.company}
+                            onChange={handleInputChange}
+                            className="form-input"
+                            placeholder="Nombre de tu empresa"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="position" className="form-label">Cargo/Posición</label>
+                          <input
+                            type="text"
+                            id="position"
+                            name="position"
+                            value={formData.position}
+                            onChange={handleInputChange}
+                            className="form-input"
+                            placeholder="Tu cargo actual"
                           />
                         </div>
                         <div className="form-group full-width">
@@ -320,38 +340,6 @@ export default function Profile() {
                             placeholder="+34 123 456 789"
                           />
                         </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeTab === 'professional' && (
-                    <div className="profile-section">
-                      <h2>Información Profesional</h2>
-                      <div className="form-grid">
-                        <div className="form-group">
-                          <label htmlFor="company" className="form-label">Empresa</label>
-                          <input
-                            type="text"
-                            id="company"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleInputChange}
-                            className="form-input"
-                            placeholder="Nombre de tu empresa"
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label htmlFor="position" className="form-label">Cargo/Posición</label>
-                          <input
-                            type="text"
-                            id="position"
-                            name="position"
-                            value={formData.position}
-                            onChange={handleInputChange}
-                            className="form-input"
-                            placeholder="Tu cargo actual"
-                          />
-                        </div>
                         <div className="form-group full-width">
                           <label htmlFor="website" className="form-label">Sitio web</label>
                           <input
@@ -368,37 +356,6 @@ export default function Profile() {
                     </div>
                   )}
 
-                  {activeTab === 'social' && (
-                    <div className="profile-section">
-                      <h2>Redes Sociales</h2>
-                      <div className="form-grid">
-                        <div className="form-group full-width">
-                          <label htmlFor="linkedin" className="form-label">LinkedIn</label>
-                          <input
-                            type="url"
-                            id="linkedin"
-                            name="linkedin"
-                            value={formData.linkedin}
-                            onChange={handleInputChange}
-                            className="form-input"
-                            placeholder="https://linkedin.com/in/tu-perfil"
-                          />
-                        </div>
-                        <div className="form-group full-width">
-                          <label htmlFor="twitter" className="form-label">Twitter</label>
-                          <input
-                            type="url"
-                            id="twitter"
-                            name="twitter"
-                            value={formData.twitter}
-                            onChange={handleInputChange}
-                            className="form-input"
-                            placeholder="https://twitter.com/tu-usuario"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
 
                   {activeTab === 'preferences' && (
                     <div className="profile-section">
@@ -492,8 +449,6 @@ export default function Profile() {
                         position: '',
                         location: '',
                         website: '',
-                        linkedin: '',
-                        twitter: '',
                         phone: '',
                         timezone: 'Europe/Madrid',
                         language: 'es',
