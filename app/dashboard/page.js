@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import UserDropdown from '../components/UserDropdown'
 import './dashboard.css'
 
 export default function Dashboard() {
@@ -129,14 +130,7 @@ export default function Dashboard() {
           </div>
 
           <div className="header-right">
-            <div className="user-menu">
-              <div className="user-avatar">
-                {session.user.name?.charAt(0) || 'U'}
-              </div>
-              <div className="user-dropdown">
-                <span className="user-name">{session.user.name}</span>
-              </div>
-            </div>
+            <UserDropdown />
           </div>
         </div>
       </header>
