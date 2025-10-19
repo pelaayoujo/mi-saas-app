@@ -14,7 +14,7 @@ export async function POST(request) {
     const authResult = await requireContentGeneration(request, 'biography')
     
     if (!authResult.success) {
-      return handleAuthError(authResult, NextResponse)
+      return handleAuthError(authResult)
     }
     
     const user = authResult.user
