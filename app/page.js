@@ -235,9 +235,16 @@ export default function Home() {
             <div className="comparison-card chatgpt-result">
               <div className="comparison-header">
                 <div className="comparison-badge chatgpt-badge">ChatGPT Genérico</div>
-                <div className="comparison-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="#6b7280" strokeWidth="2"/>
+                <div className="comparison-icon chatgpt-logo">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="6" fill="url(#chatgptGradient)"/>
+                    <path d="M25.5 14.25C25.2 11.65 23.55 9.4 21.1 8.45C19.55 7.85 17.85 7.75 16.2 8.2C14.85 8.55 13.6 9.25 12.6 10.25C11.6 11.25 10.9 12.5 10.55 13.85C10.05 15.6 10.2 17.45 10.95 19.15C11.7 20.85 12.95 22.25 14.5 23.15C16.05 24.05 17.8 24.4 19.55 24.15C21.05 23.95 22.45 23.35 23.6 22.4C24.75 21.45 25.6 20.25 26 18.95C26.4 17.65 26.3 16.25 25.8 15C25.7 14.7 25.6 14.45 25.5 14.25Z" fill="white"/>
+                    <defs>
+                      <linearGradient id="chatgptGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#74AA9C"/>
+                        <stop offset="100%" stopColor="#00A67E"/>
+                      </linearGradient>
+                    </defs>
                   </svg>
                 </div>
               </div>
