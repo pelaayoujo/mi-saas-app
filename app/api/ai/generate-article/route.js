@@ -34,7 +34,7 @@ export async function POST(request) {
     const mappedData = mapFormDataToPrompt(formData)
     
     // Crear el prompt personalizado
-    const prompt = createPrompt(mappedData)
+    const prompt = await createPrompt(mappedData)
     
     console.log('Prompt generado:', prompt) // Para debugging
     
