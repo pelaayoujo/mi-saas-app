@@ -6,6 +6,9 @@ import { ObjectId } from 'mongodb'
 import { getCurrentMonthUsage } from '../../../../lib/usageTracker'
 import { getUserPlanFromDB } from '../../../../lib/permissions'
 
+// Forzar que esta ruta sea dinámica para evitar problemas de build
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions)

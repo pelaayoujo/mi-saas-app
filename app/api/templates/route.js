@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '../../../lib/mongodb'
 
+// Forzar que esta ruta sea dinámica para evitar problemas de build
+export const dynamic = 'force-dynamic'
+
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url)
-    const category = searchParams.get('category')
-    const publicOnly = searchParams.get('public') !== 'false'
+    // Fix para evitar Dynamic server usage
+    const url = new URL(request.url)
+    const category = url.searchParams.get('category')
+    const publicOnly = url.searchParams.get('public') !== 'false'
 
     const { db } = await connectToDatabase()
     const templatesCollection = db.collection('templates')
