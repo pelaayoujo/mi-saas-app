@@ -83,6 +83,7 @@ export async function POST(request) {
     // Verificar si tenemos modelo fine-tuned configurado
     const finetunedModel = process.env.OPENAI_FINETUNED_MODEL
     console.log('🤖 Modelo fine-tuned configurado:', !!finetunedModel)
+    console.log('🤖 Valor de OPENAI_FINETUNED_MODEL:', finetunedModel || 'NO CONFIGURADO')
     
     let generatedContent
     let response
@@ -111,11 +112,16 @@ export async function POST(request) {
         })
         
         const baseContent = toneResponse.choices[0].message.content
-        console.log('Contenido base del tono:', baseContent)
+        console.log('✅ Contenido base del tono generado:', baseContent)
+        console.log('📊 Respuesta del fine-tune:', {
+          model: finetunedModel,
+          usage: toneResponse.usage,
+          finish_reason: toneResponse.choices[0].finish_reason
+        })
         
         // Paso 2: Usar gpt-4 con el contexto específico
         const contextualPrompt = createContextualPrompt(formData, baseContent)
-        console.log('Prompt contextual:', contextualPrompt)
+        console.log('🔧 Prompt contextual completo:', contextualPrompt.substring(0, 300) + '...')
         
         response = await openai.chat.completions.create({
           model: "gpt-4",
@@ -130,8 +136,11 @@ export async function POST(request) {
         })
         
         generatedContent = response.choices[0].message.content
+        console.log('✅ Artículo final generado con FINE-TUNE:', generatedContent.substring(0, 200) + '...')
+        console.log('🎯 MÉTODO UTILIZADO: Fine-tuned model + GPT-4 contextual')
       } catch (finetuneError) {
-        console.error('Error con modelo fine-tuned, usando fallback:', finetuneError)
+        console.error('❌ Error con modelo fine-tuned, usando fallback:', finetuneError)
+        console.log('🔄 CAUSAS POSIBLES: Modelo no disponible, API error, o configuración incorrecta')
         // Fallback al método tradicional
         const prompt = createPrompt(mappedData)
         console.log('Prompt generado (fallback):', prompt)
@@ -149,10 +158,12 @@ export async function POST(request) {
         })
         
         generatedContent = response.choices[0].message.content
+        console.log('🔄 Artículo generado con MÉTODO TRADICIONAL (fallback)')
+        console.log('🎯 MÉTODO UTILIZADO: GPT-4 estándar (sin fine-tune)')
       }
     } else {
       // Usar método tradicional (fallback)
-      console.log('Usando modelo estándar gpt-4')
+      console.log('⚠️ NO HAY MODELO FINE-TUNED - Usando modelo estándar gpt-4')
       const prompt = createPrompt(mappedData)
       console.log('Prompt generado:', prompt)
       
@@ -169,6 +180,8 @@ export async function POST(request) {
       })
       
       generatedContent = response.choices[0].message.content
+      console.log('🔄 Artículo generado con MÉTODO TRADICIONAL')
+      console.log('🎯 MÉTODO UTILIZADO: GPT-4 estándar (sin fine-tune configurado)')
     }
     
     // Validar que se generó contenido
