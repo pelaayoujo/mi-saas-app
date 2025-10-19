@@ -1284,7 +1284,7 @@ body {
 }
 
 .linkedai-result {
-  border-color: #4A90E2;
+  border-color: #60A5FA;
   position: relative;
 }
 
@@ -1295,7 +1295,7 @@ body {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(135deg, #4A90E2, #4facfe);
+  background: linear-gradient(135deg, #60A5FA, #4facfe);
   border-radius: 16px;
   z-index: -1;
 }
@@ -1322,8 +1322,8 @@ body {
 }
 
 .linkedai-badge {
-  background: rgba(74, 144, 226, 0.1);
-  color: #4A90E2;
+  background: rgba(96, 165, 250, 0.1);
+  color: #60A5FA;
 }
 
 .comparison-icon {
@@ -1426,7 +1426,7 @@ body {
 }
 
 .metric.positive .metric-value {
-  color: #10b981;
+  color: #059669;
 }
 
 .comparison-vs {
@@ -1440,7 +1440,7 @@ body {
 .vs-circle {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #4A90E2 0%, #4facfe 100%);
+  background: linear-gradient(135deg, #60A5FA 0%, #4facfe 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1449,7 +1449,7 @@ body {
   font-weight: 800;
   font-size: 0.9rem;
   letter-spacing: 1px;
-  box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+  box-shadow: 0 8px 20px rgba(96, 165, 250, 0.3);
 }
 
 .comparison-cta {
