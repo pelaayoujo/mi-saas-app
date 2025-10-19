@@ -1295,7 +1295,7 @@ body {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(135deg, #60A5FA, #4facfe);
+  background: linear-gradient(135deg, #93C5FD, #7DD3FC);
   border-radius: 16px;
   z-index: -1;
 }
@@ -1426,7 +1426,12 @@ body {
 }
 
 .metric.positive .metric-value {
-  color: #059669;
+  color: #047857;
+}
+
+.linkedai-result .metric.positive .metric-value {
+  color: #065f46 !important;
+  font-weight: 800;
 }
 
 .comparison-vs {
