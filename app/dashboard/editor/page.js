@@ -367,9 +367,9 @@ export default function Editor() {
                   onChange={(e) => setRegenerationSettings(prev => ({ ...prev, tone: e.target.value }))}
                 >
                   <option value="profesional">Profesional</option>
-                  <option value="casual">Casual</option>
-                  <option value="inspiracional">Inspiracional</option>
                   <option value="educativo">Educativo</option>
+                  <option value="inspiracional">Inspiracional</option>
+                  <option value="disruptivo">Disruptivo</option>
                   <option value="conversacional">Conversacional</option>
                 </select>
               </div>

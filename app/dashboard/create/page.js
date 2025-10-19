@@ -111,9 +111,9 @@ export default function CreateArticle() {
 
   const toneOptions = [
     { value: 'profesional', label: 'Profesional', description: 'Formal y autoritativo' },
-    { value: 'casual', label: 'Casual', description: 'Relajado y accesible' },
-    { value: 'inspiracional', label: 'Inspiracional', description: 'Motivador y positivo' },
     { value: 'educativo', label: 'Educativo', description: 'Informativo y didáctico' },
+    { value: 'inspiracional', label: 'Inspiracional', description: 'Motivador y positivo' },
+    { value: 'disruptivo', label: 'Disruptivo', description: 'Polémico y directo' },
     { value: 'conversacional', label: 'Conversacional', description: 'Cercano y amigable' }
   ]
 

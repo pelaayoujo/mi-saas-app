@@ -17,7 +17,7 @@ export default function Biography() {
     keySkills: '',
     achievements: '',
     specialization: '',
-    tone: 'professional',
+    tone: 'profesional',
     length: 'medium',
     includeCallToAction: true,
     callToActionType: 'contact'
@@ -434,10 +434,11 @@ export default function Biography() {
                         onChange={handleInputChange}
                         className="form-select"
                       >
-                        <option value="professional">Profesional</option>
-                        <option value="friendly">Cercano</option>
-                        <option value="inspirational">Inspirador</option>
-                        <option value="authoritative">Autoritativo</option>
+                        <option value="profesional">Profesional</option>
+                        <option value="educativo">Educativo</option>
+                        <option value="inspiracional">Inspiracional</option>
+                        <option value="disruptivo">Disruptivo</option>
+                        <option value="conversacional">Conversacional</option>
                       </select>
                       <p className="form-help">Estilo de comunicación</p>
                     </div>
