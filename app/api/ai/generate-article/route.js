@@ -37,49 +37,69 @@ export async function POST(request) {
     const finetunedModel = process.env.OPENAI_FINETUNED_MODEL
     let generatedContent
     
+    let response
+    
     if (finetunedModel) {
       // Usar modelo fine-tuned (dos pasos)
       console.log('Usando modelo fine-tuned:', finetunedModel)
       
-      // Paso 1: Obtener ejemplo del tono usando fine-tune
-      const toneExample = createFineTunePrompt(formData.tone)
-      console.log('Prompt para fine-tune:', toneExample)
-      
-      const toneResponse = await openai.chat.completions.create({
-        model: finetunedModel,
-        messages: [
-          {
-            role: "user",
-            content: toneExample
-          }
-        ],
-        max_tokens: 1000,
-        temperature: 0.7
-      })
-      
-      const baseContent = toneResponse.choices[0].message.content
-      console.log('Contenido base del tono:', baseContent)
-      
-      // Paso 2: Usar gpt-4 con el contexto específico
-      const contextualPrompt = createContextualPrompt(formData, baseContent)
-      console.log('Prompt contextual:', contextualPrompt)
-      
-      const contextualResponse = await openai.chat.completions.create({
-        model: "gpt-4",
-        messages: [
-          {
-            role: "user",
-            content: contextualPrompt
-          }
-        ],
-        max_tokens: 2000,
-        temperature: 0.7
-      })
-      
-      generatedContent = contextualResponse.choices[0].message.content
-      
-      // Usar el usage del último call para tracking
-      var response = contextualResponse
+      try {
+        // Paso 1: Obtener ejemplo del tono usando fine-tune
+        const toneExample = createFineTunePrompt(formData.tone)
+        console.log('Prompt para fine-tune:', toneExample)
+        
+        const toneResponse = await openai.chat.completions.create({
+          model: finetunedModel,
+          messages: [
+            {
+              role: "user",
+              content: toneExample
+            }
+          ],
+          max_tokens: 1000,
+          temperature: 0.7
+        })
+        
+        const baseContent = toneResponse.choices[0].message.content
+        console.log('Contenido base del tono:', baseContent)
+        
+        // Paso 2: Usar gpt-4 con el contexto específico
+        const contextualPrompt = createContextualPrompt(formData, baseContent)
+        console.log('Prompt contextual:', contextualPrompt)
+        
+        response = await openai.chat.completions.create({
+          model: "gpt-4",
+          messages: [
+            {
+              role: "user",
+              content: contextualPrompt
+            }
+          ],
+          max_tokens: 2000,
+          temperature: 0.7
+        })
+        
+        generatedContent = response.choices[0].message.content
+      } catch (finetuneError) {
+        console.error('Error con modelo fine-tuned, usando fallback:', finetuneError)
+        // Fallback al método tradicional
+        const prompt = createPrompt(mappedData)
+        console.log('Prompt generado (fallback):', prompt)
+        
+        response = await openai.chat.completions.create({
+          model: "gpt-4",
+          messages: [
+            {
+              role: "user",
+              content: prompt
+            }
+          ],
+          max_tokens: 2000,
+          temperature: 0.7
+        })
+        
+        generatedContent = response.choices[0].message.content
+      }
     } else {
       // Usar método tradicional (fallback)
       console.log('Usando modelo estándar gpt-4')
@@ -101,8 +121,17 @@ export async function POST(request) {
       generatedContent = response.choices[0].message.content
     }
     
+    // Validar que se generó contenido
+    if (!generatedContent || !response.choices || !response.choices[0] || !response.choices[0].message) {
+      console.error('Error: No se generó contenido válido')
+      return NextResponse.json(
+        { error: 'No se pudo generar el contenido' },
+        { status: 500 }
+      )
+    }
+    
     // Procesar la respuesta para extraer artículos
-    const articles = processGeneratedContent(generatedContent, formData.resultsCount)
+    const articles = processGeneratedContent(generatedContent, formData.resultsCount || 1)
     
     // Incrementar contador de uso según el plan del usuario
     try {
@@ -140,24 +169,41 @@ export async function POST(request) {
 
   } catch (error) {
     console.error('Error generando artículo:', error)
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      status: error.status,
+      stack: error.stack
+    })
     
     // Manejar errores específicos de OpenAI
     if (error.code === 'insufficient_quota') {
       return NextResponse.json(
-        { error: 'Límite de API alcanzado' },
+        { error: 'Límite de API alcanzado', details: error.message },
         { status: 429 }
       )
     }
     
     if (error.code === 'invalid_api_key') {
       return NextResponse.json(
-        { error: 'API Key inválida' },
+        { error: 'API Key inválida', details: error.message },
         { status: 401 }
       )
     }
     
+    if (error.code === 'model_not_found') {
+      return NextResponse.json(
+        { error: 'Modelo no encontrado', details: error.message },
+        { status: 400 }
+      )
+    }
+    
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      { 
+        error: 'Error interno del servidor', 
+        details: error.message,
+        code: error.code 
+      },
       { status: 500 }
     )
   }
