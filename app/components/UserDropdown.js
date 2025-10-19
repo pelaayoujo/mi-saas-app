@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { getUserPlan } from '../../lib/permissions'
+// Removed getUserPlan import - it requires MongoDB and can't run in browser
 
 export default function UserDropdown() {
   const { data: session } = useSession()
@@ -118,7 +118,7 @@ export default function UserDropdown() {
               </div>
               <div className="dropdown-plan-badge">
                 <span className="plan-badge">
-                  {session?.user?.email ? getUserPlan(session.user.email).name : 'Plan Básico'}
+                  Plan Activo
                 </span>
               </div>
             </div>
