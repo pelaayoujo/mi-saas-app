@@ -10,34 +10,83 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
+// Validar que tenemos API key
+if (!process.env.OPENAI_API_KEY) {
+  console.error('❌ OPENAI_API_KEY no configurada')
+}
+
 export async function POST(request) {
+  console.log('🚀 Iniciando generación de artículo...')
+  console.log('🔑 API Key configurada:', !!process.env.OPENAI_API_KEY)
+  
+  // Validar API key temprano
+  if (!process.env.OPENAI_API_KEY) {
+    console.error('❌ OPENAI_API_KEY no está configurada')
+    return NextResponse.json(
+      { error: 'Configuración del servidor incompleta' },
+      { status: 500 }
+    )
+  }
+  
   try {
+    console.log('🔐 Verificando autenticación y permisos...')
     // Verificar permisos y autenticación
     const authResult = await requireContentGeneration(request, 'article')
+    console.log('🔐 Resultado autenticación:', authResult.success ? 'OK' : 'FAIL', authResult.error || '')
     
     if (!authResult.success) {
+      console.log('❌ Error de autenticación:', authResult.error)
       return handleAuthError(authResult)
     }
     
     const user = authResult.user
+    console.log('👤 Usuario autenticado:', user.email)
+    
+    console.log('📥 Parseando datos del formulario...')
     const formData = await request.json()
+    console.log('📥 Datos recibidos:', {
+      topic: formData.topic ? 'Presente' : 'FALTANTE',
+      tone: formData.tone ? 'Presente' : 'FALTANTE', 
+      length: formData.length ? 'Presente' : 'FALTANTE',
+      objective: formData.objective ? 'Presente' : 'FALTANTE'
+    })
     
     // Validar datos requeridos
     if (!formData.topic || !formData.tone || !formData.length || !formData.objective) {
+      console.log('❌ Faltan datos requeridos:', {
+        topic: !!formData.topic,
+        tone: !!formData.tone,
+        length: !!formData.length,
+        objective: !!formData.objective
+      })
       return NextResponse.json(
         { error: 'Faltan datos requeridos' },
         { status: 400 }
       )
     }
 
+    console.log('🔄 Mapeando datos del formulario...')
     // Mapear datos del formulario
-    const mappedData = mapFormDataToPrompt(formData)
+    let mappedData
+    try {
+      mappedData = mapFormDataToPrompt(formData)
+      console.log('✅ Datos mapeados correctamente')
+    } catch (mappingError) {
+      console.error('❌ Error mapeando datos:', mappingError)
+      return NextResponse.json(
+        { error: 'Error procesando datos del formulario' },
+        { status: 400 }
+      )
+    }
     
     // Verificar si tenemos modelo fine-tuned configurado
     const finetunedModel = process.env.OPENAI_FINETUNED_MODEL
-    let generatedContent
+    console.log('🤖 Modelo fine-tuned configurado:', !!finetunedModel)
     
+    let generatedContent
     let response
+    
+    console.log('🔄 Iniciando generación con OpenAI...')
     
     if (finetunedModel) {
       // Usar modelo fine-tuned (dos pasos)
