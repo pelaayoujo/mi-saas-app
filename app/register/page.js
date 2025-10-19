@@ -1,8 +1,11 @@
 "use client"
 import { useState, useEffect } from 'react'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import './register.css'
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -138,13 +141,33 @@ export default function RegisterPage() {
       if (response.ok) {
         setMessage({
           type: 'success',
-          text: '¡Cuenta creada exitosamente! Redirigiendo al dashboard...'
+          text: '¡Cuenta creada exitosamente! Iniciando sesión...'
         })
         
-        // Redirigir al dashboard después de 2 segundos
-        setTimeout(() => {
-          window.location.href = '/dashboard'
-        }, 2000)
+        // Iniciar sesión automáticamente después del registro
+        try {
+          const signInResult = await signIn('credentials', {
+            email,
+            password,
+            redirect: false,
+          })
+
+          if (signInResult?.error) {
+            setMessage({
+              type: 'error',
+              text: 'Cuenta creada pero error al iniciar sesión. Por favor, inicia sesión manualmente.'
+            })
+          } else {
+            // Redirigir al dashboard
+            router.push('/dashboard')
+          }
+        } catch (signInError) {
+          console.error('Error al iniciar sesión:', signInError)
+          setMessage({
+            type: 'success',
+            text: '¡Cuenta creada exitosamente! Ahora puedes hacer login.'
+          })
+        }
       } else if (response.status === 423) {
         // Registro no disponible o lista de espera
         if (data.position) {
