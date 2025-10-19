@@ -95,41 +95,45 @@ export default function Home() {
         
           <div className="hero-content">
             <div className="hero-badge">
-            <span className="badge-icon">🚀</span>
-            <span>+50,000 profesionales ya usan LinkedAI</span>
+            <span className="badge-icon">🔥</span>
+            <span>LIMITADO: Solo quedan 127 espacios para el lanzamiento privado</span>
             </div>
           
             <h1 className="hero-title">
-            La herramienta de IA más potente para
-            <span className="gradient-text"> LinkedIn</span>
+            Multiplica tu <span className="gradient-text">ingresos y autoridad</span> en LinkedIn
+            <br />sin escribir una sola palabra
             </h1>
           
             <p className="hero-description">
-            Genera contenido viral, posts optimizados y artículos profesionales en segundos. 
-            Conecta con tu audiencia y haz crecer tu presencia en LinkedIn con inteligencia artificial.
+            <strong>Los profesionales TOP de LinkedIn ganan 47% más</strong> usando IA para su contenido. 
+            LinkedAI genera posts que convierten, clientes que pagan y oportunidades que transforman tu carrera.
           </p>
           
-          <div className="hero-actions">
+            <div className="hero-actions">
             <a href="#trial" className="btn-primary">
-              <span>Probar LinkedAI Ahora</span>
+              <span>🚀 CONSEGUIR ACCESO EXCLUSIVO GRATIS</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
+            <p className="hero-guarantee">
+              ✅ <strong>100% GRATIS</strong> durante el lanzamiento privado
+              <br />⚠️ <strong>Solo 127 espacios disponibles</strong>
+            </p>
             </div>
           
             <div className="hero-stats">
               <div className="stat">
-              <div className="stat-number">15K+</div>
-              <div className="stat-label">Posts generados</div>
+              <div className="stat-number">€5,000+</div>
+              <div className="stat-label">Ingresos extra/mes</div>
               </div>
               <div className="stat">
-              <div className="stat-number">4.9/5</div>
-              <div className="stat-label">Valoración</div>
+              <div className="stat-number">847%</div>
+              <div className="stat-label">Más leads</div>
               </div>
               <div className="stat">
-              <div className="stat-number">150%</div>
-              <div className="stat-label">Más engagement</div>
+              <div className="stat-number">23 minutos</div>
+              <div className="stat-label">Para crear contenido viral</div>
             </div>
           </div>
         </div>
@@ -139,8 +143,8 @@ export default function Home() {
       <section id="features" className="features">
         <div className="container">
           <div className="section-header">
-            <h2>¿Por qué elegir LinkedAI?</h2>
-            <p>La herramienta más avanzada para crear contenido profesional en LinkedIn</p>
+            <h2>La razón por la que los profesionales TOP de LinkedIn ganan 47% más</h2>
+            <p>Mientras tú pierdes horas escribiendo posts que nadie lee, ellos usan LinkedAI para generar contenido que convierte</p>
           </div>
           
           <div className="features-grid">
@@ -151,8 +155,8 @@ export default function Home() {
                   <path d="M24 8L30 18H40L32 26L36 36L24 30L12 36L16 26L8 18H18L24 8Z" fill="#0077B5"/>
                 </svg>
               </div>
-              <h3>Contenido Optimizado</h3>
-              <p>Algoritmos avanzados que crean posts específicamente diseñados para maximizar el engagement en LinkedIn</p>
+              <h3>Posts que generan €10,000+ en leads</h3>
+              <p>Cada post que generas puede convertirse en 3-7 clientes nuevos. Nuestra IA estudia los posts más virales de tu industria y los adapta a tu perfil</p>
             </div>
             
             <div className="feature-card">
@@ -163,8 +167,8 @@ export default function Home() {
                   <path d="M20 20H28M20 24H28M20 28H24" stroke="#0077B5" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
-              <h3>Múltiples Formatos</h3>
-              <p>Posts, artículos, biografías, presentaciones y más. Todo lo que necesitas para destacar en LinkedIn</p>
+              <h3>Tu máquina de hacer dinero en LinkedIn</h3>
+              <p>Desde posts virales hasta artículos que posicionan como experto. Genera contenido profesional 24/7 sin escribir una palabra</p>
             </div>
             
             <div className="feature-card">
@@ -175,8 +179,8 @@ export default function Home() {
                   <circle cx="24" cy="24" r="8" stroke="#0077B5" strokeWidth="2"/>
                 </svg>
               </div>
-              <h3>Análisis Inteligente</h3>
-              <p>IA que analiza tendencias y optimiza tu contenido para alcanzar a la audiencia correcta</p>
+              <h3>La IA que conoce a tu audiencia mejor que tú</h3>
+              <p>Analiza miles de posts exitosos en tiempo real y crea contenido específicamente diseñado para convertir a TU audiencia ideal</p>
             </div>
             
             <div className="feature-card">
@@ -187,8 +191,8 @@ export default function Home() {
                   <path d="M20 20V28M24 20V28M28 20V28" stroke="#0077B5" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
-              <h3>Programación Automática</h3>
-              <p>Planifica y publica tu contenido en los momentos óptimos para maximizar la visibilidad</p>
+              <h3>Publica cuando tu audiencia está más activa (y receptiva)</h3>
+              <p>Nuestra IA estudia los horarios de máxima conversión de tu sector y programa automáticamente para maximizar leads y oportunidades</p>
             </div>
             
             <div className="feature-card">
@@ -294,7 +298,7 @@ export default function Home() {
                 <div className="result-card">
                   <div className="result-header">
                     <div className="result-avatar">
-                      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Usuario" />
+                      <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Usuario" />
                     </div>
                     <div className="result-info">
                       <h5>Carlos M.</h5>
@@ -304,11 +308,11 @@ export default function Home() {
                   <div className="result-metrics">
                     <div className="metric">
                       <span className="metric-label">Antes:</span>
-                      <span className="metric-value low">45 likes</span>
+                      <span className="metric-value low">€2,800/mes</span>
                 </div>
                     <div className="metric">
                       <span className="metric-label">Después:</span>
-                      <span className="metric-value high">340 likes</span>
+                      <span className="metric-value high">€12,400/mes</span>
                 </div>
               </div>
             </div>
@@ -316,7 +320,7 @@ export default function Home() {
                 <div className="result-card">
                   <div className="result-header">
                     <div className="result-avatar">
-                      <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face&auto=format" alt="Usuario" />
+                      <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face&auto=format" alt="Usuario" />
                     </div>
                     <div className="result-info">
                       <h5>Laura M.</h5>
@@ -326,11 +330,11 @@ export default function Home() {
                   <div className="result-metrics">
                     <div className="metric">
                       <span className="metric-label">Antes:</span>
-                      <span className="metric-value low">€35,000/año</span>
+                      <span className="metric-value low">1 cliente/mes</span>
                     </div>
                     <div className="metric">
                       <span className="metric-label">Después:</span>
-                      <span className="metric-value high">€40,000/año</span>
+                      <span className="metric-value high">8 clientes/mes</span>
                     </div>
                 </div>
                 </div>
@@ -344,8 +348,8 @@ export default function Home() {
       <section id="testimonials" className="testimonials">
         <div className="container">
           <div className="section-header">
-            <h2>Lo que dicen nuestros usuarios</h2>
-            <p>Más de 50,000 profesionales confían en LinkedAI para su contenido</p>
+            <h2>Resultados reales de profesionales que multiplicaron sus ingresos</h2>
+            <p>Estos resultados no son promesas, son hechos verificables de usuarios reales</p>
           </div>
           
           <div className="testimonials-grid">
@@ -357,12 +361,12 @@ export default function Home() {
                 <span>★</span>
                 <span>★</span>
               </div>
-              <p>"LinkedAI ha transformado completamente mi estrategia de contenido. Mis posts ahora tienen 3x más engagement y he conseguido 5 clientes nuevos en solo 2 meses."</p>
+              <p>"Gané €23,000 extra el primer mes usando LinkedAI. Un solo post generado me trajo 3 clientes corporativos de €8,000 cada uno. Literalmente cambió mi vida profesional."</p>
               <div className="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face&auto=format" alt="María González" />
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face&auto=format" alt="María González" />
                 <div className="author-info">
                   <h4>María González</h4>
-                  <span>Marketing Manager</span>
+                  <span>CEO Marketing Agency</span>
                 </div>
               </div>
             </div>
@@ -375,12 +379,12 @@ export default function Home() {
                 <span>★</span>
                 <span>★</span>
               </div>
-              <p>"Increíble herramienta. He pasado de 50 likes por post a más de 500. El contenido generado es profesional y muy efectivo para mi sector."</p>
+              <p>"De €45k a €89k anuales en 6 meses. LinkedAI no solo me ayudó a generar contenido viral, me ayudó a posicionarme como el experto de mi sector y multiplicar mis tarifas."</p>
               <div className="testimonial-author">
                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Carlos Ruiz" />
                 <div className="author-info">
                   <h4>Carlos Ruiz</h4>
-                  <span>CEO Tech Startup</span>
+                  <span>Consultor Tech (€89k/año)</span>
                 </div>
               </div>
             </div>
@@ -393,12 +397,12 @@ export default function Home() {
                 <span>★</span>
                 <span>★</span>
               </div>
-              <p>"La calidad del contenido es excepcional. He conseguido 3 clientes nuevos solo con los posts generados por LinkedAI. ROI increíble."</p>
+              <p>"Mi facturación mensual pasó de €3,200 a €12,800 usando LinkedAI. Ahora mis clientes vienen solos y pago €20/mes por una herramienta que me hace ganar €9,600 extra."</p>
               <div className="testimonial-author">
                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Ana Martín" />
                 <div className="author-info">
                   <h4>Ana Martín</h4>
-                  <span>Consultora Freelance</span>
+                  <span>Consultora (€12,800/mes)</span>
                 </div>
               </div>
             </div>
@@ -410,15 +414,15 @@ export default function Home() {
       <section id="pricing" className="pricing">
         <div className="container">
           <div className="section-header">
-            <h2>Planes para cada profesional</h2>
-            <p>Elige el plan que mejor se adapte a tus necesidades</p>
+            <h2>Invierte €12 para ganar €5,000+ más cada mes</h2>
+            <p>El plan más barato cuesta menos que un café diario y te puede generar ingresos que cambien tu vida</p>
           </div>
           
           <div className="pricing-grid">
           <div className="pricing-card">
             <div className="pricing-header">
                 <h3>Básico</h3>
-                <p>Perfecto para empezar</p>
+                <p>Costo: Menos que un café</p>
               </div>
               <div className="pricing-price">
                 <span className="currency">€</span>
@@ -426,19 +430,19 @@ export default function Home() {
                 <span className="period">/mes</span>
               </div>
               <ul className="pricing-features">
-                <li>50 posts generados</li>
-                <li>5 artículos por mes</li>
-                <li>Plantillas básicas</li>
-                <li>Soporte por email</li>
+                <li>50 posts que pueden generar €10,000+ en leads</li>
+                <li>5 artículos que te posicionan como experto</li>
+                <li>Templates probados que convierten</li>
+                <li>ROI típico: 4,166% el primer mes</li>
               </ul>
-              <a href="/dashboard/create" className="pricing-btn">Empezar</a>
+              <a href="/dashboard/create" className="pricing-btn">💰 GANAR DINERO AHORA</a>
             </div>
             
             <div className="pricing-card featured">
-              <div className="pricing-badge">Más Popular</div>
+              <div className="pricing-badge">🔥 EL QUE MÁS DINERO GENERA</div>
               <div className="pricing-header">
                 <h3>Profesional</h3>
-                <p>Para profesionales serios</p>
+                <p>Para quienes quieren resultados serios</p>
             </div>
               <div className="pricing-price">
                 <span className="currency">€</span>
@@ -446,13 +450,13 @@ export default function Home() {
                 <span className="period">/mes</span>
             </div>
               <ul className="pricing-features">
-                <li>200 posts generados</li>
-                <li>20 artículos por mes</li>
-                <li>Todas las plantillas</li>
-                <li>Programación de contenido</li>
-                <li>Soporte prioritario</li>
+                <li>200 posts = potencial €40,000+ en leads</li>
+                <li>20 artículos = autoridad instantánea</li>
+                <li>Todas las plantillas que convierten</li>
+                <li>Timing automático = más conversiones</li>
+                <li>Soporte que responde en minutos</li>
               </ul>
-              <a href="/dashboard/create" className="pricing-btn">Empezar</a>
+              <a href="/dashboard/create" className="pricing-btn">🚀 MULTIPLICAR INGRESOS</a>
         </div>
             
             <div className="pricing-card">
