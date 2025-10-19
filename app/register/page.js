@@ -215,7 +215,7 @@ export default function RegisterPage() {
               onChange={(e) => setNombre(e.target.value)}
               placeholder="Tu nombre completo"
               required
-              disabled={isValidEmail}
+              disabled={!isValidEmail}
             />
           </div>
 
