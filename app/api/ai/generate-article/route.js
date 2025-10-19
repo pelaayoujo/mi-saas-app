@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
-import { createPrompt, mapFormDataToPrompt } from '../../../../lib/promptGenerator'
+import { createPrompt, mapFormDataToPrompt, createFineTunePrompt, createContextualPrompt } from '../../../../lib/promptGenerator'
 import { requireContentGeneration, handleAuthError } from '../../../../lib/authMiddleware'
 import { incrementArticleUsage, incrementArticleAndTokenUsage, canUserGenerateContent } from '../../../../lib/usageTracker'
 import { getUserPlanFromDB } from '../../../../lib/permissions'
@@ -33,25 +33,73 @@ export async function POST(request) {
     // Mapear datos del formulario
     const mappedData = mapFormDataToPrompt(formData)
     
-    // Crear el prompt personalizado
-    const prompt = createPrompt(mappedData)
+    // Verificar si tenemos modelo fine-tuned configurado
+    const finetunedModel = process.env.OPENAI_FINETUNED_MODEL
+    let generatedContent
     
-    console.log('Prompt generado:', prompt) // Para debugging
-    
-    // Llamar a OpenAI
-    const response = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [
-        {
-          role: "user",
-          content: prompt
-        }
-      ],
-      max_tokens: 2000,
-      temperature: 0.7
-    })
-
-    const generatedContent = response.choices[0].message.content
+    if (finetunedModel) {
+      // Usar modelo fine-tuned (dos pasos)
+      console.log('Usando modelo fine-tuned:', finetunedModel)
+      
+      // Paso 1: Obtener ejemplo del tono usando fine-tune
+      const toneExample = createFineTunePrompt(formData.tone)
+      console.log('Prompt para fine-tune:', toneExample)
+      
+      const toneResponse = await openai.chat.completions.create({
+        model: finetunedModel,
+        messages: [
+          {
+            role: "user",
+            content: toneExample
+          }
+        ],
+        max_tokens: 1000,
+        temperature: 0.7
+      })
+      
+      const baseContent = toneResponse.choices[0].message.content
+      console.log('Contenido base del tono:', baseContent)
+      
+      // Paso 2: Usar gpt-4 con el contexto específico
+      const contextualPrompt = createContextualPrompt(formData, baseContent)
+      console.log('Prompt contextual:', contextualPrompt)
+      
+      const contextualResponse = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "user",
+            content: contextualPrompt
+          }
+        ],
+        max_tokens: 2000,
+        temperature: 0.7
+      })
+      
+      generatedContent = contextualResponse.choices[0].message.content
+      
+      // Usar el usage del último call para tracking
+      var response = contextualResponse
+    } else {
+      // Usar método tradicional (fallback)
+      console.log('Usando modelo estándar gpt-4')
+      const prompt = createPrompt(mappedData)
+      console.log('Prompt generado:', prompt)
+      
+      response = await openai.chat.completions.create({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        max_tokens: 2000,
+        temperature: 0.7
+      })
+      
+      generatedContent = response.choices[0].message.content
+    }
     
     // Procesar la respuesta para extraer artículos
     const articles = processGeneratedContent(generatedContent, formData.resultsCount)
