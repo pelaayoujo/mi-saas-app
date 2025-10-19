@@ -116,6 +116,13 @@ export default function CreateArticle() {
         throw new Error('Formato de respuesta inválido del servidor')
       }
 
+      // Log información del fine-tune para debugging
+      console.log('🤖 INFORMACIÓN DEL FINE-TUNE:')
+      console.log('- Método de generación:', data.generationMethod)
+      console.log('- Fine-tune configurado:', data.finetunedModelConfigured)
+      console.log('- Nombre del modelo fine-tune:', data.finetunedModelName)
+      console.log('- Tokens usados:', data.tokensUsed)
+
       // Pasar al paso 3 (Revisión) con los artículos generados
       setIsGenerating(false)
       setCurrentStep(3)

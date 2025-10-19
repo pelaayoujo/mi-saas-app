@@ -87,6 +87,7 @@ export async function POST(request) {
     
     let generatedContent
     let response
+    let generationMethod = 'unknown'
     
     console.log('🔄 Iniciando generación con OpenAI...')
     
@@ -136,6 +137,7 @@ export async function POST(request) {
         })
         
         generatedContent = response.choices[0].message.content
+        generationMethod = 'fine-tuned + gpt-4 contextual'
         console.log('✅ Artículo final generado con FINE-TUNE:', generatedContent.substring(0, 200) + '...')
         console.log('🎯 MÉTODO UTILIZADO: Fine-tuned model + GPT-4 contextual')
       } catch (finetuneError) {
@@ -158,6 +160,7 @@ export async function POST(request) {
         })
         
         generatedContent = response.choices[0].message.content
+        generationMethod = 'gpt-4 fallback (fine-tune error)'
         console.log('🔄 Artículo generado con MÉTODO TRADICIONAL (fallback)')
         console.log('🎯 MÉTODO UTILIZADO: GPT-4 estándar (sin fine-tune)')
       }
@@ -180,6 +183,7 @@ export async function POST(request) {
       })
       
       generatedContent = response.choices[0].message.content
+      generationMethod = 'gpt-4 standard (no fine-tune configured)'
       console.log('🔄 Artículo generado con MÉTODO TRADICIONAL')
       console.log('🎯 MÉTODO UTILIZADO: GPT-4 estándar (sin fine-tune configurado)')
     }
@@ -281,7 +285,10 @@ export async function POST(request) {
         usage: response.usage || {},
         usageInfo: updatedUsageInfo,
         tokensUsed: tokensUsed,
-        userPlan: userPlan?.id || 'unknown'
+        userPlan: userPlan?.id || 'unknown',
+        generationMethod: generationMethod,
+        finetunedModelConfigured: !!finetunedModel,
+        finetunedModelName: finetunedModel || null
       })
     } catch (usageError) {
       console.error('Error tracking usage:', usageError)
@@ -290,7 +297,10 @@ export async function POST(request) {
         success: true,
         articles: articles,
         usage: response.usage || {},
-        error: 'Error tracking usage but content generated'
+        error: 'Error tracking usage but content generated',
+        generationMethod: generationMethod,
+        finetunedModelConfigured: !!finetunedModel,
+        finetunedModelName: finetunedModel || null
       })
     }
 
