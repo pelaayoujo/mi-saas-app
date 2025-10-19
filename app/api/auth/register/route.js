@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import clientPromise from '../../../../lib/mongodb'
 import bcrypt from 'bcryptjs'
 import { sendRegistrationConfirmation } from '../../../../lib/email'
-import { isUserAuthorized, getAssignedPlan } from '../../../../lib/permissions'
+// Removido: import de permissions - ahora se hace directo en MongoDB
 
 export async function POST(request) {
   try {
@@ -35,13 +35,14 @@ export async function POST(request) {
     }
 
     const client = await clientPromise
-    const db = client.db(process.env.MONGODB_DB)
+    const db = client.db(process.env.MONGODB_DB || 'miSaaS')
 
-    // Verificar que el email esté en la lista de leads
+    // SIMPLIFICADO: Solo dos verificaciones
+    const normalizedEmail = email.toLowerCase().trim()
+    
+    // 1. Verificar que esté en leads
     const leadsCollection = db.collection('leads')
-    const lead = await leadsCollection.findOne({ 
-      email: email.toLowerCase().trim() 
-    })
+    const lead = await leadsCollection.findOne({ email: normalizedEmail })
 
     if (!lead) {
       return NextResponse.json(
@@ -50,55 +51,18 @@ export async function POST(request) {
       )
     }
 
-    // Verificar si el usuario está autorizado para registrarse y obtener su plan asignado
-    const isAuthorized = await isUserAuthorized(email)
-    if (!isAuthorized) {
+    // 2. Verificar que esté autorizado en user_authorizations
+    const authorizationsCollection = db.collection('user_authorizations')
+    const authorization = await authorizationsCollection.findOne({ email: normalizedEmail })
+
+    if (!authorization) {
       return NextResponse.json(
-        { error: 'No tienes permisos para registrarte en este momento' },
+        { error: 'No tienes permisos para registrarte aún' },
         { status: 403 }
       )
     }
 
-    const assignedPlan = await getAssignedPlan(email)
-    if (!assignedPlan) {
-      return NextResponse.json(
-        { error: 'No se pudo determinar tu plan. Contacta al administrador.' },
-        { status: 403 }
-      )
-    }
-
-    // Verificar si el registro está activo (cuando decidas lanzar)
-    // Por ahora está desactivado - solo los primeros 1000 podrán registrarse cuando actives el lanzamiento
-    const REGISTRATION_ACTIVE = true // Activado temporalmente para crear usuarios de prueba
-    const MAX_USERS = 1000
-    
-    if (!REGISTRATION_ACTIVE) {
-      return NextResponse.json(
-        { 
-          error: 'Registro no disponible',
-          message: 'El registro aún no está disponible. Te notificaremos cuando podamos crear tu cuenta.'
-        },
-        { status: 423 }
-      )
-    }
-
-    // Cuando esté activo, solo los primeros X pueden registrarse
-    const totalLeads = await leadsCollection.countDocuments()
-    const leadPosition = await leadsCollection.countDocuments({
-      fecha: { $lt: lead.fecha }
-    }) + 1
-
-    if (leadPosition > MAX_USERS) {
-      return NextResponse.json(
-        { 
-          error: 'Lista de espera',
-          message: 'Estás en la lista de espera. Te contactaremos cuando tengamos disponibilidad.',
-          position: leadPosition,
-          totalLeads: totalLeads
-        },
-        { status: 423 }
-      )
-    }
+    const assignedPlan = authorization.plan
 
     // Verificar que no exista ya una cuenta de usuario
     const usersCollection = db.collection('users')

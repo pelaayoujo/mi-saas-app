@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import clientPromise from '../../../lib/mongodb'
-import { isUserAuthorized, getAssignedPlan } from '../../../lib/permissions'
 
 export async function POST(request) {
   try {
@@ -28,25 +27,25 @@ export async function POST(request) {
       })
     }
 
-    // Verificar si está autorizado para registrarse
-    const isAuthorized = await isUserAuthorized(email)
-    const assignedPlan = await getAssignedPlan(email)
+    // SIMPLIFICADO: Verificar autorización directamente en MongoDB
+    const authorizationsCollection = db.collection('user_authorizations')
+    const authorization = await authorizationsCollection.findOne({ email: email.toLowerCase() })
 
-    if (lead && isAuthorized && assignedPlan) {
+    if (lead && authorization) {
       return NextResponse.json({
         success: true,
         isLead: true,
         isAuthorized: true,
-        message: `Email encontrado y autorizado para registro con plan ${assignedPlan}`,
+        message: `Email encontrado y autorizado para registro con plan ${authorization.plan}`,
         leadData: {
           nombre: lead.nombre,
           email: lead.email,
           nicho: lead.nicho,
           fechaRegistro: lead.fechaRegistro
         },
-        authorizedPlan: assignedPlan
+        authorizedPlan: authorization.plan
       })
-    } else if (lead && !isAuthorized) {
+    } else if (lead && !authorization) {
       return NextResponse.json({
         success: true,
         isLead: true,
