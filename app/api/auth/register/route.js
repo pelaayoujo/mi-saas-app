@@ -51,14 +51,15 @@ export async function POST(request) {
     }
 
     // Verificar si el usuario está autorizado para registrarse y obtener su plan asignado
-    if (!isUserAuthorized(email)) {
+    const isAuthorized = await isUserAuthorized(email)
+    if (!isAuthorized) {
       return NextResponse.json(
         { error: 'No tienes permisos para registrarte en este momento' },
         { status: 403 }
       )
     }
 
-    const assignedPlan = getAssignedPlan(email)
+    const assignedPlan = await getAssignedPlan(email)
     if (!assignedPlan) {
       return NextResponse.json(
         { error: 'No se pudo determinar tu plan. Contacta al administrador.' },
