@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { createPrompt, mapFormDataToPrompt } from '../../../../lib/promptGenerator'
 import { requireContentGeneration, handleAuthError } from '../../../../lib/authMiddleware'
-import { incrementArticleUsage } from '../../../../lib/usageTracker'
+import { incrementArticleUsage, canUserGenerateContent } from '../../../../lib/usageTracker'
 
 // Inicializar cliente de OpenAI
 const openai = new OpenAI({
@@ -58,16 +58,25 @@ export async function POST(request) {
     // Incrementar contador de uso
     try {
       await incrementArticleUsage(user.email)
+      
+      // Obtener información actualizada de uso
+      const updatedUsageInfo = await canUserGenerateContent(user.email, 'article')
+      
+      return NextResponse.json({
+        success: true,
+        articles: articles,
+        usage: response.usage,
+        usageInfo: updatedUsageInfo
+      })
     } catch (usageError) {
       console.error('Error tracking usage:', usageError)
       // No fallar la respuesta por error de tracking
+      return NextResponse.json({
+        success: true,
+        articles: articles,
+        usage: response.usage
+      })
     }
-    
-    return NextResponse.json({
-      success: true,
-      articles: articles,
-      usage: response.usage
-    })
 
   } catch (error) {
     console.error('Error generando artículo:', error)
