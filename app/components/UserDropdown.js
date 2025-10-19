@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 // Removed getUserPlan import - it requires MongoDB and can't run in browser
@@ -8,6 +8,31 @@ export default function UserDropdown() {
   const { data: session } = useSession()
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
+  const [userStats, setUserStats] = useState({
+    articlesCreated: 0,
+    plan: 'trial',
+    creditos: 0,
+    daysRemaining: 'Cargando...'
+  })
+
+  // Cargar estadísticas del usuario
+  useEffect(() => {
+    const fetchUserStats = async () => {
+      try {
+        const response = await fetch('/api/user/stats')
+        if (response.ok) {
+          const data = await response.json()
+          setUserStats(data.stats)
+        }
+      } catch (error) {
+        console.error('Error cargando estadísticas del usuario:', error)
+      }
+    }
+
+    if (session) {
+      fetchUserStats()
+    }
+  }, [session])
 
   const handleSignOut = () => {
     signOut({ callbackUrl: '/' })
@@ -118,7 +143,7 @@ export default function UserDropdown() {
               </div>
               <div className="dropdown-plan-badge">
                 <span className="plan-badge">
-                  Plan Activo
+                  {userStats.plan.toUpperCase()}
                 </span>
               </div>
             </div>
@@ -138,7 +163,7 @@ export default function UserDropdown() {
                   <span className="item-icon">{item.icon}</span>
                   <span className="item-label">{item.label}</span>
                   {item.label === 'Plan y Facturación' && (
-                    <span className="item-badge">Pro</span>
+                    <span className="item-badge">{userStats.plan.toUpperCase()}</span>
                   )}
                 </button>
               ))}
@@ -147,12 +172,12 @@ export default function UserDropdown() {
             <div className="dropdown-footer">
               <div className="dropdown-stats">
                 <div className="stat-item">
-                  <span className="stat-number">12</span>
+                  <span className="stat-number">{userStats.articlesCreated}</span>
                   <span className="stat-label">Artículos creados</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">5</span>
-                  <span className="stat-label">Días restantes</span>
+                  <span className="stat-number">{userStats.creditos}</span>
+                  <span className="stat-label">Créditos restantes</span>
                 </div>
               </div>
             </div>
