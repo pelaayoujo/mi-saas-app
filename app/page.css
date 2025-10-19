@@ -777,6 +777,18 @@ body {
   color: #ffffff !important;
 }
 
+/* Estilo para botones "Próximamente" */
+.pricing-btn[href="#trial"] {
+  background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+  cursor: not-allowed;
+}
+
+.pricing-btn[href="#trial"]:hover {
+  background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
+  transform: none;
+  box-shadow: none;
+}
+
 /* Trial Section */
 .trial {
   padding: 6rem 0;

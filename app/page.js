@@ -65,7 +65,7 @@ export default function Home() {
             <a href="#testimonials">Testimonios</a>
             <a href="#pricing">Precios</a>
             <a href="/dashboard" className="nav-login">Iniciar Sesión</a>
-            <a href="/dashboard/create" className="nav-cta">Comenzar Gratis</a>
+            <a href="#trial" className="nav-cta">Comenzar Gratis</a>
           </div>
 
           <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -81,7 +81,7 @@ export default function Home() {
             <a href="#testimonials">Testimonios</a>
             <a href="#pricing">Precios</a>
             <a href="/dashboard">Iniciar Sesión</a>
-            <a href="/dashboard/create">Comenzar Gratis</a>
+            <a href="#trial">Comenzar Gratis</a>
           </div>
         )}
       </nav>
@@ -435,7 +435,7 @@ export default function Home() {
                 <li>Plantillas básicas</li>
                 <li>Soporte por email</li>
               </ul>
-              <a href="/dashboard/create" className="pricing-btn">Empezar gratis</a>
+              <a href="#trial" className="pricing-btn">Próximamente</a>
             </div>
             
             <div className="pricing-card featured">
@@ -456,7 +456,7 @@ export default function Home() {
                 <li>Programación de contenido</li>
                 <li>Soporte prioritario</li>
               </ul>
-              <a href="/dashboard/create" className="pricing-btn">Elegir plan</a>
+              <a href="#trial" className="pricing-btn">Próximamente</a>
         </div>
             
             <div className="pricing-card">
@@ -476,7 +476,7 @@ export default function Home() {
                 <li>Analytics avanzados</li>
                 <li>Soporte 24/7</li>
               </ul>
-              <a href="/dashboard/create" className="pricing-btn">Empezar</a>
+              <a href="#trial" className="pricing-btn">Próximamente</a>
             </div>
           </div>
         </div>
