@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { connectToDatabase } from '../../../lib/mongodb'
+import clientPromise from '../../../lib/mongodb'
 import { isUserAuthorized, getAssignedPlan } from '../../../lib/permissions'
 
 export async function POST(request) {
@@ -13,7 +13,8 @@ export async function POST(request) {
       )
     }
 
-    const { db } = await connectToDatabase()
+    const client = await clientPromise
+    const db = client.db(process.env.MONGODB_DB || 'miSaaS')
     const leadsCollection = db.collection('leads')
 
     // Buscar si el email existe en la colección de leads
