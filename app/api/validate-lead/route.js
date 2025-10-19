@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '../../../lib/mongodb'
+import { isUserAuthorized, getAssignedPlan } from '../../../lib/permissions'
 
 export async function POST(request) {
   try {
@@ -17,24 +18,45 @@ export async function POST(request) {
 
     // Buscar si el email existe en la colección de leads
     const lead = await leadsCollection.findOne({ email: email.toLowerCase() })
+    
+    if (!lead) {
+      return NextResponse.json({
+        success: true,
+        isLead: false,
+        message: 'Email no encontrado en la lista de leads'
+      })
+    }
 
-    if (lead) {
+    // Verificar si está autorizado para registrarse
+    const isAuthorized = await isUserAuthorized(email)
+    const assignedPlan = await getAssignedPlan(email)
+
+    if (lead && isAuthorized && assignedPlan) {
       return NextResponse.json({
         success: true,
         isLead: true,
-        message: 'Email encontrado en la lista de leads',
+        isAuthorized: true,
+        message: `Email encontrado y autorizado para registro con plan ${assignedPlan}`,
+        leadData: {
+          nombre: lead.nombre,
+          email: lead.email,
+          nicho: lead.nicho,
+          fechaRegistro: lead.fechaRegistro
+        },
+        authorizedPlan: assignedPlan
+      })
+    } else if (lead && !isAuthorized) {
+      return NextResponse.json({
+        success: true,
+        isLead: true,
+        isAuthorized: false,
+        message: 'Email encontrado en leads pero no autorizado para registro aún',
         leadData: {
           nombre: lead.nombre,
           email: lead.email,
           nicho: lead.nicho,
           fechaRegistro: lead.fechaRegistro
         }
-      })
-    } else {
-      return NextResponse.json({
-        success: true,
-        isLead: false,
-        message: 'Email no encontrado en la lista de leads'
       })
     }
 

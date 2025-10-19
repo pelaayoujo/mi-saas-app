@@ -10,7 +10,9 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
   const [isValidEmail, setIsValidEmail] = useState(false)
+  const [isAuthorized, setIsAuthorized] = useState(false)
   const [leadData, setLeadData] = useState(null)
+  const [assignedPlan, setAssignedPlan] = useState(null)
 
   // Verificar si el email está en la lista de leads
   const checkEmailAccess = async (emailToCheck) => {
@@ -32,13 +34,27 @@ export default function RegisterPage() {
           setIsValidEmail(true)
           setLeadData(data.leadData)
           setNombre(data.leadData.nombre)
-          setMessage({
-            type: 'success',
-            text: `¡Perfecto! Encontramos tu registro. Bienvenido ${data.leadData.nombre}. El registro estará disponible próximamente. Te notificaremos por email.`
-          })
+          
+          if (data.isAuthorized && data.authorizedPlan) {
+            setIsAuthorized(true)
+            setAssignedPlan(data.authorizedPlan)
+            setMessage({
+              type: 'success',
+              text: `¡Perfecto! Estás autorizado para registrarte con plan ${data.authorizedPlan.toUpperCase()}. ¡Bienvenido ${data.leadData.nombre}!`
+            })
+          } else {
+            setIsAuthorized(false)
+            setAssignedPlan(null)
+            setMessage({
+              type: 'warning',
+              text: `¡Hola ${data.leadData.nombre}! Tu email está verificado pero aún no tienes acceso. Te notificaremos cuando puedas registrarte.`
+            })
+          }
         } else {
           setIsValidEmail(false)
+          setIsAuthorized(false)
           setLeadData(null)
+          setAssignedPlan(null)
           setMessage({
             type: 'error',
             text: 'Este email no está en nuestra lista de invitados. Regístrate primero en la landing page.'
@@ -66,7 +82,9 @@ export default function RegisterPage() {
       return () => clearTimeout(timeoutId)
     } else {
       setIsValidEmail(false)
+      setIsAuthorized(false)
       setLeadData(null)
+      setAssignedPlan(null)
       setMessage(null)
     }
   }
@@ -74,10 +92,10 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    if (!isValidEmail) {
+    if (!isValidEmail || !isAuthorized) {
       setMessage({
         type: 'error',
-        text: 'Debes verificar tu email primero'
+        text: 'Debes verificar tu email y estar autorizado para continuar'
       })
       return
     }
@@ -210,7 +228,7 @@ export default function RegisterPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Mínimo 6 caracteres"
               required
-              disabled={!isValidEmail}
+              disabled={!isValidEmail || !isAuthorized}
             />
           </div>
 
@@ -223,23 +241,35 @@ export default function RegisterPage() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Repite tu contraseña"
               required
-              disabled={!isValidEmail}
+              disabled={!isValidEmail || !isAuthorized}
             />
           </div>
 
-          <button 
-            type="button" 
-            className="register-btn coming-soon"
-            disabled={true}
-          >
-            🚀 Próximamente Disponible
-          </button>
-          
-          <div className="coming-soon-info">
-            <p>📅 <strong>Fecha de lanzamiento:</strong> Próximamente</p>
-            <p>📧 Te notificaremos por email cuando puedas crear tu cuenta</p>
-            <p>🎯 Solo los leads registrados podrán acceder</p>
-          </div>
+          {isAuthorized ? (
+            <button 
+              type="submit" 
+              className="register-btn"
+              disabled={loading || !isValidEmail}
+            >
+              {loading ? '🔄 Creando cuenta...' : `🚀 Crear cuenta ${assignedPlan ? `(${assignedPlan.toUpperCase()})` : ''}`}
+            </button>
+          ) : (
+            <>
+              <button 
+                type="button" 
+                className="register-btn coming-soon"
+                disabled={true}
+              >
+                🚀 Próximamente Disponible
+              </button>
+              
+              <div className="coming-soon-info">
+                <p>📅 <strong>Estado:</strong> {isValidEmail ? 'Email verificado, esperando autorización' : 'Verifica tu email primero'}</p>
+                <p>📧 Te notificaremos por email cuando puedas crear tu cuenta</p>
+                <p>🎯 Solo los usuarios autorizados podrán acceder</p>
+              </div>
+            </>
+          )}
         </form>
 
         {message && (
