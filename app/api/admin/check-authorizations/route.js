@@ -4,7 +4,7 @@ import clientPromise from '../../../../lib/mongodb'
 export async function GET(request) {
   try {
     const client = await clientPromise
-    const db = client.db(process.env.MONGODB_DB || 'linkedai')
+    const db = client.db(process.env.MONGODB_DB || 'miSaaS')
     const authorizationsCollection = db.collection('user_authorizations')
 
     // Verificar si la colección tiene documentos

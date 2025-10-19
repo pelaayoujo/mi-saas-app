@@ -32,7 +32,7 @@ export async function POST(request) {
     }
 
     const client = await clientPromise
-    const db = client.db(process.env.MONGODB_DB || 'linkedai')
+    const db = client.db(process.env.MONGODB_DB || 'miSaaS')
     const authorizationsCollection = db.collection('user_authorizations')
 
     // Crear índice único en email
@@ -80,7 +80,7 @@ export async function GET(request) {
     }
 
     const client = await clientPromise
-    const db = client.db(process.env.MONGODB_DB || 'linkedai')
+    const db = client.db(process.env.MONGODB_DB || 'miSaaS')
     const authorizationsCollection = db.collection('user_authorizations')
 
     const authorizations = await authorizationsCollection
