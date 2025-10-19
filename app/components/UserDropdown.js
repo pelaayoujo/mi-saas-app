@@ -19,20 +19,27 @@ export default function UserDropdown() {
   useEffect(() => {
     const fetchUserStats = async () => {
       try {
+        console.log('🔄 Cargando estadísticas del usuario...')
         const response = await fetch('/api/user/stats')
+        console.log('📊 Response status:', response.status)
+        
         if (response.ok) {
           const data = await response.json()
+          console.log('📊 Datos recibidos:', data)
           setUserStats(data.stats)
+        } else {
+          const errorData = await response.json()
+          console.error('❌ Error en API:', errorData)
         }
       } catch (error) {
-        console.error('Error cargando estadísticas del usuario:', error)
+        console.error('❌ Error cargando estadísticas del usuario:', error)
       }
     }
 
-    if (session) {
+    if (session?.user?.email) {
       fetchUserStats()
     }
-  }, [session])
+  }, [session?.user?.email])
 
   const handleSignOut = () => {
     signOut({ callbackUrl: '/' })
@@ -143,7 +150,7 @@ export default function UserDropdown() {
               </div>
               <div className="dropdown-plan-badge">
                 <span className="plan-badge">
-                  {userStats.plan.toUpperCase()}
+                  {(userStats.plan || session?.user?.plan || 'trial').toUpperCase()}
                 </span>
               </div>
             </div>
@@ -163,7 +170,7 @@ export default function UserDropdown() {
                   <span className="item-icon">{item.icon}</span>
                   <span className="item-label">{item.label}</span>
                   {item.label === 'Plan y Facturación' && (
-                    <span className="item-badge">{userStats.plan.toUpperCase()}</span>
+                    <span className="item-badge">{(userStats.plan || session?.user?.plan || 'trial').toUpperCase()}</span>
                   )}
                 </button>
               ))}
