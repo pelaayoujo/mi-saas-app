@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import clientPromise from '../../../../lib/mongodb'
 import bcrypt from 'bcryptjs'
 import { sendRegistrationConfirmation } from '../../../../lib/email'
-import { isAuthorizedForTrial } from '../../../../lib/permissions'
+import { isUserAuthorized, getAssignedPlan } from '../../../../lib/permissions'
 
 export async function POST(request) {
   try {
@@ -46,6 +46,22 @@ export async function POST(request) {
     if (!lead) {
       return NextResponse.json(
         { error: 'Este email no está en nuestra lista de invitados' },
+        { status: 403 }
+      )
+    }
+
+    // Verificar si el usuario está autorizado para registrarse y obtener su plan asignado
+    if (!isUserAuthorized(email)) {
+      return NextResponse.json(
+        { error: 'No tienes permisos para registrarte en este momento' },
+        { status: 403 }
+      )
+    }
+
+    const assignedPlan = getAssignedPlan(email)
+    if (!assignedPlan) {
+      return NextResponse.json(
+        { error: 'No se pudo determinar tu plan. Contacta al administrador.' },
         { status: 403 }
       )
     }
@@ -100,8 +116,20 @@ export async function POST(request) {
     const saltRounds = 12
     const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-    // Determinar el plan inicial basado en autorización
-    const initialPlan = isAuthorizedForTrial(email) ? 'trial' : 'basic'
+    // Usar el plan específico asignado en AUTHORIZED_USERS
+    const userPlan = assignedPlan
+
+    // Determinar créditos basado en el plan
+    const getCreditsForPlan = (plan) => {
+      switch (plan) {
+        case 'trial': return 3
+        case 'basic': return 5
+        case 'professional': return 20
+        case 'enterprise': return -1 // Ilimitado
+        case 'admin': return -1 // Ilimitado
+        default: return 0
+      }
+    }
 
     // Crear el usuario
     const user = {
@@ -112,8 +140,8 @@ export async function POST(request) {
       fechaRegistro: new Date(),
       fechaLead: lead.fecha,
       status: 'activo',
-      plan: initialPlan, // Plan basado en autorización
-      creditos: initialPlan === 'trial' ? 3 : 0, // 3 créditos para trial, 0 para basic
+      plan: userPlan, // Plan específico asignado
+      creditos: getCreditsForPlan(userPlan),
       ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
     }
 
