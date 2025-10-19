@@ -21,7 +21,7 @@ export default function PromptExamplesPage() {
   // Verificar autenticación
   useEffect(() => {
     if (status === 'loading') return
-    if (!session || session.user.email !== 'user@test.com') {
+    if (!session || (session.user.plan !== 'admin' && session.user.email !== 'user@test.com')) {
       router.push('/login')
     }
   }, [session, status, router])
@@ -44,7 +44,7 @@ export default function PromptExamplesPage() {
   }
 
   useEffect(() => {
-    if (session?.user?.email === 'user@test.com') {
+    if (session && (session.user?.plan === 'admin' || session.user?.email === 'user@test.com')) {
       loadExamples()
     }
   }, [session])
@@ -91,7 +91,7 @@ export default function PromptExamplesPage() {
     return <div className="p-8">Cargando...</div>
   }
 
-  if (!session || session.user.email !== 'user@test.com') {
+  if (!session || (session.user.plan !== 'admin' && session.user.email !== 'user@test.com')) {
     return <div className="p-8">No autorizado</div>
   }
 

@@ -2,15 +2,15 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../../../lib/auth'
 import { addCustomExample, getCustomExamples } from '../../../../lib/promptTemplates'
+import { requireAdmin } from '../../../../lib/authMiddleware'
 
 // GET: Obtener ejemplos existentes
 export async function GET(request) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    // Solo usuarios admin pueden ver los ejemplos
-    if (!session || session.user.email !== 'user@test.com') {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    // Verificar que el usuario es admin
+    const adminResult = await requireAdmin(request)
+    if (!adminResult.success) {
+      return NextResponse.json({ error: adminResult.error }, { status: adminResult.status })
     }
 
     const { searchParams } = new URL(request.url)
@@ -33,12 +33,13 @@ export async function GET(request) {
 // POST: Agregar nuevo ejemplo
 export async function POST(request) {
   try {
-    const session = await getServerSession(authOptions)
-    
-    // Solo usuarios admin pueden agregar ejemplos
-    if (!session || session.user.email !== 'user@test.com') {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+    // Verificar que el usuario es admin
+    const adminResult = await requireAdmin(request)
+    if (!adminResult.success) {
+      return NextResponse.json({ error: adminResult.error }, { status: adminResult.status })
     }
+
+    const session = await getServerSession(authOptions)
 
     const body = await request.json()
     const { content, title, tone, length, category, description } = body
