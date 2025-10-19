@@ -79,6 +79,8 @@ export default function CreateArticle() {
     setIsGenerating(true)
     
     try {
+      console.log('Enviando datos:', formData)
+      
       // Llamar a la API de OpenAI
       const response = await fetch('/api/ai/generate-article', {
         method: 'POST',
@@ -88,10 +90,30 @@ export default function CreateArticle() {
         body: JSON.stringify(formData)
       })
 
-      const data = await response.json()
+      console.log('Respuesta del servidor:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok
+      })
+
+      let data
+      try {
+        data = await response.json()
+        console.log('Datos de respuesta:', data)
+      } catch (jsonError) {
+        console.error('Error parseando JSON:', jsonError)
+        throw new Error('Error en la respuesta del servidor')
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || 'Error generando artículo')
+        console.error('Error del servidor:', data)
+        throw new Error(data.error || data.details || `Error del servidor: ${response.status}`)
+      }
+
+      // Validar que tenemos artículos
+      if (!data.articles || !Array.isArray(data.articles)) {
+        console.error('Formato de respuesta inválido:', data)
+        throw new Error('Formato de respuesta inválido del servidor')
       }
 
       // Pasar al paso 3 (Revisión) con los artículos generados
@@ -100,12 +122,14 @@ export default function CreateArticle() {
       setGeneratedArticles(data.articles)
       
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error completo:', error)
+      console.error('Stack trace:', error.stack)
       setIsGenerating(false)
       setCurrentStep(1) // Volver al formulario
       
-      // Mostrar error al usuario
-      alert(`Error generando artículo: ${error.message}`)
+      // Mostrar error más detallado al usuario
+      const errorMessage = error.message || 'Error desconocido'
+      alert(`Error generando artículo: ${errorMessage}`)
     }
   }
 

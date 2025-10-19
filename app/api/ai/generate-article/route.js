@@ -133,37 +133,60 @@ export async function POST(request) {
     // Procesar la respuesta para extraer artículos
     const articles = processGeneratedContent(generatedContent, formData.resultsCount || 1)
     
+    // Validar que tenemos artículos antes de continuar
+    if (!articles || articles.length === 0) {
+      console.error('No se generaron artículos:', generatedContent)
+      return NextResponse.json(
+        { error: 'No se pudieron generar artículos válidos' },
+        { status: 500 }
+      )
+    }
+
     // Incrementar contador de uso según el plan del usuario
     try {
+      console.log('Obteniendo plan del usuario:', user.email)
       const userPlan = await getUserPlanFromDB(user.email)
+      console.log('Plan obtenido:', userPlan)
+      
       const tokensUsed = response.usage?.total_tokens || 0
+      console.log('Tokens usados:', tokensUsed)
       
       if (userPlan && userPlan.id === 'trial') {
         // TRIAL: Solo incrementar artículos (3 máximo)
+        console.log('Incrementando uso para usuario trial')
         await incrementArticleUsage(user.email)
-      } else {
+      } else if (userPlan) {
         // PLANES PAGOS: Incrementar artículos y tokens
+        console.log('Incrementando uso para usuario pagado')
         await incrementArticleAndTokenUsage(user.email, tokensUsed)
+      } else {
+        console.log('Usuario sin plan válido, permitiendo uso básico')
       }
       
-      // Obtener información actualizada de uso
-      const updatedUsageInfo = await canUserGenerateContent(user.email, 'article')
+      // Obtener información actualizada de uso (sin fallar si hay error)
+      let updatedUsageInfo = null
+      try {
+        updatedUsageInfo = await canUserGenerateContent(user.email, 'article')
+      } catch (usageInfoError) {
+        console.error('Error obteniendo info de uso:', usageInfoError)
+      }
       
       return NextResponse.json({
         success: true,
         articles: articles,
-        usage: response.usage,
+        usage: response.usage || {},
         usageInfo: updatedUsageInfo,
         tokensUsed: tokensUsed,
         userPlan: userPlan?.id || 'unknown'
       })
     } catch (usageError) {
       console.error('Error tracking usage:', usageError)
-      // No fallar la respuesta por error de tracking
+      // No fallar la respuesta por error de tracking - devolver los artículos
       return NextResponse.json({
         success: true,
         articles: articles,
-        usage: response.usage
+        usage: response.usage || {},
+        error: 'Error tracking usage but content generated'
       })
     }
 
@@ -213,30 +236,66 @@ export async function POST(request) {
 function processGeneratedContent(content, resultsCount) {
   const articles = []
   
-  if (resultsCount === 1) {
-    // Un solo artículo - limpiar y formatear
-    const cleanContent = cleanAndFormatContent(content)
-    articles.push({
-      id: 1,
-      title: extractTitle(cleanContent),
-      content: cleanContent,
-      wordCount: countWords(cleanContent)
-    })
-  } else {
-    // Múltiples artículos - separar por "---" o títulos
-    const articleSections = content.split(/---+/).filter(section => section.trim())
-    
-    articleSections.forEach((section, index) => {
-      if (section.trim()) {
-        const cleanContent = cleanAndFormatContent(section.trim())
+  // Validar que tenemos contenido
+  if (!content || typeof content !== 'string' || content.trim().length === 0) {
+    console.error('Contenido generado está vacío o inválido:', content)
+    return []
+  }
+  
+  try {
+    if (resultsCount === 1 || !resultsCount) {
+      // Un solo artículo - limpiar y formatear
+      const cleanContent = cleanAndFormatContent(content)
+      if (cleanContent && cleanContent.trim().length > 0) {
         articles.push({
-          id: index + 1,
+          id: 1,
           title: extractTitle(cleanContent),
           content: cleanContent,
           wordCount: countWords(cleanContent)
         })
       }
-    })
+    } else {
+      // Múltiples artículos - separar por "---" o títulos
+      const articleSections = content.split(/---+/).filter(section => section.trim())
+      
+      if (articleSections.length === 0) {
+        // Si no se separó correctamente, usar todo el contenido como un artículo
+        const cleanContent = cleanAndFormatContent(content)
+        if (cleanContent && cleanContent.trim().length > 0) {
+          articles.push({
+            id: 1,
+            title: extractTitle(cleanContent),
+            content: cleanContent,
+            wordCount: countWords(cleanContent)
+          })
+        }
+      } else {
+        articleSections.forEach((section, index) => {
+          if (section.trim()) {
+            const cleanContent = cleanAndFormatContent(section.trim())
+            if (cleanContent && cleanContent.trim().length > 0) {
+              articles.push({
+                id: index + 1,
+                title: extractTitle(cleanContent),
+                content: cleanContent,
+                wordCount: countWords(cleanContent)
+              })
+            }
+          }
+        })
+      }
+    }
+  } catch (processingError) {
+    console.error('Error procesando contenido:', processingError)
+    // Intentar devolver al menos el contenido básico
+    if (content && content.trim().length > 0) {
+      articles.push({
+        id: 1,
+        title: 'Artículo Generado',
+        content: content.trim(),
+        wordCount: countWords(content)
+      })
+    }
   }
   
   return articles
@@ -244,23 +303,50 @@ function processGeneratedContent(content, resultsCount) {
 
 // Función para limpiar y formatear el contenido
 function cleanAndFormatContent(content) {
-  return content
-    .replace(/^#+\s*Título[:\s]*/gmi, '') // Remover "Título:" o "## Título:"
-    .replace(/^#+\s*Gancho inicial[:\s]*/gmi, '') // Remover "Gancho inicial:"
-    .replace(/^#+\s*Cuerpo[:\s]*/gmi, '') // Remover "Cuerpo:"
-    .replace(/^#+\s*Conclusión[:\s]*/gmi, '## Conclusión\n\n') // Limpiar "Conclusión:"
-    .replace(/^#+\s*Hashtags[:\s]*/gmi, '') // Remover "Hashtags:"
-    .replace(/\n{3,}/g, '\n\n') // Limitar saltos de línea múltiples
-    .trim()
+  if (!content || typeof content !== 'string') {
+    return ''
+  }
+  
+  try {
+    return content
+      .replace(/^#+\s*Título[:\s]*/gmi, '') // Remover "Título:" o "## Título:"
+      .replace(/^#+\s*Gancho inicial[:\s]*/gmi, '') // Remover "Gancho inicial:"
+      .replace(/^#+\s*Cuerpo[:\s]*/gmi, '') // Remover "Cuerpo:"
+      .replace(/^#+\s*Conclusión[:\s]*/gmi, '## Conclusión\n\n') // Limpiar "Conclusión:"
+      .replace(/^#+\s*Hashtags[:\s]*/gmi, '') // Remover "Hashtags:"
+      .replace(/\n{3,}/g, '\n\n') // Limitar saltos de línea múltiples
+      .trim()
+  } catch (error) {
+    console.error('Error limpiando contenido:', error)
+    return content || ''
+  }
 }
 
 // Función para extraer el título del contenido
 function extractTitle(content) {
-  const titleMatch = content.match(/^#\s*(.+)$/m)
-  return titleMatch ? titleMatch[1].trim() : 'Artículo Generado'
+  if (!content || typeof content !== 'string') {
+    return 'Artículo Generado'
+  }
+  
+  try {
+    const titleMatch = content.match(/^#\s*(.+)$/m)
+    return titleMatch ? titleMatch[1].trim() : 'Artículo Generado'
+  } catch (error) {
+    console.error('Error extrayendo título:', error)
+    return 'Artículo Generado'
+  }
 }
 
 // Función para contar palabras
 function countWords(text) {
-  return text.split(/\s+/).filter(word => word.length > 0).length
+  if (!text || typeof text !== 'string') {
+    return 0
+  }
+  
+  try {
+    return text.split(/\s+/).filter(word => word.length > 0).length
+  } catch (error) {
+    console.error('Error contando palabras:', error)
+    return 0
+  }
 }
