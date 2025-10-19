@@ -77,7 +77,8 @@ export async function GET() {
       userData: {
         plan: userData?.plan || 'trial',
         creditos: userData?.creditos || 0,
-        status: userData?.status || 'activo'
+        status: userData?.status || 'activo',
+        fechaRegistro: userData?.fechaRegistro || new Date()
       }
     }
     

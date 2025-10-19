@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import UserDropdown from '../../components/UserDropdown'
@@ -10,6 +10,55 @@ export default function Billing() {
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [userStats, setUserStats] = useState({
+    plan: 'trial',
+    articlesCreated: 0,
+    creditos: 0,
+    planLimit: 0
+  })
+
+  // Cargar estadísticas del usuario
+  useEffect(() => {
+    const fetchUserStats = async () => {
+      try {
+        const response = await fetch('/api/user/stats')
+        if (response.ok) {
+          const data = await response.json()
+          setUserStats(data.stats)
+        }
+      } catch (error) {
+        console.error('Error cargando estadísticas del usuario:', error)
+      }
+    }
+
+    if (session) {
+      fetchUserStats()
+    }
+  }, [session])
+
+  // Función para obtener el nombre del plan
+  const getPlanName = (planKey) => {
+    const planNames = {
+      'trial': 'Plan Trial',
+      'basic': 'Plan Básico', 
+      'professional': 'Plan Profesional',
+      'enterprise': 'Plan Empresarial',
+      'admin': 'Plan Admin'
+    }
+    return planNames[planKey] || planKey
+  }
+
+  // Función para obtener límites del plan
+  const getPlanLimits = (planKey) => {
+    const limits = {
+      'trial': { articles: 3, posts: 10 },
+      'basic': { articles: 5, posts: 50 },
+      'professional': { articles: 20, posts: 200 },
+      'enterprise': { articles: -1, posts: -1 },
+      'admin': { articles: -1, posts: -1 }
+    }
+    return limits[planKey] || { articles: 0, posts: 0 }
+  }
 
   if (status === 'loading') {
     return (
@@ -27,7 +76,23 @@ export default function Billing() {
     return null
   }
 
+  // Planes dinámicos basados en el usuario actual
   const plans = [
+    {
+      id: 'trial',
+      name: 'Plan Trial',
+      price: 'Gratis',
+      period: '',
+      description: 'Para probar la plataforma',
+      features: [
+        '3 artículos por mes',
+        '10 posts generados',
+        'Plantillas básicas',
+        'Soporte por email'
+      ],
+      current: userStats.plan === 'trial',
+      popular: false
+    },
     {
       id: 'basic',
       name: 'Plan Básico',
@@ -40,7 +105,7 @@ export default function Billing() {
         'Plantillas básicas',
         'Soporte por email'
       ],
-      current: true,
+      current: userStats.plan === 'basic',
       popular: false
     },
     {
@@ -56,7 +121,7 @@ export default function Billing() {
         'Programación de contenido',
         'Soporte prioritario'
       ],
-      current: false,
+      current: userStats.plan === 'professional',
       popular: true
     },
     {
@@ -72,7 +137,7 @@ export default function Billing() {
         'Analytics avanzados',
         'Soporte 24/7'
       ],
-      current: false,
+      current: userStats.plan === 'enterprise',
       popular: false
     }
   ]
@@ -220,26 +285,44 @@ export default function Billing() {
                 <h2>Tu Plan Actual</h2>
                 <div className="current-plan-card">
                   <div className="plan-info">
-                    <div className="plan-name">Plan Básico</div>
+                    <div className="plan-name">{getPlanName(userStats.plan)}</div>
                     <div className="plan-status">
                       <span className="status-badge active">Activo</span>
                     </div>
                   </div>
                   <div className="plan-usage">
-                    <div className="usage-item">
-                      <span className="usage-label">Artículos usados este mes:</span>
-                      <span className="usage-value">2 de 5</span>
-                    </div>
-                    <div className="usage-bar">
-                      <div className="usage-progress" style={{width: '40%'}}></div>
-                    </div>
-                    <div className="usage-item">
-                      <span className="usage-label">Posts generados:</span>
-                      <span className="usage-value">12 de 50</span>
-                    </div>
-                    <div className="usage-bar">
-                      <div className="usage-progress" style={{width: '24%'}}></div>
-                    </div>
+                    {(() => {
+                      const limits = getPlanLimits(userStats.plan)
+                      const articlesUsed = userStats.articlesCreated
+                      const articlesLimit = limits.articles
+                      const articlesPercent = articlesLimit === -1 ? 0 : (articlesUsed / articlesLimit) * 100
+                      
+                      return (
+                        <>
+                          <div className="usage-item">
+                            <span className="usage-label">Artículos creados:</span>
+                            <span className="usage-value">
+                              {articlesLimit === -1 ? `${articlesUsed} (ilimitado)` : `${articlesUsed} de ${articlesLimit}`}
+                            </span>
+                          </div>
+                          <div className="usage-bar">
+                            <div 
+                              className="usage-progress" 
+                              style={{
+                                width: `${Math.min(articlesPercent, 100)}%`,
+                                backgroundColor: articlesPercent > 80 ? '#ef4444' : '#10b981'
+                              }}
+                            ></div>
+                          </div>
+                          <div className="usage-item">
+                            <span className="usage-label">Créditos restantes:</span>
+                            <span className="usage-value">
+                              {userStats.creditos === -1 ? 'Ilimitados' : `${userStats.creditos} créditos`}
+                            </span>
+                          </div>
+                        </>
+                      )
+                    })()}
                   </div>
                   <div className="plan-actions">
                     <button className="btn-secondary" onClick={handleCancel}>

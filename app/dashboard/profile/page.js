@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import UserDropdown from '../../components/UserDropdown'
@@ -11,6 +11,40 @@ export default function Profile() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('personal')
+  const [userStats, setUserStats] = useState({
+    articlesCreated: 0,
+    plan: 'trial',
+    creditos: 0,
+    daysAsMember: 0
+  })
+
+  // Cargar estadísticas del usuario
+  useEffect(() => {
+    const fetchUserStats = async () => {
+      try {
+        const response = await fetch('/api/user/stats')
+        if (response.ok) {
+          const data = await response.json()
+          // Calcular días como miembro basado en fechaRegistro
+          const daysAsMember = data.stats?.userData?.fechaRegistro ? 
+            Math.floor((new Date() - new Date(data.stats.userData.fechaRegistro)) / (1000 * 60 * 60 * 24)) : 0
+          
+          setUserStats({
+            articlesCreated: data.stats.articlesCreated,
+            plan: data.stats.plan,
+            creditos: data.stats.creditos,
+            daysAsMember: daysAsMember
+          })
+        }
+      } catch (error) {
+        console.error('Error cargando estadísticas del usuario:', error)
+      }
+    }
+
+    if (session) {
+      fetchUserStats()
+    }
+  }, [session])
 
   // Estado del formulario
   const [formData, setFormData] = useState({
@@ -224,11 +258,11 @@ export default function Profile() {
                   <p>{session.user.email}</p>
                   <div className="profile-stats">
                     <div className="stat-item">
-                      <span className="stat-number">12</span>
+                      <span className="stat-number">{userStats.articlesCreated}</span>
                       <span className="stat-label">Artículos creados</span>
                     </div>
                     <div className="stat-item">
-                      <span className="stat-number">5</span>
+                      <span className="stat-number">{userStats.daysAsMember}</span>
                       <span className="stat-label">Días como miembro</span>
                     </div>
                   </div>
