@@ -51,13 +51,13 @@ export default function Billing() {
   // Función para obtener límites del plan
   const getPlanLimits = (planKey) => {
     const limits = {
-      'trial': { articles: 3, posts: 10 },
-      'basic': { articles: 5, posts: 50 },
-      'professional': { articles: 20, posts: 200 },
-      'enterprise': { articles: -1, posts: -1 },
-      'admin': { articles: -1, posts: -1 }
+      'trial': { articles: 3, posts: 10, tokens: 0 },
+      'basic': { articles: 5, posts: 50, tokens: 8000 },
+      'professional': { articles: 20, posts: 200, tokens: 16000 },
+      'enterprise': { articles: -1, posts: -1, tokens: 32000 },
+      'admin': { articles: -1, posts: -1, tokens: -1 }
     }
-    return limits[planKey] || { articles: 0, posts: 0 }
+    return limits[planKey] || { articles: 0, posts: 0, tokens: 0 }
   }
 
   if (status === 'loading') {
@@ -100,8 +100,8 @@ export default function Billing() {
       period: '/mes',
       description: 'Perfecto para empezar',
       features: [
-        '50 posts generados',
-        '5 artículos por mes',
+        '8,000 tokens mensuales',
+        '~15-20 artículos por mes',
         'Plantillas básicas',
         'Soporte por email'
       ],
@@ -115,8 +115,8 @@ export default function Billing() {
       period: '/mes',
       description: 'Para profesionales serios',
       features: [
-        '200 posts generados',
-        '20 artículos por mes',
+        '16,000 tokens mensuales',
+        '~30-40 artículos por mes',
         'Todas las plantillas',
         'Programación de contenido',
         'Soporte prioritario'
@@ -127,12 +127,12 @@ export default function Billing() {
     {
       id: 'enterprise',
       name: 'Plan Empresarial',
-      price: '€30',
+      price: '€35',
       period: '/mes',
       description: 'Para equipos y empresas',
       features: [
-        'Posts ilimitados',
-        'Artículos ilimitados',
+        '32,000 tokens mensuales',
+        '~60-80 artículos por mes',
         'Múltiples usuarios',
         'Analytics avanzados',
         'Soporte 24/7'
@@ -293,35 +293,62 @@ export default function Billing() {
                   <div className="plan-usage">
                     {(() => {
                       const limits = getPlanLimits(userStats.plan)
-                      const articlesUsed = userStats.articlesCreated
-                      const articlesLimit = limits.articles
-                      const articlesPercent = articlesLimit === -1 ? 0 : (articlesUsed / articlesLimit) * 100
                       
-                      return (
-                        <>
-                          <div className="usage-item">
-                            <span className="usage-label">Artículos creados:</span>
-                            <span className="usage-value">
-                              {articlesLimit === -1 ? `${articlesUsed} (ilimitado)` : `${articlesUsed} de ${articlesLimit}`}
-                            </span>
-                          </div>
-                          <div className="usage-bar">
-                            <div 
-                              className="usage-progress" 
-                              style={{
-                                width: `${Math.min(articlesPercent, 100)}%`,
-                                backgroundColor: articlesPercent > 80 ? '#ef4444' : '#10b981'
-                              }}
-                            ></div>
-                          </div>
-                          <div className="usage-item">
-                            <span className="usage-label">Créditos restantes:</span>
-                            <span className="usage-value">
-                              {userStats.creditos === -1 ? 'Ilimitados' : `${userStats.creditos} créditos`}
-                            </span>
-                          </div>
-                        </>
-                      )
+                      if (userStats.plan === 'trial') {
+                        // TRIAL: Mostrar artículos
+                        const articlesUsed = userStats.articlesUsed || userStats.articlesCreated || 0
+                        const articlesLimit = limits.articles
+                        const articlesPercent = articlesLimit === -1 ? 0 : (articlesUsed / articlesLimit) * 100
+                        
+                        return (
+                          <>
+                            <div className="usage-item">
+                              <span className="usage-label">Artículos creados este mes:</span>
+                              <span className="usage-value">
+                                {articlesLimit === -1 ? `${articlesUsed} (ilimitado)` : `${articlesUsed} de ${articlesLimit}`}
+                              </span>
+                            </div>
+                            <div className="usage-bar">
+                              <div 
+                                className="usage-progress" 
+                                style={{
+                                  width: `${Math.min(articlesPercent, 100)}%`,
+                                  backgroundColor: articlesPercent > 80 ? '#ef4444' : '#10b981'
+                                }}
+                              ></div>
+                            </div>
+                          </>
+                        )
+                      } else {
+                        // PLANES PAGOS: Mostrar tokens
+                        const tokensUsed = userStats.tokensUsed || 0
+                        const tokensLimit = limits.tokens
+                        const tokensPercent = tokensLimit === -1 ? 0 : (tokensUsed / tokensLimit) * 100
+                        
+                        return (
+                          <>
+                            <div className="usage-item">
+                              <span className="usage-label">Tokens usados este mes:</span>
+                              <span className="usage-value">
+                                {tokensLimit === -1 ? `${tokensUsed.toLocaleString()} (ilimitado)` : `${tokensUsed.toLocaleString()} de ${tokensLimit.toLocaleString()}`}
+                              </span>
+                            </div>
+                            <div className="usage-bar">
+                              <div 
+                                className="usage-progress" 
+                                style={{
+                                  width: `${Math.min(tokensPercent, 100)}%`,
+                                  backgroundColor: tokensPercent > 80 ? '#ef4444' : '#10b981'
+                                }}
+                              ></div>
+                            </div>
+                            <div className="usage-item">
+                              <span className="usage-label">Artículos creados:</span>
+                              <span className="usage-value">{userStats.articlesCreated || 0} totales</span>
+                            </div>
+                          </>
+                        )
+                      }
                     })()}
                   </div>
                   <div className="plan-actions">

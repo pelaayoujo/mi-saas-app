@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { createPrompt, mapFormDataToPrompt } from '../../../../lib/promptGenerator'
 import { requireContentGeneration, handleAuthError } from '../../../../lib/authMiddleware'
-import { incrementArticleUsage, canUserGenerateContent } from '../../../../lib/usageTracker'
+import { incrementArticleUsage, incrementArticleAndTokenUsage, canUserGenerateContent } from '../../../../lib/usageTracker'
+import { getUserPlanFromDB } from '../../../../lib/permissions'
 
 // Inicializar cliente de OpenAI
 const openai = new OpenAI({
@@ -55,9 +56,18 @@ export async function POST(request) {
     // Procesar la respuesta para extraer artículos
     const articles = processGeneratedContent(generatedContent, formData.resultsCount)
     
-    // Incrementar contador de uso
+    // Incrementar contador de uso según el plan del usuario
     try {
-      await incrementArticleUsage(user.email)
+      const userPlan = await getUserPlanFromDB(user.email)
+      const tokensUsed = response.usage?.total_tokens || 0
+      
+      if (userPlan && userPlan.id === 'trial') {
+        // TRIAL: Solo incrementar artículos (3 máximo)
+        await incrementArticleUsage(user.email)
+      } else {
+        // PLANES PAGOS: Incrementar artículos y tokens
+        await incrementArticleAndTokenUsage(user.email, tokensUsed)
+      }
       
       // Obtener información actualizada de uso
       const updatedUsageInfo = await canUserGenerateContent(user.email, 'article')
@@ -66,7 +76,9 @@ export async function POST(request) {
         success: true,
         articles: articles,
         usage: response.usage,
-        usageInfo: updatedUsageInfo
+        usageInfo: updatedUsageInfo,
+        tokensUsed: tokensUsed,
+        userPlan: userPlan?.id || 'unknown'
       })
     } catch (usageError) {
       console.error('Error tracking usage:', usageError)

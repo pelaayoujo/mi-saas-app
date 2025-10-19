@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from '../../../../lib/auth'
 import clientPromise from '../../../../lib/mongodb'
 import { ObjectId } from 'mongodb'
+import { getCurrentMonthUsage } from '../../../../lib/usageTracker'
+import { getUserPlanFromDB } from '../../../../lib/permissions'
 
 export async function GET() {
   try {
@@ -55,25 +57,48 @@ export async function GET() {
       })
     }
 
+    // Obtener información de uso del mes actual y plan
+    const userPlan = await getUserPlanFromDB(session.user.email)
+    const monthlyUsage = await getCurrentMonthUsage(session.user.email)
+    
     // Calcular días restantes basado en el plan
-    const getDaysRemaining = (plan, creditos) => {
+    const getDaysRemaining = (plan, creditos, usageData, planData) => {
       if (plan === 'admin' || plan === 'enterprise') {
         return 'Ilimitado'
       }
       
-      // Para planes limitados, calcular basado en créditos restantes
+      // Para trial: usar artículos
       if (plan === 'trial') {
-        return creditos > 0 ? `${creditos} artículos restantes` : 'Sin créditos'
+        const used = usageData?.articlesGenerated || 0
+        const limit = planData?.limits?.articlesPerMonth || 3
+        const remaining = Math.max(0, limit - used)
+        return remaining > 0 ? `${remaining} artículos restantes` : 'Sin artículos restantes'
       }
       
-      return 'Activo'
+      // Para planes pagos: usar tokens
+      const used = usageData?.tokensUsed || 0
+      const limit = planData?.limits?.tokensPerMonth || 0
+      const remaining = Math.max(0, limit - used)
+      return remaining > 0 ? `${remaining.toLocaleString()} tokens restantes` : 'Sin tokens restantes'
     }
 
     const stats = {
       articlesCreated: articlesCount,
       plan: userData?.plan || 'trial',
       creditos: userData?.creditos || 0,
-      daysRemaining: getDaysRemaining(userData?.plan || 'trial', userData?.creditos || 0),
+      tokensUsed: monthlyUsage?.tokensUsed || 0,
+      articlesUsed: monthlyUsage?.articlesGenerated || 0,
+      daysRemaining: getDaysRemaining(
+        userData?.plan || 'trial', 
+        userData?.creditos || 0,
+        monthlyUsage,
+        userPlan
+      ),
+      monthlyUsage: {
+        articles: monthlyUsage?.articlesGenerated || 0,
+        tokens: monthlyUsage?.tokensUsed || 0
+      },
+      planLimits: userPlan?.limits || {},
       userData: {
         plan: userData?.plan || 'trial',
         creditos: userData?.creditos || 0,
