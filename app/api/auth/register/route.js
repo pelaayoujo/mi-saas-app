@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import clientPromise from '../../../../lib/mongodb'
 import bcrypt from 'bcryptjs'
 import { sendRegistrationConfirmation } from '../../../../lib/email'
+import { isAuthorizedForTrial } from '../../../../lib/permissions'
 
 export async function POST(request) {
   try {
@@ -99,6 +100,9 @@ export async function POST(request) {
     const saltRounds = 12
     const hashedPassword = await bcrypt.hash(password, saltRounds)
 
+    // Determinar el plan inicial basado en autorización
+    const initialPlan = isAuthorizedForTrial(email) ? 'trial' : 'basic'
+
     // Crear el usuario
     const user = {
       email: email.toLowerCase().trim(),
@@ -108,8 +112,8 @@ export async function POST(request) {
       fechaRegistro: new Date(),
       fechaLead: lead.fecha,
       status: 'activo',
-      plan: 'trial', // Plan de prueba por defecto
-      creditos: 10, // Créditos iniciales
+      plan: initialPlan, // Plan basado en autorización
+      creditos: initialPlan === 'trial' ? 3 : 0, // 3 créditos para trial, 0 para basic
       ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
     }
 
