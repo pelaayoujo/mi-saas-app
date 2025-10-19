@@ -16,32 +16,47 @@ export async function POST(request) {
       email: 'user@test.com' 
     })
 
-    if (existingUser) {
-      return NextResponse.json({
-        success: false,
-        message: 'El usuario user@test.com ya existe en la base de datos',
-        email: 'user@test.com'
-      })
-    }
-
     // Hash de la contraseña
     const saltRounds = 12
     const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-    // Crear el usuario admin
-    const adminUser = {
-      email: 'user@test.com',
-      password: hashedPassword,
-      nombre: 'Usuario Admin',
-      nicho: 'Administración',
-      fechaRegistro: new Date(),
-      status: 'activo',
-      plan: 'admin',
-      creditos: -1, // Ilimitado
-      ip: 'setup-script'
-    }
+    let result
+    let action
 
-    const result = await usersCollection.insertOne(adminUser)
+    if (existingUser) {
+      // Actualizar usuario existente (cambiar contraseña y asegurar plan admin)
+      await usersCollection.updateOne(
+        { email: 'user@test.com' },
+        {
+          $set: {
+            password: hashedPassword,
+            nombre: 'Usuario Admin',
+            nicho: 'Administración',
+            status: 'activo',
+            plan: 'admin',
+            creditos: -1,
+            updatedAt: new Date()
+          }
+        }
+      )
+      result = { insertedId: existingUser._id }
+      action = 'actualizado'
+    } else {
+      // Crear nuevo usuario admin
+      const adminUser = {
+        email: 'user@test.com',
+        password: hashedPassword,
+        nombre: 'Usuario Admin',
+        nicho: 'Administración',
+        fechaRegistro: new Date(),
+        status: 'activo',
+        plan: 'admin',
+        creditos: -1, // Ilimitado
+        ip: 'setup-script'
+      }
+      result = await usersCollection.insertOne(adminUser)
+      action = 'creado'
+    }
 
     // También asegurar que esté en leads y user_authorizations
     const leadsCollection = db.collection('leads')
@@ -79,12 +94,13 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Usuario admin creado exitosamente',
+      message: `Usuario admin ${action} exitosamente`,
       details: {
         email: 'user@test.com',
         password: password,
         userId: result.insertedId,
-        plan: 'admin'
+        plan: 'admin',
+        action: action
       }
     })
 
