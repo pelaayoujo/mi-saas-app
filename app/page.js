@@ -62,6 +62,7 @@ export default function Home() {
           
           <div className="nav-links">
             <a href="#features">Características</a>
+            <a href="#comparison">Comparación</a>
             <a href="#testimonials">Testimonios</a>
             <a href="#pricing">Precios</a>
             <a href="/dashboard" className="nav-login">Iniciar Sesión</a>
@@ -78,6 +79,7 @@ export default function Home() {
         {isMenuOpen && (
           <div className="mobile-menu">
             <a href="#features">Características</a>
+            <a href="#comparison">Comparación</a>
             <a href="#testimonials">Testimonios</a>
             <a href="#pricing">Precios</a>
             <a href="/dashboard">Iniciar Sesión</a>
@@ -217,6 +219,103 @@ export default function Home() {
               <h3>Ahorro de Tiempo</h3>
               <p>Reduce el tiempo de creación de contenido en un 80% y enfócate en lo que realmente importa</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Section */}
+      <section id="comparison" className="comparison">
+        <div className="container">
+          <div className="section-header">
+            <h2>La diferencia es evidente</h2>
+            <p>Compara un resultado genérico de ChatGPT vs. LinkedAI optimizado para LinkedIn</p>
+          </div>
+          
+          <div className="comparison-grid">
+            <div className="comparison-card chatgpt-result">
+              <div className="comparison-header">
+                <div className="comparison-badge chatgpt-badge">ChatGPT Genérico</div>
+                <div className="comparison-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="#6b7280" strokeWidth="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div className="comparison-content">
+                <h4>Título genérico</h4>
+                <p>"Contenido profesional para LinkedIn"</p>
+                <div className="comparison-post">
+                  <div className="post-content">
+                    <p>En el mundo laboral actual, es importante mantenerse activo en redes profesionales. LinkedIn es una plataforma clave para networking y desarrollo de carrera. Aquí tienes algunos consejos generales para mejorar tu presencia.</p>
+                    <p>Es fundamental crear contenido de valor, conectar con otros profesionales y mantener un perfil actualizado. La consistencia es clave para el éxito en LinkedIn.</p>
+                  </div>
+                </div>
+                <div className="comparison-metrics">
+                  <div className="metric negative">
+                    <span className="metric-label">Engagement esperado:</span>
+                    <span className="metric-value">15-30 likes</span>
+                  </div>
+                  <div className="metric negative">
+                    <span className="metric-label">Comentarios:</span>
+                    <span className="metric-value">1-3 comentarios</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="comparison-vs">
+              <div className="vs-circle">
+                <span>VS</span>
+              </div>
+            </div>
+
+            <div className="comparison-card linkedai-result">
+              <div className="comparison-header">
+                <div className="comparison-badge linkedai-badge">LinkedAI Optimizado</div>
+                <div className="comparison-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="4" fill="#0077B5"/>
+                    <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="white"/>
+                  </svg>
+                </div>
+              </div>
+              <div className="comparison-content">
+                <h4>🚀 ¿Sabías que el 87% de los reclutadores revisa LinkedIn ANTES de una entrevista?</h4>
+                <p>Este dato cambió completamente mi estrategia de networking...</p>
+                <div className="comparison-post">
+                  <div className="post-content">
+                    <p><strong>Hace 3 meses:</strong> Mi perfil de LinkedIn tenía 200 conexiones y posts con 5 likes promedio.</p>
+                    <p><strong>Hoy:</strong> +2,500 conexiones cualificadas y posts que generan 150+ interacciones.</p>
+                    <p>¿El cambio? Empecé a crear contenido que realmente aporta valor específico a mi sector (Marketing Digital).</p>
+                    <p><strong>3 estrategias que funcionan:</strong></p>
+                    <p>1️⃣ Compartir casos de éxito con métricas reales<br/>
+                    2️⃣ Hacer preguntas que generen debate profesional<br/>
+                    3️⃣ Contar historias de fracasos y aprendizajes</p>
+                    <p><em>¿Qué estrategia funciona mejor en tu industria? 👇</em></p>
+                  </div>
+                </div>
+                <div className="comparison-metrics">
+                  <div className="metric positive">
+                    <span className="metric-label">Engagement típico:</span>
+                    <span className="metric-value">150-400 likes</span>
+                  </div>
+                  <div className="metric positive">
+                    <span className="metric-label">Comentarios:</span>
+                    <span className="metric-value">25-60 comentarios</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="comparison-cta">
+            <p className="comparison-text">¿Listo para crear contenido que realmente destaque?</p>
+            <a href="#trial" className="btn-primary">
+              <span>Empezar a generar contenido profesional</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
           </div>
         </div>
       </section>
