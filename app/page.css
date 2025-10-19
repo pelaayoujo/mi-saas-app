@@ -1273,6 +1273,16 @@ body {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
+.comparison-card:hover * {
+  color: inherit !important;
+}
+
+.comparison-card:hover h4,
+.comparison-card:hover p,
+.comparison-card:hover span {
+  color: inherit !important;
+}
+
 .chatgpt-result {
   border-color: #e5e7eb;
 }
@@ -1390,8 +1400,9 @@ body {
 }
 
 .comparison-metrics {
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .metric {
@@ -1488,7 +1499,7 @@ body {
   }
   
   .comparison-metrics {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
   

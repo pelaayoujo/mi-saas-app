@@ -255,6 +255,8 @@ export default function Home() {
                   <div className="post-content">
                     <p>En el mundo laboral actual, es importante mantenerse activo en redes profesionales. LinkedIn es una plataforma clave para networking y desarrollo de carrera. Aquí tienes algunos consejos generales para mejorar tu presencia.</p>
                     <p>Es fundamental crear contenido de valor, conectar con otros profesionales y mantener un perfil actualizado. La consistencia es clave para el éxito en LinkedIn.</p>
+                    <p>Algunas recomendaciones básicas incluyen actualizar regularmente tu perfil, publicar contenido relevante y participar en discusiones profesionales. Estos pasos te ayudarán a construir una presencia sólida en la plataforma.</p>
+                    <p>Recuerda que la paciencia es importante. Los resultados no se verán de la noche a la mañana, pero con dedicación constante podrás mejorar tu visibilidad profesional.</p>
                   </div>
                 </div>
                 <div className="comparison-metrics">
@@ -265,6 +267,14 @@ export default function Home() {
                   <div className="metric negative">
                     <span className="metric-label">Comentarios:</span>
                     <span className="metric-value">1-3 comentarios</span>
+                  </div>
+                  <div className="metric negative">
+                    <span className="metric-label">Alcance promedio:</span>
+                    <span className="metric-value">50-100 personas</span>
+                  </div>
+                  <div className="metric negative">
+                    <span className="metric-label">Tiempo de creación:</span>
+                    <span className="metric-value">Sin optimizar</span>
                   </div>
                 </div>
               </div>
@@ -309,6 +319,14 @@ export default function Home() {
                   <div className="metric positive">
                     <span className="metric-label">Comentarios:</span>
                     <span className="metric-value">25-60 comentarios</span>
+                  </div>
+                  <div className="metric positive">
+                    <span className="metric-label">Alcance promedio:</span>
+                    <span className="metric-value">1,500-3,000 personas</span>
+                  </div>
+                  <div className="metric positive">
+                    <span className="metric-label">Tiempo de creación:</span>
+                    <span className="metric-value">2 minutos optimizado</span>
                   </div>
                 </div>
               </div>
