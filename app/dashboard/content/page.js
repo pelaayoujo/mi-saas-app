@@ -12,6 +12,8 @@ export default function Content() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [contentItems, setContentItems] = useState([])
+  const [selectedArticle, setSelectedArticle] = useState(null)
+  const [showModal, setShowModal] = useState(false)
 
   // Cargar contenido real del usuario
   useEffect(() => {
@@ -131,8 +133,8 @@ export default function Content() {
   }
 
   const handleView = (item) => {
-    // Función temporalmente deshabilitada
-    alert('Funcionalidad de visualización temporalmente deshabilitada')
+    setSelectedArticle(item)
+    setShowModal(true)
   }
 
   return (
@@ -350,16 +352,6 @@ export default function Content() {
                           Ver
                         </button>
                         <button 
-                          className="action-btn edit-btn"
-                          onClick={() => handleEdit(item)}
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 20h9"></path>
-                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                          </svg>
-                          Editar
-                        </button>
-                        <button 
                           className="action-btn delete-btn"
                           onClick={() => handleDelete(item)}
                         >
@@ -395,6 +387,58 @@ export default function Content() {
             </div>
         </main>
       </div>
+      
+      {/* Modal de visualización de artículo */}
+      {showModal && selectedArticle && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content article-view-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{selectedArticle.title}</h2>
+              <button 
+                className="modal-close"
+                onClick={() => setShowModal(false)}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="article-full-content">
+                <div 
+                  dangerouslySetInnerHTML={{ 
+                    __html: selectedArticle.content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+                  }}
+                  style={{ 
+                    lineHeight: '1.6',
+                    fontSize: '16px',
+                    whiteSpace: 'pre-wrap',
+                    wordWrap: 'break-word'
+                  }}
+                />
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button 
+                className="btn-secondary"
+                onClick={() => {
+                  navigator.clipboard.writeText(selectedArticle.content)
+                  alert('Artículo copiado al portapapeles')
+                }}
+              >
+                Copiar Contenido
+              </button>
+              <button 
+                className="btn-primary"
+                onClick={() => setShowModal(false)}
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { createPrompt, mapFormDataToPrompt, createFineTunePrompt, createContextu
 import { requireContentGeneration, handleAuthError } from '../../../../lib/authMiddleware'
 import { incrementArticleUsage, incrementArticleAndTokenUsage, canUserGenerateContent } from '../../../../lib/usageTracker'
 import { getUserPlanFromDB } from '../../../../lib/permissions'
+import { clientPromise } from '../../../../lib/mongodb'
 
 // Inicializar cliente de OpenAI
 const openai = new OpenAI({
@@ -210,6 +211,47 @@ export async function POST(request) {
         await incrementArticleAndTokenUsage(user.email, tokensUsed)
       } else {
         console.log('Usuario sin plan válido, permitiendo uso básico')
+      }
+      
+      // Guardar artículos automáticamente en la base de datos
+      try {
+        const client = await clientPromise
+        const db = client.db(process.env.MONGODB_DB || 'miSaaS')
+        const articlesCollection = db.collection('articles')
+        
+        console.log('Guardando artículos en la base de datos...')
+        for (const article of articles) {
+          const articleDoc = {
+            userId: user.email,
+            title: article.title,
+            body: article.content,
+            status: 'draft',
+            template: 'ai-generated',
+            metadata: {
+              tone: mappedData.tone || 'profesional',
+              length: mappedData.length || 'medio',
+              keywords: [mappedData.topic].filter(Boolean),
+              tags: [mappedData.objective].filter(Boolean),
+              targetAudience: mappedData.targetAudience || mappedData.audience || 'profesionales',
+              estimatedReadTime: Math.ceil(article.wordCount / 200) || 1,
+              wordCount: article.wordCount,
+              generationData: {
+                createdAt: new Date(),
+                professionalFocus: mappedData.professionalFocus,
+                aspects: mappedData.aspects
+              }
+            },
+            createdAt: new Date(),
+            updatedAt: new Date()
+          }
+          
+          await articlesCollection.insertOne(articleDoc)
+          console.log('Artículo guardado:', article.title)
+        }
+        console.log('Todos los artículos guardados correctamente')
+      } catch (saveError) {
+        console.error('Error guardando artículos:', saveError)
+        // No fallar la respuesta si hay error al guardar
       }
       
       // Obtener información actualizada de uso (sin fallar si hay error)

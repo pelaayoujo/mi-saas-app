@@ -578,15 +578,18 @@ export default function CreateArticle() {
                             </div>
                           </div>
                           <div className="linkedin-content">
-                            <ReactMarkdown
+                            <div 
+                              dangerouslySetInnerHTML={{ 
+                                __html: article.content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+                              }}
                               style={{ 
                                 fontFamily: 'inherit',
                                 lineHeight: '1.5',
-                                fontSize: '14px'
+                                fontSize: '14px',
+                                whiteSpace: 'pre-wrap',
+                                wordWrap: 'break-word'
                               }}
-                            >
-                              {article.content}
-                            </ReactMarkdown>
+                            />
                           </div>
                         </div>
                       </div>
