@@ -41,21 +41,7 @@ export async function POST(request) {
     }
     
     const user = authResult.user
-    console.log('👤 Usuario autenticado:', user.email)
-    
-    // Log específico para user@test.com
-    if (user.email === 'user@test.com') {
-      console.log('🎯 USUARIO ADMIN DETECTADO - BYPASS COMPLETO')
-    }
-    
-    console.log('📥 Parseando datos del formulario...')
     const formData = await request.json()
-    console.log('📥 Datos recibidos:', {
-      topic: formData.topic ? 'Presente' : 'FALTANTE',
-      tone: formData.tone ? 'Presente' : 'FALTANTE', 
-      length: formData.length ? 'Presente' : 'FALTANTE',
-      objective: formData.objective ? 'Presente' : 'FALTANTE'
-    })
     
     // Validar datos requeridos
     if (!formData.topic || !formData.tone || !formData.length || !formData.objective) {
