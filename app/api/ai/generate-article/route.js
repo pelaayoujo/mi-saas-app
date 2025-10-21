@@ -100,9 +100,10 @@ INSTRUCCIONES:
 - Extensión ${formData.length}: ${formData.length === 'corto' ? '150-300 palabras' : formData.length === 'medio' ? '300-500 palabras' : '500-800 palabras'}
 - Enfócate en: ${formData.aspects}
 - Objetivo: ${formData.objective}
-- Usa formato markdown: # para título, ## para subtítulos
+- NO uses símbolos markdown (#, ##, etc.) - solo texto plano
 - Incluye hashtags relevantes al final
-- Estructura: Título llamativo, párrafo inicial, desarrollo, conclusión, hashtags`
+- Estructura: Título llamativo, párrafo inicial, desarrollo, conclusión, hashtags
+- Solo un título principal, sin subtítulos`
         
         console.log('Prompt para fine-tune completo:', fineTunePrompt)
         
