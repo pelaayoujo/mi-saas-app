@@ -87,40 +87,21 @@ export async function POST(request) {
       console.log('Usando modelo fine-tuned:', finetunedModel)
       
       try {
-        // Paso 1: Obtener ejemplo del tono usando fine-tune
-        const toneExample = createFineTunePrompt(formData.tone)
-        console.log('Prompt para fine-tune:', toneExample)
+        // Usar fine-tune directamente para generar el artículo completo
+        const fineTunePrompt = `TONO: ${formData.tone}
+TEMA: ${formData.topic}
+ENFOQUE: ${formData.professionalFocus}
+EXTENSIÓN: ${formData.length}
+OBJETIVO: ${formData.objective}`
         
-        const toneResponse = await openai.chat.completions.create({
-          model: finetunedModel,
-          messages: [
-            {
-              role: "user",
-              content: toneExample
-            }
-          ],
-          max_tokens: 1000,
-          temperature: 0.7
-        })
-        
-        const baseContent = toneResponse.choices[0].message.content
-        console.log('✅ Contenido base del tono generado:', baseContent)
-        console.log('📊 Respuesta del fine-tune:', {
-          model: finetunedModel,
-          usage: toneResponse.usage,
-          finish_reason: toneResponse.choices[0].finish_reason
-        })
-        
-        // Paso 2: Usar gpt-4 con el contexto específico
-        const contextualPrompt = createContextualPrompt(formData, baseContent)
-        console.log('🔧 Prompt contextual completo:', contextualPrompt.substring(0, 300) + '...')
+        console.log('Prompt para fine-tune completo:', fineTunePrompt)
         
         response = await openai.chat.completions.create({
-          model: "gpt-4",
+          model: finetunedModel,
           messages: [
             {
               role: "user",
-              content: contextualPrompt
+              content: fineTunePrompt
             }
           ],
           max_tokens: 2000,
@@ -128,9 +109,14 @@ export async function POST(request) {
         })
         
         generatedContent = response.choices[0].message.content
-        generationMethod = 'fine-tuned + gpt-4 contextual'
-        console.log('✅ Artículo final generado con FINE-TUNE:', generatedContent.substring(0, 200) + '...')
-        console.log('🎯 MÉTODO UTILIZADO: Fine-tuned model + GPT-4 contextual')
+        generationMethod = 'fine-tuned direct'
+        console.log('✅ Artículo generado directamente con FINE-TUNE:', generatedContent.substring(0, 200) + '...')
+        console.log('🎯 MÉTODO UTILIZADO: Fine-tuned model directo')
+        console.log('📊 Respuesta del fine-tune:', {
+          model: finetunedModel,
+          usage: response.usage,
+          finish_reason: response.choices[0].finish_reason
+        })
       } catch (finetuneError) {
         console.error('❌ Error con modelo fine-tuned, usando fallback:', finetuneError)
         console.log('🔄 CAUSAS POSIBLES: Modelo no disponible, API error, o configuración incorrecta')
