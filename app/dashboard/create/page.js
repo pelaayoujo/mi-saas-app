@@ -607,53 +607,6 @@ export default function CreateArticle() {
                       
                       <div className="article-actions modern">
                         <button 
-                          className="btn-secondary"
-                          onClick={async () => {
-                            try {
-                              // Guardar artículo en la base de datos
-                              const response = await fetch('/api/articles', {
-                                method: 'POST',
-                                headers: {
-                                  'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                  title: article.title,
-                                  body: article.content,
-                                  wordCount: article.wordCount,
-                                  metadata: {
-                                    tone: formData.tone,
-                                    length: formData.length,
-                                    keywords: [],
-                                    tags: article.hashtags || [],
-                                    targetAudience: formData.targetAudience || 'profesionales',
-                                    estimatedReadTime: Math.ceil(article.wordCount / 200) || 1
-                                  }
-                                })
-                              })
-
-                              if (response.ok) {
-                                const data = await response.json()
-                                if (data.success) {
-                                  alert('Artículo guardado correctamente')
-                                } else {
-                                  alert('Error al guardar el artículo: ' + data.message)
-                                }
-                              } else {
-                                alert('Error al guardar el artículo')
-                              }
-                            } catch (error) {
-                              console.error('Error guardando artículo:', error)
-                              alert('Error al guardar el artículo')
-                            }
-                          }}
-                        >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                          </svg>
-                          Guardar Artículo
-                        </button>
-                        <button 
                           className="btn-primary"
                           onClick={async () => {
                             try {
