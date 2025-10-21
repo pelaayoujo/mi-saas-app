@@ -587,14 +587,18 @@ export default function CreateArticle() {
                           <div className="linkedin-content">
                             <div 
                               dangerouslySetInnerHTML={{ 
-                                __html: article.content.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
+                                __html: article.content
+                                  .replace(/\n/g, '<br>')
+                                  .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                                  .replace(/#([a-zA-Z0-9_]+)/g, '<span style="color: #0077B5; font-weight: 500;">#$1</span>')
                               }}
                               style={{ 
                                 fontFamily: 'inherit',
-                                lineHeight: '1.5',
+                                lineHeight: '1.6',
                                 fontSize: '14px',
                                 whiteSpace: 'pre-wrap',
-                                wordWrap: 'break-word'
+                                wordWrap: 'break-word',
+                                overflowWrap: 'break-word'
                               }}
                             />
                           </div>

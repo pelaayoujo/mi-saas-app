@@ -95,15 +95,21 @@ EXTENSIÓN: ${formData.length}
 OBJETIVO: ${formData.objective}
 ASPECTOS: ${formData.aspects}
 
-INSTRUCCIONES:
+INSTRUCCIONES CRÍTICAS:
 - Genera un artículo de LinkedIn con el tono ${formData.tone}
 - Extensión ${formData.length}: ${formData.length === 'corto' ? '150-300 palabras' : formData.length === 'medio' ? '300-500 palabras' : '500-800 palabras'}
 - Enfócate en: ${formData.aspects}
 - Objetivo: ${formData.objective}
 - NO uses símbolos markdown (#, ##, etc.) - solo texto plano
-- Incluye hashtags relevantes al final
-- Estructura: Título llamativo, párrafo inicial, desarrollo, conclusión, hashtags
-- Solo un título principal, sin subtítulos`
+- TÍTULO: Debe ser específico sobre "${formData.topic}" - NO uses hashtags en el título
+- ESTRUCTURA OBLIGATORIA:
+  1. Título llamativo sobre "${formData.topic}"
+  2. Párrafo inicial
+  3. Desarrollo del contenido
+  4. Conclusión
+  5. Línea en blanco
+  6. Hashtags relevantes al final (mínimo 3, máximo 5)
+- Los hashtags SOLO van al final, NUNCA en el título`
         
         console.log('Prompt para fine-tune completo:', fineTunePrompt)
         
