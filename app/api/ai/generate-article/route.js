@@ -92,7 +92,17 @@ export async function POST(request) {
 TEMA: ${formData.topic}
 ENFOQUE: ${formData.professionalFocus}
 EXTENSIÓN: ${formData.length}
-OBJETIVO: ${formData.objective}`
+OBJETIVO: ${formData.objective}
+ASPECTOS: ${formData.aspects}
+
+INSTRUCCIONES:
+- Genera un artículo de LinkedIn con el tono ${formData.tone}
+- Extensión ${formData.length}: ${formData.length === 'corto' ? '150-300 palabras' : formData.length === 'medio' ? '300-500 palabras' : '500-800 palabras'}
+- Enfócate en: ${formData.aspects}
+- Objetivo: ${formData.objective}
+- Usa formato markdown: # para título, ## para subtítulos
+- Incluye hashtags relevantes al final
+- Estructura: Título llamativo, párrafo inicial, desarrollo, conclusión, hashtags`
         
         console.log('Prompt para fine-tune completo:', fineTunePrompt)
         
