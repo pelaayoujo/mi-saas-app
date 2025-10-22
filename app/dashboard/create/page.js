@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
-import ExamplesModal from '../../components/ExamplesModal'
+import ExamplesModal from '../components/ExamplesModal'
 import '../dashboard.css'
 
 export default function CreateArticle() {
