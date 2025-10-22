@@ -126,7 +126,14 @@ export default function CreateArticle() {
       // Pasar al paso 3 (Revisión) con los artículos generados
       setIsGenerating(false)
       setCurrentStep(3)
-      setGeneratedArticles(data.articles)
+      
+      // Agregar IDs temporales a los artículos para evitar duplicados
+      const articlesWithTempIds = data.articles.map((article, index) => ({
+        ...article,
+        id: `temp-${Date.now()}-${index}` // ID temporal único
+      }))
+      
+      setGeneratedArticles(articlesWithTempIds)
       
     } catch (error) {
       console.error('Error completo:', error)
