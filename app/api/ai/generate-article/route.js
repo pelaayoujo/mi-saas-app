@@ -44,12 +44,11 @@ export async function POST(request) {
     const formData = await request.json()
     
     // Validar datos requeridos
-    if (!formData.topic || !formData.tone || !formData.length || !formData.objective) {
+    if (!formData.topic || !formData.tone || !formData.length) {
       console.log('❌ Faltan datos requeridos:', {
         topic: !!formData.topic,
         tone: !!formData.tone,
-        length: !!formData.length,
-        objective: !!formData.objective
+        length: !!formData.length
       })
       return NextResponse.json(
         { error: 'Faltan datos requeridos' },
@@ -92,14 +91,12 @@ export async function POST(request) {
 TEMA: ${formData.topic}
 ENFOQUE: ${formData.professionalFocus}
 EXTENSIÓN: ${formData.length}
-OBJETIVO: ${formData.objective}
 ASPECTOS: ${formData.aspects}
 
 INSTRUCCIONES CRÍTICAS:
 - Genera un artículo de LinkedIn con el tono ${formData.tone}
 - Extensión ${formData.length}: ${formData.length === 'corto' ? '150-300 palabras' : formData.length === 'medio' ? '300-500 palabras' : '500-800 palabras'}
 - Enfócate en: ${formData.aspects}
-- Objetivo: ${formData.objective}
 - NO uses símbolos markdown (#, ##, etc.) - solo texto plano
 - TÍTULO: Debe ser específico sobre "${formData.topic}" - NO uses hashtags en el título
 - ESTRUCTURA OBLIGATORIA:

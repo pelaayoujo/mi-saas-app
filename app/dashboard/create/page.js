@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
-import ExamplesModal from '../components/ExamplesModal'
 import '../dashboard.css'
 
 // Force deployment - Latest commit: 72019a5
@@ -12,11 +11,6 @@ export default function CreateArticle() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [modalState, setModalState] = useState({
-    isOpen: false,
-    type: 'tone', // 'tone' or 'objective'
-    selectedValue: null
-  })
   const [formData, setFormData] = useState({
     professionalFocus: '',
     tone: 'profesional',
@@ -24,7 +18,6 @@ export default function CreateArticle() {
     length: 'medio',
     aspects: '',
     targetAudience: '',
-    objective: 'engagement',
     resultsCount: 1
   })
   const [errors, setErrors] = useState({})
@@ -33,30 +26,6 @@ export default function CreateArticle() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedArticles, setGeneratedArticles] = useState([])
 
-  // Funciones para manejar el modal de ejemplos
-  const openExamplesModal = (type, currentValue) => {
-    setModalState({
-      isOpen: true,
-      type: type,
-      selectedValue: currentValue
-    })
-  }
-
-  const closeExamplesModal = () => {
-    setModalState({
-      isOpen: false,
-      type: 'tone',
-      selectedValue: null
-    })
-  }
-
-  const handleExampleSelect = (selectedValue) => {
-    if (modalState.type === 'tone') {
-      setFormData(prev => ({ ...prev, tone: selectedValue }))
-    } else if (modalState.type === 'objective') {
-      setFormData(prev => ({ ...prev, objective: selectedValue }))
-    }
-  }
 
   // Verificar autenticación
   if (status === 'loading') {
@@ -195,14 +164,6 @@ export default function CreateArticle() {
     { value: 'muy-largo', label: 'Muy largo (1200+ palabras)', description: 'Artículo completo' }
   ]
 
-  const objectiveOptions = [
-    { value: 'engagement', label: 'Generar Interacción', description: 'Likes, comentarios y shares' },
-    { value: 'discussion', label: 'Intercambio de Opiniones', description: 'Debate y conversación' },
-    { value: 'followers', label: 'Ganar Seguidores', description: 'Crecimiento de audiencia' },
-    { value: 'authority', label: 'Posicionar Autoridad', description: 'Establecer expertise' },
-    { value: 'leads', label: 'Generar Leads', description: 'Conversiones y contactos' },
-    { value: 'awareness', label: 'Crear Conciencia', description: 'Difundir mensaje o causa' }
-  ]
 
   return (
     <div className="dashboard">
@@ -384,22 +345,7 @@ export default function CreateArticle() {
 
                 {/* Tono */}
                 <div className="form-group">
-                  <div className="form-label-with-help">
-                    <label className="form-label">Tono del Artículo *</label>
-                    <button
-                      type="button"
-                      className="examples-button"
-                      onClick={() => openExamplesModal('tone', formData.tone)}
-                      title="Ver ejemplos de tonos"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                      </svg>
-                      Ver ejemplos
-                    </button>
-                  </div>
+                  <label className="form-label">Tono del Artículo *</label>
                   <div className="radio-group radio-group-compact">
                     {toneOptions.map((option) => (
                       <label key={option.value} className="radio-option radio-option-compact">
@@ -443,43 +389,6 @@ export default function CreateArticle() {
                   </div>
                 </div>
 
-                {/* Objetivo del Artículo */}
-                <div className="form-group">
-                  <div className="form-label-with-help">
-                    <label className="form-label">Objetivo del Artículo *</label>
-                    <button
-                      type="button"
-                      className="examples-button"
-                      onClick={() => openExamplesModal('objective', formData.objective)}
-                      title="Ver ejemplos de objetivos"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                      </svg>
-                      Ver ejemplos
-                    </button>
-                  </div>
-                  <div className="radio-group radio-group-compact">
-                    {objectiveOptions.map((option) => (
-                      <label key={option.value} className="radio-option radio-option-compact">
-                        <input
-                          type="radio"
-                          name="objective"
-                          value={option.value}
-                          checked={formData.objective === option.value}
-                          onChange={handleInputChange}
-                          className="radio-input"
-                        />
-                        <div className="radio-content">
-                          <div className="radio-label">{option.label}</div>
-                          <div className="radio-description">{option.description}</div>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </div>
 
                 {/* Audiencia Objetivo */}
                 <div className="form-group">
@@ -694,7 +603,7 @@ export default function CreateArticle() {
                                   length: formData.length,
                                   targetAudience: formData.professionalFocus,
                                   keywords: [formData.topic],
-                                  tags: [formData.objective],
+                                  tags: [],
                                   wordCount: article.wordCount
                                 })
                               })
@@ -746,14 +655,6 @@ export default function CreateArticle() {
         </main>
       </div>
 
-      {/* Modal de ejemplos */}
-      <ExamplesModal
-        isOpen={modalState.isOpen}
-        onClose={closeExamplesModal}
-        type={modalState.type}
-        selectedValue={modalState.selectedValue}
-        onSelect={handleExampleSelect}
-      />
     </div>
   )
 }

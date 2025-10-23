@@ -5544,52 +5544,7 @@ body {
   margin-bottom: 0.75rem;
 }
 
-.examples-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  border: 1px solid var(--gray-300);
-  color: var(--gray-700);
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
 
-.examples-button:hover {
-  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-  border-color: var(--linkedin-blue);
-  color: var(--linkedin-blue);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 119, 181, 0.15);
-}
-
-.examples-button:active {
-  transform: translateY(0);
-}
-
-.examples-button svg {
-  flex-shrink: 0;
-}
-
-/* Mobile responsive for examples button */
-@media (max-width: 768px) {
-  .form-label-with-help {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  
-  .examples-button {
-    align-self: flex-end;
-    font-size: 0.75rem;
-    padding: 0.4rem 0.6rem;
-  }
-}
   
   .modal-header, .modal-body, .modal-footer {
     padding: 16px;
