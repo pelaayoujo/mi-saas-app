@@ -158,10 +158,9 @@ export default function CreateArticle() {
   ]
 
   const lengthOptions = [
-    { value: 'corto', label: 'Corto (300-500 palabras)', description: 'Ideal para posts rápidos' },
-    { value: 'medio', label: 'Medio (500-800 palabras)', description: 'Artículo estándar' },
-    { value: 'largo', label: 'Largo (800-1200 palabras)', description: 'Análisis profundo' },
-    { value: 'muy-largo', label: 'Muy largo (1200+ palabras)', description: 'Artículo completo' }
+    { value: 'corto', label: 'Corto (hasta 200 palabras)', description: 'Post conciso y directo' },
+    { value: 'medio', label: 'Medio (hasta 350 palabras)', description: 'Artículo equilibrado' },
+    { value: 'largo', label: 'Largo (hasta 500 palabras)', description: 'Análisis detallado' }
   ]
 
 
@@ -611,7 +610,7 @@ export default function CreateArticle() {
                               if (response.ok) {
                                 const result = await response.json()
                                 console.log('Artículo guardado exitosamente:', result)
-                                alert('✅ Artículo guardado exitosamente en Contenido Generado')
+                                // Artículo guardado exitosamente - redirigiendo...
                                 // Redirigir a la página de contenido
                                 router.push('/dashboard/content')
                               } else {

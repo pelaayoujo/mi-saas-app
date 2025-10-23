@@ -95,7 +95,7 @@ ASPECTOS: ${formData.aspects}
 
 INSTRUCCIONES CRÍTICAS:
 - Genera un artículo de LinkedIn con el tono ${formData.tone}
-- Extensión ${formData.length}: ${formData.length === 'corto' ? '150-300 palabras' : formData.length === 'medio' ? '300-500 palabras' : '500-800 palabras'}
+- Extensión ${formData.length}: ${formData.length === 'corto' ? 'hasta 200 palabras' : formData.length === 'medio' ? 'hasta 350 palabras' : 'hasta 500 palabras'}
 - Enfócate en: ${formData.aspects}
 - NO uses símbolos markdown (#, ##, etc.) - solo texto plano
 - TÍTULO: Debe ser específico sobre "${formData.topic}" - NO uses hashtags en el título
