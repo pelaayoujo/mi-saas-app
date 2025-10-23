@@ -18,7 +18,6 @@ export default function CreateArticle() {
     length: 'medio',
     aspects: '',
     targetAudience: '',
-    resultsCount: 1
   })
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -424,43 +423,6 @@ export default function CreateArticle() {
                   <p className="form-help">Lista los puntos principales que quieres desarrollar en tu artículo</p>
                 </div>
 
-                {/* Cantidad de Resultados */}
-                <div className="form-group full-width">
-                  <label className="form-label">
-                    Cantidad de Resultados a Generar
-                  </label>
-                  <div className="slider-container">
-                    <div className="slider-labels">
-                      <span className="slider-label">1</span>
-                      <span className="slider-label">2</span>
-                      <span className="slider-label">3</span>
-                    </div>
-                    <div className="slider-wrapper">
-                      <input
-                        type="range"
-                        min="1"
-                        max="3"
-                        step="1"
-                        value={formData.resultsCount}
-                        onChange={(e) => setFormData(prev => ({ ...prev, resultsCount: parseInt(e.target.value) }))}
-                        className="slider"
-                      />
-                      <div className="slider-track">
-                        <div 
-                          className="slider-fill" 
-                          style={{ width: `${((formData.resultsCount - 1) / 2) * 100}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                    <div className="slider-value">
-                      <span className="slider-number">{formData.resultsCount}</span>
-                      <span className="slider-text">
-                        {formData.resultsCount === 1 ? 'resultado' : 'resultados'}
-                      </span>
-                    </div>
-                  </div>
-                  <p className="form-help">Selecciona cuántas versiones diferentes del artículo quieres generar</p>
-                </div>
               </div>
 
               {/* Botones de Acción */}
@@ -503,8 +465,8 @@ export default function CreateArticle() {
                   <div className="generation-spinner">
                     <div className="spinner-circle"></div>
                   </div>
-                  <h2>Generando {formData.resultsCount === 1 ? 'Artículo' : 'Artículos'}</h2>
-                  <p>Nuestra IA está creando {formData.resultsCount === 1 ? 'tu artículo' : `tus ${formData.resultsCount} artículos`} personalizado{formData.resultsCount > 1 ? 's' : ''}...</p>
+                  <h2>Generando Artículo</h2>
+                  <p>Nuestra IA está creando tu artículo personalizado...</p>
                   <div className="generation-details">
                     <div className="detail-item">
                       <span className="detail-label">Tema:</span>

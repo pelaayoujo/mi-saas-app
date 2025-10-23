@@ -98,9 +98,9 @@ INSTRUCCIONES CRÍTICAS:
 - Extensión ${formData.length}: ${formData.length === 'corto' ? 'hasta 200 palabras' : formData.length === 'medio' ? 'hasta 350 palabras' : 'hasta 500 palabras'}
 - Enfócate en: ${formData.aspects}
 - NO uses símbolos markdown (#, ##, etc.) - solo texto plano
-- TÍTULO: Debe ser específico sobre "${formData.topic}" - NO uses hashtags en el título
+- TÍTULO: Debe ser específico sobre "${formData.topic}" y NO sobre "${formData.professionalFocus}" - NO uses hashtags en el título
 - ESTRUCTURA OBLIGATORIA:
-  1. Título llamativo sobre "${formData.topic}"
+  1. Título llamativo sobre "${formData.topic}" (NO sobre "${formData.professionalFocus}")
   2. Párrafo inicial
   3. Desarrollo del contenido
   4. Conclusión
