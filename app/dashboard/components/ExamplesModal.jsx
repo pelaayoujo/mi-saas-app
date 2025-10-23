@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { toneExamples, objectiveExamples } from '../../lib/examplesData'
+import { toneExamples, objectiveExamples } from '../../../lib/examplesData'
 
 export default function ExamplesModal({ isOpen, onClose, type, selectedValue, onSelect }) {
   const [activeTab, setActiveTab] = useState(selectedValue || 'profesional')
