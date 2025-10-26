@@ -7,6 +7,11 @@ export default function Home() {
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+  const [openFAQ, setOpenFAQ] = useState(null)
+
+  const toggleFAQ = (index) => {
+    setOpenFAQ(openFAQ === index ? null : index)
+  }
 
   const handleTrialSubmit = async (e) => {
     e.preventDefault()
@@ -496,6 +501,114 @@ export default function Home() {
                 <li>Soporte 24/7</li>
               </ul>
               <a href="#trial" className="pricing-btn">Próximamente</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="faq">
+        <div className="container">
+          <div className="section-header">
+            <h2>Preguntas Frecuentes</h2>
+            <p>Resolvemos las dudas más comunes sobre LinkedAI</p>
+          </div>
+          
+          <div className="faq-container">
+            <div className="faq-item" onClick={() => toggleFAQ(0)}>
+              <div className="faq-question">
+                <h3>¿Qué es LinkedAI y cómo funciona?</h3>
+                <span className={`faq-icon ${openFAQ === 0 ? 'open' : ''}`}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              {openFAQ === 0 && (
+                <div className="faq-answer">
+                  <p>LinkedAI es una herramienta de inteligencia artificial que analiza millones de artículos de LinkedIn para generar contenido optimizado específicamente para tu perfil profesional. Nuestra IA estudia patrones de engagement, tonos efectivos y estructuras que funcionan mejor en LinkedIn para crear posts que realmente conecten con tu audiencia.</p>
+                </div>
+              )}
+            </div>
+
+            <div className="faq-item" onClick={() => toggleFAQ(1)}>
+              <div className="faq-question">
+                <h3>¿Cuánto cuesta usar LinkedAI?</h3>
+                <span className={`faq-icon ${openFAQ === 1 ? 'open' : ''}`}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              {openFAQ === 1 && (
+                <div className="faq-answer">
+                  <p>Actualmente estamos en fase de lanzamiento privado gratuito. Los usuarios autorizados pueden probar la herramienta sin costo. Próximamente tendremos planes desde €12/mes para uso básico, €20/mes para uso profesional y €35/mes para empresas. Todos los planes incluyen garantía de 30 días.</p>
+                </div>
+              )}
+            </div>
+
+            <div className="faq-item" onClick={() => toggleFAQ(2)}>
+              <div className="faq-question">
+                <h3>¿Cómo me registro para la prueba gratuita?</h3>
+                <span className={`faq-icon ${openFAQ === 2 ? 'open' : ''}`}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              {openFAQ === 2 && (
+                <div className="faq-answer">
+                  <p>Simplemente introduce tu email en el formulario de abajo. Te añadiremos a nuestra lista de espera y te notificaremos cuando tengas acceso. El proceso es completamente gratuito y sin compromiso. Puedes cancelar tu participación en cualquier momento.</p>
+                </div>
+              )}
+            </div>
+
+            <div className="faq-item" onClick={() => toggleFAQ(3)}>
+              <div className="faq-question">
+                <h3>¿Qué tipos de contenido puede generar LinkedAI?</h3>
+                <span className={`faq-icon ${openFAQ === 3 ? 'open' : ''}`}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              {openFAQ === 3 && (
+                <div className="faq-answer">
+                  <p>LinkedAI puede generar posts profesionales, artículos educativos, contenido inspiracional, mensajes disruptivos y conversaciones casuales. También optimiza biografías de LinkedIn, crea mensajes de conexión personalizados y programa contenido para mantener una presencia constante en la plataforma.</p>
+                </div>
+              )}
+            </div>
+
+            <div className="faq-item" onClick={() => toggleFAQ(4)}>
+              <div className="faq-question">
+                <h3>¿Es seguro usar LinkedAI con mi cuenta de LinkedIn?</h3>
+                <span className={`faq-icon ${openFAQ === 4 ? 'open' : ''}`}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              {openFAQ === 4 && (
+                <div className="faq-answer">
+                  <p>Absolutamente. LinkedAI no requiere acceso directo a tu cuenta de LinkedIn. Simplemente generamos el contenido optimizado que tú puedes copiar y pegar manualmente en tu perfil. No almacenamos credenciales ni accedemos a tu información personal de LinkedIn.</p>
+                </div>
+              )}
+            </div>
+
+            <div className="faq-item" onClick={() => toggleFAQ(5)}>
+              <div className="faq-question">
+                <h3>¿Qué resultados puedo esperar con LinkedAI?</h3>
+                <span className={`faq-icon ${openFAQ === 5 ? 'open' : ''}`}>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+              {openFAQ === 5 && (
+                <div className="faq-answer">
+                  <p>Nuestros usuarios reportan un aumento promedio del 150% en engagement, ahorro de 4 horas semanales en creación de contenido, y un incremento salarial anual promedio de €5,000. El contenido generado está optimizado para maximizar tu visibilidad profesional y networking efectivo.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
