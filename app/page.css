@@ -812,7 +812,7 @@ body {
 /* Showcase Section */
 .showcase {
   padding: 2.5rem 0;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
   color: #ffffff;
 }
 
@@ -820,32 +820,40 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
+  align-items: stretch;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 500px;
 }
 
 .showcase-visual {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+  height: 100%;
 }
 
 .showcase-illustration {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(135deg, #0077B5 0%, #4facfe 100%);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 119, 181, 0.2);
 }
 
 .linkedin-icon {
-  background: linear-gradient(135deg, #0077B5 0%, #4facfe 100%);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
+  padding: 3rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   animation: pulse 2s infinite;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .ai-sparkles {
@@ -894,6 +902,13 @@ body {
     transform: translateY(-10px) rotate(180deg);
     opacity: 1;
   }
+}
+
+.showcase-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
 .showcase-text h2 {
@@ -1773,6 +1788,11 @@ body {
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    min-height: auto;
+  }
+
+  .showcase-text {
+    height: auto;
   }
 
   .showcase-text h2 {
@@ -1784,17 +1804,17 @@ body {
   }
 
   .showcase-illustration {
-    width: 150px;
-    height: 150px;
+    min-height: 300px;
+    width: 100%;
   }
 
   .linkedin-icon {
-    padding: 1.5rem;
+    padding: 2rem;
   }
 
   .linkedin-icon svg {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 
   .sparkle {
