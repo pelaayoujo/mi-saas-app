@@ -17,8 +17,6 @@ if (!process.env.OPENAI_API_KEY) {
 }
 
 export async function POST(request) {
-  console.log('🚀 Iniciando generación de artículo...')
-  console.log('🔑 API Key configurada:', !!process.env.OPENAI_API_KEY)
   
   // Validar API key temprano
   if (!process.env.OPENAI_API_KEY) {
@@ -30,13 +28,10 @@ export async function POST(request) {
   }
   
   try {
-    console.log('🔐 Verificando autenticación y permisos...')
     // Verificar permisos y autenticación
     const authResult = await requireContentGeneration(request, 'article')
-    console.log('🔐 Resultado autenticación:', authResult.success ? 'OK' : 'FAIL', authResult.error || '')
     
     if (!authResult.success) {
-      console.log('❌ Error de autenticación:', authResult.error)
       return handleAuthError(authResult)
     }
     
@@ -45,23 +40,16 @@ export async function POST(request) {
     
     // Validar datos requeridos
     if (!formData.topic || !formData.tone || !formData.length) {
-      console.log('❌ Faltan datos requeridos:', {
-        topic: !!formData.topic,
-        tone: !!formData.tone,
-        length: !!formData.length
-      })
       return NextResponse.json(
         { error: 'Faltan datos requeridos' },
         { status: 400 }
       )
     }
 
-    console.log('🔄 Mapeando datos del formulario...')
     // Mapear datos del formulario
     let mappedData
     try {
       mappedData = mapFormDataToPrompt(formData)
-      console.log('✅ Datos mapeados correctamente')
     } catch (mappingError) {
       console.error('❌ Error mapeando datos:', mappingError)
       return NextResponse.json(
@@ -72,18 +60,12 @@ export async function POST(request) {
     
     // Verificar si tenemos modelo fine-tuned configurado
     const finetunedModel = process.env.OPENAI_FINETUNED_MODEL
-    console.log('🤖 Modelo fine-tuned configurado:', !!finetunedModel)
-    console.log('🤖 Valor de OPENAI_FINETUNED_MODEL:', finetunedModel || 'NO CONFIGURADO')
-    
     let generatedContent
     let response
     let generationMethod = 'unknown'
     
-    console.log('🔄 Iniciando generación con OpenAI...')
-    
     if (finetunedModel) {
       // Usar modelo fine-tuned (dos pasos)
-      console.log('Usando modelo fine-tuned:', finetunedModel)
       
       try {
         // Usar fine-tune directamente para generar el artículo completo
@@ -108,7 +90,6 @@ INSTRUCCIONES CRÍTICAS:
   6. Hashtags relevantes al final (mínimo 3, máximo 5)
 - Los hashtags SOLO van al final, NUNCA en el título`
         
-        console.log('Prompt para fine-tune completo:', fineTunePrompt)
         
         response = await openai.chat.completions.create({
           model: finetunedModel,
@@ -124,19 +105,10 @@ INSTRUCCIONES CRÍTICAS:
         
         generatedContent = response.choices[0].message.content
         generationMethod = 'fine-tuned direct'
-        console.log('✅ Artículo generado directamente con FINE-TUNE:', generatedContent.substring(0, 200) + '...')
-        console.log('🎯 MÉTODO UTILIZADO: Fine-tuned model directo')
-        console.log('📊 Respuesta del fine-tune:', {
-          model: finetunedModel,
-          usage: response.usage,
-          finish_reason: response.choices[0].finish_reason
-        })
       } catch (finetuneError) {
         console.error('❌ Error con modelo fine-tuned, usando fallback:', finetuneError)
-        console.log('🔄 CAUSAS POSIBLES: Modelo no disponible, API error, o configuración incorrecta')
         // Fallback al método tradicional
         const prompt = createPrompt(mappedData)
-        console.log('Prompt generado (fallback):', prompt)
         
         response = await openai.chat.completions.create({
           model: "gpt-4",
@@ -152,14 +124,10 @@ INSTRUCCIONES CRÍTICAS:
         
         generatedContent = response.choices[0].message.content
         generationMethod = 'gpt-4 fallback (fine-tune error)'
-        console.log('🔄 Artículo generado con MÉTODO TRADICIONAL (fallback)')
-        console.log('🎯 MÉTODO UTILIZADO: GPT-4 estándar (sin fine-tune)')
       }
     } else {
       // Usar método tradicional (fallback)
-      console.log('⚠️ NO HAY MODELO FINE-TUNED - Usando modelo estándar gpt-4')
       const prompt = createPrompt(mappedData)
-      console.log('Prompt generado:', prompt)
       
       response = await openai.chat.completions.create({
         model: "gpt-4",
@@ -175,8 +143,6 @@ INSTRUCCIONES CRÍTICAS:
       
       generatedContent = response.choices[0].message.content
       generationMethod = 'gpt-4 standard (no fine-tune configured)'
-      console.log('🔄 Artículo generado con MÉTODO TRADICIONAL')
-      console.log('🎯 MÉTODO UTILIZADO: GPT-4 estándar (sin fine-tune configurado)')
     }
     
     // Validar que se generó contenido
@@ -202,23 +168,16 @@ INSTRUCCIONES CRÍTICAS:
 
     // Incrementar contador de uso según el plan del usuario
     try {
-      console.log('Obteniendo plan del usuario:', user.email)
       const userPlan = await getUserPlanFromDB(user.email)
-      console.log('Plan obtenido:', userPlan)
       
       const tokensUsed = response.usage?.total_tokens || 0
-      console.log('Tokens usados:', tokensUsed)
       
       if (userPlan && userPlan.id === 'trial') {
         // TRIAL: Solo incrementar artículos (3 máximo)
-        console.log('Incrementando uso para usuario trial')
         await incrementArticleUsage(user.email)
       } else if (userPlan) {
         // PLANES PAGOS: Incrementar artículos y tokens
-        console.log('Incrementando uso para usuario pagado')
         await incrementArticleAndTokenUsage(user.email, tokensUsed)
-      } else {
-        console.log('Usuario sin plan válido, permitiendo uso básico')
       }
       
       // Los artículos se guardarán cuando el usuario haga clic en "Guardar"

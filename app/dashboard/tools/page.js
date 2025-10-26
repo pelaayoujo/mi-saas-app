@@ -96,6 +96,20 @@ export default function Tools() {
       ],
       status: 'coming-soon',
       path: null
+    },
+    {
+      id: 'scheduling',
+      title: 'Programación de Contenido',
+      description: 'Planifica y programa tus publicaciones en LinkedIn',
+      icon: '📅',
+      features: [
+        'Calendario editorial',
+        'Programación automática',
+        'Horarios óptimos',
+        'Gestión de contenido'
+      ],
+      status: 'coming-soon',
+      path: null
     }
   ]
 

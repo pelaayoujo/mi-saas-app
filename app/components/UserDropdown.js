@@ -75,7 +75,7 @@ export default function UserDropdown() {
         </svg>
       ),
       label: 'Configuración',
-      action: () => router.push('/dashboard/settings')
+      action: () => router.push('/dashboard/profile')
     },
     {
       icon: (
@@ -90,7 +90,7 @@ export default function UserDropdown() {
         </svg>
       ),
       label: 'Soporte',
-      action: () => router.push('/dashboard/support')
+      action: () => window.open('mailto:soporte@linkedai.com', '_blank')
     },
     {
       icon: (

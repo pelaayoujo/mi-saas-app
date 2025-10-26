@@ -170,7 +170,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3>Múltiples Formatos</h3>
-              <p>Posts, artículos, biografías, presentaciones y más. Todo lo que necesitas para destacar en LinkedIn</p>
+              <p>Posts, artículos, biografías y mensajes. Todo lo que necesitas para destacar en LinkedIn</p>
             </div>
             
             <div className="feature-card">

@@ -2,10 +2,7 @@
 import { useState } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import ReactMarkdown from 'react-markdown'
 import '../dashboard.css'
-
-// Force deployment - Latest commit: 72019a5
 
 export default function CreateArticle() {
   const { data: session, status } = useSession()
