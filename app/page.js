@@ -102,18 +102,18 @@ export default function Home() {
             </div>
           
             <h1 className="hero-title">
-            Potencia tu <span className="gradient-text">carrera profesional</span> en LinkedIn
-            <br />sin escribir una sola palabra
+            La IA que analiza <span className="gradient-text">millones de artículos</span> para optimizar tu contenido
+            <br />y maximizar tu impacto profesional
             </h1>
           
             <p className="hero-description">
-            <strong>Los profesionales TOP de LinkedIn aceleran su crecimiento</strong> usando IA para su contenido. 
-            LinkedAI genera posts que posicionan, conectan con tu audiencia y abren nuevas oportunidades laborales.
+            <strong>LinkedAI estudia patrones de contenido exitoso</strong> y te proporciona insights basados en datos reales. 
+            Optimiza tu contenido con análisis de millones de artículos que realmente funcionan en LinkedIn.
           </p>
           
             <div className="hero-actions">
             <a href="#trial" className="btn-primary">
-              <span>🚀 CONSEGUIR ACCESO EXCLUSIVO GRATIS</span>
+              <span>🚀 PROBAR ANÁLISIS DE IA GRATIS</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -146,7 +146,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <h2>¿Por qué elegir LinkedAI?</h2>
-            <p>La herramienta más avanzada para crear contenido profesional en LinkedIn</p>
+            <p>La IA más avanzada para analizar y optimizar contenido profesional en LinkedIn</p>
           </div>
           
           <div className="features-grid">
@@ -157,8 +157,8 @@ export default function Home() {
                   <path d="M24 8L30 18H40L32 26L36 36L24 30L12 36L16 26L8 18H18L24 8Z" fill="#0077B5"/>
                 </svg>
               </div>
-              <h3>Contenido Optimizado</h3>
-              <p>Algoritmos avanzados que crean posts específicamente diseñados para maximizar el engagement en LinkedIn</p>
+              <h3>Análisis de Patrones</h3>
+              <p>IA que estudia millones de artículos exitosos para identificar qué funciona y optimizar tu contenido</p>
             </div>
             
             <div className="feature-card">
@@ -169,8 +169,8 @@ export default function Home() {
                   <path d="M20 20H28M20 24H28M20 28H24" stroke="#0077B5" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
-              <h3>Múltiples Formatos</h3>
-              <p>Posts, artículos, biografías y mensajes. Todo lo que necesitas para destacar en LinkedIn</p>
+              <h3>Insights Específicos</h3>
+              <p>Análisis detallado de qué tipo de contenido funciona mejor para tu industria y audiencia específica</p>
             </div>
             
             <div className="feature-card">
@@ -181,8 +181,8 @@ export default function Home() {
                   <circle cx="24" cy="24" r="8" stroke="#0077B5" strokeWidth="2"/>
                 </svg>
               </div>
-              <h3>Análisis Inteligente</h3>
-              <p>IA que analiza tendencias y optimiza tu contenido para alcanzar a la audiencia correcta</p>
+              <h3>Datos en Tiempo Real</h3>
+              <p>Análisis continuo de tendencias y métricas para mantener tu contenido siempre optimizado</p>
             </div>
             
             <div className="feature-card">
@@ -193,8 +193,8 @@ export default function Home() {
                   <path d="M20 20V28M24 20V28M28 20V28" stroke="#0077B5" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
-              <h3>Programación Automática</h3>
-              <p>Planifica y publica tu contenido en los momentos óptimos para maximizar la visibilidad</p>
+              <h3>Optimización de Timing</h3>
+              <p>Análisis de datos para identificar los mejores momentos para publicar según tu audiencia</p>
             </div>
             
             <div className="feature-card">
@@ -204,8 +204,8 @@ export default function Home() {
                   <path d="M24 8L28 20H40L30 28L34 40L24 32L14 40L18 28L8 20H20L24 8Z" stroke="#0077B5" strokeWidth="2"/>
                 </svg>
               </div>
-              <h3>Personalización Total</h3>
-              <p>Adapta el tono, estilo y contenido a tu marca personal y objetivos profesionales</p>
+              <h3>Análisis Personalizado</h3>
+              <p>Insights específicos para tu industria, audiencia y objetivos profesionales únicos</p>
             </div>
             
             <div className="feature-card">
@@ -216,8 +216,8 @@ export default function Home() {
                   <path d="M24 16V24L28 28" stroke="#0077B5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3>Ahorro de Tiempo</h3>
-              <p>Reduce el tiempo de creación de contenido en un 80% y enfócate en lo que realmente importa</p>
+              <h3>ROI Medible</h3>
+              <p>Análisis de métricas para demostrar el impacto real de tu contenido en tu crecimiento profesional</p>
             </div>
           </div>
         </div>
@@ -472,63 +472,117 @@ export default function Home() {
       <section id="testimonials" className="testimonials">
         <div className="container">
           <div className="section-header">
-            <h2>Lo que dicen nuestros usuarios</h2>
-            <p>Más de 50,000 profesionales confían en LinkedAI para su contenido</p>
+            <h2>Resultados reales de profesionales</h2>
+            <p>LinkedAI analiza millones de artículos exitosos para optimizar tu contenido</p>
           </div>
           
           <div className="testimonials-grid">
             <div className="testimonial-card">
-              <div className="testimonial-stars">
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
+              <div className="testimonial-metrics">
+                <div className="metric">
+                  <span className="metric-number">+340%</span>
+                  <span className="metric-label">Engagement</span>
+                </div>
+                <div className="metric">
+                  <span className="metric-number">+150%</span>
+                  <span className="metric-label">Reach</span>
+                </div>
               </div>
-              <p>"LinkedAI ha transformado completamente mi estrategia de contenido. Mis posts ahora tienen 3x más engagement y he conseguido 5 clientes nuevos en solo 2 meses."</p>
+              <p>"LinkedAI me ayuda a optimizar mi contenido basándose en datos reales. Sus análisis de tendencias me han permitido crear posts que realmente conectan con mi audiencia."</p>
               <div className="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=60&h=60&fit=crop&crop=face&auto=format" alt="María González" />
+                <div className="author-avatar">
+                  <div className="avatar-initials">MG</div>
+                </div>
                 <div className="author-info">
                   <h4>María González</h4>
-                  <span>Marketing Manager</span>
+                  <span>Marketing Director, TechCorp</span>
+                  <div className="author-verified">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 12l2 2 4-4"></path>
+                      <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                      <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                    </svg>
+                    <span>Verificado</span>
+                  </div>
                 </div>
               </div>
             </div>
             
             <div className="testimonial-card">
-              <div className="testimonial-stars">
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
+              <div className="testimonial-metrics">
+                <div className="metric">
+                  <span className="metric-number">+280%</span>
+                  <span className="metric-label">Leads</span>
+                </div>
+                <div className="metric">
+                  <span className="metric-number">+95%</span>
+                  <span className="metric-label">Conversiones</span>
+                </div>
               </div>
-              <p>"Increíble herramienta. He pasado de 50 likes por post a más de 500. El contenido generado es profesional y muy efectivo para mi sector."</p>
+              <p>"La IA de LinkedAI analiza patrones de contenido exitoso y me sugiere optimizaciones específicas. Mis posts ahora generan 3x más leads calificados."</p>
               <div className="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Carlos Ruiz" />
+                <div className="author-avatar">
+                  <div className="avatar-initials">CR</div>
+                </div>
                 <div className="author-info">
                   <h4>Carlos Ruiz</h4>
-                  <span>CEO Tech Startup</span>
+                  <span>CEO, InnovateLab</span>
+                  <div className="author-verified">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 12l2 2 4-4"></path>
+                      <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                      <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                    </svg>
+                    <span>Verificado</span>
+                  </div>
                 </div>
               </div>
             </div>
             
             <div className="testimonial-card">
-              <div className="testimonial-stars">
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-              </div>
-              <p>"La calidad del contenido es excepcional. He conseguido 3 clientes nuevos solo con los posts generados por LinkedAI. ROI increíble."</p>
-              <div className="testimonial-author">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face" alt="Ana Martín" />
-                <div className="author-info">
-                  <h4>Ana Martín</h4>
-                  <span>Consultora Freelance</span>
+              <div className="testimonial-metrics">
+                <div className="metric">
+                  <span className="metric-number">+420%</span>
+                  <span className="metric-label">Impressions</span>
+                </div>
+                <div className="metric">
+                  <span className="metric-number">+180%</span>
+                  <span className="metric-label">Comments</span>
                 </div>
               </div>
+              <p>"LinkedAI no escribe por mí, sino que analiza millones de artículos para darme insights sobre qué funciona. Mis posts ahora tienen un engagement 4x superior."</p>
+              <div className="testimonial-author">
+                <div className="author-avatar">
+                  <div className="avatar-initials">AM</div>
+                </div>
+                <div className="author-info">
+                  <h4>Ana Martín</h4>
+                  <span>Consultora Senior, McKinsey</span>
+                  <div className="author-verified">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 12l2 2 4-4"></path>
+                      <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                      <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                    </svg>
+                    <span>Verificado</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="testimonials-stats">
+            <div className="stat-item">
+              <div className="stat-number">2.5M+</div>
+              <div className="stat-label">Artículos analizados</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">98%</div>
+              <div className="stat-label">Precisión en predicciones</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">15K+</div>
+              <div className="stat-label">Profesionales activos</div>
             </div>
           </div>
         </div>
