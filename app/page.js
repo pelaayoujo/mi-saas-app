@@ -69,7 +69,7 @@ export default function Home() {
             <a href="#features">Características</a>
             <a href="#comparison">Comparación</a>
             <a href="#testimonials">Testimonios</a>
-            <a href="#pricing">Precios</a>
+            <a href="/pricing">Precios</a>
             <a href="/dashboard" className="nav-login">Iniciar Sesión</a>
             <a href="#trial" className="nav-cta">Comenzar Gratis</a>
           </div>
@@ -86,7 +86,7 @@ export default function Home() {
             <a href="#features">Características</a>
             <a href="#comparison">Comparación</a>
             <a href="#testimonials">Testimonios</a>
-            <a href="#pricing">Precios</a>
+            <a href="/pricing">Precios</a>
             <a href="/dashboard">Iniciar Sesión</a>
             <a href="#trial">Comenzar Gratis</a>
           </div>
@@ -743,7 +743,7 @@ export default function Home() {
             <div className="footer-section">
                 <h4>Producto</h4>
               <a href="#features">Características</a>
-                <a href="#pricing">Precios</a>
+                <a href="/pricing">Precios</a>
               <a href="/dashboard">Dashboard</a>
               </div>
             
