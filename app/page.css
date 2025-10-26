@@ -809,6 +809,176 @@ body {
   box-shadow: none;
 }
 
+/* Showcase Section */
+.showcase {
+  padding: 2.5rem 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #ffffff;
+}
+
+.showcase-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.showcase-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.showcase-illustration {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.linkedin-icon {
+  background: linear-gradient(135deg, #0077B5 0%, #4facfe 100%);
+  border-radius: 50%;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
+  animation: pulse 2s infinite;
+}
+
+.ai-sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.sparkle-1 {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  top: 20%;
+  right: 10%;
+  animation-delay: 0.5s;
+}
+
+.sparkle-3 {
+  bottom: 20%;
+  left: 15%;
+  animation-delay: 1s;
+}
+
+.sparkle-4 {
+  bottom: 10%;
+  right: 15%;
+  animation-delay: 1.5s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+.showcase-text h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #ffffff 0%, #4facfe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.showcase-subtitle {
+  font-size: 1.2rem;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.showcase-features {
+  margin-bottom: 2.5rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(79, 172, 254, 0.3);
+  transform: translateX(5px);
+}
+
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #10b981;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.feature-item span {
+  color: #e2e8f0;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.showcase-cta {
+  text-align: left;
+}
+
+.btn-showcase {
+  display: inline-block;
+  background: linear-gradient(135deg, #0077B5 0%, #4facfe 100%);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
+}
+
+.btn-showcase:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
+  background: linear-gradient(135deg, #4facfe 0%, #0077B5 100%);
+}
+
 /* FAQ Section */
 .faq {
   padding: 2.5rem 0;
@@ -1592,6 +1762,57 @@ body {
 
   .faq-answer p {
     font-size: 0.9rem;
+  }
+
+  /* Showcase Section Mobile */
+  .showcase {
+    padding: 1.5rem 0;
+  }
+
+  .showcase-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .showcase-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .showcase-subtitle {
+    font-size: 1rem;
+  }
+
+  .showcase-illustration {
+    width: 150px;
+    height: 150px;
+  }
+
+  .linkedin-icon {
+    padding: 1.5rem;
+  }
+
+  .linkedin-icon svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .sparkle {
+    font-size: 1.2rem;
+  }
+
+  .feature-item {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-item span {
+    font-size: 0.9rem;
+  }
+
+  .btn-showcase {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
   }
   
   .comparison-vs {
