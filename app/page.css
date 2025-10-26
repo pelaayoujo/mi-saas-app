@@ -360,7 +360,7 @@ body {
 
 /* Features Section */
 .features {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   background: #ffffff;
 }
 
@@ -541,7 +541,7 @@ body {
 
 /* Testimonials Section */
 .testimonials {
-  padding: 6rem 0;
+  padding: 3rem 0;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
@@ -635,7 +635,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 4rem;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
   background: white;
   border-radius: 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -664,7 +664,7 @@ body {
 
 /* Pricing Section */
 .pricing {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   background: #f8fafc;
 }
 
@@ -811,7 +811,7 @@ body {
 
 /* Trial Section */
 .trial {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   background: linear-gradient(135deg, #0077B5 0%, #4facfe 100%);
   color: #ffffff;
   text-align: center;
@@ -908,7 +908,7 @@ body {
 
 /* CTA Section */
 .cta {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   background: linear-gradient(135deg, #0077B5 0%, #4facfe 100%);
   color: #ffffff;
   text-align: center;
@@ -1198,7 +1198,7 @@ body {
 
 /* Comparison Section */
 .comparison {
-  padding: 4rem 0;
+  padding: 2.5rem 0;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
@@ -1459,7 +1459,7 @@ body {
 
 @media (max-width: 768px) {
   .comparison {
-    padding: 2.5rem 0;
+    padding: 1.5rem 0;
   }
   
   .comparison-card {
