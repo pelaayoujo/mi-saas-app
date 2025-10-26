@@ -5,56 +5,13 @@ import './pricing.css'
 export default function Pricing() {
   const [selectedWords, setSelectedWords] = useState(20000)
   const [billingCycle, setBillingCycle] = useState('monthly')
-  const [selectedPlan, setSelectedPlan] = useState('basic')
 
-  const pricingPlans = {
-    basic: {
-      name: 'Básico',
-      description: 'Ideal para profesionales que empiezan en LinkedIn',
-      monthly: { 20000: 12, 50000: 18, 100000: 25, 300000: 40, 500000: 60 },
-      annual: { 20000: 10, 50000: 15, 100000: 20, 300000: 32, 500000: 48 },
-      features: [
-        'Artículos optimizados para LinkedIn',
-        '5 tonos diferentes (profesional, educativo, inspiracional, disruptivo, conversacional)',
-        'Biografías de LinkedIn optimizadas',
-        'Hasta 3 artículos guardados',
-        'Soporte por email',
-        'Análisis de engagement básico'
-      ]
-    },
-    professional: {
-      name: 'Profesional',
-      description: 'Para profesionales que buscan maximizar su impacto',
-      monthly: { 20000: 20, 50000: 30, 100000: 45, 300000: 70, 500000: 100 },
-      annual: { 20000: 16, 50000: 24, 100000: 36, 300000: 56, 500000: 80 },
-      features: [
-        'Todo lo del plan Básico',
-        'Hasta 20 artículos guardados',
-        'Programación de contenido',
-        'Mensajes de conexión personalizados',
-        'Análisis avanzado de engagement',
-        'Soporte prioritario',
-        'Plantillas premium',
-        'Exportación a múltiples formatos'
-      ]
-    },
-    enterprise: {
-      name: 'Empresarial',
-      description: 'Para equipos y empresas que necesitan escalar',
-      monthly: { 20000: 35, 50000: 55, 100000: 80, 300000: 120, 500000: 180 },
-      annual: { 20000: 28, 50000: 44, 100000: 64, 300000: 96, 500000: 144 },
-      features: [
-        'Todo lo del plan Profesional',
-        'Artículos ilimitados guardados',
-        'Hasta 5 usuarios en equipo',
-        'API personalizada',
-        'Integración con CRM',
-        'Analytics avanzados',
-        'Soporte 24/7',
-        'Entrenamiento personalizado',
-        'Gestión de múltiples perfiles'
-      ]
-    }
+  const pricingData = {
+    20000: { monthly: 12, annual: 10 },
+    50000: { monthly: 18, annual: 15 },
+    100000: { monthly: 25, annual: 20 },
+    300000: { monthly: 40, annual: 32 },
+    500000: { monthly: 60, annual: 48 }
   }
 
   const wordOptions = [
@@ -65,13 +22,12 @@ export default function Pricing() {
     { value: 500000, label: '+500k', display: '+500.000' }
   ]
 
-  const currentPlan = pricingPlans[selectedPlan]
   const currentPrice = billingCycle === 'monthly' 
-    ? currentPlan.monthly[selectedWords] 
-    : currentPlan.annual[selectedWords]
+    ? pricingData[selectedWords].monthly 
+    : pricingData[selectedWords].annual
 
   const savings = billingCycle === 'annual' 
-    ? Math.round((currentPlan.monthly[selectedWords] * 12 - currentPrice * 12) / 12)
+    ? Math.round((pricingData[selectedWords].monthly * 12 - currentPrice * 12) / 12)
     : 0
 
   return (
@@ -127,67 +83,98 @@ export default function Pricing() {
           </div>
 
           <div className="pricing-content">
-            <div className="plan-selector">
-              {Object.entries(pricingPlans).map(([key, plan]) => (
-                <button
-                  key={key}
-                  className={`plan-btn ${selectedPlan === key ? 'active' : ''}`}
-                  onClick={() => setSelectedPlan(key)}
-                >
-                  {plan.name}
-                </button>
-              ))}
+            <div className="price-display">
+              <div className="price-amount">
+                <span className="currency">€</span>
+                <span className="amount">{currentPrice}</span>
+                <span className="period">/mes</span>
+              </div>
+              {billingCycle === 'annual' && (
+                <p className="billing-note">
+                  Facturado anualmente (Ahorra €{savings}/año)
+                </p>
+              )}
             </div>
 
-            <div className="pricing-card">
-              <div className="price-display">
-                <div className="price-amount">
-                  <span className="currency">€</span>
-                  <span className="amount">{currentPrice}</span>
-                  <span className="period">/mes</span>
+            <div className="plan-info">
+              <h3>Ideal para profesionales del marketing</h3>
+              <p className="plan-description">
+                Podrás apoyarte de LinkedAI para escribir contenido creativo, atractivo, 
+                persuasivo y de calidad para tus proyectos de LinkedIn y networking profesional.
+              </p>
+              
+              <button className="cta-button">
+                Empezar ahora
+              </button>
+              
+              <p className="words-note">
+                Podrás generar hasta {selectedWords.toLocaleString()} palabras, y si generas menos 
+                se guardarán para el siguiente mes de tu suscripción.
+              </p>
+            </div>
+
+            <div className="features-grid">
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>{selectedWords.toLocaleString()} palabras mensuales</strong>
                 </div>
-                {billingCycle === 'annual' && (
-                  <p className="billing-note">
-                    Facturado anualmente (Ahorra €{savings}/año)
-                  </p>
-                )}
               </div>
 
-              <div className="plan-info">
-                <h3>{currentPlan.name}</h3>
-                <p className="plan-description">{currentPlan.description}</p>
-                
-                <div className="plan-features">
-                  {currentPlan.features.map((feature, index) => (
-                    <div key={index} className="feature-item">
-                      <span className="feature-icon">✓</span>
-                      <span className="feature-text">{feature}</span>
-                    </div>
-                  ))}
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>Hasta 3 usuarios en tu equipo de trabajo</strong>
                 </div>
+              </div>
 
-                <div className="plan-stats">
-                  <div className="stat">
-                    <span className="stat-number">{selectedWords.toLocaleString()}</span>
-                    <span className="stat-label">palabras mensuales</span>
-                  </div>
-                  {selectedPlan === 'enterprise' && (
-                    <div className="stat">
-                      <span className="stat-number">5</span>
-                      <span className="stat-label">usuarios en equipo</span>
-                    </div>
-                  )}
-                  {selectedPlan === 'professional' && (
-                    <div className="stat">
-                      <span className="stat-number">20</span>
-                      <span className="stat-label">artículos guardados</span>
-                    </div>
-                  )}
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>Hasta 3 perfiles de LinkedIn incluidos en equipo</strong>
                 </div>
+              </div>
 
-                <button className="cta-button">
-                  Empezar ahora
-                </button>
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>Romperás las fronteras de idiomas con LinkedAI, que conoce hasta 5 tonos diferentes para crear contenido profesional.</strong>
+                </div>
+              </div>
+
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>Elige entre más de 3 herramientas que la IA de LinkedAI conoce para tu caso de uso y así impulsar tu redacción.</strong>
+                </div>
+              </div>
+
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>Extensión de navegador de LinkedAI: Consigue la facilidad de crear contenido rápidamente en cualquier espacio de trabajo (Google Documentos, WordPress, Notion, etc), LinkedAI se adapta a ti.</strong>
+                </div>
+              </div>
+
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>Podrás solicitar acceso a la API de LinkedAI.</strong>
+                </div>
+              </div>
+
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>Crea artículos automatizados con el plugin de LinkedAI para tu página web en WordPress.</strong>
+                </div>
+              </div>
+
+              <div className="feature-item">
+                <div className="feature-icon">✓</div>
+                <div className="feature-text">
+                  <strong>No te preocupes si no llegas a gastar todas las palabras del plan en ese mes, las palabras que no hayas gastado se añadirán como palabras adicionales a tu plan para que los puedas usar en cualquier momento.</strong>
+                </div>
               </div>
             </div>
           </div>
@@ -215,9 +202,12 @@ export default function Pricing() {
               <div className="testimonial">
                 <div className="testimonial-content">
                   <p>
-                    "Excelente herramienta. Llevo un tiempo probando varias herramientas 
-                    para generar contenido de LinkedIn y LinkedAI está entre una de las 
-                    mejores que he probado. Ya llevo más de 15 horas de trabajo ahorradas."
+                    "Excelente Herramienta. Llevo un tiempo probando varias herramientas 
+                    para generar contenido de forma 'automática' y LinkedAI está entre una 
+                    de las mejores que he probado. Lo bueno es que tienen un equipo detrás 
+                    que se van alimentando del feedback que dan los usuarios y cada semana 
+                    hay mejoras. Ya llevo más de 15 horas de trabajo ahorradas con esta 
+                    herramienta así que no me arrepiento en nada el estar suscrito a la membresía."
                   </p>
                 </div>
                 <div className="testimonial-author">
@@ -230,8 +220,10 @@ export default function Pricing() {
                 <div className="testimonial-content">
                   <p>
                     "Una herramienta para profesionales de LinkedIn muy potente. 
-                    Desde que la utilizo he visto recuperada mi inversión. Me ha ayudado 
-                    a ahorrar tiempo y crear el doble de contenido."
+                    Desde que la utilizo he visto recuperada mi inversión con la 
+                    suscripción mensual. Me ha ayudado a ahorrar tiempo en la creación 
+                    de contenido, tardando mucho menos tiempo, y lo cual me permite 
+                    hacer el doble de artículos de lo que solía tardar antes de encontrar LinkedAI. ¡Ha sido todo un descubrimiento!"
                   </p>
                 </div>
                 <div className="testimonial-author">
@@ -244,13 +236,65 @@ export default function Pricing() {
                 <div className="testimonial-content">
                   <p>
                     "LinkedAI es una aplicación brutal para escribir contenido 100% 
-                    original para LinkedIn a golpe de un clic. Realmente ha sido un 
-                    gran descubrimiento para ahorrar horas de redacción."
+                    original para LinkedIn a golpe de un clic y en segundos. Herramienta 
+                    totalmente recomendable tanto si eres un profesional, redactor, 
+                    consultor o copy. Además en el poco tiempo que llevan las mejoras 
+                    y nuevas funcionalidades son constantes. Realmente ha sido un gran 
+                    descubrimiento para ahorrar horas y horas de redacción."
                   </p>
                 </div>
                 <div className="testimonial-author">
                   <strong>Laura Martín</strong>
                   <span>Consultora</span>
+                </div>
+              </div>
+
+              <div className="testimonial">
+                <div className="testimonial-content">
+                  <p>
+                    "Una herramienta genial. Te permite escribir contenido 100% 
+                    original para LinkedIn en tiempo récord. Ahorras mucho tiempo y 
+                    dinero en redactores. Muy recomendable."
+                  </p>
+                </div>
+                <div className="testimonial-author">
+                  <strong>David Monje</strong>
+                  <span>Consultor</span>
+                </div>
+              </div>
+
+              <div className="testimonial">
+                <div className="testimonial-content">
+                  <p>
+                    "He utilizado herramientas similares a ésta, pero me quedo con 
+                    LinkedAI, entre otras cosas por la calidad del contenido para 
+                    LinkedIn, algo que para mí es completamente imprescindible. 
+                    Otra de las grandes cosas es que cada semana la herramienta va 
+                    mejorando. Me he suscrito anualmente, y desde luego, no me 
+                    arrepiento en absoluto. La uso prácticamente a diario."
+                  </p>
+                </div>
+                <div className="testimonial-author">
+                  <strong>Tobías Muñoz</strong>
+                  <span>Profesional</span>
+                </div>
+              </div>
+
+              <div className="testimonial">
+                <div className="testimonial-content">
+                  <p>
+                    "Gran extensión para la genial aplicación LinkedAI de generación 
+                    de contenido con inteligencia artificial. La extensión te permite 
+                    generar contenido de manera super fácil desde cualquier web, incluso 
+                    desde Google Docs. Esta herramienta es muy superior en la redacción 
+                    de contenido tanto en español como en otros idiomas a otras herramientas 
+                    de IA que he probado. Reduce muchísimo el tiempo de creación y redacción 
+                    de contenido para mis proyectos. 100% recomendable!!!"
+                  </p>
+                </div>
+                <div className="testimonial-author">
+                  <strong>Ana López</strong>
+                  <span>Profesional</span>
                 </div>
               </div>
             </div>
@@ -278,11 +322,10 @@ export default function Pricing() {
             </div>
 
             <div className="faq-item">
-              <h4>¿El contenido que genera LinkedAI es original?</h4>
+              <h4>¿En qué idiomas puede escribir la herramienta?</h4>
               <p>
-                El contenido que LinkedAI genera jamás será plagiado. Nuestra IA ha 
-                sido entrenada específicamente para LinkedIn y genera contenido 
-                original basado en las características que le proporciones.
+                Con el plan premium, podrás crear contenido con los siguientes tonos:
+                🇪🇸 Profesional 🇺🇸 Educativo 🇸🇰 Inspiracional 🇧🇬 Disruptivo 🇨🇿 Conversacional
               </p>
             </div>
 
@@ -292,6 +335,25 @@ export default function Pricing() {
                 Independientemente de tu sector profesional, LinkedAI puede ayudarte 
                 a crear cualquier tipo de contenido para LinkedIn, desde tecnología 
                 hasta salud, finanzas, educación y más.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h4>¿El contenido que genera LinkedAI tiene plagio?</h4>
+              <p>
+                El contenido que LinkedAI genera jamás será plagiado de otras webs. 
+                LinkedAI ha sido entrenado con millones de parámetros por lo que tiene 
+                un gran conocimiento del mundo digital. Únicamente utilizará contenido 
+                propio generado por la IA o en base a las características que le hayas proporcionado.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h4>¿Dónde puedo aprender sobre LinkedIn y emprendimiento?</h4>
+              <p>
+                La newsletter de LinkedAI incluye temas como LinkedIn, Inteligencia 
+                Artificial aplicada en el marketing digital, emprendimiento y una 
+                variedad de otros temas que nos interesan.
               </p>
             </div>
           </div>
