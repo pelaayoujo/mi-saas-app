@@ -69,7 +69,7 @@ export default function Home() {
             <a href="#features">Características</a>
             <a href="#comparison">Comparación</a>
             <a href="#testimonials">Testimonios</a>
-            <a href="/pricing">Precios</a>
+            <a href="#pricing">Precios</a>
             <a href="/dashboard" className="nav-login">Iniciar Sesión</a>
             <a href="#trial" className="nav-cta">Comenzar Gratis</a>
           </div>
@@ -86,7 +86,7 @@ export default function Home() {
             <a href="#features">Características</a>
             <a href="#comparison">Comparación</a>
             <a href="#testimonials">Testimonios</a>
-            <a href="/pricing">Precios</a>
+            <a href="#pricing">Precios</a>
             <a href="/dashboard">Iniciar Sesión</a>
             <a href="#trial">Comenzar Gratis</a>
           </div>
@@ -331,7 +331,7 @@ export default function Home() {
                   <div className="metric positive">
                     <span className="metric-label">Tiempo de creación:</span>
                     <span className="metric-value">2 minutos optimizado</span>
-                  </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -637,11 +637,11 @@ export default function Home() {
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </span>
-              </div>
+            </div>
               {openFAQ === 3 && (
                 <div className="faq-answer">
                   <p>LinkedAI puede generar posts profesionales, artículos educativos, contenido inspiracional, mensajes disruptivos y conversaciones casuales. También optimiza biografías de LinkedIn, crea mensajes de conexión personalizados y programa contenido para mantener una presencia constante en la plataforma.</p>
-                </div>
+            </div>
               )}
             </div>
 
@@ -653,11 +653,11 @@ export default function Home() {
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </span>
-              </div>
+            </div>
               {openFAQ === 4 && (
                 <div className="faq-answer">
                   <p>Absolutamente. LinkedAI no requiere acceso directo a tu cuenta de LinkedIn. Simplemente generamos el contenido optimizado que tú puedes copiar y pegar manualmente en tu perfil. No almacenamos credenciales ni accedemos a tu información personal de LinkedIn.</p>
-                </div>
+            </div>
               )}
             </div>
 
@@ -669,11 +669,11 @@ export default function Home() {
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </span>
-              </div>
+            </div>
               {openFAQ === 5 && (
                 <div className="faq-answer">
                   <p>Nuestros usuarios reportan un aumento promedio del 150% en engagement, ahorro de 4 horas semanales en creación de contenido, y un incremento salarial anual promedio de €5,000. El contenido generado está optimizado para maximizar tu visibilidad profesional y networking efectivo.</p>
-                </div>
+            </div>
               )}
             </div>
           </div>
@@ -742,8 +742,8 @@ export default function Home() {
             
             <div className="footer-section">
                 <h4>Producto</h4>
-              <a href="#features">Características</a>
-                <a href="/pricing">Precios</a>
+                <a href="#features">Características</a>
+                <a href="#pricing">Precios</a>
               <a href="/dashboard">Dashboard</a>
               </div>
             
