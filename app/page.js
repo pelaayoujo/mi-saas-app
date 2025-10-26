@@ -103,7 +103,6 @@ export default function Home() {
           
             <h1 className="hero-title">
             La IA que analiza <span className="gradient-text">millones de artículos</span> para optimizar tu contenido
-            <br />y maximizar tu impacto profesional
             </h1>
           
             <p className="hero-description">
@@ -478,16 +477,6 @@ export default function Home() {
           
           <div className="testimonials-grid">
             <div className="testimonial-card">
-              <div className="testimonial-metrics">
-                <div className="metric">
-                  <span className="metric-number">+340%</span>
-                  <span className="metric-label">Engagement</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-number">+150%</span>
-                  <span className="metric-label">Reach</span>
-                </div>
-              </div>
               <p>"LinkedAI me ayuda a optimizar mi contenido basándose en datos reales. Sus análisis de tendencias me han permitido crear posts que realmente conectan con mi audiencia."</p>
               <div className="testimonial-author">
                 <div className="author-avatar">
@@ -509,16 +498,6 @@ export default function Home() {
             </div>
             
             <div className="testimonial-card">
-              <div className="testimonial-metrics">
-                <div className="metric">
-                  <span className="metric-number">+280%</span>
-                  <span className="metric-label">Leads</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-number">+95%</span>
-                  <span className="metric-label">Conversiones</span>
-                </div>
-              </div>
               <p>"La IA de LinkedAI analiza patrones de contenido exitoso y me sugiere optimizaciones específicas. Mis posts ahora generan 3x más leads calificados."</p>
               <div className="testimonial-author">
                 <div className="author-avatar">
@@ -540,16 +519,6 @@ export default function Home() {
             </div>
             
             <div className="testimonial-card">
-              <div className="testimonial-metrics">
-                <div className="metric">
-                  <span className="metric-number">+420%</span>
-                  <span className="metric-label">Impressions</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-number">+180%</span>
-                  <span className="metric-label">Comments</span>
-                </div>
-              </div>
               <p>"LinkedAI no escribe por mí, sino que analiza millones de artículos para darme insights sobre qué funciona. Mis posts ahora tienen un engagement 4x superior."</p>
               <div className="testimonial-author">
                 <div className="author-avatar">
