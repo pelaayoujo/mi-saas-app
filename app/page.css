@@ -424,40 +424,7 @@ body {
   line-height: 1.6;
 }
 
-/* Benefits Section */
-.benefits {
-  padding: 4rem 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-}
 
-.benefits-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.benefits-text h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1e293b;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-}
-
-.benefits-subtitle {
-  font-size: 1.2rem;
-  color: #64748b;
-  margin-bottom: 2.5rem;
-  line-height: 1.6;
-}
-
-.benefits-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-}
 
 .demo-feature {
   display: flex;
@@ -1118,36 +1085,6 @@ body {
     font-size: 1rem;
   }
 
-  /* Benefits Section Mobile */
-  .benefits {
-    padding: 2.5rem 0;
-  }
-
-  .benefits-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .benefits-text h2 {
-    font-size: 1.8rem;
-  }
-
-  .benefits-subtitle {
-    font-size: 1rem;
-  }
-
-  .benefits-stats {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .benefits-visual {
-    display: none;
-  }
-
-  .benefits-features {
-    gap: 1rem;
-  }
   
   /* Mejorar fondo del hero en móvil */
   .hero-pattern {
@@ -1232,88 +1169,6 @@ body {
   justify-content: center;
 }
 
-.benefit-content h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
-}
-
-.benefit-content p {
-  font-size: 1rem;
-  color: #64748b;
-  line-height: 1.5;
-}
-
-.benefits-cta {
-  text-align: center;
-}
-
-.cta-disclaimer {
-  font-size: 0.9rem;
-  color: #64748b;
-  margin-top: 1rem;
-}
-
-.benefits-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.results-showcase {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-  max-width: 400px;
-}
-
-.result-card {
-  background: white;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-}
-
-.result-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.result-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.result-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.result-info h5 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0;
-}
-
-.result-info span {
-  font-size: 0.9rem;
-  color: #64748b;
-}
-
-.result-metrics {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .metric {
   display: flex;
