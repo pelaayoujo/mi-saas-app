@@ -477,64 +477,58 @@ export default function Home() {
           
           <div className="testimonials-grid">
             <div className="testimonial-card">
+              <div className="testimonial-quote">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+                </svg>
+              </div>
               <p>"LinkedAI me ayuda a optimizar mi contenido basándose en datos reales. Sus análisis de tendencias me han permitido crear posts que realmente conectan con mi audiencia."</p>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <div className="avatar-initials">MG</div>
-                </div>
                 <div className="author-info">
                   <h4>María González</h4>
                   <span>Marketing Director, TechCorp</span>
-                  <div className="author-verified">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9 12l2 2 4-4"></path>
-                      <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
-                      <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
-                    </svg>
-                    <span>Verificado</span>
-                  </div>
+                </div>
+                <div className="testimonial-rating">
+                  <span>★★★★★</span>
                 </div>
               </div>
             </div>
             
             <div className="testimonial-card">
+              <div className="testimonial-quote">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+                </svg>
+              </div>
               <p>"La IA de LinkedAI analiza patrones de contenido exitoso y me sugiere optimizaciones específicas. Mis posts ahora generan 3x más leads calificados."</p>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <div className="avatar-initials">CR</div>
-                </div>
                 <div className="author-info">
                   <h4>Carlos Ruiz</h4>
                   <span>CEO, InnovateLab</span>
-                  <div className="author-verified">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9 12l2 2 4-4"></path>
-                      <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
-                      <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
-                    </svg>
-                    <span>Verificado</span>
-                  </div>
+                </div>
+                <div className="testimonial-rating">
+                  <span>★★★★★</span>
                 </div>
               </div>
             </div>
             
             <div className="testimonial-card">
+              <div className="testimonial-quote">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+                </svg>
+              </div>
               <p>"LinkedAI no escribe por mí, sino que analiza millones de artículos para darme insights sobre qué funciona. Mis posts ahora tienen un engagement 4x superior."</p>
               <div className="testimonial-author">
-                <div className="author-avatar">
-                  <div className="avatar-initials">AM</div>
-                </div>
                 <div className="author-info">
                   <h4>Ana Martín</h4>
                   <span>Consultora Senior, McKinsey</span>
-                  <div className="author-verified">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9 12l2 2 4-4"></path>
-                      <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
-                      <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
-                    </svg>
-                    <span>Verificado</span>
-                  </div>
+                </div>
+                <div className="testimonial-rating">
+                  <span>★★★★★</span>
                 </div>
               </div>
             </div>
