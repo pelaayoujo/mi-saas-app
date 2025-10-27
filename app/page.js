@@ -682,21 +682,24 @@ export default function Home() {
                 <h4>Producto</h4>
                 <a href="#features">Características</a>
                 <a href="#pricing">Precios</a>
-              <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/login">Iniciar Sesión</a>
               </div>
             
             <div className="footer-section">
               <h4>Recursos</h4>
-              <a href="#demo">Demo</a>
               <a href="#testimonials">Testimonios</a>
-              <a href="#help">Ayuda</a>
+              <a href="#comparison">Comparación</a>
+              <a href="#faq">Preguntas Frecuentes</a>
+              <a href="/contact">Contacto</a>
               </div>
             
             <div className="footer-section">
-              <h4>Empresa</h4>
-              <a href="#about">Sobre nosotros</a>
-              <a href="#contact">Contacto</a>
-              <a href="#privacy">Privacidad</a>
+              <h4>Legal</h4>
+              <a href="/terms">Términos y Condiciones</a>
+              <a href="/privacy">Política de Privacidad</a>
+              <a href="/cookies">Política de Cookies</a>
+              <a href="/contact">Contacto</a>
               </div>
             </div>
           
