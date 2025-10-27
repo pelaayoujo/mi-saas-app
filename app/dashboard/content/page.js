@@ -117,13 +117,10 @@ export default function Content() {
     return matchesFilter && matchesSearch
   })
 
-  const handleEdit = (item) => {
-    // Redirigir al editor correspondiente según el tipo
-    if (item.type === 'article') {
-      router.push('/dashboard/editor')
-    } else {
-      alert(`Editor para ${getTypeInfo(item.type).label} estará disponible próximamente`)
-    }
+  const handleView = (item) => {
+    // Mostrar el contenido completo en modal
+    setSelectedItem(item)
+    setShowModal(true)
   }
 
   const handleDelete = (item) => {

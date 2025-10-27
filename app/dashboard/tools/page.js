@@ -35,8 +35,7 @@ export default function Tools() {
       features: [
         'Múltiples tonos de escritura',
         'Optimización para engagement',
-        'Estructura profesional',
-        'Editor integrado'
+        'Estructura profesional'
       ],
       status: 'available',
       path: '/dashboard/create'

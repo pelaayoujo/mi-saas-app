@@ -268,11 +268,6 @@ export default function Dashboard() {
                     <h3>Herramientas</h3>
                     <p>Optimiza tu contenido</p>
                   </div>
-                  <div className="quick-action-card" onClick={() => router.push('/dashboard/editor')}>
-                    <div className="action-icon">✏️</div>
-                    <h3>Editor</h3>
-                    <p>Edita y personaliza tus posts</p>
-                  </div>
                 </div>
               </div>
 
@@ -318,7 +313,7 @@ export default function Dashboard() {
                             </div>
                           </div>
                           <div className="article-actions">
-                            <button className="action-btn primary">Editar</button>
+                            <button className="action-btn primary" onClick={() => router.push('/dashboard/content')}>Ver</button>
                           </div>
                         </div>
                       )
