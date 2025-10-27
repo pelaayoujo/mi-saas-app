@@ -66,31 +66,10 @@ export default function Home() {
           </div>
           
           <div className="nav-links">
-            <a href="#features">Características</a>
-            <a href="#comparison">Comparación</a>
-            <a href="#testimonials">Testimonios</a>
-            <a href="#pricing">Precios</a>
-            <a href="/dashboard" className="nav-login">Iniciar Sesión</a>
+            <a href="/login" className="nav-login">Iniciar Sesión</a>
             <a href="#trial" className="nav-cta">Comenzar Gratis</a>
           </div>
-
-          <button className="mobile-menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
-
-        {isMenuOpen && (
-          <div className="mobile-menu">
-            <a href="#features">Características</a>
-            <a href="#comparison">Comparación</a>
-            <a href="#testimonials">Testimonios</a>
-            <a href="#pricing">Precios</a>
-            <a href="/dashboard">Iniciar Sesión</a>
-            <a href="#trial">Comenzar Gratis</a>
-          </div>
-        )}
       </nav>
 
       {/* Hero Section */}
@@ -102,7 +81,6 @@ export default function Home() {
         
           <div className="hero-content">
             <div className="hero-badge">
-            <span className="badge-icon">🔥</span>
             <span>LIMITADO: Solo quedan 127 espacios para el lanzamiento privado</span>
             </div>
           
@@ -117,7 +95,7 @@ export default function Home() {
           
             <div className="hero-actions">
             <a href="#trial" className="btn-primary">
-              <span>🚀 PROBAR ANÁLISIS DE IA GRATIS</span>
+              <span>PROBAR ANÁLISIS DE IA GRATIS</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -155,71 +133,31 @@ export default function Home() {
           
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect width="48" height="48" rx="12" fill="rgba(0, 119, 181, 0.1)"/>
-                  <path d="M24 8L30 18H40L32 26L36 36L24 30L12 36L16 26L8 18H18L24 8Z" fill="#0077B5"/>
-                </svg>
-              </div>
               <h3>Análisis de Patrones</h3>
               <p>IA que estudia millones de artículos exitosos para identificar qué funciona y optimizar tu contenido</p>
             </div>
             
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect width="48" height="48" rx="12" fill="rgba(0, 119, 181, 0.1)"/>
-                  <path d="M16 12H32C34.2091 12 36 13.7909 36 16V32C36 34.2091 34.2091 36 32 36H16C13.7909 36 12 34.2091 12 32V16C12 13.7909 13.7909 12 16 12Z" stroke="#0077B5" strokeWidth="2"/>
-                  <path d="M20 20H28M20 24H28M20 28H24" stroke="#0077B5" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
               <h3>Insights Específicos</h3>
               <p>Análisis detallado de qué tipo de contenido funciona mejor para tu industria y audiencia específica</p>
             </div>
             
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect width="48" height="48" rx="12" fill="rgba(0, 119, 181, 0.1)"/>
-                  <path d="M24 8V40M8 24H40" stroke="#0077B5" strokeWidth="2" strokeLinecap="round"/>
-                  <circle cx="24" cy="24" r="8" stroke="#0077B5" strokeWidth="2"/>
-                </svg>
-              </div>
               <h3>Datos en Tiempo Real</h3>
               <p>Análisis continuo de tendencias y métricas para mantener tu contenido siempre optimizado</p>
             </div>
             
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect width="48" height="48" rx="12" fill="rgba(0, 119, 181, 0.1)"/>
-                  <path d="M16 16H32V32H16V16Z" stroke="#0077B5" strokeWidth="2"/>
-                  <path d="M20 20V28M24 20V28M28 20V28" stroke="#0077B5" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
               <h3>Optimización de Timing</h3>
               <p>Análisis de datos para identificar los mejores momentos para publicar según tu audiencia</p>
             </div>
             
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect width="48" height="48" rx="12" fill="rgba(0, 119, 181, 0.1)"/>
-                  <path d="M24 8L28 20H40L30 28L34 40L24 32L14 40L18 28L8 20H20L24 8Z" stroke="#0077B5" strokeWidth="2"/>
-                </svg>
-              </div>
               <h3>Análisis Personalizado</h3>
               <p>Insights específicos para tu industria, audiencia y objetivos profesionales únicos</p>
             </div>
             
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect width="48" height="48" rx="12" fill="rgba(0, 119, 181, 0.1)"/>
-                  <path d="M24 8C15.1634 8 8 15.1634 8 24C8 32.8366 15.1634 40 24 40C32.8366 40 40 32.8366 40 24C40 15.1634 32.8366 8 24 8Z" stroke="#0077B5" strokeWidth="2"/>
-                  <path d="M24 16V24L28 28" stroke="#0077B5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
               <h3>ROI Medible</h3>
               <p>Análisis de métricas para demostrar el impacto real de tu contenido en tu crecimiento profesional</p>
             </div>
@@ -301,7 +239,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="comparison-content">
-                <h4>🚀 ¿Sabías que el 87% de los reclutadores revisa LinkedIn ANTES de una entrevista?</h4>
+                <h4>¿Sabías que el 87% de los reclutadores revisa LinkedIn ANTES de una entrevista?</h4>
                 <p>Este dato cambió completamente mi estrategia de networking...</p>
                 <div className="comparison-post">
                   <div className="post-content">
@@ -518,10 +456,10 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="ai-sparkles">
-                  <div className="sparkle sparkle-1">✨</div>
-                  <div className="sparkle sparkle-2">🚀</div>
-                  <div className="sparkle sparkle-3">💡</div>
-                  <div className="sparkle sparkle-4">📈</div>
+                  <div className="sparkle sparkle-1"></div>
+                  <div className="sparkle sparkle-2"></div>
+                  <div className="sparkle sparkle-3"></div>
+                  <div className="sparkle sparkle-4"></div>
                 </div>
               </div>
             </div>
