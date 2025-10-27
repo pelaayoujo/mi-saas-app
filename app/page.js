@@ -392,8 +392,8 @@ export default function Home() {
                 <span className="period">/mes</span>
               </div>
               <ul className="pricing-features">
-                <li>8,000 tokens mensuales</li>
-                <li>~15-20 artículos por mes</li>
+                <li>4,500 tokens mensuales</li>
+                <li>~12-15 artículos por mes</li>
                 <li>Plantillas básicas</li>
                 <li>Soporte por email</li>
               </ul>
@@ -412,8 +412,8 @@ export default function Home() {
                 <span className="period">/mes</span>
             </div>
               <ul className="pricing-features">
-                <li>16,000 tokens mensuales</li>
-                <li>~30-40 artículos por mes</li>
+                <li>12,000 tokens mensuales</li>
+                <li>~35-40 artículos por mes</li>
                 <li>Todas las plantillas</li>
                 <li>Programación de contenido</li>
                 <li>Soporte prioritario</li>
@@ -432,8 +432,8 @@ export default function Home() {
                 <span className="period">/mes</span>
             </div>
               <ul className="pricing-features">
-                <li>32,000 tokens mensuales</li>
-                <li>~60-80 artículos por mes</li>
+                <li>30,000 tokens mensuales</li>
+                <li>~90-100 artículos por mes</li>
                 <li>Múltiples usuarios</li>
                 <li>Analytics avanzados</li>
                 <li>Soporte 24/7</li>
