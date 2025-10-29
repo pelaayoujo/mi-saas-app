@@ -117,11 +117,7 @@ export default function Content() {
     return matchesFilter && matchesSearch
   })
 
-  const handleView = (item) => {
-    // Mostrar el contenido completo en modal
-    setSelectedItem(item)
-    setShowModal(true)
-  }
+  // Visualizar un elemento de contenido en el modal
 
   const handleDelete = (item) => {
     if (confirm(`¿Estás seguro de que quieres eliminar "${item.title}"?`)) {
