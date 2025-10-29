@@ -1,2 +1,2 @@
-Force deploy - profile cleanup and password change - timestamp: ${Date.now()}
+Force deploy - ensure Vercel uses latest main
 
