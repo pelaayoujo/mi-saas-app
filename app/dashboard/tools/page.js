@@ -140,7 +140,7 @@ export default function Tools() {
             <div className="logo">
               <div className="logo-icon">
                 <img 
-                  src="/logos/ChatGPT Image 29 oct 2025, 21_08_17-Photoroom.png" 
+                  src="/logos/linkedai-logo.png" 
                   alt="LinkedAI" 
                   className="logo-image"
                 />

@@ -52,7 +52,7 @@ export default function Home() {
           <div className="nav-logo">
             <div className="logo-icon">
               <img 
-                src="/logos/ChatGPT Image 29 oct 2025, 21_08_17-Photoroom.png" 
+                src="/logos/linkedai-logo.png" 
                 alt="LinkedAI" 
                 className="logo-image"
               />
@@ -446,7 +446,7 @@ export default function Home() {
             <div className="showcase-visual">
               <div className="showcase-illustration">
                 <img 
-                  src="/images/ChatGPT Image 29 oct 2025, 21_15_55.png" 
+                  src="/images/showcase-linkedai.png" 
                   alt="LinkedAI en acción" 
                   className="showcase-image"
                 />
@@ -651,7 +651,7 @@ export default function Home() {
               <div className="footer-logo">
                 <div className="logo-icon">
                   <img 
-                    src="/logos/ChatGPT Image 29 oct 2025, 21_08_17-Photoroom.png" 
+                    src="/logos/linkedai-logo.png" 
                     alt="LinkedAI" 
                     className="logo-image"
                   />
