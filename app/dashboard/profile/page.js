@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import UserDropdown from '../../components/UserDropdown'
 import '../dashboard.css'
@@ -17,6 +17,16 @@ export default function Profile() {
     creditos: 0,
     daysAsMember: 0
   })
+
+  // Estado para cambio de contraseña
+  const [passwordForm, setPasswordForm] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: ''
+  })
+  const [isChangingPassword, setIsChangingPassword] = useState(false)
+  const [passwordMessage, setPasswordMessage] = useState('')
+  const [passwordStatus, setPasswordStatus] = useState(null) // 'success' | 'error'
 
   // Cargar estadísticas del usuario
   useEffect(() => {
@@ -79,6 +89,56 @@ export default function Profile() {
   if (!session) {
     router.push('/login')
     return null
+  }
+
+  const handleChangePassword = async () => {
+    setPasswordMessage('')
+    setPasswordStatus(null)
+
+    if (!passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmNewPassword) {
+      setPasswordStatus('error')
+      setPasswordMessage('Por favor, completa todos los campos de contraseña.')
+      return
+    }
+
+    if (passwordForm.newPassword.length < 6) {
+      setPasswordStatus('error')
+      setPasswordMessage('La nueva contraseña debe tener al menos 6 caracteres.')
+      return
+    }
+
+    if (passwordForm.newPassword !== passwordForm.confirmNewPassword) {
+      setPasswordStatus('error')
+      setPasswordMessage('Las contraseñas no coinciden.')
+      return
+    }
+
+    setIsChangingPassword(true)
+    try {
+      const res = await fetch('/api/user/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword: passwordForm.currentPassword,
+          newPassword: passwordForm.newPassword
+        })
+      })
+
+      const data = await res.json()
+      if (res.ok) {
+        setPasswordStatus('success')
+        setPasswordMessage(data.message || 'Contraseña actualizada correctamente.')
+        setPasswordForm({ currentPassword: '', newPassword: '', confirmNewPassword: '' })
+      } else {
+        setPasswordStatus('error')
+        setPasswordMessage(data.error || 'No se pudo actualizar la contraseña.')
+      }
+    } catch (e) {
+      setPasswordStatus('error')
+      setPasswordMessage('Error de red. Inténtalo de nuevo.')
+    } finally {
+      setIsChangingPassword(false)
+    }
   }
 
   const handleInputChange = (e) => {
@@ -238,21 +298,11 @@ export default function Profile() {
             <div className="profile-container">
               {/* Header del Perfil */}
               <div className="profile-header">
-                <div className="profile-avatar">
-                  <div className="avatar-large">
-                    {session.user.name?.charAt(0) || 'U'}
-                  </div>
-                  <button className="avatar-change-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M3 21h18"></path>
-                      <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"></path>
-                      <path d="M10 8h4"></path>
-                      <path d="M10 12h4"></path>
-                      <path d="M10 16h4"></path>
-                    </svg>
-                    Cambiar foto
-                  </button>
+              <div className="profile-avatar">
+                <div className="avatar-large">
+                  {session.user.name?.charAt(0) || 'U'}
                 </div>
+              </div>
                 <div className="profile-info">
                   <h1>{session.user.name || 'Usuario'}</h1>
                   <p>{session.user.email}</p>
@@ -457,6 +507,55 @@ export default function Profile() {
                               />
                               <span className="checkbox-text">Recibir ofertas y actualizaciones de productos</span>
                             </label>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Cambiar contraseña */}
+                      <div className="profile-section" style={{marginTop: '2rem'}}>
+                        <h3>Seguridad: Cambiar contraseña</h3>
+                        <div className="form-grid">
+                          <div className="form-group full-width">
+                            <label htmlFor="currentPassword" className="form-label">Contraseña actual</label>
+                            <input
+                              type="password"
+                              id="currentPassword"
+                              name="currentPassword"
+                              value={passwordForm.currentPassword}
+                              onChange={(e) => setPasswordForm(prev => ({ ...prev, currentPassword: e.target.value }))}
+                              className="form-input"
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="newPassword" className="form-label">Nueva contraseña</label>
+                            <input
+                              type="password"
+                              id="newPassword"
+                              name="newPassword"
+                              value={passwordForm.newPassword}
+                              onChange={(e) => setPasswordForm(prev => ({ ...prev, newPassword: e.target.value }))}
+                              className="form-input"
+                            />
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="confirmNewPassword" className="form-label">Confirmar nueva contraseña</label>
+                            <input
+                              type="password"
+                              id="confirmNewPassword"
+                              name="confirmNewPassword"
+                              value={passwordForm.confirmNewPassword}
+                              onChange={(e) => setPasswordForm(prev => ({ ...prev, confirmNewPassword: e.target.value }))}
+                              className="form-input"
+                            />
+                          </div>
+                          <div className="form-group full-width">
+                            <button type="button" className="btn-primary" disabled={isChangingPassword} onClick={handleChangePassword}>
+                              {isChangingPassword ? 'Actualizando...' : 'Actualizar contraseña'}
+                            </button>
+                            {passwordMessage && (
+                              <p className={passwordStatus === 'success' ? 'message success' : 'message error'} style={{marginTop: '0.75rem'}}>
+                                {passwordMessage}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
