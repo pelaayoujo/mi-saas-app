@@ -51,17 +51,11 @@ export default function Home() {
         <div className="nav-container">
           <div className="nav-logo">
             <div className="logo-icon">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
-                <path d="M8 8h16v16H8V8z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 12h8v8h-8v-8z" fill="white" opacity="0.8"/>
-                <defs>
-                  <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-                    <stop offset="0%" stopColor="#0077B5"/>
-                    <stop offset="100%" stopColor="#4facfe"/>
-                  </linearGradient>
-                </defs>
-              </svg>
+              <img 
+                src="/logos/ChatGPT Image 29 oct 2025, 21_08_17-Photoroom.png" 
+                alt="LinkedAI" 
+                className="logo-image"
+              />
             </div>
             <span className="logo-text">LinkedAI</span>
           </div>
@@ -451,17 +445,11 @@ export default function Home() {
           <div className="showcase-content">
             <div className="showcase-visual">
               <div className="showcase-illustration">
-                <div className="linkedin-icon">
-                  <svg width="120" height="120" viewBox="0 0 24 24" fill="none">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" fill="#0077B5"/>
-                  </svg>
-                </div>
-                <div className="ai-sparkles">
-                  <div className="sparkle sparkle-1"></div>
-                  <div className="sparkle sparkle-2"></div>
-                  <div className="sparkle sparkle-3"></div>
-                  <div className="sparkle sparkle-4"></div>
-                </div>
+                <img 
+                  src="/images/ChatGPT Image 29 oct 2025, 21_15_55.png" 
+                  alt="LinkedAI en acción" 
+                  className="showcase-image"
+                />
               </div>
             </div>
             
@@ -662,17 +650,11 @@ export default function Home() {
             <div className="footer-section">
               <div className="footer-logo">
                 <div className="logo-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
-                    <path d="M8 8h16v16H8V8z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 12h8v8h-8v-8z" fill="white" opacity="0.8"/>
-                    <defs>
-                      <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-                        <stop offset="0%" stopColor="#0077B5"/>
-                        <stop offset="100%" stopColor="#4facfe"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                  <img 
+                    src="/logos/ChatGPT Image 29 oct 2025, 21_08_17-Photoroom.png" 
+                    alt="LinkedAI" 
+                    className="logo-image"
+                  />
                 </div>
                 <span>LinkedAI</span>
               </div>
