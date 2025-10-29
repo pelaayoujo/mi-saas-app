@@ -1,4 +1,5 @@
 "use client"
+// deploy-bump: profile updates + change password endpoint
 import { useState } from 'react'
 import './page.css'
 
