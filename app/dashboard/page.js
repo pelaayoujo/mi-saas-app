@@ -268,6 +268,11 @@ export default function Dashboard() {
                     <h3>Herramientas</h3>
                     <p>Optimiza tu contenido</p>
                   </div>
+                  <div className="quick-action-card" onClick={() => router.push('/dashboard/profile')}>
+                    <div className="action-icon">👤</div>
+                    <h3>Perfil</h3>
+                    <p>Gestiona tu cuenta y preferencias</p>
+                  </div>
                 </div>
               </div>
 
