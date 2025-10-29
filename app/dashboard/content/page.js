@@ -76,23 +76,13 @@ export default function Content() {
   }
 
   const contentTypes = [
-    { value: 'all', label: 'Todo el Contenido', icon: '📄' },
-    { value: 'article', label: 'Artículos', icon: '📝' },
-    { value: 'post', label: 'Posts', icon: '💬' },
-    { value: 'biography', label: 'Biografías', icon: '👤' },
-    { value: 'email', label: 'Emails', icon: '📧' },
-    { value: 'presentation', label: 'Presentaciones', icon: '📊' },
-    { value: 'proposal', label: 'Propuestas', icon: '📋' }
+    { value: 'all', label: 'Todo', icon: '📄' },
+    { value: 'article', label: 'Artículos', icon: '📝' }
   ]
 
   const getTypeInfo = (type) => {
     const typeMap = {
-      article: { label: 'Artículo', icon: '📝', color: '#0077B5' },
-      post: { label: 'Post', icon: '💬', color: '#28a745' },
-      biography: { label: 'Biografía', icon: '👤', color: '#6f42c1' },
-      email: { label: 'Email', icon: '📧', color: '#fd7e14' },
-      presentation: { label: 'Presentación', icon: '📊', color: '#20c997' },
-      proposal: { label: 'Propuesta', icon: '📋', color: '#dc3545' }
+      article: { label: 'Artículo', icon: '📝', color: '#0077B5' }
     }
     return typeMap[type] || { label: 'Contenido', icon: '📄', color: '#6c757d' }
   }
@@ -364,7 +354,7 @@ export default function Content() {
                 <div className="empty-state">
                   <span className="empty-icon">📦</span>
                   <h3>No hay contenido generado</h3>
-                  <p>Parece que aún no has creado ningún contenido. ¡Empieza a usar nuestras herramientas para generar artículos, posts y más!</p>
+                  <p>Parece que aún no has creado ningún contenido. ¡Empieza a usar nuestras herramientas para generar artículos!</p>
                   <button 
                     className="btn-primary"
                     onClick={() => router.push('/dashboard/tools')}
