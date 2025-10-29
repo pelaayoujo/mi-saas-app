@@ -107,8 +107,8 @@ export default function Tools() {
         'Horarios óptimos',
         'Gestión de contenido'
       ],
-      status: 'coming-soon',
-      path: null
+      status: 'available',
+      path: '/dashboard/schedule'
     }
   ]
 
