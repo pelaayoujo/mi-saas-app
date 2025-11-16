@@ -57,6 +57,23 @@ export default function Home() {
             <a href="/login" className="nav-login">Iniciar Sesión</a>
             <a href="#trial" className="nav-cta">Comenzar Gratis</a>
           </div>
+
+          <button 
+            className="mobile-menu-btn" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          {isMenuOpen && (
+            <div className="mobile-menu">
+              <a href="/login" onClick={() => setIsMenuOpen(false)}>Iniciar Sesión</a>
+              <a href="#trial" onClick={() => setIsMenuOpen(false)}>Comenzar Gratis</a>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -651,7 +668,6 @@ export default function Home() {
                 <h4>Producto</h4>
                 <a href="#features">Características</a>
                 <a href="#pricing">Precios</a>
-                <a href="/dashboard">Dashboard</a>
                 <a href="/login">Iniciar Sesión</a>
               </div>
             
