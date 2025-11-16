@@ -90,7 +90,7 @@ export default function Home() {
           
             <div className="hero-actions">
             <a href="#trial" className="btn-primary">
-              <span>PROBAR ANÁLISIS DE IA GRATIS</span>
+              <span>PROBAR LINKEDAI GRATIS</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
