@@ -50,13 +50,6 @@ export default function Home() {
       <nav className="navbar">
         <div className="nav-container">
           <div className="nav-logo">
-            <div className="logo-icon">
-              <img 
-                src="/logos/linkedai-logo.png" 
-                alt="LinkedAI" 
-                className="logo-image"
-              />
-            </div>
             <span className="logo-text">LinkedAI</span>
           </div>
           
@@ -649,13 +642,6 @@ export default function Home() {
           <div className="footer-content">
             <div className="footer-section">
               <div className="footer-logo">
-                <div className="logo-icon">
-                  <img 
-                    src="/logos/linkedai-logo.png" 
-                    alt="LinkedAI" 
-                    className="logo-image"
-                  />
-                </div>
                 <span>LinkedAI</span>
               </div>
               <p>La herramienta de IA más potente para LinkedIn</p>

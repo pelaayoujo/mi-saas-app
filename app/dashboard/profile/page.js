@@ -203,13 +203,6 @@ export default function Profile() {
               </svg>
             </button>
             <div className="logo">
-              <div className="logo-icon">
-                <img 
-                  src="/logos/linkedai-logo.png" 
-                  alt="LinkedAI" 
-                  className="logo-image"
-                />
-              </div>
               <span className="logo-text">LinkedAI</span>
             </div>
           </div>
