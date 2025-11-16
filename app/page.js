@@ -2,8 +2,11 @@
 // deploy-bump: profile updates + change password endpoint
 import { useState } from 'react'
 import './page.css'
+import { useTranslation } from '@/lib/i18n'
+import LanguageSelector from './components/LanguageSelector'
 
 export default function Home() {
+  const { t } = useTranslation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -28,17 +31,17 @@ export default function Home() {
       })
 
       if (response.ok) {
-        setSubmitMessage('¡Gracias! Te hemos enviado un email con acceso a la prueba.')
+        setSubmitMessage(t('trial.success'))
         setEmail('')
       } else if (response.status === 409) {
-        setSubmitMessage('Este email ya está registrado. ¡Gracias por tu interés!')
+        setSubmitMessage(t('trial.duplicate'))
         setEmail('')
       } else {
         const errorData = await response.json()
-        setSubmitMessage(errorData.error || 'Error al procesar tu solicitud. Inténtalo de nuevo.')
+        setSubmitMessage(errorData.error || t('trial.error'))
       }
     } catch (error) {
-      setSubmitMessage('Error de conexión. Inténtalo de nuevo.')
+      setSubmitMessage(t('trial.connectionError'))
     }
     
       setIsSubmitting(false)
@@ -54,8 +57,9 @@ export default function Home() {
           </div>
           
           <div className="nav-links">
-            <a href="/login" className="nav-login">Iniciar Sesión</a>
-            <a href="#trial" className="nav-cta">Comenzar Gratis</a>
+            <LanguageSelector />
+            <a href="/login" className="nav-login">{t('nav.login')}</a>
+            <a href="#trial" className="nav-cta">{t('nav.startFree')}</a>
           </div>
 
           <button 
@@ -70,8 +74,9 @@ export default function Home() {
 
           {isMenuOpen && (
             <div className="mobile-menu">
-              <a href="/login" onClick={() => setIsMenuOpen(false)}>Iniciar Sesión</a>
-              <a href="#trial" onClick={() => setIsMenuOpen(false)}>Comenzar Gratis</a>
+              <LanguageSelector />
+              <a href="/login" onClick={() => setIsMenuOpen(false)}>{t('nav.login')}</a>
+              <a href="#trial" onClick={() => setIsMenuOpen(false)}>{t('nav.startFree')}</a>
             </div>
           )}
         </div>
@@ -86,43 +91,54 @@ export default function Home() {
         
           <div className="hero-content">
             <div className="hero-badge">
-            <span>LIMITADO: Solo quedan 127 espacios para el lanzamiento privado</span>
+            <span>{t('hero.badge')}</span>
             </div>
           
             <h1 className="hero-title">
-            Crea contenido para LinkedIn que <span className="gradient-text">genera interacciones</span> y contactos de calidad
+            {(() => {
+              const title = t('hero.title')
+              const highlight = t('hero.titleHighlight')
+              const parts = title.split('{highlight}')
+              return (
+                <>
+                  {parts[0]}
+                  <span className="gradient-text">{highlight}</span>
+                  {parts[1]}
+                </>
+              )
+            })()}
             </h1>
           
             <p className="hero-description">
-            <strong>LinkedAI es tu asistente de IA para crear contenido profesional</strong> que realmente funciona. 
-            Genera posts, biografías y mensajes optimizados que aumentan tu engagement, atraen conexiones valiosas y potencian tu presencia en LinkedIn.
+            <strong>{t('hero.description').split('.')[0]}.</strong> 
+            {t('hero.description').split('.').slice(1).join('.')}
           </p>
           
             <div className="hero-actions">
             <a href="#trial" className="btn-primary">
-              <span>PROBAR LINKEDAI GRATIS</span>
+              <span>{t('hero.cta')}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </a>
             <p className="hero-guarantee">
-              ✅ <strong>100% GRATIS</strong> durante el lanzamiento privado
-              <br />⚠️ <strong>Solo 127 espacios disponibles</strong>
+              ✅ <strong>{t('hero.guarantee1')}</strong>
+              <br />⚠️ <strong>{t('hero.guarantee2')}</strong>
             </p>
             </div>
           
             <div className="hero-stats">
               <div className="stat">
               <div className="stat-number">3x</div>
-              <div className="stat-label">Más oportunidades</div>
+              <div className="stat-label">{t('hero.stats.opportunities')}</div>
               </div>
               <div className="stat">
               <div className="stat-number">847%</div>
-              <div className="stat-label">Más engagement</div>
+              <div className="stat-label">{t('hero.stats.engagement')}</div>
               </div>
               <div className="stat">
               <div className="stat-number">23 min</div>
-              <div className="stat-label">Para contenido viral</div>
+              <div className="stat-label">{t('hero.stats.viral')}</div>
             </div>
           </div>
         </div>
@@ -132,39 +148,39 @@ export default function Home() {
       <section id="features" className="features">
         <div className="container">
           <div className="section-header">
-            <h2>¿Por qué elegir LinkedAI?</h2>
-            <p>La herramienta de IA más potente para crear contenido profesional que genera resultados en LinkedIn</p>
+            <h2>{t('features.title')}</h2>
+            <p>{t('features.subtitle')}</p>
           </div>
           
           <div className="features-grid">
             <div className="feature-card">
-              <h3>Generación de Posts</h3>
-              <p>Crea posts profesionales en segundos con 5 tonos diferentes: profesional, educativo, inspiracional, disruptivo y conversacional</p>
+              <h3>{t('features.postGeneration.title')}</h3>
+              <p>{t('features.postGeneration.description')}</p>
             </div>
             
             <div className="feature-card">
-              <h3>Biografías Optimizadas</h3>
-              <p>Genera biografías de LinkedIn que maximizan tu visibilidad, atraen conexiones valiosas y aumentan tus oportunidades</p>
+              <h3>{t('features.bios.title')}</h3>
+              <p>{t('features.bios.description')}</p>
             </div>
             
             <div className="feature-card">
-              <h3>Mensajes Personalizados</h3>
-              <p>Crea mensajes de conexión y seguimiento personalizados que aumentan tu tasa de respuesta y networking efectivo</p>
+              <h3>{t('features.messages.title')}</h3>
+              <p>{t('features.messages.description')}</p>
             </div>
             
             <div className="feature-card">
-              <h3>Contenido Auténtico</h3>
-              <p>Genera contenido que no se detecta como IA, manteniendo tu voz profesional y credibilidad en cada publicación</p>
+              <h3>{t('features.authentic.title')}</h3>
+              <p>{t('features.authentic.description')}</p>
             </div>
             
             <div className="feature-card">
-              <h3>Plantillas Inteligentes</h3>
-              <p>Accede a plantillas probadas para diferentes objetivos: generar leads, aumentar engagement, construir marca personal</p>
+              <h3>{t('features.templates.title')}</h3>
+              <p>{t('features.templates.description')}</p>
             </div>
             
             <div className="feature-card">
-              <h3>Ahorro de Tiempo</h3>
-              <p>Ahorra 4 horas semanales en creación de contenido mientras mejoras tu presencia profesional y resultados</p>
+              <h3>{t('features.timeSaving.title')}</h3>
+              <p>{t('features.timeSaving.description')}</p>
             </div>
           </div>
         </div>
@@ -174,14 +190,14 @@ export default function Home() {
       <section id="comparison" className="comparison">
         <div className="container">
           <div className="section-header">
-            <h2>La diferencia es evidente</h2>
-            <p>Compara un resultado genérico de ChatGPT vs. LinkedAI optimizado para LinkedIn</p>
+            <h2>{t('comparison.title')}</h2>
+            <p>{t('comparison.subtitle')}</p>
           </div>
           
           <div className="comparison-grid">
             <div className="comparison-card chatgpt-result">
               <div className="comparison-header">
-                <div className="comparison-badge chatgpt-badge">ChatGPT Genérico</div>
+                <div className="comparison-badge chatgpt-badge">{t('comparison.chatgpt.badge')}</div>
                 <div className="comparison-icon chatgpt-logo">
                   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <rect width="32" height="32" rx="6" fill="url(#chatgptGradient)"/>
@@ -208,20 +224,20 @@ export default function Home() {
                 </div>
                 <div className="comparison-metrics">
                   <div className="metric negative">
-                    <span className="metric-label">Engagement esperado:</span>
+                    <span className="metric-label">{t('comparison.metrics.expectedEngagement')}</span>
                     <span className="metric-value">15-30 likes</span>
                   </div>
                   <div className="metric negative">
-                    <span className="metric-label">Comentarios:</span>
+                    <span className="metric-label">{t('comparison.metrics.comments')}</span>
                     <span className="metric-value">1-3 comentarios</span>
                   </div>
                   <div className="metric negative">
-                    <span className="metric-label">Alcance promedio:</span>
+                    <span className="metric-label">{t('comparison.metrics.reach')}</span>
                     <span className="metric-value">50-100 personas</span>
                   </div>
                   <div className="metric negative">
-                    <span className="metric-label">Tiempo de creación:</span>
-                    <span className="metric-value">Sin optimizar</span>
+                    <span className="metric-label">{t('comparison.metrics.creationTime')}</span>
+                    <span className="metric-value">{t('comparison.metrics.notOptimized')}</span>
                   </div>
                 </div>
               </div>
@@ -235,7 +251,7 @@ export default function Home() {
 
             <div className="comparison-card linkedai-result">
               <div className="comparison-header">
-                <div className="comparison-badge linkedai-badge">LinkedAI Optimizado</div>
+                <div className="comparison-badge linkedai-badge">{t('comparison.linkedai.badge')}</div>
                 <div className="comparison-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <rect width="24" height="24" rx="4" fill="#0077B5"/>
@@ -260,20 +276,20 @@ export default function Home() {
                 </div>
                 <div className="comparison-metrics">
                   <div className="metric positive">
-                    <span className="metric-label">Engagement típico:</span>
+                    <span className="metric-label">{t('comparison.metrics.typicalEngagement')}</span>
                     <span className="metric-value">150-400 likes</span>
                   </div>
                   <div className="metric positive">
-                    <span className="metric-label">Comentarios:</span>
+                    <span className="metric-label">{t('comparison.metrics.comments')}</span>
                     <span className="metric-value">25-60 comentarios</span>
                   </div>
                   <div className="metric positive">
-                    <span className="metric-label">Alcance promedio:</span>
+                    <span className="metric-label">{t('comparison.metrics.reach')}</span>
                     <span className="metric-value">1,500-3,000 personas</span>
                   </div>
                   <div className="metric positive">
-                    <span className="metric-label">Tiempo de creación:</span>
-                    <span className="metric-value">2 minutos optimizado</span>
+                    <span className="metric-label">{t('comparison.metrics.creationTime')}</span>
+                    <span className="metric-value">{t('comparison.metrics.optimized')}</span>
                 </div>
                 </div>
               </div>
@@ -281,9 +297,9 @@ export default function Home() {
           </div>
           
           <div className="comparison-cta">
-            <p className="comparison-text">¿Listo para crear contenido que realmente destaque?</p>
+            <p className="comparison-text">{t('comparison.cta')}</p>
             <a href="#trial" className="btn-primary">
-              <span>Empezar a generar contenido profesional</span>
+              <span>{t('comparison.ctaButton')}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M4.167 10h11.666M10 4.167L15.833 10 10 15.833" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -297,8 +313,8 @@ export default function Home() {
       <section id="testimonials" className="testimonials">
         <div className="container">
           <div className="section-header">
-            <h2>Resultados reales de profesionales</h2>
-            <p>LinkedAI ayuda a miles de profesionales a crear contenido que genera interacciones y oportunidades</p>
+            <h2>{t('testimonials.title')}</h2>
+            <p>{t('testimonials.subtitle')}</p>
           </div>
           
           <div className="testimonials-grid">
@@ -309,7 +325,7 @@ export default function Home() {
                   <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
                 </svg>
               </div>
-              <p>"LinkedAI me permite crear contenido profesional en minutos. Sus plantillas y generación de posts me han ayudado a aumentar mi engagement en un 300% y conseguir más conexiones valiosas."</p>
+              <p>"{t('testimonials.testimonial1')}"</p>
               <div className="testimonial-author">
                 <div className="author-info">
                   <h4>María González</h4>
@@ -328,7 +344,7 @@ export default function Home() {
                   <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
                 </svg>
               </div>
-              <p>"La herramienta de LinkedAI genera posts que realmente funcionan. He creado contenido que genera 3x más leads calificados y me ha ahorrado horas de trabajo cada semana."</p>
+              <p>"{t('testimonials.testimonial2')}"</p>
               <div className="testimonial-author">
                 <div className="author-info">
                   <h4>Carlos Ruiz</h4>
@@ -347,7 +363,7 @@ export default function Home() {
                   <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
                 </svg>
               </div>
-              <p>"LinkedAI me ayuda a crear contenido auténtico y profesional que no parece generado por IA. Mis posts ahora tienen un engagement 4x superior y he conseguido más contactos de calidad."</p>
+              <p>"{t('testimonials.testimonial3')}"</p>
               <div className="testimonial-author">
                 <div className="author-info">
                   <h4>Ana Martín</h4>
@@ -363,15 +379,15 @@ export default function Home() {
           <div className="testimonials-stats">
             <div className="stat-item">
               <div className="stat-number">50K+</div>
-              <div className="stat-label">Posts creados</div>
+              <div className="stat-label">{t('testimonials.stats.postsCreated')}</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">150%</div>
-              <div className="stat-label">Aumento promedio de engagement</div>
+              <div className="stat-label">{t('testimonials.stats.engagementIncrease')}</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">15K+</div>
-              <div className="stat-label">Profesionales activos</div>
+              <div className="stat-label">{t('testimonials.stats.activeUsers')}</div>
             </div>
           </div>
         </div>
@@ -381,69 +397,69 @@ export default function Home() {
       <section id="pricing" className="pricing">
         <div className="container">
           <div className="section-header">
-            <h2>Planes para cada profesional</h2>
-            <p>Elige el plan que mejor se adapte a tus necesidades</p>
+            <h2>{t('pricing.title')}</h2>
+            <p>{t('pricing.subtitle')}</p>
           </div>
           
           <div className="pricing-grid">
           <div className="pricing-card">
             <div className="pricing-header">
-                <h3>Plan Básico</h3>
-                <p>Perfecto para empezar</p>
+                <h3>{t('pricing.basic.title')}</h3>
+                <p>{t('pricing.basic.subtitle')}</p>
               </div>
               <div className="pricing-price">
                 <span className="currency">€</span>
-                <span className="amount">12</span>
-                <span className="period">/mes</span>
+                <span className="amount">{t('pricing.basic.price')}</span>
+                <span className="period">{t('pricing.basic.period')}</span>
               </div>
               <ul className="pricing-features">
-                <li>4,500 tokens mensuales</li>
-                <li>~12-15 artículos por mes</li>
-                <li>Plantillas básicas</li>
-                <li>Soporte por email</li>
+                <li>{t('pricing.basic.features.tokens')}</li>
+                <li>{t('pricing.basic.features.articles')}</li>
+                <li>{t('pricing.basic.features.templates')}</li>
+                <li>{t('pricing.basic.features.support')}</li>
               </ul>
-              <a href="#trial" className="pricing-btn">Próximamente</a>
+              <a href="#trial" className="pricing-btn">{t('pricing.basic.button')}</a>
             </div>
             
             <div className="pricing-card featured">
-              <div className="pricing-badge">Más popular</div>
+              <div className="pricing-badge">{t('pricing.professional.badge')}</div>
               <div className="pricing-header">
-                <h3>Plan Profesional</h3>
-                <p>Para profesionales serios</p>
+                <h3>{t('pricing.professional.title')}</h3>
+                <p>{t('pricing.professional.subtitle')}</p>
             </div>
               <div className="pricing-price">
                 <span className="currency">€</span>
-                <span className="amount">20</span>
-                <span className="period">/mes</span>
+                <span className="amount">{t('pricing.professional.price')}</span>
+                <span className="period">{t('pricing.professional.period')}</span>
             </div>
               <ul className="pricing-features">
-                <li>12,000 tokens mensuales</li>
-                <li>~35-40 artículos por mes</li>
-                <li>Todas las plantillas</li>
-                <li>Programación de contenido</li>
-                <li>Soporte prioritario</li>
+                <li>{t('pricing.professional.features.tokens')}</li>
+                <li>{t('pricing.professional.features.articles')}</li>
+                <li>{t('pricing.professional.features.templates')}</li>
+                <li>{t('pricing.professional.features.scheduling')}</li>
+                <li>{t('pricing.professional.features.support')}</li>
               </ul>
-              <a href="#trial" className="pricing-btn">Próximamente</a>
+              <a href="#trial" className="pricing-btn">{t('pricing.professional.button')}</a>
         </div>
             
             <div className="pricing-card">
               <div className="pricing-header">
-                <h3>Empresarial</h3>
-                <p>Para equipos y empresas</p>
+                <h3>{t('pricing.enterprise.title')}</h3>
+                <p>{t('pricing.enterprise.subtitle')}</p>
           </div>
               <div className="pricing-price">
                 <span className="currency">€</span>
-                <span className="amount">35</span>
-                <span className="period">/mes</span>
+                <span className="amount">{t('pricing.enterprise.price')}</span>
+                <span className="period">{t('pricing.enterprise.period')}</span>
             </div>
               <ul className="pricing-features">
-                <li>30,000 tokens mensuales</li>
-                <li>~90-100 artículos por mes</li>
-                <li>Múltiples usuarios</li>
-                <li>Analytics avanzados</li>
-                <li>Soporte 24/7</li>
+                <li>{t('pricing.enterprise.features.tokens')}</li>
+                <li>{t('pricing.enterprise.features.articles')}</li>
+                <li>{t('pricing.enterprise.features.users')}</li>
+                <li>{t('pricing.enterprise.features.analytics')}</li>
+                <li>{t('pricing.enterprise.features.support')}</li>
               </ul>
-              <a href="#trial" className="pricing-btn">Próximamente</a>
+              <a href="#trial" className="pricing-btn">{t('pricing.enterprise.button')}</a>
             </div>
           </div>
         </div>
@@ -464,44 +480,44 @@ export default function Home() {
             </div>
             
             <div className="showcase-text">
-              <h2>LinkedAI se comerá sus palabras</h2>
-              <p className="showcase-subtitle">...si encuentras otra herramienta que pueda hacer todas estas cosas</p>
+              <h2>{t('showcase.title')}</h2>
+              <p className="showcase-subtitle">{t('showcase.subtitle')}</p>
               
               <div className="showcase-features">
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Genera posts profesionales en segundos con 5 tonos diferentes: profesional, educativo, inspiracional, disruptivo y conversacional.</span>
+                  <span>{t('showcase.feature1')}</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Crea biografías de LinkedIn optimizadas que maximizan tu visibilidad, atraen conexiones valiosas y aumentan tus oportunidades.</span>
+                  <span>{t('showcase.feature2')}</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Genera mensajes de conexión y seguimiento personalizados que aumentan tu tasa de respuesta y networking efectivo.</span>
+                  <span>{t('showcase.feature3')}</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Accede a plantillas probadas para diferentes objetivos: generar leads, aumentar engagement, construir marca personal.</span>
+                  <span>{t('showcase.feature4')}</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Ahorra 4 horas semanales en creación de contenido mientras mejoras tu presencia profesional y resultados.</span>
+                  <span>{t('showcase.feature5')}</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Crea contenido auténtico que no se detecta como generado por IA, manteniendo tu voz profesional y credibilidad.</span>
+                  <span>{t('showcase.feature6')}</span>
                 </div>
               </div>
               
               <div className="showcase-cta">
                 <a href="#trial" className="btn-showcase">
-                  ¡Empezar Ahora!
+                  {t('showcase.cta')}
                 </a>
               </div>
             </div>
@@ -513,14 +529,14 @@ export default function Home() {
       <section id="faq" className="faq">
         <div className="container">
           <div className="section-header">
-            <h2>Preguntas Frecuentes</h2>
-            <p>Resolvemos las dudas más comunes sobre LinkedAI</p>
+            <h2>{t('faq.title')}</h2>
+            <p>{t('faq.subtitle')}</p>
           </div>
           
           <div className="faq-container">
             <div className="faq-item" onClick={() => toggleFAQ(0)}>
               <div className="faq-question">
-                <h3>¿Qué es LinkedAI y cómo funciona?</h3>
+                <h3>{t('faq.q1.question')}</h3>
                 <span className={`faq-icon ${openFAQ === 0 ? 'open' : ''}`}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -529,14 +545,14 @@ export default function Home() {
               </div>
               {openFAQ === 0 && (
                 <div className="faq-answer">
-                  <p>LinkedAI es una herramienta de inteligencia artificial diseñada para ayudarte a crear contenido profesional para LinkedIn. Genera posts, biografías y mensajes optimizados que aumentan tu engagement, atraen conexiones valiosas y potencian tu presencia profesional. Nuestra IA crea contenido auténtico en diferentes tonos y estilos, adaptado a tus objetivos profesionales.</p>
+                  <p>{t('faq.q1.answer')}</p>
                 </div>
               )}
             </div>
 
             <div className="faq-item" onClick={() => toggleFAQ(1)}>
               <div className="faq-question">
-                <h3>¿Cuánto cuesta usar LinkedAI?</h3>
+                <h3>{t('faq.q2.question')}</h3>
                 <span className={`faq-icon ${openFAQ === 1 ? 'open' : ''}`}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -545,14 +561,14 @@ export default function Home() {
               </div>
               {openFAQ === 1 && (
                 <div className="faq-answer">
-                  <p>Actualmente estamos en fase de lanzamiento privado gratuito. Los usuarios autorizados pueden probar la herramienta sin costo. Próximamente tendremos planes desde €12/mes para uso básico, €20/mes para uso profesional y €35/mes para empresas. Todos los planes incluyen garantía de 30 días.</p>
+                  <p>{t('faq.q2.answer')}</p>
                 </div>
               )}
             </div>
 
             <div className="faq-item" onClick={() => toggleFAQ(2)}>
               <div className="faq-question">
-                <h3>¿Cómo me registro para la prueba gratuita?</h3>
+                <h3>{t('faq.q3.question')}</h3>
                 <span className={`faq-icon ${openFAQ === 2 ? 'open' : ''}`}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -561,14 +577,14 @@ export default function Home() {
               </div>
               {openFAQ === 2 && (
                 <div className="faq-answer">
-                  <p>Simplemente introduce tu email en el formulario de abajo. Te añadiremos a nuestra lista de espera y te notificaremos cuando tengas acceso. El proceso es completamente gratuito y sin compromiso. Puedes cancelar tu participación en cualquier momento.</p>
+                  <p>{t('faq.q3.answer')}</p>
                 </div>
               )}
             </div>
 
             <div className="faq-item" onClick={() => toggleFAQ(3)}>
               <div className="faq-question">
-                <h3>¿Qué tipos de contenido puede generar LinkedAI?</h3>
+                <h3>{t('faq.q4.question')}</h3>
                 <span className={`faq-icon ${openFAQ === 3 ? 'open' : ''}`}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -577,14 +593,14 @@ export default function Home() {
             </div>
               {openFAQ === 3 && (
                 <div className="faq-answer">
-                  <p>LinkedAI puede generar posts profesionales, artículos educativos, contenido inspiracional, mensajes disruptivos y conversaciones casuales. También optimiza biografías de LinkedIn, crea mensajes de conexión personalizados y programa contenido para mantener una presencia constante en la plataforma.</p>
+                  <p>{t('faq.q4.answer')}</p>
             </div>
               )}
             </div>
 
             <div className="faq-item" onClick={() => toggleFAQ(4)}>
               <div className="faq-question">
-                <h3>¿Es seguro usar LinkedAI con mi cuenta de LinkedIn?</h3>
+                <h3>{t('faq.q5.question')}</h3>
                 <span className={`faq-icon ${openFAQ === 4 ? 'open' : ''}`}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -593,14 +609,14 @@ export default function Home() {
             </div>
               {openFAQ === 4 && (
                 <div className="faq-answer">
-                  <p>Absolutamente. LinkedAI no requiere acceso directo a tu cuenta de LinkedIn. Simplemente generamos el contenido optimizado que tú puedes copiar y pegar manualmente en tu perfil. No almacenamos credenciales ni accedemos a tu información personal de LinkedIn.</p>
+                  <p>{t('faq.q5.answer')}</p>
             </div>
               )}
             </div>
 
             <div className="faq-item" onClick={() => toggleFAQ(5)}>
               <div className="faq-question">
-                <h3>¿Qué resultados puedo esperar con LinkedAI?</h3>
+                <h3>{t('faq.q6.question')}</h3>
                 <span className={`faq-icon ${openFAQ === 5 ? 'open' : ''}`}>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M10 4.167v11.666M4.167 10h11.666" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -609,7 +625,7 @@ export default function Home() {
             </div>
               {openFAQ === 5 && (
                 <div className="faq-answer">
-                  <p>Nuestros usuarios reportan un aumento promedio del 150% en engagement, ahorro de 4 horas semanales en creación de contenido, y un incremento salarial anual promedio de €5,000. El contenido generado está optimizado para maximizar tu visibilidad profesional y networking efectivo.</p>
+                  <p>{t('faq.q6.answer')}</p>
             </div>
               )}
             </div>
@@ -621,30 +637,30 @@ export default function Home() {
       <section id="trial" className="trial">
         <div className="container">
           <div className="trial-content">
-            <h2>¿Listo para transformar tu LinkedIn?</h2>
-            <p>Únete a la prueba de lanzamiento privada gratuita de LinkedAI</p>
+            <h2>{t('trial.title')}</h2>
+            <p>{t('trial.subtitle')}</p>
             
             <form className="trial-form" onSubmit={handleTrialSubmit}>
               <div className="form-group">
                 <input 
                   type="email" 
-                  placeholder="Tu email para la prueba gratuita" 
+                  placeholder={t('trial.placeholder')} 
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required 
                 />
                 <button type="submit" className="btn-primary large">
-                  <span>Comenzar Prueba Gratis</span>
+                  <span>{t('trial.button')}</span>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </button>
               </div>
               <p className="trial-disclaimer">
-                Sin compromiso. Cancela cuando quieras. Acceso inmediato.
+                {t('trial.disclaimer')}
               </p>
               {submitMessage && (
-                <p className={`submit-message ${submitMessage.includes('Gracias') || submitMessage.includes('registrado') ? 'success' : 'error'}`}>
+                <p className={`submit-message ${submitMessage === t('trial.success') || submitMessage === t('trial.duplicate') ? 'success' : 'error'}`}>
                   {submitMessage}
                 </p>
               )}
@@ -661,35 +677,35 @@ export default function Home() {
               <div className="footer-logo">
                 <span>LinkedAI</span>
               </div>
-              <p>La herramienta de IA más potente para LinkedIn</p>
+              <p>{t('footer.tagline')}</p>
             </div>
             
             <div className="footer-section">
-                <h4>Producto</h4>
-                <a href="#features">Características</a>
-                <a href="#pricing">Precios</a>
-                <a href="/login">Iniciar Sesión</a>
+                <h4>{t('footer.product')}</h4>
+                <a href="#features">{t('footer.features')}</a>
+                <a href="#pricing">{t('footer.pricing')}</a>
+                <a href="/login">{t('nav.login')}</a>
               </div>
             
             <div className="footer-section">
-              <h4>Recursos</h4>
-              <a href="#testimonials">Testimonios</a>
-              <a href="#comparison">Comparación</a>
-              <a href="#faq">Preguntas Frecuentes</a>
-              <a href="/contact">Contacto</a>
+              <h4>{t('footer.resources')}</h4>
+              <a href="#testimonials">{t('footer.testimonials')}</a>
+              <a href="#comparison">{t('footer.comparison')}</a>
+              <a href="#faq">{t('footer.faq')}</a>
+              <a href="/contact">{t('footer.contact')}</a>
               </div>
             
             <div className="footer-section">
-              <h4>Legal</h4>
-              <a href="/terms">Términos y Condiciones</a>
-              <a href="/privacy">Política de Privacidad</a>
-              <a href="/cookies">Política de Cookies</a>
-              <a href="/contact">Contacto</a>
+              <h4>{t('footer.legal')}</h4>
+              <a href="/terms">{t('footer.terms')}</a>
+              <a href="/privacy">{t('footer.privacy')}</a>
+              <a href="/cookies">{t('footer.cookies')}</a>
+              <a href="/contact">{t('footer.contact')}</a>
               </div>
             </div>
           
           <div className="footer-bottom">
-            <p>&copy; 2024 LinkedAI. Todos los derechos reservados.</p>
+            <p>&copy; {t('footer.copyright')}</p>
           </div>
         </div>
       </footer>

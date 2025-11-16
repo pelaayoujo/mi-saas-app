@@ -1,0 +1,198 @@
+{
+  "nav": {
+    "login": "Iniciar Sesión",
+    "startFree": "Comenzar Gratis"
+  },
+  "hero": {
+    "badge": "LIMITADO: Solo quedan 127 espacios para el lanzamiento privado",
+    "title": "Crea contenido para LinkedIn que {highlight} y contactos de calidad",
+    "titleHighlight": "genera interacciones",
+    "description": "LinkedAI es tu asistente de IA para crear contenido profesional que realmente funciona. Genera posts, biografías y mensajes optimizados que aumentan tu engagement, atraen conexiones valiosas y potencian tu presencia en LinkedIn.",
+    "cta": "PROBAR LINKEDAI GRATIS",
+    "guarantee1": "100% GRATIS durante el lanzamiento privado",
+    "guarantee2": "Solo 127 espacios disponibles",
+    "stats": {
+      "opportunities": "Más oportunidades",
+      "engagement": "Más engagement",
+      "viral": "Para contenido viral"
+    }
+  },
+  "features": {
+    "title": "¿Por qué elegir LinkedAI?",
+    "subtitle": "La herramienta de IA más potente para crear contenido profesional que genera resultados en LinkedIn",
+    "postGeneration": {
+      "title": "Generación de Posts",
+      "description": "Crea posts profesionales en segundos con 5 tonos diferentes: profesional, educativo, inspiracional, disruptivo y conversacional"
+    },
+    "bios": {
+      "title": "Biografías Optimizadas",
+      "description": "Genera biografías de LinkedIn que maximizan tu visibilidad, atraen conexiones valiosas y aumentan tus oportunidades"
+    },
+    "messages": {
+      "title": "Mensajes Personalizados",
+      "description": "Crea mensajes de conexión y seguimiento personalizados que aumentan tu tasa de respuesta y networking efectivo"
+    },
+    "authentic": {
+      "title": "Contenido Auténtico",
+      "description": "Genera contenido que no se detecta como IA, manteniendo tu voz profesional y credibilidad en cada publicación"
+    },
+    "templates": {
+      "title": "Plantillas Inteligentes",
+      "description": "Accede a plantillas probadas para diferentes objetivos: generar leads, aumentar engagement, construir marca personal"
+    },
+    "timeSaving": {
+      "title": "Ahorro de Tiempo",
+      "description": "Ahorra 4 horas semanales en creación de contenido mientras mejoras tu presencia profesional y resultados"
+    }
+  },
+  "comparison": {
+    "title": "La diferencia es evidente",
+    "subtitle": "Compara un resultado genérico de ChatGPT vs. LinkedAI optimizado para LinkedIn",
+    "chatgpt": {
+      "badge": "ChatGPT Genérico",
+      "title": "Título genérico",
+      "subtitle": "Contenido profesional para LinkedIn"
+    },
+    "linkedai": {
+      "badge": "LinkedAI Optimizado",
+      "title": "¿Sabías que el 87% de los reclutadores revisa LinkedIn ANTES de una entrevista?",
+      "subtitle": "Este dato cambió completamente mi estrategia de networking..."
+    },
+    "metrics": {
+      "expectedEngagement": "Engagement esperado:",
+      "comments": "Comentarios:",
+      "reach": "Alcance promedio:",
+      "creationTime": "Tiempo de creación:",
+      "typicalEngagement": "Engagement típico:",
+      "notOptimized": "Sin optimizar",
+      "optimized": "2 minutos optimizado"
+    },
+    "cta": "¿Listo para crear contenido que realmente destaque?",
+    "ctaButton": "Empezar a generar contenido profesional"
+  },
+  "testimonials": {
+    "title": "Resultados reales de profesionales",
+    "subtitle": "LinkedAI ayuda a miles de profesionales a crear contenido que genera interacciones y oportunidades",
+    "testimonial1": "LinkedAI me permite crear contenido profesional en minutos. Sus plantillas y generación de posts me han ayudado a aumentar mi engagement en un 300% y conseguir más conexiones valiosas.",
+    "testimonial2": "La herramienta de LinkedAI genera posts que realmente funcionan. He creado contenido que genera 3x más leads calificados y me ha ahorrado horas de trabajo cada semana.",
+    "testimonial3": "LinkedAI me ayuda a crear contenido auténtico y profesional que no parece generado por IA. Mis posts ahora tienen un engagement 4x superior y he conseguido más contactos de calidad.",
+    "stats": {
+      "postsCreated": "Posts creados",
+      "engagementIncrease": "Aumento promedio de engagement",
+      "activeUsers": "Profesionales activos"
+    }
+  },
+  "pricing": {
+    "title": "Planes para cada profesional",
+    "subtitle": "Elige el plan que mejor se adapte a tus necesidades",
+    "basic": {
+      "title": "Plan Básico",
+      "subtitle": "Perfecto para empezar",
+      "price": "12",
+      "period": "/mes",
+      "features": {
+        "tokens": "4,500 tokens mensuales",
+        "articles": "~12-15 artículos por mes",
+        "templates": "Plantillas básicas",
+        "support": "Soporte por email"
+      },
+      "button": "Próximamente"
+    },
+    "professional": {
+      "title": "Plan Profesional",
+      "subtitle": "Para profesionales serios",
+      "badge": "Más popular",
+      "price": "20",
+      "period": "/mes",
+      "features": {
+        "tokens": "12,000 tokens mensuales",
+        "articles": "~35-40 artículos por mes",
+        "templates": "Todas las plantillas",
+        "scheduling": "Programación de contenido",
+        "support": "Soporte prioritario"
+      },
+      "button": "Próximamente"
+    },
+    "enterprise": {
+      "title": "Empresarial",
+      "subtitle": "Para equipos y empresas",
+      "price": "35",
+      "period": "/mes",
+      "features": {
+        "tokens": "30,000 tokens mensuales",
+        "articles": "~90-100 artículos por mes",
+        "users": "Múltiples usuarios",
+        "analytics": "Analytics avanzados",
+        "support": "Soporte 24/7"
+      },
+      "button": "Próximamente"
+    }
+  },
+  "showcase": {
+    "title": "LinkedAI se comerá sus palabras",
+    "subtitle": "...si encuentras otra herramienta que pueda hacer todas estas cosas",
+    "feature1": "Genera posts profesionales en segundos con 5 tonos diferentes: profesional, educativo, inspiracional, disruptivo y conversacional.",
+    "feature2": "Crea biografías de LinkedIn optimizadas que maximizan tu visibilidad, atraen conexiones valiosas y aumentan tus oportunidades.",
+    "feature3": "Genera mensajes de conexión y seguimiento personalizados que aumentan tu tasa de respuesta y networking efectivo.",
+    "feature4": "Accede a plantillas probadas para diferentes objetivos: generar leads, aumentar engagement, construir marca personal.",
+    "feature5": "Ahorra 4 horas semanales en creación de contenido mientras mejoras tu presencia profesional y resultados.",
+    "feature6": "Crea contenido auténtico que no se detecta como generado por IA, manteniendo tu voz profesional y credibilidad.",
+    "cta": "¡Empezar Ahora!"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Resolvemos las dudas más comunes sobre LinkedAI",
+    "q1": {
+      "question": "¿Qué es LinkedAI y cómo funciona?",
+      "answer": "LinkedAI es una herramienta de inteligencia artificial diseñada para ayudarte a crear contenido profesional para LinkedIn. Genera posts, biografías y mensajes optimizados que aumentan tu engagement, atraen conexiones valiosas y potencian tu presencia profesional. Nuestra IA crea contenido auténtico en diferentes tonos y estilos, adaptado a tus objetivos profesionales."
+    },
+    "q2": {
+      "question": "¿Cuánto cuesta usar LinkedAI?",
+      "answer": "Actualmente estamos en fase de lanzamiento privado gratuito. Los usuarios autorizados pueden probar la herramienta sin costo. Próximamente tendremos planes desde €12/mes para uso básico, €20/mes para uso profesional y €35/mes para empresas. Todos los planes incluyen garantía de 30 días."
+    },
+    "q3": {
+      "question": "¿Cómo me registro para la prueba gratuita?",
+      "answer": "Simplemente introduce tu email en el formulario de abajo. Te añadiremos a nuestra lista de espera y te notificaremos cuando tengas acceso. El proceso es completamente gratuito y sin compromiso. Puedes cancelar tu participación en cualquier momento."
+    },
+    "q4": {
+      "question": "¿Qué tipos de contenido puede generar LinkedAI?",
+      "answer": "LinkedAI puede generar posts profesionales, artículos educativos, contenido inspiracional, mensajes disruptivos y conversaciones casuales. También optimiza biografías de LinkedIn, crea mensajes de conexión personalizados y programa contenido para mantener una presencia constante en la plataforma."
+    },
+    "q5": {
+      "question": "¿Es seguro usar LinkedAI con mi cuenta de LinkedIn?",
+      "answer": "Absolutamente. LinkedAI no requiere acceso directo a tu cuenta de LinkedIn. Simplemente generamos el contenido optimizado que tú puedes copiar y pegar manualmente en tu perfil. No almacenamos credenciales ni accedemos a tu información personal de LinkedIn."
+    },
+    "q6": {
+      "question": "¿Qué resultados puedo esperar con LinkedAI?",
+      "answer": "Nuestros usuarios reportan un aumento promedio del 150% en engagement, ahorro de 4 horas semanales en creación de contenido, y un incremento salarial anual promedio de €5,000. El contenido generado está optimizado para maximizar tu visibilidad profesional y networking efectivo."
+    }
+  },
+  "trial": {
+    "title": "¿Listo para transformar tu LinkedIn?",
+    "subtitle": "Únete a la prueba de lanzamiento privada gratuita de LinkedAI",
+    "placeholder": "Tu email para la prueba gratuita",
+    "button": "Comenzar Prueba Gratis",
+    "disclaimer": "Sin compromiso. Cancela cuando quieras. Acceso inmediato.",
+    "success": "¡Gracias! Te hemos enviado un email con acceso a la prueba.",
+    "duplicate": "Este email ya está registrado. ¡Gracias por tu interés!",
+    "error": "Error al procesar tu solicitud. Inténtalo de nuevo.",
+    "connectionError": "Error de conexión. Inténtalo de nuevo."
+  },
+  "footer": {
+    "tagline": "La herramienta de IA más potente para LinkedIn",
+    "product": "Producto",
+    "resources": "Recursos",
+    "legal": "Legal",
+    "features": "Características",
+    "pricing": "Precios",
+    "testimonials": "Testimonios",
+    "comparison": "Comparación",
+    "faq": "Preguntas Frecuentes",
+    "contact": "Contacto",
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad",
+    "cookies": "Política de Cookies",
+    "copyright": "2024 LinkedAI. Todos los derechos reservados."
+  }
+}
+
