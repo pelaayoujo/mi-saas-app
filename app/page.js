@@ -90,12 +90,12 @@ export default function Home() {
             </div>
           
             <h1 className="hero-title">
-            La IA que analiza <span className="gradient-text">millones de artículos</span> para optimizar tu contenido
+            Crea contenido para LinkedIn que <span className="gradient-text">genera interacciones</span> y contactos de calidad
             </h1>
           
             <p className="hero-description">
-            <strong>LinkedAI estudia patrones de contenido exitoso</strong> y te proporciona insights basados en datos reales. 
-            Optimiza tu contenido con análisis de millones de artículos que realmente funcionan en LinkedIn.
+            <strong>LinkedAI es tu asistente de IA para crear contenido profesional</strong> que realmente funciona. 
+            Genera posts, biografías y mensajes optimizados que aumentan tu engagement, atraen conexiones valiosas y potencian tu presencia en LinkedIn.
           </p>
           
             <div className="hero-actions">
@@ -133,38 +133,38 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <h2>¿Por qué elegir LinkedAI?</h2>
-            <p>La IA más avanzada para analizar y optimizar contenido profesional en LinkedIn</p>
+            <p>La herramienta de IA más potente para crear contenido profesional que genera resultados en LinkedIn</p>
           </div>
           
           <div className="features-grid">
             <div className="feature-card">
-              <h3>Análisis de Patrones</h3>
-              <p>IA que estudia millones de artículos exitosos para identificar qué funciona y optimizar tu contenido</p>
+              <h3>Generación de Posts</h3>
+              <p>Crea posts profesionales en segundos con 5 tonos diferentes: profesional, educativo, inspiracional, disruptivo y conversacional</p>
             </div>
             
             <div className="feature-card">
-              <h3>Insights Específicos</h3>
-              <p>Análisis detallado de qué tipo de contenido funciona mejor para tu industria y audiencia específica</p>
+              <h3>Biografías Optimizadas</h3>
+              <p>Genera biografías de LinkedIn que maximizan tu visibilidad, atraen conexiones valiosas y aumentan tus oportunidades</p>
             </div>
             
             <div className="feature-card">
-              <h3>Datos en Tiempo Real</h3>
-              <p>Análisis continuo de tendencias y métricas para mantener tu contenido siempre optimizado</p>
+              <h3>Mensajes Personalizados</h3>
+              <p>Crea mensajes de conexión y seguimiento personalizados que aumentan tu tasa de respuesta y networking efectivo</p>
             </div>
             
             <div className="feature-card">
-              <h3>Optimización de Timing</h3>
-              <p>Análisis de datos para identificar los mejores momentos para publicar según tu audiencia</p>
+              <h3>Contenido Auténtico</h3>
+              <p>Genera contenido que no se detecta como IA, manteniendo tu voz profesional y credibilidad en cada publicación</p>
             </div>
             
             <div className="feature-card">
-              <h3>Análisis Personalizado</h3>
-              <p>Insights específicos para tu industria, audiencia y objetivos profesionales únicos</p>
+              <h3>Plantillas Inteligentes</h3>
+              <p>Accede a plantillas probadas para diferentes objetivos: generar leads, aumentar engagement, construir marca personal</p>
             </div>
             
             <div className="feature-card">
-              <h3>ROI Medible</h3>
-              <p>Análisis de métricas para demostrar el impacto real de tu contenido en tu crecimiento profesional</p>
+              <h3>Ahorro de Tiempo</h3>
+              <p>Ahorra 4 horas semanales en creación de contenido mientras mejoras tu presencia profesional y resultados</p>
             </div>
           </div>
         </div>
@@ -298,7 +298,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header">
             <h2>Resultados reales de profesionales</h2>
-            <p>LinkedAI analiza millones de artículos exitosos para optimizar tu contenido</p>
+            <p>LinkedAI ayuda a miles de profesionales a crear contenido que genera interacciones y oportunidades</p>
           </div>
           
           <div className="testimonials-grid">
@@ -309,7 +309,7 @@ export default function Home() {
                   <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
                 </svg>
               </div>
-              <p>"LinkedAI me ayuda a optimizar mi contenido basándose en datos reales. Sus análisis de tendencias me han permitido crear posts que realmente conectan con mi audiencia."</p>
+              <p>"LinkedAI me permite crear contenido profesional en minutos. Sus plantillas y generación de posts me han ayudado a aumentar mi engagement en un 300% y conseguir más conexiones valiosas."</p>
               <div className="testimonial-author">
                 <div className="author-info">
                   <h4>María González</h4>
@@ -328,7 +328,7 @@ export default function Home() {
                   <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
                 </svg>
               </div>
-              <p>"La IA de LinkedAI analiza patrones de contenido exitoso y me sugiere optimizaciones específicas. Mis posts ahora generan 3x más leads calificados."</p>
+              <p>"La herramienta de LinkedAI genera posts que realmente funcionan. He creado contenido que genera 3x más leads calificados y me ha ahorrado horas de trabajo cada semana."</p>
               <div className="testimonial-author">
                 <div className="author-info">
                   <h4>Carlos Ruiz</h4>
@@ -347,7 +347,7 @@ export default function Home() {
                   <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
                 </svg>
               </div>
-              <p>"LinkedAI no escribe por mí, sino que analiza millones de artículos para darme insights sobre qué funciona. Mis posts ahora tienen un engagement 4x superior."</p>
+              <p>"LinkedAI me ayuda a crear contenido auténtico y profesional que no parece generado por IA. Mis posts ahora tienen un engagement 4x superior y he conseguido más contactos de calidad."</p>
               <div className="testimonial-author">
                 <div className="author-info">
                   <h4>Ana Martín</h4>
@@ -362,12 +362,12 @@ export default function Home() {
           
           <div className="testimonials-stats">
             <div className="stat-item">
-              <div className="stat-number">2.5M+</div>
-              <div className="stat-label">Artículos analizados</div>
+              <div className="stat-number">50K+</div>
+              <div className="stat-label">Posts creados</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">98%</div>
-              <div className="stat-label">Precisión en predicciones</div>
+              <div className="stat-number">150%</div>
+              <div className="stat-label">Aumento promedio de engagement</div>
             </div>
             <div className="stat-item">
               <div className="stat-number">15K+</div>
@@ -470,32 +470,32 @@ export default function Home() {
               <div className="showcase-features">
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Analizar millones de artículos de LinkedIn para crear contenido que realmente conecte con tu audiencia profesional.</span>
+                  <span>Genera posts profesionales en segundos con 5 tonos diferentes: profesional, educativo, inspiracional, disruptivo y conversacional.</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Generar posts optimizados en 5 tonos diferentes: profesional, educativo, inspiracional, disruptivo y conversacional.</span>
+                  <span>Crea biografías de LinkedIn optimizadas que maximizan tu visibilidad, atraen conexiones valiosas y aumentan tus oportunidades.</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Crear biografías de LinkedIn que maximicen tu visibilidad y oportunidades de networking.</span>
+                  <span>Genera mensajes de conexión y seguimiento personalizados que aumentan tu tasa de respuesta y networking efectivo.</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Optimizar contenido para aumentar tu engagement en un 150% promedio según nuestros usuarios.</span>
+                  <span>Accede a plantillas probadas para diferentes objetivos: generar leads, aumentar engagement, construir marca personal.</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Ahorrar 4 horas semanales en creación de contenido mientras mejoras tu presencia profesional.</span>
+                  <span>Ahorra 4 horas semanales en creación de contenido mientras mejoras tu presencia profesional y resultados.</span>
                 </div>
                 
                 <div className="feature-item">
                   <div className="feature-icon">✓</div>
-                  <span>Generar contenido que no se detecte como creado por IA, manteniendo autenticidad y credibilidad.</span>
+                  <span>Crea contenido auténtico que no se detecta como generado por IA, manteniendo tu voz profesional y credibilidad.</span>
                 </div>
               </div>
               
@@ -529,7 +529,7 @@ export default function Home() {
               </div>
               {openFAQ === 0 && (
                 <div className="faq-answer">
-                  <p>LinkedAI es una herramienta de inteligencia artificial que analiza millones de artículos de LinkedIn para generar contenido optimizado específicamente para tu perfil profesional. Nuestra IA estudia patrones de engagement, tonos efectivos y estructuras que funcionan mejor en LinkedIn para crear posts que realmente conecten con tu audiencia.</p>
+                  <p>LinkedAI es una herramienta de inteligencia artificial diseñada para ayudarte a crear contenido profesional para LinkedIn. Genera posts, biografías y mensajes optimizados que aumentan tu engagement, atraen conexiones valiosas y potencian tu presencia profesional. Nuestra IA crea contenido auténtico en diferentes tonos y estilos, adaptado a tus objetivos profesionales.</p>
                 </div>
               )}
             </div>
