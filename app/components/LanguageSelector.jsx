@@ -19,8 +19,8 @@ export default function LanguageSelector() {
   }, [])
 
   const languages = [
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'en', name: 'English', flag: '🇬🇧' }
+    { code: 'es', name: 'Español', flag: '🇪🇸', flagAlt: 'ES' },
+    { code: 'en', name: 'English', flag: '🇬🇧', flagAlt: 'EN' }
   ]
 
   const currentLang = languages.find(lang => lang.code === locale) || languages[0]
@@ -32,7 +32,7 @@ export default function LanguageSelector() {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Select language"
       >
-        <span className="language-flag">{currentLang.flag}</span>
+        <span className="language-flag" title={currentLang.name}>{currentLang.flag}</span>
         <span className="language-code">{currentLang.code.toUpperCase()}</span>
         <svg 
           width="12" 

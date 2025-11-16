@@ -62,6 +62,11 @@ export default function Home() {
             <a href="#trial" className="nav-cta">{t('nav.startFree')}</a>
           </div>
 
+          {/* Language selector for mobile - always visible */}
+          <div className="nav-mobile-language">
+            <LanguageSelector />
+          </div>
+
           <button 
             className="mobile-menu-btn" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -74,7 +79,6 @@ export default function Home() {
 
           {isMenuOpen && (
             <div className="mobile-menu">
-              <LanguageSelector />
               <a href="/login" onClick={() => setIsMenuOpen(false)}>{t('nav.login')}</a>
               <a href="#trial" onClick={() => setIsMenuOpen(false)}>{t('nav.startFree')}</a>
             </div>

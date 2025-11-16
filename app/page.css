@@ -86,6 +86,11 @@ body {
   margin-right: 1rem;
 }
 
+/* Mobile language selector - hidden on desktop */
+.nav-mobile-language {
+  display: none;
+}
+
 .language-button {
   display: flex;
   align-items: center;
@@ -108,11 +113,18 @@ body {
 
 .language-flag {
   font-size: 1.2rem;
+  line-height: 1;
+  display: inline-block;
+  min-width: 1.2rem;
+  text-align: center;
+  /* Fallback si el emoji no se renderiza */
+  font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
 }
 
 .language-code {
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
 }
 
 .language-arrow {
@@ -1393,6 +1405,20 @@ body {
     display: none;
   }
   
+  /* Show mobile language selector */
+  .nav-mobile-language {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 60px; /* Space for menu button */
+    transform: translateY(-50%);
+    z-index: 1000;
+  }
+  
+  .nav-mobile-language .language-selector {
+    margin-right: 0;
+  }
+  
   .mobile-menu-btn {
     display: flex;
   }
@@ -1403,14 +1429,9 @@ body {
     gap: 1rem;
   }
   
-  .mobile-menu .language-selector {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-  }
-  
   .language-dropdown {
-    right: auto;
-    left: 0;
+    right: 0;
+    left: auto;
   }
   
   .hero-title {
